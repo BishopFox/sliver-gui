@@ -19,7 +19,7 @@ import { Sort } from '@angular/material/sort';
 import { SliverService } from '@app/providers/sliver.service';
 import { FadeInOut } from '@app/shared/animations';
 
-import * as clientpb from '@rpc/pb/client_pb'; // Protobuf
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 
 
 function compare(a: number | string | boolean, b: number | string | boolean, isAsc: boolean) {

@@ -17,12 +17,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { RPCConfig } from '@rpc/rpc';
 import { ClientService, ReadFiles } from '@app/providers/client.service';
 import { FadeInOut } from '@app/shared/animations';
 
-import * as base64 from 'base64-arraybuffer';
-
+import * as sliver from 'sliver-script';
 
 @Component({
   selector: 'app-select-server',
@@ -32,8 +30,8 @@ import * as base64 from 'base64-arraybuffer';
 })
 export class SelectServerComponent implements OnInit {
 
-  configs: RPCConfig[];
-  selectedConfig: RPCConfig;
+  configs: sliver.SliverClientConfig[];
+  selectedConfig: sliver.SliverClientConfig;
   connecting = false;
   connectionError: string;
 
@@ -52,7 +50,7 @@ export class SelectServerComponent implements OnInit {
     this.fetchConfigs();
   }
 
-  onSelectedConfig(config: RPCConfig) {
+  onSelectedConfig(config: sliver.SliverClientConfig) {
     this.connecting = true;
     this._clientService.setActiveConfig(config).then(() => {
       this._router.navigate(['/home']);
@@ -80,10 +78,10 @@ export class SelectServerComponent implements OnInit {
       return;  // User hit cancel
     }
 
-    const configs: RPCConfig[] = [];
+    const configs: sliver.SliverClientConfig[] = [];
     for (let index = 0; index < rawConfigs.files.length; ++index) {
       try {
-        const config: RPCConfig = JSON.parse(atob(rawConfigs.files[index].data));
+        const config: sliver.SliverClientConfig = JSON.parse(atob(rawConfigs.files[index].data));
         configs.push(config);
       } catch (err) {
         console.error(err);

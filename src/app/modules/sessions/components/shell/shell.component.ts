@@ -18,7 +18,7 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, OnDestroy } fr
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import * as clientpb from '@rpc/pb/client_pb'; // Protobuf
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 import { SliverService } from '@app/providers/sliver.service';
 import { TunnelService, Tunnel } from '@app/providers/tunnel.service';
 import * as xterm from 'xterm';
@@ -34,7 +34,7 @@ export class ShellComponent implements OnInit, AfterViewInit, OnDestroy {
   readonly SCROLLBACK = 100000;
 
   @ViewChild('terminal') el: ElementRef;
-  session: clientpb.Sliver;
+  session: clientpb.Session;
   terminal: xterm.Terminal;
   recvSub: Subscription;
   tunnel: Tunnel;

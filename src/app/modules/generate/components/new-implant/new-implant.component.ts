@@ -17,7 +17,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import * as clientpb from '@rpc/pb/client_pb'; // Protobuf
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 
 import { FadeInOut } from '@app/shared/animations';
 import { SliverService } from '@app/providers/sliver.service';
@@ -191,7 +191,7 @@ export class NewImplantComponent implements OnInit, OnDestroy {
 
   async onGenerate() {
     this.isGenerating = true;
-    const config = new clientpb.SliverConfig();
+    const config = new clientpb.ImplantConfig();
 
 
     const generate = await this._sliverService.generate(config);

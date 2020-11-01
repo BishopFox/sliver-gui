@@ -21,8 +21,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import * as base64 from 'base64-arraybuffer';
 
+import * as sliver from 'sliver-script';
+
 import { IPCService } from './ipc.service';
-import { RPCConfig } from '@rpc/rpc';
 import { FileFilter } from 'electron';
 
 
@@ -69,12 +70,12 @@ export class ClientService {
 
   constructor(private _ipc: IPCService) { }
 
-  async getActiveConfig(): Promise<RPCConfig> {
+  async getActiveConfig(): Promise<sliver.SliverClientConfig> {
     const rawConfig = await this._ipc.request('client_activeConfig');
     return rawConfig ? JSON.parse(rawConfig) : null;
   }
 
-  async setActiveConfig(config: RPCConfig): Promise<string> {
+  async setActiveConfig(config: sliver.SliverClientConfig): Promise<string> {
     const data = await this._ipc.request('client_start', JSON.stringify(config));
     this.isConnected$.next(true);
     return data;
@@ -90,13 +91,13 @@ export class ClientService {
     return this.getSettings();
   }
 
-  async listConfigs(): Promise<RPCConfig[]> {
+  async listConfigs(): Promise<sliver.SliverClientConfig[]> {
     const resp = await this._ipc.request('config_list');
-    const configs: RPCConfig[] = JSON.parse(resp);
+    const configs: sliver.SliverClientConfig[] = JSON.parse(resp);
     return configs;
   }
 
-  async saveConfigs(configs: RPCConfig[]): Promise<string> {
+  async saveConfigs(configs: sliver.SliverClientConfig[]): Promise<string> {
     return this._ipc.request('config_save', JSON.stringify({ configs: configs })); 
   }
 

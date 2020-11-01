@@ -16,9 +16,9 @@
 import { Injectable } from '@angular/core';
 import { IPCService } from './ipc.service';
 import { ProtobufService } from './protobuf.service';
-import { SliverPB, ClientPB } from '@rpc/pb'; // Constants
-import * as clientpb from '@rpc/pb/client_pb'; // Protobuf
-import * as sliverpb from '@rpc/pb/sliver_pb'; // Protobuf
+
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
+import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb'; // Protobuf
 
 
 @Injectable({
@@ -31,10 +31,9 @@ export class JobsService extends ProtobufService {
   }
 
   async jobs(): Promise<clientpb.Jobs> {
-    const reqEnvelope = new sliverpb.Envelope();
-    reqEnvelope.setType(ClientPB.MsgJobs);
-    const resp = await this._ipc.request('rpc_request', this.encode(reqEnvelope));
-    return clientpb.Jobs.deserializeBinary(this.decode(resp));
+
+    
+    return new clientpb.Jobs();
   }
 
   async jobById(jobId: number): Promise<clientpb.Job> {
@@ -53,64 +52,29 @@ export class JobsService extends ProtobufService {
     if (lport < 1 || 65535 <= lport) {
       return Promise.reject('Invalid port number');
     }
-    const reqEnvelope = new sliverpb.Envelope();
-    reqEnvelope.setType(ClientPB.MsgMtls);
-    const mtlsReq = new clientpb.MTLSReq();
-    mtlsReq.setLport(lport);
-    reqEnvelope.setData(mtlsReq.serializeBinary());
-    const resp = await this._ipc.request('rpc_request', this.encode(reqEnvelope));
-    const mtls = clientpb.MTLS.deserializeBinary(this.decode(resp));
-    const job = await this.jobById(mtls.getJobid());
-    return job;
+
+    return null;
   }
 
   async startHTTPListener(domain: string, website: string, lport: number): Promise<clientpb.Job> {
     if (lport < 1 || 65535 <= lport) {
       return Promise.reject('Invalid port number');
     }
-    const reqEnvelope = new sliverpb.Envelope();
-    reqEnvelope.setType(ClientPB.MsgHttp);
-    const httpReq = new clientpb.HTTPReq();
-    httpReq.setLport(lport);
-    httpReq.setDomain(domain);
-    httpReq.setWebsite(website);
-    reqEnvelope.setData(httpReq.serializeBinary());
-    const resp = await this._ipc.request('rpc_request', this.encode(reqEnvelope));
-    const http = clientpb.HTTP.deserializeBinary(this.decode(resp));
-    const job = await this.jobById(http.getJobid());
-    return job;
+
+    return null;
   }
 
   async startHTTPSListener(domain: string, website: string, lport: number, acme: boolean): Promise<clientpb.Job> {
     if (lport < 1 || 65535 <= lport) {
       return Promise.reject('Invalid port number');
     }
-    const reqEnvelope = new sliverpb.Envelope();
-    reqEnvelope.setType(ClientPB.MsgHttp);
-    const httpReq = new clientpb.HTTPReq();
-    httpReq.setLport(lport);
-    httpReq.setDomain(domain);
-    httpReq.setWebsite(website);
-    httpReq.setSecure(true);
-    httpReq.setAcme(acme ? true : false);
-    reqEnvelope.setData(httpReq.serializeBinary());
-    const resp = await this._ipc.request('rpc_request', this.encode(reqEnvelope));
-    const https = clientpb.HTTP.deserializeBinary(this.decode(resp));
-    const job = await this.jobById(https.getJobid());
-    return job;
+
+    return null;
   }
 
   async startDNSListener(domains: string[], canaries: boolean): Promise<clientpb.Job> {
-    const reqEnvelope = new sliverpb.Envelope();
-    reqEnvelope.setType(ClientPB.MsgDns);
-    const dnsReq = new clientpb.DNSReq();
-    dnsReq.setDomainsList(domains);
-    dnsReq.setCanaries(canaries ? true : false);
-    reqEnvelope.setData(dnsReq.serializeBinary());
-    const resp = await this._ipc.request('rpc_request', this.encode(reqEnvelope));
-    const dns = clientpb.DNS.deserializeBinary(this.decode(resp));
-    const job = await this.jobById(dns.getJobid());
-    return job;
+
+    return null;
   }
 
 }

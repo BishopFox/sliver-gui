@@ -23,7 +23,7 @@ import { FadeInOut } from '../../shared/animations';
 import { EventsService } from '../../providers/events.service';
 import { SliverService } from '../../providers/sliver.service';
 
-import * as clientpb from '@rpc/pb/client_pb'; // Protobuf
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 
 
 interface TableSessionData {
@@ -74,7 +74,7 @@ export class SessionsComponent implements OnInit, OnDestroy {
   }
 
   tableData(sessions: clientpb.Sessions): TableSessionData[] {
-    const slivers = sessions.getSliversList();
+    const slivers = sessions.getSessionsList();
     const table: TableSessionData[] = [];
     for (let index = 0; index < slivers.length; index++) {
       table.push({

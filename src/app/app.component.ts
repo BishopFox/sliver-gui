@@ -19,7 +19,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 import { AppConfig } from '../environments/environment';
-import * as clientpb from '@rpc/pb/client_pb'; // Protobuf
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 
 
 @Component({
@@ -34,7 +34,9 @@ export class AppComponent {
               private _snackBar: MatSnackBar) {
     console.log(AppConfig);
     this._eventsService.events$.subscribe((event: clientpb.Event) => {
+
       const eventType = event.getEventtype();
+
       switch (eventType) {
 
         // Players
@@ -50,10 +52,6 @@ export class AppComponent {
           this.jobStoppedAlert(event.getJob());
           break;
 
-        // Sessions
-        case Events.Connected:
-          this.sessionOpenedAlert(event.getSliver());
-          break;
 
         default:
           console.error(`Unknown event type: '${eventType}'`);
@@ -73,7 +71,7 @@ export class AppComponent {
     });
   }
 
-  sessionOpenedAlert(session: clientpb.Sliver) {
+  sessionOpenedAlert(session: clientpb.Session) {
     const snackBarRef = this._snackBar.open(`Session #${session.getId()} opened`, 'Interact', {
       duration: 5000,
     });

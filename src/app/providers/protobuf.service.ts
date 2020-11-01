@@ -19,7 +19,7 @@ Easy access to methods used to en/decode (base64) IPC protobuf messages.
 
 import { Injectable } from '@angular/core';
 import * as base64 from 'base64-arraybuffer';
-import * as sliverpb from '@rpc/pb/sliver_pb';
+import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb';
 
 @Injectable({
   providedIn: 'root'

@@ -22,8 +22,8 @@ import { MatMenuTrigger } from '@angular/material/menu';
 
 import * as pako from 'pako';
 
-import * as clientpb from '@rpc/pb/client_pb'; // Protobuf
-import * as sliverpb from '@rpc/pb/sliver_pb'; // Protobuf
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
+import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb'; // Protobuf
 import { FadeInOut } from '@app/shared/animations';
 import { SliverService } from '@app/providers/sliver.service';
 import { ClientService } from '@app/providers/client.service';
@@ -50,7 +50,7 @@ function compare(a: number | string | boolean, b: number | string | boolean, isA
 export class FileBrowserComponent implements OnInit {
 
   ls: sliverpb.Ls;
-  session: clientpb.Sliver;
+  session: clientpb.Session;
   dataSrc = new MatTableDataSource<TableFileData>();
   displayedColumns: string[] = [
     'isDir', 'name', 'size', 'options'
