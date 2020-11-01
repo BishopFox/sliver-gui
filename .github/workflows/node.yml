@@ -21,12 +21,16 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+
     - run: npm install
     - run: npm install -g electron-packager
     - run: npm install -g ts-protoc-gen
     - run: npm install -g @angular/cli
-    
+ 
     - run: npm run electron:mac
+      env:
+        CSC_IDENTITY_AUTO_DISCOVERY: false
+    
     - name: MacOS Artifact
       uses: actions/upload-artifact@v2
       with:
@@ -59,7 +63,7 @@ jobs:
     #     name: sliver-gui.exe
     #     path: release/windows/sliver-*.exe
 
-    - run: npm run electron:linux
+    - run: npm run electron:linux && ls -lah && ls -lah ./release
     - name: Linux Artifact (deb)
       uses: actions/upload-artifact@v2
       with:
