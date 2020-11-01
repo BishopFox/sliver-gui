@@ -25,4 +25,4 @@ const routes: Routes = [
 
 ];
 
-export const ScriptingRoutes: ModuleWithProviders = RouterModule.forChild(routes);
+export const ScriptingRoutes: ModuleWithProviders<any> = RouterModule.forChild(routes);

@@ -52,7 +52,6 @@ export class AppComponent {
           this.jobStoppedAlert(event.getJob());
           break;
 
-
         default:
           console.error(`Unknown event type: '${eventType}'`);
       }

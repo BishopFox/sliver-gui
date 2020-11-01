@@ -35,7 +35,6 @@
   "linux": {
     "icon": "dist",
     "target": [
-      "AppImage",
       "deb",
       "rpm"
     ]

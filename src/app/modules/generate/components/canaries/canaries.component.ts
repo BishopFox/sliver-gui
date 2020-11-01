@@ -62,10 +62,10 @@ export class CanariesComponent implements OnInit {
     const table: TableCanaryData[] = [];
     for (const canary of canaries.getCanariesList()) {
       table.push({
-        sliverName: canary.getSlivername(),
+        sliverName: canary.getImplantname(),
         domain: canary.getDomain(),
         triggered: canary.getTriggered(),
-        firstTriggered: canary.getFristtriggered(),
+        firstTriggered: canary.getFirsttriggered(),
         latestTrigger: canary.getLatesttrigger()
       });
     }

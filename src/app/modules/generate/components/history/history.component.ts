@@ -83,7 +83,7 @@ export class HistoryComponent implements OnInit {
     this.dataSrc = new MatTableDataSource(this.tableData(sliverBuilds));
   }
 
-  tableData(builds: clientpb.SessionBuilds): TableSliverBuildData[] {
+  tableData(builds: clientpb.ImplantBuilds): TableSliverBuildData[] {
 
     // For some reason Google thought it'd be cool to not give you any useful
     // datatypes, and their docs on how to use protobuf 'maps' in JavaScript
@@ -94,11 +94,12 @@ export class HistoryComponent implements OnInit {
     // undocumented attribute within this object `.arr_` that contains the actual
     // data we want. It's an array of arrays containing [key, value]'s
 
-    const entries = builds.getConfigsMap().entries().arr_;
+    // TODO: Refactor
+    const entries = builds.getConfigsMap().getEntryList();
     const table: TableSliverBuildData[] = [];
     for (const entry of entries) {
       const name: string = entry[0];
-      const config: clientpb.SessionConfig = entry[1];
+      const config: clientpb.ImplantConfig = entry[1];
       table.push({
         name: name,
         os: config.getGoos(),
@@ -124,9 +125,9 @@ export class HistoryComponent implements OnInit {
       this._snackBar.open(`Regenerating ${targetRow.name}, please wait...`, 'Dismiss', {
         duration: 5000,
       });
-      const regen = await this._sliverService.regenerate(targetRow.name);
-      if (regen) {
-        const file = regen.getFile();
+      const regenerated = await this._sliverService.regenerate(targetRow.name);
+      if (regenerated) {
+        const file = regenerated.getFile();
         const msg = `Save regenerated file ${file.getName()}`;
         const path = await this._clientService.saveFile('Save File', msg, file.getName(), file.getData_asU8());
         console.log(`Saved file to: ${path}`);
@@ -136,7 +137,7 @@ export class HistoryComponent implements OnInit {
     });
   }
 
-  c2sToURLs(sliverC2s: clientpb.SessionC2[]): string[] {
+  c2sToURLs(sliverC2s: clientpb.ImplantC2[]): string[] {
     const c2URLs: string[] = [];
     for (let index = 0; index < sliverC2s.length; ++index) {
       c2URLs.push(sliverC2s[index].getUrl());

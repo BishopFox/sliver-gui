@@ -16,7 +16,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ClientService } from '@app/providers/client.service';
-import { RPCConfig } from '@rpc/rpc';
+import { SliverClientConfig } from 'sliver-script';
 
 
 @Component({
@@ -27,7 +27,7 @@ import { RPCConfig } from '@rpc/rpc';
 export class TopMenuComponent implements OnInit {
 
   isConnected = false;
-  activeConfig: RPCConfig;
+  activeConfig: SliverClientConfig;
 
   constructor(private _clientService: ClientService) { }
 

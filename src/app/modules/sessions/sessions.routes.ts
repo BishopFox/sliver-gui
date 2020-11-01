@@ -39,4 +39,4 @@ const routes: Routes = [
 
 ];
 
-export const SessionsRoutes: ModuleWithProviders = RouterModule.forChild(routes);
+export const SessionsRoutes: ModuleWithProviders<any> = RouterModule.forChild(routes);

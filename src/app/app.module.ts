@@ -45,9 +45,6 @@ import { GenerateRoutes } from './modules/generate/generate.routes';
 import { SessionsModule } from './modules/sessions/sessions.module';
 import { SessionsRoutes } from './modules/sessions/sessions.routes';
 
-import { InfrastructureModule } from './modules/infrastructure/infrastructure.module';
-import { InfrastructureRoutes } from './modules/infrastructure/infrastructure.routes';
-
 import { JobsModule } from './modules/jobs/jobs.module';
 import { JobsRoutes } from './modules/jobs/jobs.routes';
 
@@ -77,14 +74,12 @@ import { ScriptingRoutes } from './modules/scripting/scripting.routes';
     AppRoutingModule,
     GenerateRoutes,
     SessionsRoutes,
-    InfrastructureRoutes,
     JobsRoutes,
     ScriptingRoutes,
 
     // Modules
     GenerateModule,
     SessionsModule,
-    InfrastructureModule,
     JobsModule,
     ScriptingModule,
 

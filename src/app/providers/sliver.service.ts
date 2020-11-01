@@ -60,7 +60,7 @@ export class SliverService extends ProtobufService {
     return null;
   }
 
-  async regenerate(name: string): Promise<clientpb.RegenerateReq> {
+  async regenerate(name: string): Promise<clientpb.Generate> {
     
     return null;
   }

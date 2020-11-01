@@ -28,4 +28,4 @@ const routes: Routes = [
 
 ];
 
-export const JobsRoutes: ModuleWithProviders = RouterModule.forChild(routes);
+export const JobsRoutes: ModuleWithProviders<any> = RouterModule.forChild(routes);
