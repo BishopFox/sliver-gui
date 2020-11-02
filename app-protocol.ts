@@ -53,7 +53,7 @@ function mime(filename: string): string {
   return type ? type : null;
 }
 
-export function requestHandler(req: Electron.Request, next: ProtocolCallback) {
+export function requestHandler(req: Electron.ProtocolRequest, next: ProtocolCallback) {
   const reqUrl = new URL(req.url);
   let reqPath = path.normalize(reqUrl.pathname);
   if (reqPath === '/') {
