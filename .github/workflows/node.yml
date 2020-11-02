@@ -29,11 +29,11 @@ jobs:
  
     - run: npm run electron:mac
     
-    # - name: MacOS Artifact
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: sliver-gui.dmg
-    #     path: release/sliver-*.dmg
+    - name: MacOS Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: sliver-gui.dmg
+        path: release/sliver-*.dmg
 
   linux-build:
 
