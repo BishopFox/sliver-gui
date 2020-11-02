@@ -92,4 +92,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: sliver-gui.exe
-        path: release/sliver-*.exe
+        path: release/sliver*.exe
