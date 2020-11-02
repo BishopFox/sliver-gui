@@ -1,6 +1,5 @@
 {
   "productName": "sliver",
-
   "directories": {
     "output": "release/"
   },
