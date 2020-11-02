@@ -26,6 +26,7 @@ import * as path from 'path';
 import * as uuid from 'uuid';
 
 import { jsonSchema } from './json-schema';
+import { SliverClientConfig } from 'sliver-script';
 
 const CLIENT_DIR = path.join(homedir(), '.sliver-client');
 const CONFIG_DIR = path.join(CLIENT_DIR, 'configs');
@@ -75,6 +76,32 @@ async function makeConfigDir(): Promise<NodeJS.ErrnoException|null> {
 
 // IPC Methods used to start/interact with the RPCClient
 export class IPCHandlers {
+
+  // Config
+  static config_list(): Promise<string> {
+    return new Promise((resolve) => {
+      fs.readdir(CONFIG_DIR, (_, items) => {
+        if (!fs.existsSync(CONFIG_DIR) || items === undefined) {
+          return resolve(JSON.stringify([]));
+        }
+        const configs: SliverClientConfig[] = [];
+        for (let index = 0; index < items.length; ++index) {
+          const filePath = path.join(CONFIG_DIR, items[index]);
+          if (fs.existsSync(filePath) && !fs.lstatSync(filePath).isDirectory()) {
+            const fileData = fs.readFileSync(filePath);
+            configs.push(JSON.parse(fileData.toString('utf8')));
+          }
+        }
+        resolve(JSON.stringify(configs));
+      });
+    });
+  }
+
+  // Client
+  static client_exit() {
+    process.on('unhandledRejection', () => { }); // STFU Node
+    process.exit(0);
+  }
 
 }
 
