@@ -93,6 +93,7 @@ export class ClientService {
 
   async listConfigs(): Promise<sliver.SliverClientConfig[]> {
     const resp = await this._ipc.request('config_list');
+    console.log(`listConfigs: ${resp}`);
     const configs: sliver.SliverClientConfig[] = JSON.parse(resp);
     return configs;
   }

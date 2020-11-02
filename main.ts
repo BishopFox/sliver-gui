@@ -79,11 +79,13 @@ async function createMainWindow() {
 
 try {
 
-  // Custom procotol handler
+  let handlers = new IPCHandlers();
+
+  // Custom protocol handler
   app.on('ready', () => {
     protocol.registerBufferProtocol(AppProtocol.scheme, AppProtocol.requestHandler);
     createMainWindow();
-    startIPCHandlers(mainWindow);
+    startIPCHandlers(mainWindow, handlers);
   });
 
   // Prevent navigation in any window

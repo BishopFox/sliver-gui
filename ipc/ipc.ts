@@ -26,7 +26,7 @@ import * as path from 'path';
 import * as uuid from 'uuid';
 
 import { jsonSchema } from './json-schema';
-import { SliverClientConfig } from 'sliver-script';
+import { SliverClient, SliverClientConfig } from 'sliver-script';
 
 const CLIENT_DIR = path.join(homedir(), '.sliver-client');
 const CONFIG_DIR = path.join(CLIENT_DIR, 'configs');
@@ -74,11 +74,25 @@ async function makeConfigDir(): Promise<NodeJS.ErrnoException|null> {
 }
 
 
-// IPC Methods used to start/interact with the RPCClient
+/*
+ - IPC Methods used to start/interact with the RPCClient
+  
+  If you're wondering why each method has a `self` argument, it's because TypeScript
+  inherits the `this` keyword from JavaScript, and JavaScript is a *fucking stupid*
+  language. Because of the indirection in the calls to these methods, there's no way
+  to reference the object instance, and no bind() / call() don't work in this case,
+  because again JavaScript is *fucking awful* --why anyone likes this shitty fucking
+  programming language is beyond human comprehension.
+*/
 export class IPCHandlers {
 
+  private client: SliverClient;
+
+  // ----------
   // Config
-  static config_list(): Promise<string> {
+  // ----------
+
+  private config_list(self: IPCHandlers): Promise<string> {
     return new Promise((resolve) => {
       fs.readdir(CONFIG_DIR, (_, items) => {
         if (!fs.existsSync(CONFIG_DIR) || items === undefined) {
@@ -97,22 +111,239 @@ export class IPCHandlers {
     });
   }
 
+  @jsonSchema({
+    "properties": {
+      "configs": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "operator": {"type": "string", "minLength": 1},
+            "lhost": {"type": "string", "minLength": 1},
+            "lport": {"type": "number"},
+            "ca_certificate": {"type": "string", "minLength": 1},
+            "certificate": {"type": "string", "minLength": 1},
+            "private_key": {"type": "string", "minLength": 1},
+          }
+        },
+      },
+    },
+    "required": ["configs"]
+  })
+  async config_save(self: IPCHandlers, req: string): Promise<string> {
+    const configs: SliverClientConfig[] = JSON.parse(req).configs;
+    if (!fs.existsSync(CONFIG_DIR)) {
+      const err = await makeConfigDir();
+      if (err) {
+        return Promise.reject(`Failed to create config dir: ${err}`);
+      }
+    }
+    const fileOptions = {
+      mode: 0o600,
+      encoding: 'utf-8',
+    };
+
+    await Promise.all(configs.map((config) => { 
+      return new Promise((resolve) => {
+        const fileName: string = uuid.v4();
+        const data = JSON.stringify(config);
+        fs.writeFile(path.join(CONFIG_DIR, fileName), data, fileOptions, (err) => {
+          if (err) {
+            console.error(err);
+          }
+          resolve();
+        });
+      });
+    }));
+
+    return self.config_list(self);
+  }
+
+  // ----------
   // Client
-  static client_exit() {
+  // ----------
+
+  @jsonSchema({
+    "properties": {
+      "operator": {"type": "string", "minLength": 1},
+      "lhost": {"type": "string", "minLength": 1},
+      "lport": {"type": "number"},
+      "ca_certificate": {"type": "string", "minLength": 1},
+      "certificate": {"type": "string", "minLength": 1},
+      "private_key": {"type": "string", "minLength": 1},
+    },
+    "required": [
+      "operator", "lhost", "lport", "ca_certificate", "certificate", "private_key"
+    ]
+  })
+  public async client_start(self: IPCHandlers, req: string): Promise<string> {
+    const config: SliverClientConfig = JSON.parse(req);
+    self.client = new SliverClient(config);
+    await self.client.connect();
+    console.log('Connection successful');
+
+    // Pipe realtime events back to renderer process
+    self.client.event$.subscribe((event) => {
+      ipcMain.emit('push', base64.encode(event.serializeBinary()));
+    });
+
+    return 'success';
+  }
+
+  public async client_activeConfig(self: IPCHandlers): Promise<string> {
+    return self.client ? JSON.stringify(self.client.config) : '';
+  }
+
+  @jsonSchema({
+    "properties": {
+      "title": {"type": "string", "minLength": 1, "maxLength": 100},
+      "message": {"type": "string", "minLength": 1, "maxLength": 100},
+      "openDirectory": {"type": "boolean"},
+      "multiSelections": {"type": "boolean"},
+      "filter": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {"type": "string"},
+            "extensions": {
+              "type": "array",
+              "items": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "required": ["title", "message"]
+  })
+  public async client_readFile(self: IPCHandlers, req: string): Promise<string> {
+    const readFileReq: ReadFileReq = JSON.parse(req);
+    const dialogOptions = {
+      title: readFileReq.title,
+      message: readFileReq.message,
+      openDirectory: readFileReq.openDirectory,
+      multiSelections: readFileReq.multiSelections
+    };
+    const files = [];
+    const open = await dialog.showOpenDialog(null, dialogOptions);
+    await Promise.all(open.filePaths.map((filePath) => {
+      return new Promise(async (resolve) => {
+        fs.readFile(filePath, (err, data) => {
+          files.push({
+            filePath: filePath,
+            error: err ? err.toString() : null,
+            data: data ? base64.encode(data) : null
+          });
+          resolve();
+        });
+      });
+    }));
+    return JSON.stringify({ files: files });
+  }
+
+  @jsonSchema({
+    "properties": {
+      "title": {"type": "string", "minLength": 1, "maxLength": 100},
+      "message": {"type": "string", "minLength": 1, "maxLength": 100},
+      "filename": {"type": "string", "minLength": 1},
+      "data": {"type": "string"}
+    },
+    "required": ["title", "message", "filename", "data"]
+  })
+  public client_saveFile(self: IPCHandlers, req: string): Promise<string> {
+    return new Promise(async (resolve, reject) => {
+      const saveFileReq: SaveFileReq = JSON.parse(req);
+      const dialogOptions = {
+        title: saveFileReq.title,
+        message: saveFileReq.message,
+        defaultPath: path.join(homedir(), 'Downloads', path.basename(saveFileReq.filename)),
+      };
+      const save = await dialog.showSaveDialog(dialogOptions);
+      console.log(`[save file] ${save.filePath}`);
+      if (save.canceled) {
+        return resolve('');  // Must return to stop execution
+      }
+      const fileOptions = {
+        mode: 0o644,
+        encoding: 'binary',
+      };
+      const data = Buffer.from(base64.decode(saveFileReq.data));
+      fs.writeFile(save.filePath, data, fileOptions, (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(JSON.stringify({ filename: save.filePath }));
+        }
+      });
+    });
+  }
+
+  public client_getSettings(self: IPCHandlers): Promise<string> {
+    return new Promise((resolve, reject) => {
+      try {
+        if (!fs.existsSync(SETTINGS_PATH)) {
+          return resolve('{}');
+        }
+        fs.readFile(SETTINGS_PATH, 'utf-8', (err, data) => {
+          if (err) {
+            return reject(err);
+          }
+          JSON.parse(data);
+          resolve(data);
+        });
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
+  // The Node process never interacts with the "settings" values, so
+  // we do not validate them, aside from ensuing it's valid JSON
+  public client_saveSettings(self: IPCHandlers, settings: string): Promise<string> {
+    return new Promise(async (resolve, reject) => {
+      
+      if (!fs.existsSync(CONFIG_DIR)) {
+        const err = await makeConfigDir();
+        if (err) {
+          return reject(`Failed to create config dir: ${err}`);
+        }
+      }
+
+      const fileOptions = {
+        mode: 0o600,
+        encoding: 'utf-8',
+      };
+      try {
+        JSON.parse(settings); // Just ensure it's valid JSON
+        fs.writeFile(SETTINGS_PATH, settings, fileOptions, async (err) => {
+          if (err) {
+            reject(err);
+          } else {
+            const updated = await self.client_getSettings(self);
+            resolve(updated);
+          }
+        });
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
+  public client_exit(self: IPCHandlers) {
     process.on('unhandledRejection', () => { }); // STFU Node
     process.exit(0);
   }
 
 }
 
-async function dispatchIPC(method: string, data: string): Promise<Object | null> {
+async function dispatchIPC(handlers: IPCHandlers, method: string, data: string): Promise<Object | null> {
   console.log(`IPC Dispatch: ${method}`);
 
   // IPC handlers must start with "namespace_" this helps ensure we do not inadvertently
   // expose methods that we don't want exposed to the sandboxed code.
   if (['client_', 'config_', 'rpc_'].some(prefix => method.startsWith(prefix))) {
-    if (typeof IPCHandlers[method] === 'function') {
-      const result: string = await IPCHandlers[method](data);
+    if (typeof handlers[method] === 'function') {
+      const result: string = await handlers[method](handlers, data);
       return result;
     } else {
       return Promise.reject(`No handler for method: ${method}`);
@@ -122,10 +353,10 @@ async function dispatchIPC(method: string, data: string): Promise<Object | null>
   }
 }
 
-export function startIPCHandlers(window: BrowserWindow) {
+export function startIPCHandlers(window: BrowserWindow, handlers: IPCHandlers) {
 
   ipcMain.on('ipc', async (event: IpcMainEvent, msg: IPCMessage) => {
-    dispatchIPC(msg.method, msg.data).then((result: string) => {
+    dispatchIPC(handlers, msg.method, msg.data).then((result: string) => {
       if (msg.id !== 0) {
         event.sender.send('ipc', {
           id: msg.id,

@@ -10,10 +10,10 @@ export function jsonSchema(schema: object) {
     return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
   
       const originalMethod = descriptor.value;
-      descriptor.value = (arg: string) => {
+      descriptor.value = (self: any, arg: string) => {
         const valid = validate(arg);
         if (valid) {
-          return originalMethod(arg);
+          return originalMethod(self, arg);
         } else {
           console.error(validate.errors);
           return Promise.reject(`Invalid schema: ${ajv.errorsText(validate.errors)}`);
