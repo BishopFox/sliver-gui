@@ -72,3 +72,29 @@ jobs:
       with:
         name: sliver-gui.rpm
         path: release/sliver-*.rpm
+
+  windows-build:
+
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install
+    - run: npm install -g electron-packager
+    - run: npm install -g ts-protoc-gen
+    - run: npm install -g @angular/cli
+
+    - run: npm run electron:windows
+    - name: Windows Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: sliver-gui.exe
+        path: release/sliver-*.exe
