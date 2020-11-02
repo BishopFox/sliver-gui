@@ -2,6 +2,7 @@
 
 Electron based Sliver GUI written in Angular/TypeScript.
 
+![Node.js CI](https://github.com/moloch--/sliver-gui/workflows/Node.js%20CI/badge.svg)
 
 #### Why Electron?
 
