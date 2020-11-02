@@ -10,6 +10,8 @@ jobs:
 
   macos-build:
     runs-on: macos-latest
+    env:
+      CSC_IDENTITY_AUTO_DISCOVERY: false
 
     strategy:
       matrix:
