@@ -325,6 +325,79 @@ export class IPCHandlers {
     return '';
   }
 
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "host": {"type": "string"},
+      "port": {"type": "number"},
+    },
+    "required": ["host", "port"],
+    "additionalProperties": false,
+  })
+  async rpc_startMTLSListener(self: IPCHandlers, req: any): Promise<string> {
+    let job = await self.client.startMTLSListener(req.host, req.port);
+    return Base64.fromUint8Array(job.serializeBinary());
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "host": {"type": "string"},
+      "domain": {"type": "string"},
+      "website": {"type": "string"},
+      "port": {"type": "number"},
+    },
+    "required": ["host", "port"],
+    "additionalProperties": false,
+  })
+  async rpc_startHTTPListener(self: IPCHandlers, req: any): Promise<string> {
+    let job = await self.client.startHTTPListener(req.domain, req.host, req.port, req.website);
+    return Base64.fromUint8Array(job.serializeBinary());
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "host": {"type": "string"},
+      "domain": {"type": "string"},
+      "website": {"type": "string"},
+      "port": {"type": "number"},
+      "acme": {"type": "boolean"},
+      "cert": {"type": "string"},
+      "key": {"type": "string"}
+    },
+    "required": ["host", "port"],
+    "additionalProperties": false,
+  })
+  async rpc_startHTTPSListener(self: IPCHandlers, req: any): Promise<string> {
+    let job = await self.client.startHTTPSListener(req.domain, req.host, req.port, req.acme, req.website, req.cert, req.key);
+    return Base64.fromUint8Array(job.serializeBinary());
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "domains": {
+        "type": "array",
+        "items": {"type": "string"},
+        "additionalItems": false,
+      },
+      "canaries": {"type": "boolean"},
+      "host": {"type": "string"},
+      "port": {"type": "number"},
+    },
+    "required": ["host", "port"],
+    "additionalProperties": false,
+  })
+  async rpc_startDNSListener(self: IPCHandlers, req: any): Promise<string> {
+    let job = await self.client.startDNSListener(req.domains, req.canaries, req.host, req.port);
+    return Base64.fromUint8Array(job.serializeBinary());
+  }
+
   // ----------
   // > Config
   // ----------
