@@ -39,7 +39,6 @@ export class IPCService extends ProtobufService {
   private _ipcResponse$ = new Subject<IPCMessage>();
   ipcEvent$ = new Subject<clientpb.Event>();
 
-
   constructor() {
     super();
     window.addEventListener('message', (ipcEvent) => {
@@ -56,7 +55,7 @@ export class IPCService extends ProtobufService {
     });
   }
 
-  request(method: string, data?: string): Promise<string> {
+  request(method: string, data?: string): Promise<any> {
     return new Promise((resolve, reject) => {
       const msgId = this.randomId();
       const subscription = this._ipcResponse$.subscribe((msg: IPCMessage) => {
@@ -76,16 +75,6 @@ export class IPCService extends ProtobufService {
         data: data,
       }), '*');
     });
-  }
-
-  // Send envelope, don't wait for response
-  sendEnvelope(envelope: sliverpb.Envelope) {
-    window.postMessage(JSON.stringify({
-      id: 0,
-      type: 'request',
-      method: 'rpc_send',
-      data: this.encode(envelope),
-    }), '*');
   }
 
   private randomId(): number {

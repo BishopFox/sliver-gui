@@ -20,23 +20,21 @@ listing/selecting configs to the sandboxed code.
 
 import { ipcMain, dialog, FileFilter, BrowserWindow, IpcMainEvent } from 'electron';
 import { homedir } from 'os';
-import * as base64 from 'base64-arraybuffer';
+import { Base64 } from 'js-base64';
+
 import * as fs from 'fs';
 import * as path from 'path';
 import * as uuid from 'uuid';
 
 import { jsonSchema } from './json-schema';
+import { isConnected } from './decorators';
 import { SliverClient, SliverClientConfig } from 'sliver-script';
+import { Session } from 'sliver-script/lib/pb/clientpb/client_pb';
 
 const CLIENT_DIR = path.join(homedir(), '.sliver-client');
 const CONFIG_DIR = path.join(CLIENT_DIR, 'configs');
 const SETTINGS_PATH = path.join(CLIENT_DIR, 'gui-settings.json');
 
-
-function decodeRequest(data: string): Uint8Array {
-  const buf = base64.decode(data);
-  return new Uint8Array(buf);
-}
 
 export interface SaveFileReq {
   title: string;
@@ -86,13 +84,19 @@ async function makeConfigDir(): Promise<NodeJS.ErrnoException|null> {
 */
 export class IPCHandlers {
 
-  private client: SliverClient;
+  public client: SliverClient;
+
+  @isConnected()
+  async rpc_sessions(self: IPCHandlers, req: string): Promise<String[]> {
+    let sessions = await self.client.sessions();
+    return sessions.map(session => Base64.fromUint8Array(session.serializeBinary()));
+  }
 
   // ----------
-  // Config
+  // > Config
   // ----------
 
-  private config_list(self: IPCHandlers): Promise<string> {
+  public config_list(self: IPCHandlers): Promise<string> {
     return new Promise((resolve) => {
       fs.readdir(CONFIG_DIR, (_, items) => {
         if (!fs.existsSync(CONFIG_DIR) || items === undefined) {
@@ -160,7 +164,7 @@ export class IPCHandlers {
   }
 
   // ----------
-  // Client
+  // > Client
   // ----------
 
   @jsonSchema({
@@ -184,7 +188,7 @@ export class IPCHandlers {
 
     // Pipe realtime events back to renderer process
     self.client.event$.subscribe((event) => {
-      ipcMain.emit('push', base64.encode(event.serializeBinary()));
+      ipcMain.emit('push', Base64.fromUint8Array(event.serializeBinary()));
     });
 
     return 'success';
@@ -232,7 +236,7 @@ export class IPCHandlers {
           files.push({
             filePath: filePath,
             error: err ? err.toString() : null,
-            data: data ? base64.encode(data) : null
+            data: data ? Base64.fromUint8Array(data) : null
           });
           resolve();
         });
@@ -267,7 +271,7 @@ export class IPCHandlers {
         mode: 0o644,
         encoding: 'binary',
       };
-      const data = Buffer.from(base64.decode(saveFileReq.data));
+      const data = Buffer.from(Base64.decode(saveFileReq.data));
       fs.writeFile(save.filePath, data, fileOptions, (err) => {
         if (err) {
           reject(err);
@@ -336,14 +340,14 @@ export class IPCHandlers {
 
 }
 
-async function dispatchIPC(handlers: IPCHandlers, method: string, data: string): Promise<Object | null> {
+async function dispatchIPC(handlers: IPCHandlers, method: string, data: string): Promise<any> {
   console.log(`IPC Dispatch: ${method}`);
 
   // IPC handlers must start with "namespace_" this helps ensure we do not inadvertently
   // expose methods that we don't want exposed to the sandboxed code.
   if (['client_', 'config_', 'rpc_'].some(prefix => method.startsWith(prefix))) {
     if (typeof handlers[method] === 'function') {
-      const result: string = await handlers[method](handlers, data);
+      const result: any = await handlers[method](handlers, data);
       return result;
     } else {
       return Promise.reject(`No handler for method: ${method}`);
@@ -356,7 +360,7 @@ async function dispatchIPC(handlers: IPCHandlers, method: string, data: string):
 export function startIPCHandlers(window: BrowserWindow, handlers: IPCHandlers) {
 
   ipcMain.on('ipc', async (event: IpcMainEvent, msg: IPCMessage) => {
-    dispatchIPC(handlers, msg.method, msg.data).then((result: string) => {
+    dispatchIPC(handlers, msg.method, msg.data).then((result: any) => {
       if (msg.id !== 0) {
         event.sender.send('ipc', {
           id: msg.id,

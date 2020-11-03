@@ -21,6 +21,7 @@ use protobuf.
 import { Injectable } from '@angular/core';
 import { IPCService } from './ipc.service';
 import { ProtobufService } from './protobuf.service';
+import { Base64 } from 'js-base64';
 
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb'; // Protobuf
@@ -35,9 +36,10 @@ export class SliverService extends ProtobufService {
     super();
   }
 
-  async sessions(): Promise<clientpb.Sessions> {
-
-    return null;
+  async sessions(): Promise<clientpb.Session[]> {
+    let sessions: string[] = await this._ipc.request('rpc_sessions');
+    console.log(sessions);
+    return sessions.map(session => clientpb.Session.deserializeBinary(Base64.toUint8Array(session)));
   }
 
   async sessionById(id: number): Promise<clientpb.Session> {

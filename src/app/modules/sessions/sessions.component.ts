@@ -73,18 +73,17 @@ export class SessionsComponent implements OnInit, OnDestroy {
     this.dataSrc = new MatTableDataSource(this.tableData(sessions));
   }
 
-  tableData(sessions: clientpb.Sessions): TableSessionData[] {
-    const slivers = sessions.getSessionsList();
+  tableData(sessions: clientpb.Session[]): TableSessionData[] {
     const table: TableSessionData[] = [];
-    for (let index = 0; index < slivers.length; index++) {
+    for (let index = 0; index < sessions.length; index++) {
       table.push({
-        id: slivers[index].getId(),
-        name: slivers[index].getName(),
-        transport: slivers[index].getTransport(),
-        remoteaddress: slivers[index].getRemoteaddress(),
-        username: slivers[index].getUsername(),
-        os: slivers[index].getOs(),
-        checkin: slivers[index].getLastcheckin()
+        id: sessions[index].getId(),
+        name: sessions[index].getName(),
+        transport: sessions[index].getTransport(),
+        remoteaddress: sessions[index].getRemoteaddress(),
+        username: sessions[index].getUsername(),
+        os: sessions[index].getOs(),
+        checkin: sessions[index].getLastcheckin()
       });
     }
     return table.sort((a, b) => (a.id > b.id) ? 1 : -1);
@@ -98,7 +97,7 @@ export class SessionsComponent implements OnInit, OnDestroy {
     this._router.navigate(['sessions', row.id, 'info']);
   }
 
-  // Becauase MatTableDataSource is absolute piece of shit
+  // Because MatTableDataSource is absolute piece of shit
   sortData(event: Sort) {
     this.dataSrc.data = this.dataSrc.data.slice().sort((a, b) => {
       const isAsc = event.direction === 'asc';

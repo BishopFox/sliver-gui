@@ -20,7 +20,6 @@ but should not be directly accessible since it itself is not sandboxed.
 
 const { ipcRenderer } = require('electron');
 
-
 window.addEventListener('message', (event) => {
   try {
     const msg = JSON.parse(event.data);
