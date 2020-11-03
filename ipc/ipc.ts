@@ -30,6 +30,8 @@ import { jsonSchema } from './json-schema';
 import { isConnected } from './decorators';
 import { SliverClient, SliverClientConfig } from 'sliver-script';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb';
+
 
 const CLIENT_DIR = path.join(homedir(), '.sliver-client');
 const CONFIG_DIR = path.join(CLIENT_DIR, 'configs');
@@ -89,6 +91,8 @@ export class IPCHandlers {
   // ----------
   // > RPC
   // ----------
+
+  // Sessions / Implants
 
   @isConnected()
   async rpc_sessions(self: IPCHandlers): Promise<string[]> {
@@ -154,12 +158,171 @@ export class IPCHandlers {
     "properties": {
       "name": {"type": "string", "minLength": 1},
     },
-    "required": [],
+    "required": ["name"],
     "additionalProperties": false,
   })
-  async regenerate(self: IPCHandlers, req: any): Promise<string> {
+  async rpc_regenerate(self: IPCHandlers, req: any): Promise<string> {
     let regenerated = await self.client.regenerate(req.name);
     return Base64.fromUint8Array(regenerated.serializeBinary());
+  }
+
+  // Session Interaction
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "sessionId": {"type": "number"}
+    },
+    "required": ["sessionId"],
+    "additionalProperties": false,
+  })
+  async rpc_ps(self: IPCHandlers, req: any): Promise<string[]> {
+    let session = await self.client.interact(req.sessionId);
+    let ps = await session.ps();
+    return ps.map(p => Base64.fromUint8Array(p.serializeBinary()));
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "sessionId": {"type": "number"},
+      "targetDir": {"type": "string"},
+    },
+    "required": ["sessionId"],
+    "additionalProperties": false,
+  })
+  async rpc_ls(self: IPCHandlers, req: any): Promise<string> {
+    let session = await self.client.interact(req.sessionId);
+    let ls = await session.ls(req.targetDir);
+    return Base64.fromUint8Array(ls.serializeBinary());
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "sessionId": {"type": "number"},
+      "targetDir": {"type": "string"},
+    },
+    "required": ["sessionId"],
+    "additionalProperties": false,
+  })
+  async rpc_cd(self: IPCHandlers, req: any): Promise<string> {
+    let session = await self.client.interact(req.sessionId);
+    let cd = await session.cd(req.targetDir);
+    return Base64.fromUint8Array(cd.serializeBinary());
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "sessionId": {"type": "number"},
+      "target": {"type": "string"},
+    },
+    "required": ["sessionId"],
+    "additionalProperties": false,
+  })
+  async rpc_rm(self: IPCHandlers, req: any): Promise<string> {
+    let session = await self.client.interact(req.sessionId);
+    let rm = await session.rm(req.target);
+    return Base64.fromUint8Array(rm.serializeBinary());
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "sessionId": {"type": "number"},
+      "targetDir": {"type": "string"},
+    },
+    "required": ["sessionId"],
+    "additionalProperties": false,
+  })
+  async rpc_mkdir(self: IPCHandlers, req: any): Promise<string> {
+    let session = await self.client.interact(req.sessionId);
+    let mkdir = await session.mkdir(req.targetDir);
+    return Base64.fromUint8Array(mkdir.serializeBinary());
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "sessionId": {"type": "number"},
+      "target": {"type": "string"},
+    },
+    "required": ["sessionId"],
+    "additionalProperties": false,
+  })
+  async rpc_download(self: IPCHandlers, req: any): Promise<string> {
+    let session = await self.client.interact(req.sessionId);
+    let data = await session.download(req.target);
+    return Base64.fromUint8Array(data);
+  }
+  
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "sessionId": {"type": "number"},
+      "data": {"type": "string"},
+      "path": {"type": "string"},
+    },
+    "required": ["sessionId"],
+    "additionalProperties": false,
+  })
+  async rpc_upload(self: IPCHandlers, req: any): Promise<string> {
+    let session = await self.client.interact(req.sessionId);
+    let data = Base64.toUint8Array(req.data);
+    let upload = await session.upload(req.path, Buffer.from(data));
+    return Base64.fromUint8Array(upload.serializeBinary());
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "sessionId": {"type": "number"},
+    },
+    "required": ["sessionId"],
+    "additionalProperties": false,
+  })
+  async rpc_ifconfig(self: IPCHandlers, req: any): Promise<string> {
+    let session = await self.client.interact(req.sessionId);
+    let ifconfig = await session.ifconfig();
+    return Base64.fromUint8Array(ifconfig.serializeBinary());
+  }
+
+  // Jobs
+  @isConnected()
+  async rpc_jobs(self: IPCHandlers): Promise<string[]> {
+    let jobs = await self.client.jobs();
+    return jobs.map(job => Base64.fromUint8Array(job.serializeBinary()));
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "id": {"type": "number"},
+    },
+    "required": ["id"],
+    "additionalProperties": false,
+  })
+  async rpc_jobById(self: IPCHandlers, req: any): Promise<string> {
+    let jobId = req.id;
+    if (isNaN(jobId) || jobId <= 0) {
+      return '';
+    }
+    let jobs = await self.client.jobs();
+    for (let index = 0; index < jobs.length; ++index) {
+      if (jobs[index].getId() === jobId) {
+        return Base64.fromUint8Array(jobs[index].serializeBinary());
+      }
+    }
+    return '';
   }
 
   // ----------
@@ -446,7 +609,8 @@ export function startIPCHandlers(window: BrowserWindow, handlers: IPCHandlers) {
         });
       }
     }).catch((err) => {
-      console.error(`[startIPCHandlers] ${err}`);
+      console.error(`[ipc handlers] ${err}`);
+      console.trace();
       if (msg.id !== 0) {
         event.sender.send('ipc', {
           id: msg.id,

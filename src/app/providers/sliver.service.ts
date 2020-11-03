@@ -20,7 +20,6 @@ use protobuf.
 
 import { Injectable } from '@angular/core';
 import { IPCService } from './ipc.service';
-import { ProtobufService } from './protobuf.service';
 import { Base64 } from 'js-base64';
 
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
@@ -31,10 +30,10 @@ import * as commonpb from 'sliver-script/lib/pb/commonpb/common_pb';
 @Injectable({
   providedIn: 'root'
 })
-export class SliverService extends ProtobufService {
+export class SliverService {
 
   constructor(private _ipc: IPCService) {
-    super();
+
   }
 
   async sessions(): Promise<clientpb.Session[]> {
@@ -78,44 +77,65 @@ export class SliverService extends ProtobufService {
   }
 
   // Session Interaction
-  async ps(sessionId: number): Promise<sliverpb.Ps> {
-
-    return null;
+  async ps(sessionId: number): Promise<commonpb.Process[]> {
+    let ps: string[] = await this._ipc.request('rpc_ps', JSON.stringify({ sessionId: sessionId }));
+    return ps.map(p => commonpb.Process.deserializeBinary(Base64.toUint8Array(p)));
   }
 
   async ls(sessionId: number, targetDir: string): Promise<sliverpb.Ls> {
-    
-    return null;
+    let ls: string = await this._ipc.request('rpc_ls', JSON.stringify({
+      sessionId: sessionId,
+      targetDir: targetDir,
+    }));
+    return sliverpb.Ls.deserializeBinary(Base64.toUint8Array(ls));
   }
 
   async cd(sessionId: number, targetDir: string): Promise<sliverpb.Pwd> {
-    
-    return null;
+    let pwd: string = await this._ipc.request('rpc_cd', JSON.stringify({
+      sessionId: sessionId,
+      targetDir: targetDir,
+    }));
+    return sliverpb.Pwd.deserializeBinary(Base64.toUint8Array(pwd));
   }
 
   async rm(sessionId: number, target: string): Promise<sliverpb.Rm> {
-    
-    return null;
+    let rm: string = await this._ipc.request('rpc_rm', JSON.stringify({
+      sessionId: sessionId,
+      target: target,
+    }));
+    return sliverpb.Rm.deserializeBinary(Base64.toUint8Array(rm));
   }
 
   async mkdir(sessionId: number, targetDir: string): Promise<sliverpb.Mkdir> {
-    
-    return null;
+    let mkdir: string = await this._ipc.request('rpc_mkdir', JSON.stringify({
+      sessionId: sessionId,
+      targetDir: targetDir,
+    }));
+    return sliverpb.Mkdir.deserializeBinary(Base64.toUint8Array(mkdir));
   }
 
-  async download(sessionId: number, targetFile: string): Promise<sliverpb.Download> {
-    
-    return null;
+  async download(sessionId: number, target: string): Promise<Uint8Array> {
+    let data: string = await this._ipc.request('rpc_download', JSON.stringify({
+      sessionId: sessionId,
+      target: target,
+    }));
+    return Base64.toUint8Array(data);
   }
 
-  async upload(sessionId: number, data: Uint8Array, encoder: string, dst: string): Promise<sliverpb.Upload> {
-    
-    return null;
+  async upload(sessionId: number, data: Uint8Array, path: string): Promise<sliverpb.Upload> {
+    let upload: string = await this._ipc.request('rpc_upload', JSON.stringify({
+      sessionId: sessionId,
+      data: Base64.fromUint8Array(data),
+      path: path,
+    }));
+    return sliverpb.Upload.deserializeBinary(Base64.toUint8Array(upload));
   }
 
   async ifconfig(sessionId: number): Promise<sliverpb.Ifconfig> {
-    
-    return null;
+    let ifconfig: string = await this._ipc.request('rpc_ifconfig', JSON.stringify({
+      sessionId: sessionId,
+    }));
+    return sliverpb.Ifconfig.deserializeBinary(Base64.toUint8Array(ifconfig));
   }
 
 }

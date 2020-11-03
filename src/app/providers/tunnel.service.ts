@@ -17,7 +17,6 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observer } from 'rxjs';
 import { IPCService } from './ipc.service';
-import { ProtobufService } from './protobuf.service';
 
 
 export interface Tunnel {
@@ -31,10 +30,10 @@ export interface Tunnel {
 @Injectable({
   providedIn: 'root'
 })
-export class TunnelService extends ProtobufService {
+export class TunnelService {
 
   constructor(private _ipc: IPCService) {
-    super();
+
   }
 
   async createTunnel(sessionId: number, enablePty?: boolean): Promise<Tunnel> {

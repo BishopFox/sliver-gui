@@ -19,7 +19,7 @@ This service is talks to the mTLS client and manages configs/etc.
 
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import * as base64 from 'base64-arraybuffer';
+import { Base64 } from 'js-base64';
 
 import * as sliver from 'sliver-script';
 
@@ -107,7 +107,7 @@ export class ClientService {
       title: title,
       message: message,
       filename: filename,
-      data: base64.encode(data),
+      data: Base64.fromUint8Array(data),
     }));
   }
 

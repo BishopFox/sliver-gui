@@ -15,7 +15,6 @@
 
 import { Injectable } from '@angular/core';
 import { IPCService } from './ipc.service';
-import { ProtobufService } from './protobuf.service';
 import { Subject } from 'rxjs';
 
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
@@ -37,7 +36,7 @@ export const Events = {
 @Injectable({
   providedIn: 'root'
 })
-export class EventsService extends ProtobufService {
+export class EventsService {
 
   events$ = new Subject<clientpb.Event>();
 
@@ -46,7 +45,7 @@ export class EventsService extends ProtobufService {
   sessions$ = new Subject<clientpb.Event>();
 
   constructor(private _ipc: IPCService) {
-    super();
+
     this._ipc.ipcEvent$.subscribe((event) => {
       try {
         this.events$.next(event);

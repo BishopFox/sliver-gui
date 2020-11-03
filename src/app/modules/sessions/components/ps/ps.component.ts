@@ -20,6 +20,8 @@ import { Sort } from '@angular/material/sort';
 
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb'; // Protobuf
+import * as commonpb from 'sliver-script/lib/pb/commonpb/common_pb'; // Protobuf
+
 import { FadeInOut } from '@app/shared/animations';
 import { SliverService } from '@app/providers/sliver.service';
 
@@ -80,15 +82,14 @@ export class PsComponent implements OnInit, OnDestroy {
     }
   }
 
-  tableData(ps: sliverpb.Ps): TableProcessData[] {
-    const procs = ps.getProcessesList();
+  tableData(ps: commonpb.Process[]): TableProcessData[] {
     const table: TableProcessData[] = [];
-    for (let index = 0; index < procs.length; index++) {
+    for (let index = 0; index < ps.length; index++) {
       table.push({
-        pid: procs[index].getPid(),
-        name: procs[index].getExecutable(),
-        owner: procs[index].getOwner(),
-        ppid: procs[index].getPpid(),
+        pid: ps[index].getPid(),
+        name: ps[index].getExecutable(),
+        owner: ps[index].getOwner(),
+        ppid: ps[index].getPpid(),
       });
     }
     return table;
@@ -98,7 +99,7 @@ export class PsComponent implements OnInit, OnDestroy {
     this.dataSrc.filter = filterValue.trim().toLowerCase();
   }
 
-  // Becauase MatTableDataSource is absolute piece of shit
+  // Because MatTableDataSource is absolute piece of shit
   sortData(event: Sort) {
     this.dataSrc.data = this.dataSrc.data.slice().sort((a, b) => {
       const isAsc = event.direction === 'asc';

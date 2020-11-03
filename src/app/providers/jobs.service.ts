@@ -15,7 +15,7 @@
 
 import { Injectable } from '@angular/core';
 import { IPCService } from './ipc.service';
-import { ProtobufService } from './protobuf.service';
+import { Base64 } from 'js-base64';
 
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb'; // Protobuf
@@ -24,27 +24,22 @@ import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb'; // Protobuf
 @Injectable({
   providedIn: 'root'
 })
-export class JobsService extends ProtobufService {
+export class JobsService {
 
   constructor(private _ipc: IPCService) {
-    super();
+
   }
 
-  async jobs(): Promise<clientpb.Jobs> {
-
-    
-    return new clientpb.Jobs();
+  async jobs(): Promise<clientpb.Job[]> {
+    let jobs: string[] = await this._ipc.request('rpc_jobs');
+    return jobs.map(job => clientpb.Job.deserializeBinary(Base64.toUint8Array(job)));
   }
 
   async jobById(jobId: number): Promise<clientpb.Job> {
-    const jobs = await this.jobs();
-    const activeJobs = jobs.getActiveList();
-    for (let index = 0; index < activeJobs.length; ++index) {
-      if (jobId === activeJobs[index].getId()) {
-        return activeJobs[index];
-      }
-    }
-    return Promise.reject('Job not found');
+    let job: string = await this._ipc.request('rpc_jobById', JSON.stringify({
+      id: jobId
+    }));
+    return clientpb.Job.deserializeBinary(Base64.toUint8Array(job));
   }
 
   async startMTLSListener(lport: number): Promise<clientpb.Job> {

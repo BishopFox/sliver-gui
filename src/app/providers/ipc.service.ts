@@ -22,7 +22,6 @@ import { Subject } from 'rxjs';
 
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb'; // Protobuf
-import { ProtobufService } from './protobuf.service';
 
 interface IPCMessage {
   id: number;
@@ -34,13 +33,12 @@ interface IPCMessage {
 @Injectable({
   providedIn: 'root'
 })
-export class IPCService extends ProtobufService {
+export class IPCService {
 
   private _ipcResponse$ = new Subject<IPCMessage>();
   ipcEvent$ = new Subject<clientpb.Event>();
 
   constructor() {
-    super();
     window.addEventListener('message', (ipcEvent) => {
       try {
         const msg: IPCMessage = JSON.parse(ipcEvent.data);

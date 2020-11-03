@@ -111,14 +111,13 @@ export class NewImplantComponent implements OnInit, OnDestroy {
 
   async fetchJobs() {
     const jobs = await this._jobsService.jobs();
-    const activeJobs = jobs.getActiveList();
     this.listeners = [];
-    for (let index = 0; index < activeJobs.length; ++index) {
-      if (activeJobs[index].getName() === 'rpc') {
+    for (let index = 0; index < jobs.length; ++index) {
+      if (jobs[index].getName() === 'rpc') {
         continue;
       }
       this.listeners.push({
-        job: activeJobs[index],
+        job: jobs[index],
         checked: false,
       });
     }

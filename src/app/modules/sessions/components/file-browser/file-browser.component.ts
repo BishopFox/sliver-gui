@@ -186,11 +186,7 @@ export class FileBrowserComponent implements OnInit {
     this.contextMenu.closeMenu();
     this.downloading = true;
     console.log(`[download] ${target}`);
-    const download = await this._sliverService.download(this.session.getId(), target.name);
-    let data = download.getData_asU8();
-    if (download.getEncoder() === 'gzip') {
-      data = pako.ungzip(data);
-    }
+    const data = await this._sliverService.download(this.session.getId(), target.name);
     this.downloading = false;
     const msg = `Save downloaded file: ${target.name}`;
     const save = await this._clientService.saveFile('Save File', msg, target.name, data);
@@ -204,11 +200,7 @@ export class FileBrowserComponent implements OnInit {
   async openFile(target: TableFileData) {
     this.contextMenu.closeMenu();
     this.downloading = true;
-    const download = await this._sliverService.download(this.session.getId(), target.name);
-    let data = download.getData_asU8();
-    if (download.getEncoder() === 'gzip') {
-      data = pako.ungzip(data);
-    }
+    const data = await this._sliverService.download(this.session.getId(), target.name);
     this.downloading = false;
   }
 

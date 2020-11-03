@@ -70,16 +70,15 @@ export class JobsComponent implements OnInit, OnDestroy {
     this.dataSrc = new MatTableDataSource(this.tableData(jobs));
   }
 
-  tableData(jobs: clientpb.Jobs): TableJobData[] {
-    const activeJobs = jobs.getActiveList();
+  tableData(jobs: clientpb.Job[]): TableJobData[] {
     const table: TableJobData[] = [];
-    for (let index = 0; index < activeJobs.length; index++) {
+    for (let index = 0; index < jobs.length; index++) {
       table.push({
-        id: activeJobs[index].getId(),
-        name: activeJobs[index].getName(),
-        protocol: activeJobs[index].getProtocol(),
-        port: activeJobs[index].getPort(),
-        description: activeJobs[index].getDescription(),
+        id: jobs[index].getId(),
+        name: jobs[index].getName(),
+        protocol: jobs[index].getProtocol(),
+        port: jobs[index].getPort(),
+        description: jobs[index].getDescription(),
       });
     }
     return table.sort((a, b) => (a.id > b.id) ? 1 : -1);
