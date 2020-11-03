@@ -29,7 +29,7 @@ import * as uuid from 'uuid';
 import { jsonSchema } from './json-schema';
 import { isConnected } from './decorators';
 import { SliverClient, SliverClientConfig } from 'sliver-script';
-import { Session } from 'sliver-script/lib/pb/clientpb/client_pb';
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 const CLIENT_DIR = path.join(homedir(), '.sliver-client');
 const CONFIG_DIR = path.join(CLIENT_DIR, 'configs');
@@ -101,10 +101,12 @@ export class IPCHandlers {
     "type": "object",
     "properties": {
       "id": {"type": "number"},
-    }
+    },
+    "required": ["id"],
+    "additionalProperties": false,
   })
-  async rpc_sessionById(self: IPCHandlers, req: string): Promise<string> {
-    let sessionId = JSON.parse(req).id;
+  async rpc_sessionById(self: IPCHandlers, req: any): Promise<string> {
+    let sessionId = req.id;
     // Remember JS is *terrible* and any direct compares to NaN will
     // return false, for example `sessionId == NaN` is always false
     if (isNaN(sessionId) || sessionId <= 0) {
@@ -129,6 +131,35 @@ export class IPCHandlers {
   async rpc_canaries(self: IPCHandlers): Promise<string[]>  {
     let canaries = await self.client.canaries();
     return canaries.map(canary => Base64.fromUint8Array(canary.serializeBinary()));
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "config": {"type": "string", "minLength": 1},
+    },
+    "required": ["config"],
+    "additionalProperties": false
+  })
+  async rpc_generate(self: IPCHandlers, req: any): Promise<string> {
+    let config = clientpb.ImplantConfig.deserializeBinary(Base64.toUint8Array(req.config));
+    let generated = await self.client.generate(config);
+    return Base64.fromUint8Array(generated.serializeBinary());
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "name": {"type": "string", "minLength": 1},
+    },
+    "required": [],
+    "additionalProperties": false,
+  })
+  async regenerate(self: IPCHandlers, req: any): Promise<string> {
+    let regenerated = await self.client.regenerate(req.name);
+    return Base64.fromUint8Array(regenerated.serializeBinary());
   }
 
   // ----------
@@ -168,14 +199,16 @@ export class IPCHandlers {
             "ca_certificate": {"type": "string", "minLength": 1},
             "certificate": {"type": "string", "minLength": 1},
             "private_key": {"type": "string", "minLength": 1},
-          }
+          },
+          "additionalProperties": false,
         },
       },
     },
-    "required": ["configs"]
+    "required": ["configs"],
+    "additionalProperties": false,
   })
-  async config_save(self: IPCHandlers, req: string): Promise<string> {
-    const configs: SliverClientConfig[] = JSON.parse(req).configs;
+  async config_save(self: IPCHandlers, req: any): Promise<string> {
+    const configs: SliverClientConfig[] = req.configs;
     if (!fs.existsSync(CONFIG_DIR)) {
       const err = await makeConfigDir();
       if (err) {
@@ -219,10 +252,10 @@ export class IPCHandlers {
     },
     "required": [
       "operator", "lhost", "lport", "ca_certificate", "certificate", "private_key"
-    ]
+    ],
+    "additionalProperties": false,
   })
-  public async client_start(self: IPCHandlers, req: string): Promise<string> {
-    const config: SliverClientConfig = JSON.parse(req);
+  public async client_start(self: IPCHandlers, config: SliverClientConfig): Promise<string> {
     self.client = new SliverClient(config);
     await self.client.connect();
     console.log('Connection successful');
@@ -260,10 +293,10 @@ export class IPCHandlers {
         }
       }
     },
-    "required": ["title", "message"]
+    "required": ["title", "message"],
+    "additionalProperties": false,
   })
-  public async client_readFile(self: IPCHandlers, req: string): Promise<string> {
-    const readFileReq: ReadFileReq = JSON.parse(req);
+  public async client_readFile(self: IPCHandlers, readFileReq: ReadFileReq): Promise<string> {
     const dialogOptions = {
       title: readFileReq.title,
       message: readFileReq.message,
@@ -295,11 +328,11 @@ export class IPCHandlers {
       "filename": {"type": "string", "minLength": 1},
       "data": {"type": "string"}
     },
-    "required": ["title", "message", "filename", "data"]
+    "required": ["title", "message", "filename", "data"],
+    "additionalProperties": false,
   })
-  public client_saveFile(self: IPCHandlers, req: string): Promise<string> {
+  public client_saveFile(self: IPCHandlers, saveFileReq: SaveFileReq): Promise<string> {
     return new Promise(async (resolve, reject) => {
-      const saveFileReq: SaveFileReq = JSON.parse(req);
       const dialogOptions = {
         title: saveFileReq.title,
         message: saveFileReq.message,

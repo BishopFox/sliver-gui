@@ -194,10 +194,9 @@ export class NewImplantComponent implements OnInit, OnDestroy {
     const config = new clientpb.ImplantConfig();
 
 
-    const generate = await this._sliverService.generate(config);
-    const file = generate.getFile();
-    const msg = `Save new implant ${file.getName()}`;
-    const save = await this._clientService.saveFile('Save File', msg, file.getName(), file.getData_asU8());
+    const generated = await this._sliverService.generate(config);
+    const msg = `Save new implant ${generated.getName()}`;
+    const save = await this._clientService.saveFile('Save File', msg, generated.getName(), generated.getData_asU8());
     console.log(`Saved file to: ${save}`);
   }
 

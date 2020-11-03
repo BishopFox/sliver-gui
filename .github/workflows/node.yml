@@ -31,11 +31,11 @@ jobs:
  
     - run: npm run electron:mac
     
-    - name: MacOS Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: sliver-gui.dmg
-        path: release/sliver-*.dmg
+    # - name: MacOS Artifact
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: sliver-gui.dmg
+    #     path: release/sliver-*.dmg
 
   linux-build:
 
@@ -57,16 +57,16 @@ jobs:
     - run: npm install -g @angular/cli
 
     - run: npm run electron:linux
-    - name: Linux Artifact (deb)
-      uses: actions/upload-artifact@v2
-      with:
-        name: sliver-gui.deb
-        path: release/sliver-*.deb
-    - name: Linux Artifact (rpm)
-      uses: actions/upload-artifact@v2
-      with:
-        name: sliver-gui.rpm
-        path: release/sliver-*.rpm
+    # - name: Linux Artifact (deb)
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: sliver-gui.deb
+    #     path: release/sliver-*.deb
+    # - name: Linux Artifact (rpm)
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: sliver-gui.rpm
+    #     path: release/sliver-*.rpm
 
   windows-build:
 
@@ -88,8 +88,8 @@ jobs:
     - run: npm install -g @angular/cli
 
     - run: npm run electron:windows
-    - name: Windows Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: sliver-gui.exe
-        path: release/sliver*.exe
+    # - name: Windows Artifact
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: sliver-gui.exe
+    #     path: release/sliver*.exe

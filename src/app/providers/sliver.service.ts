@@ -25,7 +25,7 @@ import { Base64 } from 'js-base64';
 
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb'; // Protobuf
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import * as commonpb from 'sliver-script/lib/pb/commonpb/common_pb';
 
 
 @Injectable({
@@ -63,14 +63,18 @@ export class SliverService extends ProtobufService {
     return canaries.map(canary => clientpb.DNSCanary.deserializeBinary(Base64.toUint8Array(canary)));
   }
 
-  async generate(config: clientpb.ImplantConfig): Promise<clientpb.Generate> {
-
-    return null;
+  async generate(config: clientpb.ImplantConfig): Promise<commonpb.File> {
+    let generated: string = await this._ipc.request('rpc_generate', JSON.stringify({
+      config: Base64.fromUint8Array(config.serializeBinary())
+    }));
+    return commonpb.File.deserializeBinary(Base64.toUint8Array(generated));
   }
 
-  async regenerate(name: string): Promise<clientpb.Generate> {
-    
-    return null;
+  async regenerate(name: string): Promise<commonpb.File> {
+    let regenerated: string = await this._ipc.request('rpc_regenerate', JSON.stringify({
+      name: name
+    }));
+    return commonpb.File.deserializeBinary(Base64.toUint8Array(regenerated));
   }
 
   // Session Interaction

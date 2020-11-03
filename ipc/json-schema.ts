@@ -5,15 +5,15 @@ import * as Ajv from 'ajv';
 // casting the result of JSON.parse() to an interface.
 export function jsonSchema(schema: object) {
   const ajv = new Ajv({allErrors: true});
-  schema["additionalProperties"] = false;
   const validate = ajv.compile(schema);
   return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
 
     const originalMethod = descriptor.value;
     descriptor.value = (self: any, arg: string) => {
-      const valid = validate(JSON.parse(arg));
+      const parsed = JSON.parse(arg);
+      const valid = validate(parsed);
       if (valid) {
-        return originalMethod(self, arg);
+        return originalMethod(self, parsed);
       } else {
         console.error(validate.errors);
         return Promise.reject(`Invalid schema: ${ajv.errorsText(validate.errors)}`);

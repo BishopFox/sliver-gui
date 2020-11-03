@@ -86,11 +86,11 @@ export class HistoryComponent implements OnInit {
   tableData(builds: clientpb.ImplantBuilds): TableSliverBuildData[] {
 
     // For some reason Google thought it'd be cool to not give you any useful
-    // datatypes, and their docs on how to use protobuf 'maps' in JavaScript
+    // data types, and their docs on how to use protobuf 'maps' in JavaScript
     // comes down to "read the code bitch." So we just convert these bullshit
     // types into something useful.
 
-    // .entries() - Returns one of these bullshit unuseful nonsense, but there's an
+    // .entries() - Returns one of these bullshit un-useful nonsense, but there's an
     // undocumented attribute within this object `.arr_` that contains the actual
     // data we want. It's an array of arrays containing [key, value]'s
 
@@ -127,9 +127,8 @@ export class HistoryComponent implements OnInit {
       });
       const regenerated = await this._sliverService.regenerate(targetRow.name);
       if (regenerated) {
-        const file = regenerated.getFile();
-        const msg = `Save regenerated file ${file.getName()}`;
-        const path = await this._clientService.saveFile('Save File', msg, file.getName(), file.getData_asU8());
+        const msg = `Save regenerated file ${regenerated.getName()}`;
+        const path = await this._clientService.saveFile('Save File', msg, regenerated.getName(), regenerated.getData_asU8());
         console.log(`Saved file to: ${path}`);
       } else {
         console.error(`Failed to regenerate sliver ${targetRow.name}`);
@@ -159,7 +158,7 @@ export class HistoryComponent implements OnInit {
     }
   }
 
-  // Becauase MatTableDataSource is absolute piece of shit
+  // Because MatTableDataSource is absolute piece of shit
   sortData(event: Sort) {
     this.dataSrc.data = this.dataSrc.data.slice().sort((a, b) => {
       const isAsc = event.direction === 'asc';
