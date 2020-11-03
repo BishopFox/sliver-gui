@@ -11,7 +11,7 @@ export function jsonSchema(schema: object) {
 
     const originalMethod = descriptor.value;
     descriptor.value = (self: any, arg: string) => {
-      const valid = validate(arg);
+      const valid = validate(JSON.parse(arg));
       if (valid) {
         return originalMethod(self, arg);
       } else {

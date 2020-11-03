@@ -25,6 +25,7 @@ import { Base64 } from 'js-base64';
 
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb'; // Protobuf
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Injectable({
@@ -38,23 +39,28 @@ export class SliverService extends ProtobufService {
 
   async sessions(): Promise<clientpb.Session[]> {
     let sessions: string[] = await this._ipc.request('rpc_sessions');
-    console.log(sessions);
     return sessions.map(session => clientpb.Session.deserializeBinary(Base64.toUint8Array(session)));
   }
 
   async sessionById(id: number): Promise<clientpb.Session> {
-
+    let session: string = await this._ipc.request('rpc_sessionById', JSON.stringify({ id: id }));
+    if (session.length) {
+      return clientpb.Session.deserializeBinary(Base64.toUint8Array(session));
+    }
     return Promise.reject(`No session with id '${id}'`);
   }
 
-  async sliverBuilds(): Promise<clientpb.ImplantBuilds> {
-
-    return null;
+  async implantBuilds(): Promise<clientpb.ImplantBuilds> {
+    let builds: string = await this._ipc.request('rpc_sessions');
+    if (builds.length) {
+      return clientpb.ImplantBuilds.deserializeBinary(Base64.toUint8Array(builds));
+    }
+    return Promise.reject(`Empty IPC response`);
   }
 
-  async canaries(): Promise<clientpb.Canaries> {
-
-    return null;
+  async canaries(): Promise<clientpb.DNSCanary[]> {
+    let canaries: string[] = await this._ipc.request('rpc_canaries');
+    return canaries.map(canary => clientpb.DNSCanary.deserializeBinary(Base64.toUint8Array(canary)));
   }
 
   async generate(config: clientpb.ImplantConfig): Promise<clientpb.Generate> {
@@ -67,6 +73,7 @@ export class SliverService extends ProtobufService {
     return null;
   }
 
+  // Session Interaction
   async ps(sessionId: number): Promise<sliverpb.Ps> {
 
     return null;

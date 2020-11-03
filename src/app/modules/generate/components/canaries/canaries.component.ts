@@ -58,9 +58,9 @@ export class CanariesComponent implements OnInit {
     this.dataSrc = new MatTableDataSource(this.tableData(canaries));
   }
 
-  tableData(canaries: clientpb.Canaries): TableCanaryData[] {
+  tableData(canaries: clientpb.DNSCanary[]): TableCanaryData[] {
     const table: TableCanaryData[] = [];
-    for (const canary of canaries.getCanariesList()) {
+    for (const canary of canaries) {
       table.push({
         sliverName: canary.getImplantname(),
         domain: canary.getDomain(),

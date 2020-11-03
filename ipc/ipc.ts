@@ -18,7 +18,7 @@ listing/selecting configs to the sandboxed code.
 
 */
 
-import { ipcMain, dialog, FileFilter, BrowserWindow, IpcMainEvent } from 'electron';
+import { ipcMain, dialog, FileFilter, BrowserWindow, IpcMainEvent, session } from 'electron';
 import { homedir } from 'os';
 import { Base64 } from 'js-base64';
 
@@ -86,10 +86,49 @@ export class IPCHandlers {
 
   public client: SliverClient;
 
+  // ----------
+  // > RPC
+  // ----------
+
   @isConnected()
-  async rpc_sessions(self: IPCHandlers, req: string): Promise<String[]> {
+  async rpc_sessions(self: IPCHandlers): Promise<string[]> {
     let sessions = await self.client.sessions();
     return sessions.map(session => Base64.fromUint8Array(session.serializeBinary()));
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "id": {"type": "number"},
+    }
+  })
+  async rpc_sessionById(self: IPCHandlers, req: string): Promise<string> {
+    let sessionId = JSON.parse(req).id;
+    // Remember JS is *terrible* and any direct compares to NaN will
+    // return false, for example `sessionId == NaN` is always false
+    if (isNaN(sessionId) || sessionId <= 0) {
+      return '';
+    }
+    let sessions = await self.client.sessions();
+    for (let index = 0; index < sessions.length; ++index) {
+      if (sessions[index].getId() === sessionId) {
+        return Base64.fromUint8Array(sessions[index].serializeBinary());
+      }
+    }
+    return '';
+  }
+
+  @isConnected()
+  async rpc_implantBuilds(self: IPCHandlers): Promise<string>  {
+    let builds = await self.client.implantBuilds();
+    return Base64.fromUint8Array(builds.serializeBinary());
+  }
+
+  @isConnected()
+  async rpc_canaries(self: IPCHandlers): Promise<string[]>  {
+    let canaries = await self.client.canaries();
+    return canaries.map(canary => Base64.fromUint8Array(canary.serializeBinary()));
   }
 
   // ----------
@@ -116,6 +155,7 @@ export class IPCHandlers {
   }
 
   @jsonSchema({
+    "type": "object",
     "properties": {
       "configs": {
         "type": "array",
@@ -168,6 +208,7 @@ export class IPCHandlers {
   // ----------
 
   @jsonSchema({
+    "type": "object",
     "properties": {
       "operator": {"type": "string", "minLength": 1},
       "lhost": {"type": "string", "minLength": 1},
@@ -199,6 +240,7 @@ export class IPCHandlers {
   }
 
   @jsonSchema({
+    "type": "object",
     "properties": {
       "title": {"type": "string", "minLength": 1, "maxLength": 100},
       "message": {"type": "string", "minLength": 1, "maxLength": 100},
@@ -246,6 +288,7 @@ export class IPCHandlers {
   }
 
   @jsonSchema({
+    "type": "object",
     "properties": {
       "title": {"type": "string", "minLength": 1, "maxLength": 100},
       "message": {"type": "string", "minLength": 1, "maxLength": 100},
