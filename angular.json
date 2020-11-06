@@ -25,6 +25,35 @@
               "src/favicon.256x256.png",
               "src/favicon.512x512.png",
               {
+                "glob": "require.js",
+                "input": "node_modules/requirejs/",
+                "output": "worker-lib/"
+              },
+              {
+                "glob": "protobuf.min.*",
+                "input": "node_modules/protobufjs/dist/",
+                "output": "worker-lib/"
+              },
+              {
+                "glob": "rxjs.umd.min.*",
+                "input": "node_modules/rxjs/bundles/",
+                "output": "worker-lib/"
+              },
+              {
+                "glob": "google-protobuf.js",
+                "input": "node_modules/google-protobuf/",
+                "output": "worker-lib/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/sliver-script/lib/pb",
+                "output": "worker-lib/pb",
+                "ignore": [
+                  "*.ts",
+                  ".gitkeep"
+                ]
+              },
+              {
                 "glob": "**/*",
                 "input": "node_modules/monaco-editor",
                 "output": "assets/monaco-editor/"
@@ -66,10 +95,6 @@
               ]
             },
             "production": {
-              "index": {
-                "input": "src/index.production.html",
-                "output": "index.html"
-              },
               "budgets": [
                 {
                   "type": "anyComponentStyle",

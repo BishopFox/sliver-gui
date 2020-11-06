@@ -13,40 +13,58 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+
+import { ProtocolRequest } from 'electron';
+import { WorkerManager } from './worker-manager';
+
+import * as Handlebars from 'handlebars';
 import * as fs from 'fs';
 import * as path from 'path';
 
 
 type ProtocolCallback = (arg0: { mimeType: string; charset: string; data: Buffer; }) => void;
-const DIST_PATH = path.join(__dirname);
-const INDEX_FILE = path.join(DIST_PATH, 'index.html');
-const JS_PATH = path.join(DIST_PATH, 'js');
+const WORKER_PATH = path.join(__dirname);
+const INDEX_FILE = path.join(WORKER_PATH, 'index.html');
+const DIST_PATH = path.resolve(path.join(__dirname, '..', 'dist'));
+const LIB_DIR = path.join(DIST_PATH, 'worker-lib');
+
 
 export const scheme = 'worker';
 
-export function requestHandler(req: Electron.ProtocolRequest, next: ProtocolCallback) {
+export async function requestHandler(workerManager: WorkerManager, req: ProtocolRequest, next: ProtocolCallback) {
   const reqUrl = new URL(req.url);
+  if (!workerManager.isScriptExecuting(reqUrl.hostname)) {
+    console.warn(`[WorkerProtocol] Script is not executing: ${reqUrl.hostname}`);
+    return;
+  }
+
   const reqPath = path.normalize(reqUrl.pathname);
+
+  /* Index Request */
   if (reqPath === '/' || reqPath === '/index.html') {
     return fs.readFile(INDEX_FILE, (_, data) => {
+      const frameTemplate = Handlebars.compile(data.toString());
       next({
         mimeType: 'text/html',
         charset: 'utf-8',
-        data: data
+        data: Buffer.from(frameTemplate({ execId: reqUrl.hostname })),
       });
     });
   }
 
   /* JavaScript Request */
   if (reqPath === '/code.js') {
-
-    // Pull user code and return it
-
+    const script = await workerManager.getScriptExecutionById(reqUrl.hostname);
+    return next({
+      mimeType: 'text/javascript',
+      charset: 'utf-8',
+      data: script,
+    });
   }
 
   // Default handler
   const reqFilename = path.basename(reqPath);
-  fs.readFile(path.join(JS_PATH, reqFilename), (err, data) => {
+  fs.readFile(path.join(LIB_DIR, reqFilename), (err, data: Buffer) => {
     if (!err) {
       next({
         mimeType: 'text/javascript',

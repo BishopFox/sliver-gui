@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IPCService } from '@app/providers/ipc.service';
+import { WorkersService } from '@app/providers/workers.service';
 import { MonacoEditorLoaderService, MonacoEditorComponent } from '@materia-ui/ngx-monaco-editor';
 
 import { filter, take } from 'rxjs/operators';
@@ -21,7 +22,8 @@ export class EditorComponent implements OnInit {
   };
   code = 'function x() {\nconsole.log("Hello world!");\n}';
 
-  constructor(private _ipcService: IPCService, 
+  constructor(private _ipcService: IPCService,
+              private _workersService: WorkersService,
               private _monacoLoaderService: MonacoEditorLoaderService) {
 
     this._monacoLoaderService.isMonacoLoaded$.pipe(
@@ -43,7 +45,9 @@ export class EditorComponent implements OnInit {
   }
 
   async executeScript() {
-
+    console.log(`Executing script, with code\n${this.code}`);
+    const execId = await this._workersService.startWorker(this.code);
+    console.log(`Started execution with id ${execId}`);
   }
 
 }

@@ -18,7 +18,7 @@ listing/selecting configs to the sandboxed code.
 
 */
 
-import { ipcMain, dialog, FileFilter, BrowserWindow, IpcMainEvent } from 'electron';
+import { ipcMain, dialog, FileFilter, BrowserWindow, IpcMainEvent, TouchBarOtherItemsProxy } from 'electron';
 import { homedir } from 'os';
 import { Base64 } from 'js-base64';
 
@@ -32,6 +32,8 @@ import { SliverClient, SliverClientConfig } from 'sliver-script';
 
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb';
+
+import { WorkerManager } from '../worker/worker-manager';
 
 
 const CLIENT_DIR = path.join(homedir(), '.sliver-client');
@@ -88,6 +90,29 @@ async function makeConfigDir(): Promise<NodeJS.ErrnoException|null> {
 export class IPCHandlers {
 
   public client: SliverClient;
+  private _workerManager: WorkerManager;
+
+  constructor(workerManager: WorkerManager) {
+    this._workerManager = workerManager;
+  }
+
+  // ----------
+  // > Script
+  // ----------
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "code": {"type": "string"},
+    },
+    "required": ["code"],
+    "additionalProperties": false,
+  })
+  async script_execute(self: IPCHandlers, req: any): Promise<string> {
+    let execId = await self._workerManager.startScriptExecution(req.code);
+    return execId;
+  }
+
 
   // ----------
   // > RPC
@@ -660,7 +685,7 @@ async function dispatchIPC(handlers: IPCHandlers, method: string, data: string):
 
   // IPC handlers must start with "namespace_" this helps ensure we do not inadvertently
   // expose methods that we don't want exposed to the sandboxed code.
-  if (['client_', 'config_', 'rpc_'].some(prefix => method.startsWith(prefix))) {
+  if (['client_', 'config_', 'rpc_', 'script_'].some(prefix => method.startsWith(prefix))) {
     if (typeof handlers[method] === 'function') {
       const result: any = await handlers[method](handlers, data);
       return result;

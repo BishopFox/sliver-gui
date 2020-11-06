@@ -17,6 +17,9 @@ import { app, BrowserWindow, screen, protocol } from 'electron';
 import * as path from 'path';
 
 import { startIPCHandlers, IPCHandlers } from './ipc/ipc';
+import { WorkerManager } from './worker/worker-manager';
+
+import * as WorkerProtocol from './worker/worker-protocol';
 import * as AppProtocol from './app-protocol';
 
 
@@ -79,11 +82,15 @@ async function createMainWindow() {
 
 try {
 
-  let handlers = new IPCHandlers();
+  let workerManager = new WorkerManager();
+  let handlers = new IPCHandlers(workerManager);
 
   // Custom protocol handler
   app.on('ready', () => {
     protocol.registerBufferProtocol(AppProtocol.scheme, AppProtocol.requestHandler);
+    protocol.registerBufferProtocol(WorkerProtocol.scheme, (req, next) => {
+      WorkerProtocol.requestHandler(workerManager, req, next);
+    });
     createMainWindow();
     startIPCHandlers(mainWindow, handlers);
   });
@@ -106,6 +113,11 @@ try {
 
   protocol.registerSchemesAsPrivileged([{
     scheme: AppProtocol.scheme,
+    privileges: { standard: true, secure: true }
+  }]);
+
+  protocol.registerSchemesAsPrivileged([{
+    scheme: WorkerProtocol.scheme,
     privileges: { standard: true, secure: true }
   }]);
 

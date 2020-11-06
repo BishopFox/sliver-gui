@@ -30,8 +30,10 @@ window.addEventListener('message', (event) => {
   try {
     const msg = JSON.parse(event.data);
     if (msg.type === 'request') {
-      if (['client_', 'config_', 'rpc_'].some(prefix => msg.method.startsWith(prefix))) {
+      if (['client_', 'config_', 'rpc_', 'script_'].some(prefix => msg.method.startsWith(prefix))) {
         ipcRenderer.send('ipc', msg);
+      } else {
+        console.error(`Invalid namespace: ${msg.method}`);
       }
     }
   } catch (err) {
