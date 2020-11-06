@@ -25,40 +25,6 @@
               "src/favicon.256x256.png",
               "src/favicon.512x512.png",
               {
-                "glob": "require.js",
-                "input": "node_modules/requirejs/",
-                "output": "sliver-script/"
-              },
-              {
-                "glob": "protobuf.min.*",
-                "input": "node_modules/protobufjs/dist/",
-                "output": "sliver-script/"
-              },
-              {
-                "glob": "rxjs.umd.min.*",
-                "input": "node_modules/rxjs/bundles/",
-                "output": "sliver-script/"
-              },
-              {
-                "glob": "google-protobuf.js",
-                "input": "node_modules/google-protobuf/",
-                "output": "sliver-script/"
-              },
-              {
-                "glob": "**/*",
-                "input": "rpc/pb",
-                "output": "sliver-script/pb",
-                "ignore": [
-                  "*.ts",
-                  ".gitkeep"
-                ]
-              },
-              {
-                "glob": "api.js",
-                "input": "sliver-script/",
-                "output": "sliver-script/"
-              },
-              {
                 "glob": "**/*",
                 "input": "node_modules/monaco-editor",
                 "output": "assets/monaco-editor/"

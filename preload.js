@@ -24,6 +24,7 @@ const APP_ORIGIN = 'app://sliver';
 
 window.addEventListener('message', (event) => {
   if (event.origin !== APP_ORIGIN) {
+    console.error(`Message from invalid origin: ${event.origin}`);
     return;
   }
   try {
