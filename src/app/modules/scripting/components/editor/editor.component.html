@@ -9,13 +9,13 @@
 
       <button mat-raised-button class="toolbar-button">
         <i class="fas fa-fw fa-bug"></i>
-        Enable Devtools
+        Enable DevTools
       </button>
 
     </mat-toolbar>
   </div>
   <div>
-    <ngx-monaco-editor style="height: 600px" [options]="editorOptions" [(ngModel)]="code">
+    <ngx-monaco-editor style="height: 600px" [options]="editorOptions" [(ngModel)]="code" (init)="editorInit($event)">
     </ngx-monaco-editor>
   </div>
 </div>

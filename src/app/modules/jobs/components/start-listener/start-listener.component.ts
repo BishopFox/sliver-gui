@@ -92,4 +92,8 @@ export class StartListenerComponent implements OnInit {
     this._router.navigate(['jobs']);
   }
 
+  back() {
+    window.history.back();
+  }
+
 }

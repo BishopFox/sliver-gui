@@ -20,7 +20,12 @@ but should not be directly accessible since it itself is not sandboxed.
 
 const { ipcRenderer } = require('electron');
 
+const APP_ORIGIN = 'app://sliver';
+
 window.addEventListener('message', (event) => {
+  if (event.origin !== APP_ORIGIN) {
+    return;
+  }
   try {
     const msg = JSON.parse(event.data);
     if (msg.type === 'request') {
@@ -36,7 +41,7 @@ window.addEventListener('message', (event) => {
 ipcRenderer.on('ipc', (_, msg) => {
   try {
     if (msg.type === 'response' || msg.type === 'push') {
-      window.postMessage(JSON.stringify(msg), '*');
+      window.postMessage(JSON.stringify(msg), APP_ORIGIN);
     }
   } catch (err) {
     console.error(err);

@@ -43,26 +43,18 @@
       </ng-container>
     </button>
 
-    <button style="-webkit-app-region: no-drag" mat-button [matMenuTriggerFor]="jobs">
+    <button style="-webkit-app-region: no-drag" mat-button [routerLink]="['/jobs']">
       <i class="fas fa-fw fa-flask"></i>
       <ng-container i18n>
         Jobs
       </ng-container>
     </button>
-    <mat-menu style="-webkit-app-region: no-drag" #jobs="matMenu">
-      <button mat-menu-item [routerLink]="['/jobs/new']">
-        <i class="fas fa-fw fa-plus"></i>
-        Start Listener
-      </button>
-      <button mat-menu-item [routerLink]="['/jobs']">
-        <i class="fas fa-fw fa-flask"></i>
-        Current Jobs
-      </button>
-    </mat-menu>
 
     <button style="-webkit-app-region: no-drag" mat-button [routerLink]="['/scripting/editor']">
       <i class="fas fa-fw fa-code"></i>
-      Scripting
+      <ng-container i18n>
+        Scripting
+      </ng-container>
     </button>
   </div>
   <span class="pull-right-spacer"></span>

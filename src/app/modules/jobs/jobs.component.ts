@@ -65,6 +65,10 @@ export class JobsComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  startListener() {
+    this._router.navigate(['jobs', 'new']);
+  }
+
   async fetchJobs() {
     const jobs = await this._jobsService.jobs();
     this.dataSrc = new MatTableDataSource(this.tableData(jobs));
@@ -89,7 +93,7 @@ export class JobsComponent implements OnInit, OnDestroy {
   }
 
   onRowSelection(row: any) {
-    this._router.navigate(['sessions', row.id]);
+    this._router.navigate(['jobs', row.id]);
   }
 
   // Because MatTableDataSource is absolute piece of shit

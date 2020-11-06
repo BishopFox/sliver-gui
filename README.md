@@ -1,6 +1,6 @@
 # Sliver GUI
 
-Electron based Sliver GUI written in Angular/TypeScript.
+[Sliver](https://github.com/BishopFox/sliver) GUI based on Electron/Angular/TypeScript. The GUI is an alternative to the Sliver console client.
 
 ![Node.js CI](https://github.com/moloch--/sliver-gui/workflows/Node.js%20CI/badge.svg) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
@@ -14,7 +14,7 @@ Download the [latest release](https://github.com/moloch--/sliver-gui/releases) a
 
 Because I value my development time more than your RAM.
 
-#### Electron is Insecure!
+#### Isn't Electron is Insecure?
 
 You can read about the [security architecture of this application here](https://github.com/moloch--/reasonably-secure-electron).
 
@@ -25,7 +25,6 @@ From this directory:
 ```bash
 npm install
 npm install -g electron-packager
-npm install -g ts-protoc-gen
 npm install -g @angular/cli
 npm run electron:local
 ```

@@ -18,6 +18,7 @@ import { ModuleWithProviders } from '@angular/core';
 
 import { ActiveConfig } from '../../app-routing-guards.module';
 import { JobsComponent } from './jobs.component';
+import { JobComponent } from './components/job/job.component';
 import { StartListenerComponent } from './components/start-listener/start-listener.component';
 
 
@@ -25,6 +26,7 @@ const routes: Routes = [
 
   { path: 'jobs', component: JobsComponent, canActivate: [ActiveConfig] },
   { path: 'jobs/new', component: StartListenerComponent, canActivate: [ActiveConfig] },
+  { path: 'jobs/:job-id', component: JobComponent, canActivate: [ActiveConfig] },
 
 ];
 

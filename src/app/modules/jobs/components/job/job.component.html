@@ -1,0 +1,37 @@
+<div *ngIf="!job" class="grid-spinner-wrapper">
+  <div class="spinner">
+    <mat-progress-spinner mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+</div>
+
+<div [@fadeInOut] *ngIf="job">
+  <div>
+    <mat-toolbar>
+
+      <button mat-raised-button class="toolbar-button" (click)="back()">
+        <i class="fas fa-fw fa-chevron-left"></i>
+        Back
+      </button>
+
+      <span class="toolbar-spacer"></span>
+
+      <button mat-raised-button class="toolbar-button" color="warn" (click)="startListener()">
+        <i class="fas fa-fw fa-stop"></i>
+        Stop Job
+      </button>
+
+    </mat-toolbar>
+  </div>
+
+  <div>
+
+    <h1>
+      <i class="fas fa-fw fa-flask"></i>
+      Job #{{job.getId()}}
+    </h1>
+
+
+  </div>
+
+</div>

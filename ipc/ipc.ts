@@ -18,7 +18,7 @@ listing/selecting configs to the sandboxed code.
 
 */
 
-import { ipcMain, dialog, FileFilter, BrowserWindow, IpcMainEvent, session } from 'electron';
+import { ipcMain, dialog, FileFilter, BrowserWindow, IpcMainEvent } from 'electron';
 import { homedir } from 'os';
 import { Base64 } from 'js-base64';
 
@@ -27,8 +27,9 @@ import * as path from 'path';
 import * as uuid from 'uuid';
 
 import { jsonSchema } from './json-schema';
-import { isConnected } from './decorators';
+import { isConnected } from './is-connected';
 import { SliverClient, SliverClientConfig } from 'sliver-script';
+
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb';
 
@@ -514,7 +515,7 @@ export class IPCHandlers {
       "title": {"type": "string", "minLength": 1, "maxLength": 100},
       "message": {"type": "string", "minLength": 1, "maxLength": 100},
       "openDirectory": {"type": "boolean"},
-      "multiSelections": {"type": "boolean"},
+      "multiSelection": {"type": "boolean"},
       "filter": {
         "type": "array",
         "items": {
@@ -523,9 +524,11 @@ export class IPCHandlers {
             "name": {"type": "string"},
             "extensions": {
               "type": "array",
-              "items": {"type": "string"}
+              "items": {"type": "string"},
+              "additionalItems": false,
             }
-          }
+          },
+          "additionalProperties": false,
         }
       }
     },

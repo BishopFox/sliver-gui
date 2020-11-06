@@ -17,36 +17,38 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { FadeInOut } from '@app/shared/animations';
-import { SliverService } from '@app/providers/sliver.service';
+import { JobsService } from '@app/providers/jobs.service';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 
 
 @Component({
-  selector: 'app-interact',
-  templateUrl: './interact.component.html',
-  styleUrls: ['./interact.component.scss'],
+  selector: 'app-job',
+  templateUrl: './job.component.html',
+  styleUrls: ['./job.component.scss'],
   animations: [FadeInOut]
 })
-export class InteractComponent implements OnInit {
+export class JobComponent implements OnInit {
 
-  session: clientpb.Session;
+  job: clientpb.Job;
 
   constructor(private _route: ActivatedRoute,
-              private _sliverService: SliverService) { }
+              private _jobsService: JobsService) { }
 
   ngOnInit() {
     this._route.params.subscribe((params) => {
-      const sessionId: number = parseInt(params['session-id'], 10);
-      this._sliverService.sessionById(sessionId).then((session) => {
-        this.session = session;
+      const jobId: number = parseInt(params['job-id'], 10);
+      console.log(`Job ${jobId}`);
+      this._jobsService.jobById(jobId).then((job) => {
+        console.log(job);
+        this.job = job;
       }).catch(() => {
-        console.log(`No session with id ${sessionId}`);
+        console.log(`No job with id ${jobId}`);
       });
     });
   }
 
-  get ActiveC2(): string {
-    return this.session ? this.session.getActivec2() : null;
+  back() {
+    window.history.back();
   }
 
 }
