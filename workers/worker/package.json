@@ -16,6 +16,7 @@
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
+    "js-base64": "^3.6.0",
     "rxjs": "^6.6.3",
     "sliver-script": "^1.0.26"
   }

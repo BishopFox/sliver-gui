@@ -20,34 +20,80 @@ but should not be directly accessible since it itself is not sandboxed.
 
 const { ipcRenderer } = require('electron');
 
+
+/** App Listener */
+
 const APP_ORIGIN = 'app://sliver';
 const appPrefixes = ['client_', 'config_', 'rpc_', 'script_'];
 
 window.addEventListener('message', (event) => {
   if (event.origin !== APP_ORIGIN) {
-    console.error(`Message from invalid origin: ${event.origin}`);
     return;
   }
   try {
     const msg = JSON.parse(event.data);
     if (msg.type === 'request') {
       if (appPrefixes.some(prefix => msg.method.startsWith(prefix))) {
-        ipcRenderer.send('ipc', msg);
+        ipcRenderer.send('ipc', msg, event.origin);
       } else {
         console.error(`Invalid namespace: ${msg.method}`);
       }
     }
   } catch (err) {
-    console.error(err);
+    console.trace(err);
   }
 });
 
-ipcRenderer.on('ipc', (_, msg) => {
+ipcRenderer.on('ipc', (_, msg, origin) => {
+  if (origin !== APP_ORIGIN && origin !== '*') {
+    return;
+  }
   try {
     if (msg.type === 'response' || msg.type === 'push') {
       window.postMessage(JSON.stringify(msg), APP_ORIGIN);
     }
   } catch (err) {
-    console.error(err);
+    console.trace(err);
+  }
+});
+
+
+/** Worker Listener */
+
+const WORKER_PROTOCOL = 'worker:';
+const workerPrefixes = ['rpc_'];
+
+window.addEventListener('message', (event) => {
+  let url = new URL(event.origin);
+  if (url.protocol !== WORKER_PROTOCOL) {
+    return;
+  }
+
+  try {
+    const msg = JSON.parse(event.data);
+    if (msg.type === 'request') {
+      if (workerPrefixes.some(prefix => msg.method.startsWith(prefix))) {
+        ipcRenderer.send('ipc', msg, event.origin);
+      } else {
+        console.error(`Invalid namespace: ${msg.method}`);
+      }
+    }
+  } catch (err) {
+    console.trace(err);
+  }
+});
+
+ipcRenderer.on('ipc', (_, msg, origin) => {
+  let url = new URL(origin);
+  if (url.protocol !== WORKER_PROTOCOL) {
+    return;
+  }
+  try {
+    if (msg.type === 'response' || msg.type === 'push') {
+      const iframe = document.getElementById(url.hostname);
+      iframe?.contentWindow?.postMessage(JSON.stringify(msg), origin);
+    }
+  } catch (err) {
+    console.trace(err);
   }
 });

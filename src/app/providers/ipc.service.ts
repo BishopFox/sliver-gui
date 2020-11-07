@@ -39,12 +39,17 @@ export class IPCService {
   ipcEvent$ = new Subject<clientpb.Event>();
 
   constructor() {
-    window.addEventListener('message', (ipcEvent) => {
+    window.addEventListener('message', (event) => {
+      if (event.origin !== window.location.origin) {
+        return;
+      }
       try {
-        const msg: IPCMessage = JSON.parse(ipcEvent.data);
+        const msg: IPCMessage = JSON.parse(event.data);
         if (msg.type === 'response') {
           this._ipcResponse$.next(msg);
         } else if (msg.type === 'push') {
+          
+          // TODO: Handle pushes
 
         }
       } catch (err) {
@@ -71,7 +76,7 @@ export class IPCService {
         type: 'request',
         method: method,
         data: data,
-      }), '*');
+      }), window.location.origin);
     });
   }
 

@@ -699,7 +699,8 @@ async function dispatchIPC(handlers: IPCHandlers, method: string, data: string):
 
 export function startIPCHandlers(window: BrowserWindow, handlers: IPCHandlers) {
 
-  ipcMain.on('ipc', async (event: IpcMainEvent, msg: IPCMessage) => {
+  ipcMain.on('ipc', async (event: IpcMainEvent, msg: IPCMessage, origin: string) => {
+    console.log(`Request Origin: ${origin}`);
     dispatchIPC(handlers, msg.method, msg.data).then((result: any) => {
       if (msg.id !== 0) {
         event.sender.send('ipc', {
@@ -707,7 +708,7 @@ export function startIPCHandlers(window: BrowserWindow, handlers: IPCHandlers) {
           type: 'response',
           method: 'success',
           data: result
-        });
+        }, origin);
       }
     }).catch((err) => {
       console.error(`[ipc handlers] ${err}`);
@@ -718,7 +719,7 @@ export function startIPCHandlers(window: BrowserWindow, handlers: IPCHandlers) {
           type: 'response',
           method: 'error',
           data: err.toString()
-        });
+        }, origin);
       }
     });
   });
@@ -730,7 +731,7 @@ export function startIPCHandlers(window: BrowserWindow, handlers: IPCHandlers) {
       type: 'push',
       method: '',
       data: data
-    });
+    }, '*');
   });
 
 }

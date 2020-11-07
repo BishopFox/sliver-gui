@@ -15,19 +15,15 @@
     "postinstall": "npm run postinstall:electron && electron-builder install-app-deps",
     "postinstall:electron": "node postinstall",
     "ng": "ng",
-    
     "build:worker": "cd workers/worker && npm run build",
-
     "build": "npm run postinstall:electron && npm run electron:serve-tsc && ng build",
     "build:dev": "npm run build:worker && npm run build -- -c dev",
     "build:prod": "npm run build:worker && npm run build -- -c production",
-
     "electron:serve-tsc": "tsc -p tsconfig-serve.json",
     "electron:local": "npm run build:dev && electron .",
     "electron:linux": "npm run build:prod && electron-builder build --linux",
     "electron:windows": "npm run build:prod && electron-builder build --windows",
     "electron:mac": "npm run build:prod && electron-builder build --mac --publish=never",
-
     "test": "npm run postinstall:web && ng test",
     "e2e": "npm run build:prod && mocha --timeout 300000 --require ts-node/register e2e/**/*.spec.ts"
   },
@@ -87,7 +83,7 @@
     "ajv": "^6.12.0",
     "google-protobuf": "^3.11.4",
     "handlebars": "^4.7.6",
-    "js-base64": "^3.5.2",
+    "js-base64": "^3.6.0",
     "material-design-icons": "^3.0.1",
     "moment": "^2.24.0",
     "monaco-editor": "^0.18.1",
