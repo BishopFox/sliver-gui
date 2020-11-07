@@ -1,2 +1,2 @@
-./*.js
-./*.map
+worker-manager.js
+worker-protocol.js

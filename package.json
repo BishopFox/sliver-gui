@@ -16,7 +16,7 @@
     "postinstall:electron": "node postinstall",
     "ng": "ng",
     
-    "build:worker": "cd workers/worker && npx webpack",
+    "build:worker": "cd workers/worker && npm run build",
 
     "build": "npm run postinstall:electron && npm run electron:serve-tsc && ng build",
     "build:dev": "npm run build:worker && npm run build -- -c dev",

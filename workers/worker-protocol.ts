@@ -26,7 +26,7 @@ type ProtocolCallback = (arg0: { mimeType: string; charset: string; data: Buffer
 const WORKER_PATH = path.join(__dirname);
 const INDEX_FILE = path.join(WORKER_PATH, 'index.html');
 const DIST_PATH = path.resolve(path.join(__dirname, '..', 'dist'));
-const LIB_DIR = path.join(DIST_PATH, 'worker-lib');
+const WORKER_DIST_PATH = path.join(DIST_PATH, 'worker');
 
 
 export const scheme = 'worker';
@@ -63,7 +63,7 @@ export async function requestHandler(workerManager: WorkerManager, req: Protocol
   }
 
   // Default handler
-  fs.readFile(path.join(LIB_DIR, reqPath), (err, data: Buffer) => {
+  fs.readFile(path.join(WORKER_DIST_PATH, reqPath), (err, data: Buffer) => {
     if (!err) {
       next({
         mimeType: 'text/javascript',
