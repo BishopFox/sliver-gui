@@ -63,8 +63,7 @@ export async function requestHandler(workerManager: WorkerManager, req: Protocol
   }
 
   // Default handler
-  const reqFilename = path.basename(reqPath);
-  fs.readFile(path.join(LIB_DIR, reqFilename), (err, data: Buffer) => {
+  fs.readFile(path.join(LIB_DIR, reqPath), (err, data: Buffer) => {
     if (!err) {
       next({
         mimeType: 'text/javascript',

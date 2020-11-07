@@ -15,15 +15,19 @@
     "postinstall": "npm run postinstall:electron && electron-builder install-app-deps",
     "postinstall:electron": "node postinstall",
     "ng": "ng",
-    "start": "npm run postinstall:electron && npm-run-all -p ng:serve electron:serve",
+    
+    "build:worker": "cd workers/worker && npx webpack",
+
     "build": "npm run postinstall:electron && npm run electron:serve-tsc && ng build",
-    "build:dev": "npm run build -- -c dev",
-    "build:prod": "npm run build -- -c production",
+    "build:dev": "npm run build:worker && npm run build -- -c dev",
+    "build:prod": "npm run build:worker && npm run build -- -c production",
+
     "electron:serve-tsc": "tsc -p tsconfig-serve.json",
     "electron:local": "npm run build:dev && electron .",
     "electron:linux": "npm run build:prod && electron-builder build --linux",
     "electron:windows": "npm run build:prod && electron-builder build --windows",
     "electron:mac": "npm run build:prod && electron-builder build --mac --publish=never",
+
     "test": "npm run postinstall:web && ng test",
     "e2e": "npm run build:prod && mocha --timeout 300000 --require ts-node/register e2e/**/*.spec.ts"
   },
@@ -91,7 +95,7 @@
     "protobufjs": "^6.8.8",
     "requirejs": "^2.3.6",
     "rxjs": "^6.5.3",
-    "sliver-script": "^1.0.25",
+    "sliver-script": "^1.0.26",
     "tslib": "^2.0.0",
     "xterm": "^4.4.0"
   }

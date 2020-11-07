@@ -17,9 +17,9 @@ import { app, BrowserWindow, screen, protocol } from 'electron';
 import * as path from 'path';
 
 import { startIPCHandlers, IPCHandlers } from './ipc/ipc';
-import { WorkerManager } from './worker/worker-manager';
+import { WorkerManager } from './workers/worker-manager';
 
-import * as WorkerProtocol from './worker/worker-protocol';
+import * as WorkerProtocol from './workers/worker-protocol';
 import * as AppProtocol from './app-protocol';
 
 

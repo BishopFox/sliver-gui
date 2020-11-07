@@ -21,6 +21,7 @@ but should not be directly accessible since it itself is not sandboxed.
 const { ipcRenderer } = require('electron');
 
 const APP_ORIGIN = 'app://sliver';
+const appPrefixes = ['client_', 'config_', 'rpc_', 'script_'];
 
 window.addEventListener('message', (event) => {
   if (event.origin !== APP_ORIGIN) {
@@ -30,7 +31,7 @@ window.addEventListener('message', (event) => {
   try {
     const msg = JSON.parse(event.data);
     if (msg.type === 'request') {
-      if (['client_', 'config_', 'rpc_', 'script_'].some(prefix => msg.method.startsWith(prefix))) {
+      if (appPrefixes.some(prefix => msg.method.startsWith(prefix))) {
         ipcRenderer.send('ipc', msg);
       } else {
         console.error(`Invalid namespace: ${msg.method}`);

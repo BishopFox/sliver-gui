@@ -33,7 +33,7 @@ import { SliverClient, SliverClientConfig } from 'sliver-script';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb';
 
-import { WorkerManager } from '../worker/worker-manager';
+import { WorkerManager } from '../workers/worker-manager';
 
 
 const CLIENT_DIR = path.join(homedir(), '.sliver-client');
