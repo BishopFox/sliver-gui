@@ -20,7 +20,6 @@ import { Sort } from '@angular/material/sort';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 
-import * as pako from 'pako';
 
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb'; // Protobuf
@@ -266,7 +265,7 @@ export class RmDialogComponent {
 })
 export class DownloadDialogComponent {
 
-  constructor(public dialogRef: MatDialogRef<RmDialogComponent>,
+  constructor(public dialogRef: MatDialogRef<DownloadDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {

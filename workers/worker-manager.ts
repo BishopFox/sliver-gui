@@ -38,12 +38,7 @@ export class WorkerManager {
   }
 
   private async saveScriptIndex(scriptIndex: Map<string, string>): Promise<void> {
-    const data = JSON.stringify(
-      Array.from(scriptIndex.entries()).reduce((obj, [key, value]) => { 
-        obj[key] = value; 
-        return obj; 
-      }, {})
-    );
+    const data = JSON.stringify(this.indexToJSON(scriptIndex));
     const fileOptions = { mode: 0o600, encoding: 'utf-8' };
     return new Promise((resolve, reject) => {
       fs.writeFile(SAVED_INDEX, data, fileOptions, (err) => {
@@ -52,8 +47,18 @@ export class WorkerManager {
     });
   }
 
+  private indexToJSON(scriptIndex: Map<string, string>): any {
+    return Array.from(scriptIndex.entries()).reduce((obj, [key, value]) => { 
+        obj[key] = value; 
+        return obj; 
+      }, {});
+  }
+
   private async loadScriptIndex(): Promise<Map<string, string>> {
     const scriptIndex = new Map<string, string>();
+    if (!fs.existsSync(SAVED_INDEX)) {
+      return new Map<string, string>();
+    }
     return new Promise((resolve, reject) => {
       fs.readFile(SAVED_INDEX, (err, data: Buffer) => {
         if (err) {
@@ -103,12 +108,12 @@ export class WorkerManager {
     });
   }
 
-  async listScripts(): Promise<[string, string][]> {
+  async listScripts(): Promise<any> {
     const scriptIndex = await this.loadScriptIndex();
-    return Array.from(scriptIndex.entries());
+    return this.indexToJSON(scriptIndex);
   }
 
-  async loadScript(id: string): Promise<[string, string]|null> {
+  async loadScript(id: string): Promise<any> {
     const scriptIndex = await this.loadScriptIndex();
     if (!scriptIndex.has(id)) {
       return null;
@@ -116,7 +121,11 @@ export class WorkerManager {
     const name = scriptIndex.get(id);
     return new Promise((resolve, reject) => {
       fs.readFile(path.join(SAVED_DIR, id), (err, data: Buffer) => {
-        err ? reject(err) : resolve([name, data.toString()]);
+        err ? reject(err) : resolve({
+          id: id,
+          name: name,
+          code: data.toString()
+        });
       });
     });
   }

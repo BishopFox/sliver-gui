@@ -153,14 +153,18 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   async script_load(self: IPCHandlers, req: any): Promise<string> {
-    let name, code = await self._workerManager.loadScript(req.id);
-    return JSON.stringify({ name: name, code: code });
+    let script = await self._workerManager.loadScript(req.id);
+    return JSON.stringify({
+      id: script.id,
+      name: script.name,
+      code: script.code
+    });
   }
 
   @isConnected()
   async script_list(self: IPCHandlers): Promise<string> {
-    let listOfScripts = self._workerManager.listScripts();
-    return JSON.stringify({ scripts: listOfScripts });
+    const scripts = await self._workerManager.listScripts();
+    return JSON.stringify(scripts);
   }
 
   @isConnected()

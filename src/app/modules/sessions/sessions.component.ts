@@ -19,9 +19,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
 import { Subscription } from 'rxjs';
 
-import { FadeInOut } from '../../shared/animations';
-import { EventsService } from '../../providers/events.service';
-import { SliverService } from '../../providers/sliver.service';
+import { FadeInOut } from '@app/shared/animations';
+import { EventsService } from '@app/providers/events.service';
+import { SliverService } from '@app/providers/sliver.service';
 
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 

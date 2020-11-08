@@ -1,13 +1,13 @@
-<div class="grid-wrapper">
+<div [@fadeInOut]>
   <div>
     <mat-toolbar>
 
-      <button mat-raised-button class="toolbar-button" (click)="executeScript()">
+      <button mat-raised-button (click)="executeScript()">
         <i class="fas fa-fw fa-folder-plus"></i>
         Execute Script
       </button>
 
-      <button mat-raised-button class="toolbar-button">
+      <button mat-raised-button>
         <i class="fas fa-fw fa-bug"></i>
         Enable DevTools
       </button>
@@ -15,6 +15,7 @@
     </mat-toolbar>
   </div>
   <div>
+    <h1>{{name}}</h1>
     <ngx-monaco-editor style="height: 600px" [options]="editorOptions" [(ngModel)]="code" (init)="editorInit($event)">
     </ngx-monaco-editor>
   </div>

@@ -3,6 +3,13 @@ import { Injectable } from '@angular/core';
 import { IPCService } from './ipc.service';
 
 
+export interface Script {
+  id: string;
+  name: string;
+  code: string;
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -44,13 +51,13 @@ export class WorkersService {
     }));
   }
 
-  async listScripts(): Promise<[string, string][]> {
-    let scripts = await this._ipcService.request('script_list');
-    return JSON.parse(scripts)?.scripts;
+  async listScripts(): Promise<any> {
+    const scripts = await this._ipcService.request('script_list');
+    return JSON.parse(scripts);
   }
 
   async newScript(name: string, code: string): Promise<string> {
-    let id = await this._ipcService.request('script_new', JSON.stringify({
+    const id = await this._ipcService.request('script_new', JSON.stringify({
       name: name,
       code: code,
     }));
@@ -65,12 +72,11 @@ export class WorkersService {
     }));
   }
 
-  async loadScript(id: string): Promise<[string, string]> {
-    const rawScript = await this._ipcService.request('script_load', JSON.stringify({
+  async loadScript(id: string): Promise<Script> {
+    const script = await this._ipcService.request('script_load', JSON.stringify({
       id: id,
     }));
-    const script = JSON.parse(rawScript);
-    return [script.name, script.code];
+    return JSON.parse(script);
   }
 
   async removeScript(id: string): Promise<void> {
