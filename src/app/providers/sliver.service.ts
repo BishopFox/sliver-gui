@@ -32,9 +32,7 @@ import * as commonpb from 'sliver-script/lib/pb/commonpb/common_pb';
 })
 export class SliverService {
 
-  constructor(private _ipc: IPCService) {
-
-  }
+  constructor(private _ipc: IPCService) { }
 
   async sessions(): Promise<clientpb.Session[]> {
     let sessions: string[] = await this._ipc.request('rpc_sessions');

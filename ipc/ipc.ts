@@ -113,6 +113,69 @@ export class IPCHandlers {
     return execId;
   }
 
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "name": {"type": "string"},
+      "code": {"type": "string"},
+    },
+    "required": ["name", "code"],
+    "additionalProperties": false,
+  })
+  async script_new(self: IPCHandlers, req: any): Promise<string> {
+    let scriptId = await self._workerManager.newScript(req.name, req.code);
+    return scriptId;
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "id": {"type": "string"},
+      "name": {"type": "string"},
+      "code": {"type": "string"},
+    },
+    "required": ["id", "name", "code"],
+    "additionalProperties": false,
+  })
+  async script_update(self: IPCHandlers, req: any): Promise<void> {
+    await self._workerManager.updateScript(req.id, req.name, req.code);
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "id": {"type": "string"},
+    },
+    "required": ["id"],
+    "additionalProperties": false,
+  })
+  async script_load(self: IPCHandlers, req: any): Promise<string> {
+    let name, code = await self._workerManager.loadScript(req.id);
+    return JSON.stringify({ name: name, code: code });
+  }
+
+  @isConnected()
+  async script_list(self: IPCHandlers): Promise<string> {
+    let listOfScripts = self._workerManager.listScripts();
+    return JSON.stringify({ scripts: listOfScripts });
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "id": {"type": "string"},
+    },
+    "required": ["id"],
+    "additionalProperties": false,
+  })
+  async script_remove(self: IPCHandlers, req: any) {
+    await self._workerManager.removeScript(req.id);
+  }
+
 
   // ----------
   // > RPC
@@ -477,11 +540,8 @@ export class IPCHandlers {
         return Promise.reject(`Failed to create config dir: ${err}`);
       }
     }
-    const fileOptions = {
-      mode: 0o600,
-      encoding: 'utf-8',
-    };
-
+    
+    const fileOptions = { mode: 0o600, encoding: 'utf-8' };
     await Promise.all(configs.map((config) => { 
       return new Promise((resolve) => {
         const fileName: string = uuid.v4();
@@ -653,10 +713,7 @@ export class IPCHandlers {
         }
       }
 
-      const fileOptions = {
-        mode: 0o600,
-        encoding: 'utf-8',
-      };
+      const fileOptions = { mode: 0o600, encoding: 'utf-8' };
       try {
         JSON.parse(settings); // Just ensure it's valid JSON
         fs.writeFile(SETTINGS_PATH, settings, fileOptions, async (err) => {
@@ -700,7 +757,6 @@ async function dispatchIPC(handlers: IPCHandlers, method: string, data: string):
 export function startIPCHandlers(window: BrowserWindow, handlers: IPCHandlers) {
 
   ipcMain.on('ipc', async (event: IpcMainEvent, msg: IPCMessage, origin: string) => {
-    console.log(`Request Origin: ${origin}`);
     dispatchIPC(handlers, msg.method, msg.data).then((result: any) => {
       if (msg.id !== 0) {
         event.sender.send('ipc', {
@@ -711,7 +767,7 @@ export function startIPCHandlers(window: BrowserWindow, handlers: IPCHandlers) {
         }, origin);
       }
     }).catch((err) => {
-      console.error(`[ipc handlers] ${err}`);
+      console.error(`[ipc handlers](${origin}): ${err}`);
       console.trace();
       if (msg.id !== 0) {
         event.sender.send('ipc', {

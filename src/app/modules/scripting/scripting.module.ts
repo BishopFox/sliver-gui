@@ -5,10 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { BaseMaterialModule } from '../../base-material';
 
 import { MonacoEditorModule } from '@materia-ui/ngx-monaco-editor';
+import { BrowserComponent } from './components/browser/browser.component';
+import { TaskManagerComponent } from './components/task-manager/task-manager.component';
 
 
 @NgModule({
-  declarations: [EditorComponent],
+  declarations: [EditorComponent, BrowserComponent, TaskManagerComponent],
   imports: [
     CommonModule,
     FormsModule,

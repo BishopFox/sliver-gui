@@ -72,49 +72,62 @@ export class WorkerManager {
     });
   }
 
-  async saveScript(name: string, script: string): Promise<void> {
+  async newScript(name: string, code: string): Promise<string> {
     const scriptIndex = await this.loadScriptIndex();
-
-    let id: string;
-    if (scriptIndex.has(name)) {
-      id = scriptIndex.get(name);
-    } else {
-      id = uuid.v4();
-      scriptIndex.set(name, id);
-    }
+    let id = uuid.v4();
+    scriptIndex.set(id, name);
     return new Promise(async (resolve, reject) => {
       const fileOptions = { mode: 0o600, encoding: 'utf-8' };
-      fs.writeFile(path.join(SAVED_DIR, id), script, fileOptions, async (err) => {
+      fs.writeFile(path.join(SAVED_DIR, id), code, fileOptions, async (err) => {
         if (err) {
           return reject(err);
         }
         await this.saveScriptIndex(scriptIndex);
-        resolve();
+        resolve(id);
       });
     });
   }
 
-  async loadScript(name: string): Promise<string|null> {
+  async updateScript(id: string, name: string, code: string) {
     const scriptIndex = await this.loadScriptIndex();
-    if (!scriptIndex.has(name)) {
-      return null;
-    }
-    const id = scriptIndex.get(name);
-    return new Promise((resolve, reject) => {
-      fs.readFile(path.join(SAVED_DIR, id), (err, data: Buffer) => {
-        err ? reject(err) : resolve(data.toString());
-      });
-    });
-  }
-
-  async removeScript(name: string): Promise<void> {
-    const scriptIndex = await this.loadScriptIndex();
-    if (!scriptIndex.has(name)) {
+    if (!scriptIndex.has(id)) {
       return;
     }
-    const id = scriptIndex.get(name);
+    scriptIndex.set(id, name);
+    await this.saveScriptIndex(scriptIndex);
+    return new Promise((resolve, reject) => {
+      const fileOptions = { mode: 0o600, encoding: 'utf-8' };
+      fs.writeFile(path.join(SAVED_DIR, id), code, fileOptions, (err) => {
+        err ? reject(err) : resolve();
+      });
+    });
+  }
+
+  async listScripts(): Promise<[string, string][]> {
+    const scriptIndex = await this.loadScriptIndex();
+    return Array.from(scriptIndex.entries());
+  }
+
+  async loadScript(id: string): Promise<[string, string]|null> {
+    const scriptIndex = await this.loadScriptIndex();
+    if (!scriptIndex.has(id)) {
+      return null;
+    }
+    const name = scriptIndex.get(id);
+    return new Promise((resolve, reject) => {
+      fs.readFile(path.join(SAVED_DIR, id), (err, data: Buffer) => {
+        err ? reject(err) : resolve([name, data.toString()]);
+      });
+    });
+  }
+
+  async removeScript(id: string): Promise<void> {
+    const scriptIndex = await this.loadScriptIndex();
+    if (!scriptIndex.has(id)) {
+      return;
+    }
     fs.unlink(path.join(SAVED_DIR, id), (err) => { console.error(err) });
-    scriptIndex.delete(name);
+    scriptIndex.delete(id);
     await this.saveScriptIndex(scriptIndex);
   }
 

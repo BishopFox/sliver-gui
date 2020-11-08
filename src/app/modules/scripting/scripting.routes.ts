@@ -17,11 +17,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
 import { ActiveConfig } from '../../app-routing-guards.module';
+import { BrowserComponent } from './components/browser/browser.component';
+import { TaskManagerComponent } from './components/task-manager/task-manager.component';
 import { EditorComponent } from './components/editor/editor.component';
 
 const routes: Routes = [
 
-    { path: 'scripting/editor', component: EditorComponent, canActivate: [ActiveConfig] },
+  { path: 'scripting/browser', component: BrowserComponent, canActivate: [ActiveConfig] },
+  { path: 'scripting/task-manager', component: TaskManagerComponent, canActivate: [ActiveConfig] },
+  { path: 'scripting/editor/:script-id', component: EditorComponent, canActivate: [ActiveConfig] },
 
 ];
 

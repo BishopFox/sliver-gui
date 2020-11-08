@@ -84,10 +84,16 @@ window.addEventListener('message', (event) => {
 });
 
 ipcRenderer.on('ipc', (_, msg, origin) => {
+
+  if (origin === '*') {
+    return; // Pushes are forwarded to the worker from the main app
+  }
+
   let url = new URL(origin);
   if (url.protocol !== WORKER_PROTOCOL) {
     return;
   }
+
   try {
     if (msg.type === 'response' || msg.type === 'push') {
       const iframe = document.getElementById(url.hostname);
