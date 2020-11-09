@@ -25,10 +25,15 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - run: npm install && cd ./workers/worker && npm install && cd ../..
-    - run: npm install -g electron-packager
-    - run: npm install -g @angular/cli
- 
+    - name: NPM Install
+      run: |
+        npm install
+        cd ./workers/worker
+        npm install
+        cd ../..
+        npm install -g electron-packager
+        npm install -g @angular/cli
+
     - run: npm run electron:mac
     
     - name: MacOS Artifact
@@ -52,9 +57,15 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install && cd ./workers/worker && npm install && cd ../..
-    - run: npm install -g electron-packager
-    - run: npm install -g @angular/cli
+
+    - name: NPM Install
+      run: |
+        npm install
+        cd ./workers/worker
+        npm install
+        cd ../..
+        npm install -g electron-packager
+        npm install -g @angular/cli
 
     - run: npm run electron:linux
     - name: Linux Artifact (deb)
@@ -83,10 +94,16 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install && cd ./workers/worker && npm install && cd ../..
-    - run: npm install -g electron-packager
-    - run: npm install -g @angular/cli
 
+    - name: NPM Install
+      run: |
+        npm install
+        cd ./workers/worker
+        npm install
+        cd ../..
+        npm install -g electron-packager
+        npm install -g @angular/cli
+        
     - run: npm run electron:windows
     - name: Windows Artifact
       uses: actions/upload-artifact@v2
