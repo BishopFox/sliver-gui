@@ -10,13 +10,13 @@ Download the [latest release](https://github.com/moloch--/sliver-gui/releases) a
 
 ### FAQ
 
-#### Why Electron?
+#### Why Electron!?
 
 Because I value my development time more than your RAM.
 
-#### Isn't Electron is Insecure?
+### Features
 
-You can read about the [security architecture of this application here](https://github.com/moloch--/reasonably-secure-electron).
+* Sandboxed JavaScript scripting engine
 
 ### Build
 
