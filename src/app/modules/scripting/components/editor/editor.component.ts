@@ -14,7 +14,7 @@
 */
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MonacoEditorLoaderService, MonacoEditorComponent } from '@materia-ui/ngx-monaco-editor';
 
 import { Subject } from 'rxjs';
@@ -49,6 +49,7 @@ export class EditorComponent implements OnInit {
   lastSave: Date;
 
   constructor(private _route: ActivatedRoute,
+              private _router: Router,
               private _workersService: WorkersService,
               private _monacoLoaderService: MonacoEditorLoaderService) 
   {
@@ -100,6 +101,7 @@ export class EditorComponent implements OnInit {
     let execCode = this.siaf ? `(async () => { ${this.code} })();` : this.code;
     const execId = await this._workersService.startWorker(this.name, execCode);
     console.log(`Started execution with id ${execId}`);
+    this._router.navigate(['scripting', 'tasks', execId]);
   }
 
   // --------------------

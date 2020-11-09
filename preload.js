@@ -95,7 +95,7 @@ ipcRenderer.on('ipc', (_, msg, origin) => {
   }
 
   try {
-    if (msg.type === 'response' || msg.type === 'push') {
+    if (msg.type === 'response') {
       const iframe = document.getElementById(url.hostname);
       iframe?.contentWindow?.postMessage(JSON.stringify(msg), origin);
     }
