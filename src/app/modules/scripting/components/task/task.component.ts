@@ -31,7 +31,7 @@ export class TaskComponent implements OnInit, AfterViewChecked {
   terminal: Terminal;
 
   readonly TERMINAL = "terminal";
-  private terminalInitialized = false;
+  private isTerminalInitialized = false;
 
   constructor(private _route: ActivatedRoute,
               private _workersService: WorkersService) { }
@@ -45,8 +45,8 @@ export class TaskComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    if (!this.terminalInitialized) {
-      this.terminalInitialized = true;
+    if (!this.isTerminalInitialized) {
+      this.isTerminalInitialized = true;
       this.terminal.open(document.getElementById(this.TERMINAL));
     }
   }
