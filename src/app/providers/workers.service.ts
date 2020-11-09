@@ -86,7 +86,7 @@ export class WorkersService {
     iframe?.remove();
     this._workers.delete(execId);
     await this._ipcService.request('script_stop', JSON.stringify({
-      execId: execId,
+      id: execId,
     }));
   }
 

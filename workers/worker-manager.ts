@@ -156,7 +156,6 @@ export class WorkerManager {
     const scriptExecDir = path.join(this.execDir, path.basename(execId));
     if (fs.existsSync(scriptExecDir)) {
       fs.unlinkSync(path.join(scriptExecDir, SCRIPT_FILE));
-      fs.unlinkSync(scriptExecDir);
     }
   }
 

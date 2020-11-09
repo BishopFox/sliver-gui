@@ -1,0 +1,12 @@
+.grid-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 11fr 1fr;
+}
+
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+
+#terminal {
+    height: 80vh;
+}

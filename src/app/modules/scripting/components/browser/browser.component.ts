@@ -52,7 +52,6 @@ export class BrowserComponent implements OnInit {
 
   async fetchScripts() {
     this.scripts = await this._workerService.listScripts();
-    console.log(typeof this.scripts);
     this.dataSrc = new MatTableDataSource(this.tableData(this.scripts));
   }
 

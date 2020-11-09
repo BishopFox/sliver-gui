@@ -117,6 +117,19 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
+      "id": {"type": "string"},
+    },
+    "required": ["id"],
+    "additionalProperties": false,
+  })
+  async script_stop(self: IPCHandlers, req: any): Promise<void> {
+    await self._workerManager.stopScriptExecutionById(req.id);
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
       "name": {"type": "string"},
       "code": {"type": "string"},
     },

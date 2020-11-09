@@ -14,9 +14,10 @@
 */
 
 import { Component, OnInit, AfterViewChecked } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { WorkersService } from '@app/providers/workers.service';
 import { Terminal } from 'xterm';
+import { FitAddon } from 'xterm-addon-fit';
 
 
 @Component({
@@ -29,26 +30,37 @@ export class TaskComponent implements OnInit, AfterViewChecked {
   execId: string;
   name: string;
   terminal: Terminal;
+  fitAddon: any;
 
   readonly TERMINAL = "terminal";
   private isTerminalInitialized = false;
 
-  constructor(private _route: ActivatedRoute,
+  constructor(private _router: Router,
+              private _route: ActivatedRoute,
               private _workersService: WorkersService) { }
 
   ngOnInit(): void {
     this._route.params.subscribe((params) => {
       this.execId = params['exec-id'];
+      this.fitAddon = new FitAddon();
       this.name = this._workersService.getWorkerName(this.execId);
       this.terminal = this._workersService.getWorkerTerminal(this.execId);
     });
   }
 
   ngAfterViewChecked(): void {
+    
     if (!this.isTerminalInitialized) {
       this.isTerminalInitialized = true;
+      this.terminal.loadAddon(this.fitAddon);
       this.terminal.open(document.getElementById(this.TERMINAL));
     }
+    this.fitAddon.fit();
+  }
+
+  stopTask() {
+    this._workersService.stopWorker(this.execId);
+    this._router.navigate(['scripting']);
   }
 
 }

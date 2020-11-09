@@ -50,7 +50,7 @@ console.log = (...args: any[]): void => {
 
 const originalError = console.error;
 console.error = (...args: any[]): void => {
-  originalLog(args);
+  originalError(...args);
   
   if (1 < args.length) {
     const err = sprintf(args[0], ...args);
@@ -60,8 +60,6 @@ console.error = (...args: any[]): void => {
   }
 
 }
-
-// const originalTrace = console.trace;
 
 window.onerror = function(message, source, lineno, colno, error) {
   const fmtErr = Colors.Red+"%(message)s\r\nLine %(lineno)s:%(colno)s"+Colors.Reset;
