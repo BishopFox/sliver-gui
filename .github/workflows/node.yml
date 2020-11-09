@@ -51,7 +51,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install && cd ./workers/worker && npm install && cd ../..
+    - run: npm install
+    - run: cd ./workers/worker && npm install && cd ../..
     - run: npm install -g electron-packager
     - run: npm install -g @angular/cli
 
