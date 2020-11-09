@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { Terminal } from 'xterm';
 import { IPCService } from './ipc.service';
 
 
@@ -9,21 +10,40 @@ export interface Script {
   code: string;
 }
 
+const WORKER_PROTOCOL = 'worker:';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkersService {
 
+  private readonly TERMINAL_TYPE = "terminal";
   private readonly elemId = "workers";
 
-  constructor(private _ipcService: IPCService) { }
+  private _workers: Map<string, HTMLIFrameElement>;
+  private _terminals: Map<string, Terminal>;
+
+  constructor(private _ipcService: IPCService) {
+    this._workers = new Map<string, HTMLIFrameElement>();
+    this._terminals = new Map<string, Terminal>();
+    window.addEventListener('message', (event) => {
+      const origin = new URL(event.origin);
+      if (origin.protocol !== WORKER_PROTOCOL || event.data?.type !== this.TERMINAL_TYPE) {
+        return;
+      }
+      if (this._terminals.has(origin.hostname)) {
+        const term = this._terminals.get(origin.hostname);
+        console.log(`Term write: ${event.data?.data}`);
+        term.write(event.data?.data);
+      }
+    });
+  }
 
   private getWorkersElem(): HTMLElement {
     return document.getElementById(this.elemId);
   }
 
-  async startWorker(code: string): Promise<string> {
+  async startWorker(name: string, code: string): Promise<string> {
     
     const execId = await this._ipcService.request('script_execute', JSON.stringify({
       code: code
@@ -31,21 +51,40 @@ export class WorkersService {
 
     const iframe = document.createElement('iframe');
     iframe.setAttribute("id", execId);
+    iframe.setAttribute("name", name);
     iframe.setAttribute("sandbox", "allow-scripts allow-same-origin");
     iframe.setAttribute("style", "display: none;");
     iframe.setAttribute("src", `worker://${execId}`);
-    
+
+    const terminal = new Terminal();
+    this._terminals.set(execId, terminal);
+    this._workers.set(execId, iframe);
     this.getWorkersElem().appendChild(iframe);
+
     return execId;
   }
 
-  async listWorkers(): Promise<string[]> {
+  // execId->name
+  workers(): Map<string, string> {
+    const keys = Array.from(this._workers.keys());
+    const workers = new Map<string, string>();
+    keys.forEach(key => workers.set(key, this.getWorkerName(key)));
+    return workers;
+  }
 
-    return [];
+  getWorkerTerminal(execId: string): Terminal {
+    return this._terminals.get(execId);
+  }
+
+  getWorkerName(execId: string): string {
+    const iframe = this._workers.get(execId);
+    return iframe?.getAttribute("name");
   }
 
   async stopWorker(execId: string): Promise<void> {
-    this.getWorkersElem().querySelector(`#${execId}`).remove();
+    const iframe = this._workers.get(execId);
+    iframe?.remove();
+    this._workers.delete(execId);
     await this._ipcService.request('script_stop', JSON.stringify({
       execId: execId,
     }));

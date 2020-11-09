@@ -1,0 +1,27 @@
+<div [@fadeInOut]>
+  <mat-toolbar>
+
+    <button mat-raised-button (click)="createNewScript()">
+      <i class="fas fa-fw fa-plus-square"></i>
+      New Script
+    </button>
+
+  </mat-toolbar>
+
+  <div class="grid-wrapper">
+
+    <div><!-- Edge --></div>
+
+    <div>
+      <scripting-browser></scripting-browser>
+    </div>
+
+    <div><!-- Middle --></div>
+
+    <div>
+      <scripting-task-manager></scripting-task-manager>
+    </div>
+
+    <div><!-- Edge --></div>
+  </div>
+</div>

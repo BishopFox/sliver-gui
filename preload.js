@@ -27,7 +27,7 @@ const APP_ORIGIN = 'app://sliver';
 const appPrefixes = ['client_', 'config_', 'rpc_', 'script_'];
 
 window.addEventListener('message', (event) => {
-  if (event.origin !== APP_ORIGIN) {
+  if (event.origin !== APP_ORIGIN || typeof(event.data) !== 'string') {
     return;
   }
   try {
@@ -65,7 +65,7 @@ const workerPrefixes = ['rpc_'];
 
 window.addEventListener('message', (event) => {
   let url = new URL(event.origin);
-  if (url.protocol !== WORKER_PROTOCOL) {
+  if (url.protocol !== WORKER_PROTOCOL || typeof(event.data) !== 'string') {
     return;
   }
 

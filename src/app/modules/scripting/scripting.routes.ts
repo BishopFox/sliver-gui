@@ -16,15 +16,16 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
-import { ActiveConfig } from '../../app-routing-guards.module';
-import { BrowserComponent } from './components/browser/browser.component';
-import { TaskManagerComponent } from './components/task-manager/task-manager.component';
+import { ActiveConfig } from '@app/app-routing-guards.module';
+import { ScriptingComponent } from './components/scripting/scripting.component';
+
 import { EditorComponent } from './components/editor/editor.component';
+import { TaskComponent } from './components/task/task.component';
 
 const routes: Routes = [
 
-  { path: 'scripting/browser', component: BrowserComponent, canActivate: [ActiveConfig] },
-  { path: 'scripting/task-manager', component: TaskManagerComponent, canActivate: [ActiveConfig] },
+  { path: 'scripting', component: ScriptingComponent, canActivate: [ActiveConfig] },
+  { path: 'scripting/tasks/:exec-id', component: TaskComponent, canActivate: [ActiveConfig] },
   { path: 'scripting/editor/:script-id', component: EditorComponent, canActivate: [ActiveConfig] },
 
 ];

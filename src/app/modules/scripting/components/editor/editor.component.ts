@@ -50,7 +50,8 @@ export class EditorComponent implements OnInit {
 
   constructor(private _route: ActivatedRoute,
               private _workersService: WorkersService,
-              private _monacoLoaderService: MonacoEditorLoaderService) {
+              private _monacoLoaderService: MonacoEditorLoaderService) 
+  {
     this._monacoLoaderService.isMonacoLoaded$.pipe(
       filter(isLoaded => isLoaded),
       take(1),
@@ -97,11 +98,9 @@ export class EditorComponent implements OnInit {
 
   async executeScript() {
     let execCode = this.siaf ? `(async () => { ${this.code} })();` : this.code;
-    const execId = await this._workersService.startWorker(execCode);
+    const execId = await this._workersService.startWorker(this.name, execCode);
     console.log(`Started execution with id ${execId}`);
   }
-
-
 
   // --------------------
   // > Autocomplete Code

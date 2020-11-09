@@ -1,44 +1,33 @@
-<div *ngIf="!scripts" class="grid-spinner-wrapper">
-  <div class="spinner">
-    <mat-progress-spinner mode="indeterminate">
-    </mat-progress-spinner>
-  </div>
-</div>
+<div *ngIf="dataSrc">
 
-<div [@fadeInOut]>
-  <mat-toolbar>
-
-    <button mat-raised-button (click)="createNewScript()">
-      <i class="fas fa-fw fa-plus-square"></i>
-      New Script
-    </button>
-
-  </mat-toolbar>
-
-  <div>
-    <div *ngIf="dataSrc">
-
+  <div class="table-header">
+    <div>
+      <h3>
+        <i class="fas fa-fw fa-code"></i>
+        Scripts
+      </h3>
+    </div>
+    <div>
       <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
       </mat-form-field>
-
-      <table mat-table [dataSource]="dataSrc" matSort (matSortChange)="sortData($event)">
-
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-          <td mat-cell *matCellDef="let script"> {{script.id}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-          <td mat-cell *matCellDef="let script"> {{script.name}} </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row (click)="onRowSelection(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-
     </div>
-
-
   </div>
+
+  <table mat-table [dataSource]="dataSrc" matSort (matSortChange)="sortData($event)">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let script"> {{script.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let script"> {{script.name}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row (click)="onRowSelection(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</div>

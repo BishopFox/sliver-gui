@@ -43,7 +43,7 @@ const modules = [
   MatFormFieldModule, MatTooltipModule, MatToolbarModule, MatIconModule, MatProgressSpinnerModule,
   MatDialogModule, MatGridListModule, MatCardModule, MatTableModule, MatSortModule, MatInputModule,
   MatStepperModule, MatSnackBarModule, MatSlideToggleModule, MatSidenavModule, MatDividerModule,
-  MatProgressBarModule
+  MatProgressBarModule, MatDividerModule
 ];
 
 @NgModule({

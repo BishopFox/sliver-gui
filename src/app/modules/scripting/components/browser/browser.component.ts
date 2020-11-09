@@ -1,11 +1,25 @@
-import { Component, OnInit, Inject } from '@angular/core';
+/*
+  Sliver Implant Framework
+  Copyright (C) 2020  Bishop Fox
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
 
 import { WorkersService } from '@app/providers/workers.service'
-import { FadeInOut } from '@app/shared/animations';
 
 interface TableSessionData {
   id: string;
@@ -19,8 +33,7 @@ function compare(a: number | string, b: number | string, isAsc: boolean) {
 @Component({
   selector: 'scripting-browser',
   templateUrl: './browser.component.html',
-  styleUrls: ['./browser.component.scss'],
-  animations: [FadeInOut],
+  styleUrls: ['./browser.component.scss']
 })
 export class BrowserComponent implements OnInit {
 
@@ -30,8 +43,7 @@ export class BrowserComponent implements OnInit {
     'name'
   ];
 
-  constructor(public dialog: MatDialog,
-              private _router: Router,
+  constructor(private _router: Router,
               private _workerService: WorkersService) { }
 
   ngOnInit(): void {
@@ -44,25 +56,9 @@ export class BrowserComponent implements OnInit {
     this.dataSrc = new MatTableDataSource(this.tableData(this.scripts));
   }
 
-  createNewScript() {
-    const dialogRef = this.dialog.open(NewScriptDialogComponent);
-    dialogRef.afterClosed().subscribe(async (result) => {
-      if (result) {
-        this.newScript(result);
-      }
-    });
-  }
-
-  private async newScript(name: string) {
-    console.log(`Create new script ${name}`);
-    const scriptId = await this._workerService.newScript(name, '\n\n\n');
-    this._router.navigate(['scripting', 'editor', scriptId]);
-  }
-
   tableData(scripts): TableSessionData[] {
     const table: TableSessionData[] = [];
     for (const [id, name] of Object.entries(scripts)) {
-      console.log(id, name);
       table.push({
         id: id,
         name: name.toString(),
@@ -92,24 +88,3 @@ export class BrowserComponent implements OnInit {
 
 }
 
-
-@Component({
-  selector: 'scripting-new-script-dialog',
-  templateUrl: 'new-script.dialog.html',
-})
-export class NewScriptDialogComponent implements OnInit {
-
-  result: any;
-
-  constructor(public dialogRef: MatDialogRef<NewScriptDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) { }
-
-  ngOnInit() {
-    this.result = this.data;
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}

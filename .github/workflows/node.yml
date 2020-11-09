@@ -8,28 +8,28 @@ on:
 
 jobs:
 
-  macos-build:
-    runs-on: macos-latest
-    env:
-      CSC_IDENTITY_AUTO_DISCOVERY: false
+  # macos-build:
+  #   runs-on: macos-latest
+  #   env:
+  #     CSC_IDENTITY_AUTO_DISCOVERY: false
 
-    strategy:
-      matrix:
-        node-version: [14.x]
+  #   strategy:
+  #     matrix:
+  #       node-version: [14.x]
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Use Node.js ${{ matrix.node-version }}
+  #     uses: actions/setup-node@v1
+  #     with:
+  #       node-version: ${{ matrix.node-version }}
 
-    - run: npm install
-    - run: npm install -g electron-packager
-    - run: npm install -g ts-protoc-gen
-    - run: npm install -g @angular/cli
+  #   - run: npm install
+  #   - run: npm install -g electron-packager
+  #   - run: npm install -g ts-protoc-gen
+  #   - run: npm install -g @angular/cli
  
-    - run: npm run electron:mac
+  #   - run: npm run electron:mac
     
     # - name: MacOS Artifact
     #   uses: actions/upload-artifact@v2
@@ -53,7 +53,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: npm install -g electron-packager
-    - run: npm install -g ts-protoc-gen
     - run: npm install -g @angular/cli
 
     - run: npm run electron:linux
@@ -68,26 +67,26 @@ jobs:
     #     name: sliver-gui.rpm
     #     path: release/sliver-*.rpm
 
-  windows-build:
+  # windows-build:
 
-    runs-on: windows-latest
+  #   runs-on: windows-latest
 
-    strategy:
-      matrix:
-        node-version: [14.x]
+  #   strategy:
+  #     matrix:
+  #       node-version: [14.x]
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - run: npm install -g electron-packager
-    - run: npm install -g ts-protoc-gen
-    - run: npm install -g @angular/cli
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Use Node.js ${{ matrix.node-version }}
+  #     uses: actions/setup-node@v1
+  #     with:
+  #       node-version: ${{ matrix.node-version }}
+  #   - run: npm install
+  #   - run: npm install -g electron-packager
+  #   - run: npm install -g ts-protoc-gen
+  #   - run: npm install -g @angular/cli
 
-    - run: npm run electron:windows
+  #   - run: npm run electron:windows
     # - name: Windows Artifact
     #   uses: actions/upload-artifact@v2
     #   with:

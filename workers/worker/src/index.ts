@@ -169,6 +169,22 @@ export class Sliver {
 
 }
 
+
+export class Terminal {
+
+  private readonly TERMINAL_TYPE = 'terminal';
+
+  write(data: string|Uint8Array) {
+    parent.postMessage({
+      type: this.TERMINAL_TYPE,
+      method: 'write',
+      data: data,
+    }, APP_ORIGIN);
+  }
+
+}
+
+
 /* Export to 'window' */
 declare global {
   interface Window { CommonPB: any; }
@@ -176,6 +192,7 @@ declare global {
   interface Window { SliverPB: any; }
   interface Window { Base64: any; }
   interface Window { Sliver: Sliver; }
+  interface Window { Terminal: Terminal; }
 }
 
 window.CommonPB = commonpb;
@@ -183,3 +200,4 @@ window.ClientPB = clientpb;
 window.SliverPB = sliverpb;
 window.Base64 = Base64;
 window.Sliver = new Sliver();
+window.Terminal = new Terminal();
