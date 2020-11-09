@@ -24,7 +24,7 @@ jobs:
   #     with:
   #       node-version: ${{ matrix.node-version }}
 
-  #   - run: npm install
+  #   - run: npm install && cd ./workers/worker && npm install && cd ../..
   #   - run: npm install -g electron-packager
   #   - run: npm install -g ts-protoc-gen
   #   - run: npm install -g @angular/cli
@@ -51,16 +51,17 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install
+    - run: npm install && cd ./workers/worker && npm install && cd ../..
     - run: npm install -g electron-packager
     - run: npm install -g @angular/cli
 
     - run: npm run electron:linux
-    # - name: Linux Artifact (deb)
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: sliver-gui.deb
-    #     path: release/sliver-*.deb
+
+    - name: Linux Artifact (deb)
+      uses: actions/upload-artifact@v2
+      with:
+        name: sliver-gui.deb
+        path: release/sliver-*.deb
     # - name: Linux Artifact (rpm)
     #   uses: actions/upload-artifact@v2
     #   with:
@@ -81,7 +82,7 @@ jobs:
   #     uses: actions/setup-node@v1
   #     with:
   #       node-version: ${{ matrix.node-version }}
-  #   - run: npm install
+  #   - run: npm install && cd ./workers/worker && npm install && cd ../..
   #   - run: npm install -g electron-packager
   #   - run: npm install -g ts-protoc-gen
   #   - run: npm install -g @angular/cli

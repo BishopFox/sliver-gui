@@ -24,6 +24,7 @@ From this directory:
 
 ```bash
 npm install
+cd workers/worker && npm install && cd ../..
 npm install -g electron-packager
 npm install -g @angular/cli
 npm run electron:local
