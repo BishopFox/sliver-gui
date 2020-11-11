@@ -43,9 +43,12 @@ export class AppComponent {
 
         // Sessions
         case Events.Connected:
-          this.sessionOpenedAlert(event.getSession());
+          this.sessionConnectedAlert(event.getSession());
           break;
-
+        case Events.Disconnected:
+          this.sessionDisconnectedAlert(event.getSession());
+          break;
+          
         // Players
         case Events.Joined:
           this.playerAlert('joined', event.getClient());
@@ -77,7 +80,7 @@ export class AppComponent {
     });
   }
 
-  sessionOpenedAlert(session: clientpb.Session) {
+  sessionConnectedAlert(session: clientpb.Session) {
     const snackBarRef = this._snackBar.open(`Session #${session.getId()} opened`, 'Interact', {
       duration: 5000,
     });
@@ -87,6 +90,12 @@ export class AppComponent {
 
     const _ = new Notification('Sliver', {
       body: `Session #${session.getId()} opened`
+    });
+  }
+
+  sessionDisconnectedAlert(session: clientpb.Session) {
+    const snackBarRef = this._snackBar.open(`Lost session #${session.getId()}`, 'Dismiss', {
+      duration: 5000,
     });
   }
 

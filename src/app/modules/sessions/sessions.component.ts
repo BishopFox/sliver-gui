@@ -61,7 +61,9 @@ export class SessionsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.fetchSessions();
-    this.subscription = this._eventsService.sessions$.subscribe(this.fetchSessions);
+    this.subscription = this._eventsService.sessions$.subscribe(() => {
+      this.fetchSessions();
+    });
   }
 
   ngOnDestroy() {
