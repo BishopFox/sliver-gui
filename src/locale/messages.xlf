@@ -99,6 +99,38 @@
           <context context-type="sourcefile">src/app/components/settings/settings.component.html</context>
           <context context-type="linenumber">9,10</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fe46ccaae902ce974e2441abe752399288298619" datatype="html">
+        <source>Language</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/settings/settings.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fb8213f23bcc08c769ed719b081f466d996bdaec" datatype="html">
+        <source> Restart Required </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/settings/restart.dialog.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="df179e3ae4f1218339d4c55b037b80252bf561d1" datatype="html">
+        <source> You must restart the application for these changes to take affect. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/settings/restart.dialog.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a7868521fbf6d9fb7b97f910c3f060bbd995a118" datatype="html">
+        <source>Okay</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/settings/restart.dialog.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="c5aaa7cb8e2bca91ffe63c9e189e66f3efb88126" datatype="html">
         <source> Scripts </source>
@@ -141,47 +173,72 @@
           <context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context>
           <context context-type="linenumber">21</context>
         </context-group>
-      </trans-unit>
-      <trans-unit id="5af39fbf79ad61e83057811e836bd70f0c9346de" datatype="html">
-        <source> Back </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
-          <context context-type="linenumber">9,10</context>
+          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context>
+          <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="f86a201543a540545283f1a9ef0e0364256e13e2" datatype="html">
+      <trans-unit id="4c27cd467bacebe1d9a182fa8970234b6bcd89bd" datatype="html">
         <source> Start Listener </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/jobs.component.html</context>
           <context context-type="linenumber">16,17</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2124e85511a4a0d37e992ffb99d47dc148d6946b" datatype="html">
+      <trans-unit id="13778a9d7012d26638d3fc85eb6232c096b3d392" datatype="html">
         <source> Name </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/jobs.component.html</context>
           <context context-type="linenumber">38,39</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="9b3b919b18954749e9b25803ed2eb787c5f5d8fd" datatype="html">
+      <trans-unit id="ec5248d3a6c09ab11c75cdcb1ecc24d02cd59535" datatype="html">
         <source> Protocol </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/jobs.component.html</context>
           <context context-type="linenumber">47,48</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="9c4fc4f48143f2c8734846de4c3ce2e6d96cec24" datatype="html">
+      <trans-unit id="f4ef653af2d6581107c957c7d1a64f0593b117cd" datatype="html">
         <source> Port </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/jobs.component.html</context>
           <context context-type="linenumber">56,57</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8a539e5907399d706e61fa93cfa9062e17497302" datatype="html">
+      <trans-unit id="51ca888ac08cb4f6151b6b1a1d43012198d56948" datatype="html">
         <source> Description </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/jobs.component.html</context>
           <context context-type="linenumber">65,66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a9440bc19049d4223f2a0a264cfd18f12ee220e0" datatype="html">
+        <source> Download File </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="38b21a77c169dc1d573d1959b82ee0d1bc2382a4" datatype="html">
+        <source>File Name:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bbcd87921d19dc8354eaae57c3e28619b244fa11" datatype="html">
+        <source>File Size:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dc75033a5238fdc4f462212c847a45ba8018a3fd" datatype="html">
+        <source>Download</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
     </body>
