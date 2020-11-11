@@ -35,12 +35,12 @@ import { SliverClient, SliverClientConfig } from 'sliver-script';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb';
 
+import { getClientDir } from '../locale';
 import { WorkerManager } from '../workers/worker-manager';
 
 
-const CLIENT_DIR = path.join(homedir(), '.sliver-client');
-const CONFIG_DIR = path.join(CLIENT_DIR, 'configs');
-const SETTINGS_PATH = path.join(CLIENT_DIR, 'gui-settings.json');
+const CONFIG_DIR = path.join(getClientDir(), 'configs');
+const SETTINGS_PATH = path.join(getClientDir(), 'gui-settings.json');
 
 
 export interface SaveFileReq {

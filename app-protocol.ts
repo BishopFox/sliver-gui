@@ -22,9 +22,10 @@ Implementing a custom protocol achieves two goals:
 import * as fs from 'fs';
 import * as path from 'path';
 
+import { getDistPath } from './locale';
 
 type ProtocolCallback = (arg0: { mimeType: string; charset: string; data: Buffer; }) => void;
-const DIST_PATH = path.join(__dirname, 'dist');
+const DIST_PATH = getDistPath();
 export const scheme = 'app';
 
 

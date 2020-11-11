@@ -16,6 +16,7 @@
 
 import { ProtocolRequest } from 'electron';
 import { WorkerManager } from './worker-manager';
+import { getDistPath } from '../locale';
 
 import * as Handlebars from 'handlebars';
 import * as fs from 'fs';
@@ -25,7 +26,7 @@ import * as path from 'path';
 type ProtocolCallback = (arg0: { mimeType: string; charset: string; data: Buffer; }) => void;
 const WORKER_PATH = path.join(__dirname);
 const INDEX_FILE = path.join(WORKER_PATH, 'index.html');
-const DIST_PATH = path.resolve(path.join(__dirname, '..', 'dist'));
+const DIST_PATH = getDistPath();
 const WORKER_DIST_PATH = path.join(DIST_PATH, 'worker');
 
 

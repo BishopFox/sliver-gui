@@ -12,6 +12,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "aot": true,
+            "localize": true,
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -61,6 +62,7 @@
               "extractCss": true,
               "namedChunks": false,
               "aot": true,
+              "localize": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": false,
@@ -147,6 +149,18 @@
             "exclude": [
               "**/node_modules/**"
             ]
+          }
+        }
+      },
+      "i18n": {
+        "sourceLocale": {
+          "code": "en",
+          "baseHref": ""
+        },
+        "locales": {
+          "fr": {
+            "translation": "src/locale/messages.fr.xlf",
+            "baseHref": ""
           }
         }
       }
