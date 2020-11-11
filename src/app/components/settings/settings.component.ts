@@ -13,7 +13,8 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ClientService, Settings } from '@app/providers/client.service';
 
 
@@ -28,7 +29,8 @@ export class SettingsComponent implements OnInit {
   locales: Map<string, string>;
   currentLocale: string;
 
-  constructor(private _clientService: ClientService) { }
+  constructor(public dialog: MatDialog,
+              private _clientService: ClientService) { }
 
   ngOnInit() {
     this.fetchSettings();
@@ -46,6 +48,26 @@ export class SettingsComponent implements OnInit {
 
   back() {
     window.history.back();
+  }
+
+  async selectLanguage(event) {
+    await this._clientService.setLocale(event.value);
+    this.dialog.open(RestartDialogComponent);
+  }
+
+}
+
+@Component({
+  selector: 'settings-restart-dialog',
+  templateUrl: 'restart.dialog.html',
+})
+export class RestartDialogComponent {
+
+  constructor(public dialogRef: MatDialogRef<RestartDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }

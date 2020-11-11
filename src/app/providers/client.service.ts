@@ -86,6 +86,10 @@ export class ClientService {
     return this._ipc.request('client_currentLocale');
   }
 
+  async setLocale(locale: string): Promise<string> {
+    return this._ipc.request('client_setLocale', locale);
+  }
+
   async getActiveConfig(): Promise<sliver.SliverClientConfig> {
     const rawConfig = await this._ipc.request('client_activeConfig');
     return rawConfig ? JSON.parse(rawConfig) : null;

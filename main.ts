@@ -23,17 +23,27 @@ import * as WorkerProtocol from './workers/worker-protocol';
 import * as AppProtocol from './app-protocol';
 
 
-let mainWindow: BrowserWindow;
 
 
-async function createMainWindow() {
+protocol.registerSchemesAsPrivileged([{
+  scheme: AppProtocol.scheme,
+  privileges: { standard: true, secure: true }
+}]);
+
+protocol.registerSchemesAsPrivileged([{
+  scheme: WorkerProtocol.scheme,
+  privileges: { standard: true, secure: true }
+}]);
+
+
+function createMainWindow() {
 
   const electronScreen = screen;
   const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
   // Create the browser window.
   const gutterSize = 100;
-  mainWindow = new BrowserWindow({
+  let mainWindow = new BrowserWindow({
     titleBarStyle: 'hidden',
     x: gutterSize,
     y: gutterSize,
@@ -76,69 +86,63 @@ async function createMainWindow() {
 
   console.log('Main window done');
 
+  return mainWindow;
 }
 
 // ----------------------------------------- [ MAIN ] -----------------------------------------
 
-try {
+function main() {
+  try {
 
-  let workerManager = new WorkerManager();
-  let handlers = new IPCHandlers(workerManager);
+    let workerManager = new WorkerManager();
+    let handlers = new IPCHandlers(workerManager);
 
-  // Custom protocol handler
-  app.on('ready', () => {
-    protocol.registerBufferProtocol(AppProtocol.scheme, AppProtocol.requestHandler);
-    protocol.registerBufferProtocol(WorkerProtocol.scheme, (req, next) => {
-      WorkerProtocol.requestHandler(workerManager, req, next);
+    // Custom protocol handler
+    app.on('ready', () => {
+      protocol.registerBufferProtocol(AppProtocol.scheme, AppProtocol.requestHandler);
+      protocol.registerBufferProtocol(WorkerProtocol.scheme, (req, next) => {
+        WorkerProtocol.requestHandler(workerManager, req, next);
+      });
+      const mainWindow = createMainWindow();
+      startIPCHandlers(mainWindow, handlers);
+
+      app.on('activate', () => {
+        if (mainWindow === null) {
+          createMainWindow();
+        }
+      });
+
     });
-    createMainWindow();
-    startIPCHandlers(mainWindow, handlers);
-  });
 
-  // Prevent navigation in any window
-  // WARNING: This actually doesn't work because Electron hates security
-  // https://github.com/electron/electron/issues/8841
-  app.on('web-contents-created', (_, contents) => {
-    contents.on('will-navigate', (event, url) => {
-      console.log(`[will-navigate] ${url}`);
-      console.log(event);
-      event.preventDefault();
+    // Prevent navigation in any window
+    // WARNING: This actually doesn't work because Electron hates security
+    // https://github.com/electron/electron/issues/8841
+    app.on('web-contents-created', (_, contents) => {
+      contents.on('will-navigate', (event, url) => {
+        console.log(`[will-navigate] ${url}`);
+        console.log(event);
+        event.preventDefault();
+      });
+      contents.on('will-redirect', (event, url) => {
+        console.log(`[will-redirect] ${url}`);
+        console.log(event);
+        event.preventDefault();
+      });
     });
-    contents.on('will-redirect', (event, url) => {
-      console.log(`[will-redirect] ${url}`);
-      console.log(event);
-      event.preventDefault();
+
+    // Quit when all windows are closed.
+    app.on('window-all-closed', () => {
+      // On OS X it is common for applications and their menu bar
+      // to stay active until the user quits explicitly with Cmd + Q
+      if (process.platform !== 'darwin') {
+        app.quit();
+      }
     });
-  });
 
-  protocol.registerSchemesAsPrivileged([{
-    scheme: AppProtocol.scheme,
-    privileges: { standard: true, secure: true }
-  }]);
-
-  protocol.registerSchemesAsPrivileged([{
-    scheme: WorkerProtocol.scheme,
-    privileges: { standard: true, secure: true }
-  }]);
-
-  // Quit when all windows are closed.
-  app.on('window-all-closed', () => {
-    // On OS X it is common for applications and their menu bar
-    // to stay active until the user quits explicitly with Cmd + Q
-    if (process.platform !== 'darwin') {
-      app.quit();
-    }
-  });
-
-
-  app.on('activate', () => {
-    if (mainWindow === null) {
-      createMainWindow();
-    }
-  });
-
-
-} catch (error) {
-  console.log(error);
-  process.exit(1);
+  } catch (error) {
+    console.trace(error);
+    process.exit(1);
+  }
 }
+
+main();

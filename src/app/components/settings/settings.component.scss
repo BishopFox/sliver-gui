@@ -1,5 +1,12 @@
 .grid-container {
-    display: grid;
-    grid-column: 1fr 5fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 7fr 1fr;
+  grid-template-rows: minmax(50px, auto);
+  justify-items: center;
+  align-items: center;
 }
 
+.language {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}

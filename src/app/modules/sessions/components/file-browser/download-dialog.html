@@ -1,20 +1,27 @@
 <h1 mat-dialog-title>
   <i class="fas fa-fw fa-download"></i>
-  Download File
+  <ng-container i18n>
+    Download File
+  </ng-container>
 </h1>
 <div mat-dialog-content>
-  <strong>File Name:</strong>&nbsp;<span class="monospace">{{data.name}}</span>
+  <strong>
+    <ng-container i18n>File Name:</ng-container>
+  </strong>&nbsp;
+  <span class="monospace">{{data.name}}</span>
   <br />
   <br />
-  <strong>File Size:</strong> {{data.size | fileSize}}
+  <strong>
+    <ng-container i18n>File Size:</ng-container>
+  </strong> {{data.size | fileSize}}
   <br />
   <br />
 </div>
 <div mat-dialog-actions>
   <button mat-button [mat-dialog-close]="data" cdkFocusInitial color="primary">
-    &nbsp;&nbsp;Download&nbsp;&nbsp;
+    &nbsp;&nbsp;<ng-container i18n>Download</ng-container>&nbsp;&nbsp;
   </button>
   <button mat-button (click)="onNoClick()">
-    &nbsp;&nbsp;Cancel&nbsp;&nbsp;
+    &nbsp;&nbsp;<ng-container i18n>Cancel</ng-container>&nbsp;&nbsp;
   </button>
 </div>

@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template" target-language="fr">
     <body>
-      <trans-unit id="93cda5379c21993be8e215182118fca846149fe3" datatype="html">
+      <trans-unit id="0d98653d70a7074599226a5320c0c16cbe77572e" datatype="html">
+        <source> Add Config </source><target state="new"> Ajouter une configuration </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/select-server/select-server.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+      </trans-unit><trans-unit id="383a25ee6d9b9a3f8efdb7d5ebc952206d1b8336" datatype="html">
+        <source> Connect </source><target state="new"> Connect </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/select-server/select-server.component.html</context>
+          <context context-type="linenumber">42,43</context>
+        </context-group>
+      </trans-unit><trans-unit id="1e8787a343691f0024051832ae34371e57ddaf32" datatype="html">
+        <source> You must select a configuration. </source><target state="new"> You must select a configuration. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/select-server/select-server.component.html</context>
+          <context context-type="linenumber">27,28</context>
+        </context-group>
+      </trans-unit><trans-unit id="93cda5379c21993be8e215182118fca846149fe3" datatype="html">
         <source> Settings </source><target state="new"> Settings </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
@@ -112,6 +130,42 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context>
           <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit><trans-unit id="5af39fbf79ad61e83057811e836bd70f0c9346de" datatype="html">
+        <source> Back </source><target state="new"> Back </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit><trans-unit id="f86a201543a540545283f1a9ef0e0364256e13e2" datatype="html">
+        <source> Start Listener </source><target state="new"> Start Listener </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/jobs.component.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+      </trans-unit><trans-unit id="2124e85511a4a0d37e992ffb99d47dc148d6946b" datatype="html">
+        <source> Name </source><target state="new"> Name </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/jobs.component.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+      </trans-unit><trans-unit id="9b3b919b18954749e9b25803ed2eb787c5f5d8fd" datatype="html">
+        <source> Protocol </source><target state="new"> Protocol </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/jobs.component.html</context>
+          <context context-type="linenumber">47,48</context>
+        </context-group>
+      </trans-unit><trans-unit id="9c4fc4f48143f2c8734846de4c3ce2e6d96cec24" datatype="html">
+        <source> Port </source><target state="new"> Port </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/jobs.component.html</context>
+          <context context-type="linenumber">56,57</context>
+        </context-group>
+      </trans-unit><trans-unit id="8a539e5907399d706e61fa93cfa9062e17497302" datatype="html">
+        <source> Description </source><target state="new"> Description </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/jobs.component.html</context>
+          <context context-type="linenumber">65,66</context>
         </context-group>
       </trans-unit>
     </body>

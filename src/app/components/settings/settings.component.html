@@ -16,13 +16,20 @@
   </div>
 
   <div class="grid-container">
-    <div><!-- Edge --></div>
-    <div>
+    
+    <div class="language">
 
-
+      <mat-form-field appearance="fill">
+        <mat-label i18n>Language</mat-label>
+        <mat-select [(value)]="currentLocale" (selectionChange)="selectLanguage($event)">
+          <mat-option *ngFor="let locale of locales | keyvalue" [value]="locale.key">
+            {{ locale.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
     </div>
-    <div><!-- Edge --></div>
+    
   </div>
 
 </div>

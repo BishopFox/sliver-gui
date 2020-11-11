@@ -4,7 +4,9 @@
   <mat-grid-tile>
     <button *ngIf="!connecting" mat-button color="primary" (click)="addConfigFile()">
       <i class="fas fa-fw fa-plus"></i>
-      Add Config
+      <ng-container i18n>
+        Add Config
+      </ng-container>
     </button>
   </mat-grid-tile>
   <mat-grid-tile></mat-grid-tile>
@@ -21,7 +23,9 @@
       <form [formGroup]="selectConfigForm" (ngSubmit)="onSelectedConfig(selectConfigForm.controls['config'].value)">
         <mat-form-field style="width: 100%;">
           <mat-error *ngIf="selectConfigForm.controls['config'].value === ''">
-            You must select a configuration.
+            <ng-container i18n>
+              You must select a configuration.
+            </ng-container>
           </mat-error>
           <mat-error *ngIf="selectConfigForm.controls['config'].hasError('connectionError')">
             {{connectionError}}
@@ -34,7 +38,9 @@
         </mat-form-field>
         <button style="width: 100%;" mat-button [disabled]="selectConfigForm.controls['config'].value === ''"
           type="submit">
-          Connect
+          <ng-container i18n>
+            Connect
+          </ng-container>
         </button>
       </form>
     </div>
