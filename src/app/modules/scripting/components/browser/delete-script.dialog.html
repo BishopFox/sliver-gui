@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>
+    <i class="fas fa-fw fa-file-code"></i>
+    Delete Script?
+  </h1>
+  <div mat-dialog-content>
+  
+    Are you sure you want to delete the <strong>{{data.name}}</strong> script?
+  
+  </div>
+  <div mat-dialog-actions align="center">
+  
+      <button mat-button [mat-dialog-close]="result" color="warn">
+        &nbsp;&nbsp;Delete&nbsp;&nbsp;
+      </button>
+      
+      <button mat-button (click)="onNoClick()">
+        &nbsp;&nbsp;Cancel&nbsp;&nbsp;
+      </button>
+  
+  </div>

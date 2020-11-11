@@ -14,7 +14,8 @@
 */
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
@@ -43,7 +44,8 @@ export class BrowserComponent implements OnInit {
     'name', 'options'
   ];
 
-  constructor(private _router: Router,
+  constructor(public dialog: MatDialog,
+              private _router: Router,
               private _workerService: WorkersService) { }
 
   ngOnInit(): void {
@@ -87,8 +89,37 @@ export class BrowserComponent implements OnInit {
 
   removeScript(event, script) {
     event.stopPropagation();
-    console.log(script);
+    const dialogRef = this.dialog.open(DeleteScriptDialogComponent, {
+      data: script,
+    });
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result) {
+        await this._workerService.removeScript(script.id);
+        this.fetchScripts();
+      }
+    });
   } 
 
 }
 
+
+@Component({
+  selector: 'scripting-delete-script-dialog',
+  templateUrl: 'delete-script.dialog.html',
+})
+export class DeleteScriptDialogComponent implements OnInit {
+
+  result: any;
+
+  constructor(public dialogRef: MatDialogRef<DeleteScriptDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  ngOnInit() {
+    this.result = this.data;
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
