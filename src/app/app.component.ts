@@ -37,7 +37,14 @@ export class AppComponent {
 
       const eventType = event.getEventtype();
 
+      console.log(`[push event] ${eventType}`);
+
       switch (eventType) {
+
+        // Sessions
+        case Events.Connected:
+          this.sessionOpenedAlert(event.getSession());
+          break;
 
         // Players
         case Events.Joined:
@@ -59,7 +66,7 @@ export class AppComponent {
   }
 
   playerAlert(action: string, client: clientpb.Client) {
-    this._snackBar.open(`${client.getOperator()} has ${action} the game!`, 'Dismiss', {
+    this._snackBar.open(`${client.getOperator()?.getName()} has ${action} the game!`, 'Dismiss', {
       duration: 5000,
     });
   }

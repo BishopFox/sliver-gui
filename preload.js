@@ -45,16 +45,24 @@ window.addEventListener('message', (event) => {
 });
 
 ipcRenderer.on('ipc', (_, msg, origin) => {
-  if (origin !== APP_ORIGIN && origin !== '*') {
+  if (origin !== APP_ORIGIN) {
     return;
   }
   try {
-    if (msg.type === 'response' || msg.type === 'push') {
+    if (msg.type === 'response') {
       window.postMessage(JSON.stringify(msg), APP_ORIGIN);
     }
   } catch (err) {
     console.trace(err);
   }
+});
+
+// Push events
+ipcRenderer.on('push', (event, data) => {
+  window.postMessage(JSON.stringify({
+    type: 'push',
+    data: data,
+  }), APP_ORIGIN);
 });
 
 
@@ -85,20 +93,22 @@ window.addEventListener('message', (event) => {
 
 ipcRenderer.on('ipc', (_, msg, origin) => {
 
-  if (origin === '*') {
-    return; // Pushes are forwarded to the worker from the main app
-  }
-
-  let url = new URL(origin);
-  if (url.protocol !== WORKER_PROTOCOL) {
+  if (typeof origin !== 'string') {
     return;
   }
 
   try {
+    
+    let url = new URL(origin);
+    if (url.protocol !== WORKER_PROTOCOL) {
+      return;
+    }
+
     if (msg.type === 'response') {
       const iframe = document.getElementById(url.hostname);
       iframe?.contentWindow?.postMessage(JSON.stringify(msg), origin);
     }
+
   } catch (err) {
     console.trace(err);
   }

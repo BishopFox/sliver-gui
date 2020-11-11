@@ -18,7 +18,9 @@ listing/selecting configs to the sandboxed code.
 
 */
 
-import { ipcMain, dialog, FileFilter, BrowserWindow, IpcMainEvent, TouchBarOtherItemsProxy } from 'electron';
+import {
+  ipcMain, dialog, FileFilter, BrowserWindow, IpcMainEvent, TouchBarOtherItemsProxy
+} from 'electron';
 import { homedir } from 'os';
 import { Base64 } from 'js-base64';
 
@@ -600,8 +602,8 @@ export class IPCHandlers {
     console.log('Connection successful');
 
     // Pipe realtime events back to renderer process
-    self.client.event$.subscribe((event) => {
-      ipcMain.emit('push', Base64.fromUint8Array(event.serializeBinary()));
+    self.client.event$.subscribe((event: clientpb.Event) => {
+      ipcMain.emit('push', {}, Base64.fromUint8Array(event.serializeBinary()));
     });
 
     return 'success';
@@ -797,14 +799,10 @@ export function startIPCHandlers(window: BrowserWindow, handlers: IPCHandlers) {
     });
   });
 
-  // This one doesn't have an event argument for some reason ...
-  ipcMain.on('push', async (_: IpcMainEvent, data: string) => {
-    window.webContents.send('ipc', {
-      id: 0,
-      type: 'push',
-      method: '',
-      data: data
-    }, '*');
+  // I know what you're thinking, why do we need a main<->main event emitter here,
+  // can't you just send an IPC event to the renderer? The answer is no, you can't.
+  ipcMain.on('push', async (event: IpcMainEvent, data: string) => {
+    window.webContents.send('push', data);
   });
 
 }
