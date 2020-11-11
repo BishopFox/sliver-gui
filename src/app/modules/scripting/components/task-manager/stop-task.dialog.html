@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>
+  <i class="fas fa-fw fa-stop"></i>
+  Stop Task
+</h1>
+<div mat-dialog-content>
+
+  Are you sure you want to stop the <strong>{{data.name}}</strong> task?
+
+</div>
+<div mat-dialog-actions align="center">
+
+    <button mat-button [mat-dialog-close]="result" color="warn">
+      &nbsp;&nbsp;Stop&nbsp;&nbsp;
+    </button>
+    
+    <button mat-button (click)="onNoClick()">
+      &nbsp;&nbsp;Cancel&nbsp;&nbsp;
+    </button>
+
+</div>

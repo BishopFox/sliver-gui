@@ -22,7 +22,7 @@ import { BaseMaterialModule } from '../../base-material';
 
 import { MonacoEditorModule } from '@materia-ui/ngx-monaco-editor';
 import { BrowserComponent } from './components/browser/browser.component';
-import { TaskManagerComponent } from './components/task-manager/task-manager.component';
+import { TaskManagerComponent, StopTaskDialogComponent } from './components/task-manager/task-manager.component';
 import { ScriptingComponent, NewScriptDialogComponent } from './components/scripting/scripting.component';
 import { TaskComponent } from './components/task/task.component';
 
@@ -32,6 +32,7 @@ import { TaskComponent } from './components/task/task.component';
     EditorComponent,
     BrowserComponent,
     NewScriptDialogComponent,
+    StopTaskDialogComponent,
     TaskManagerComponent,
     ScriptingComponent,
     TaskComponent,

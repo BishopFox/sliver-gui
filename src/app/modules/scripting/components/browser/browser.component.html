@@ -26,6 +26,15 @@
       <td mat-cell *matCellDef="let script"> {{script.name}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="options">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+      <td mat-cell *matCellDef="let script">
+        <button style="float: right;" mat-button color="warn" (click)="removeScript($event, script)">
+          Delete
+        </button>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row (click)="onRowSelection(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>

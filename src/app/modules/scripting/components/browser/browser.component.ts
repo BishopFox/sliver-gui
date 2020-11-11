@@ -40,7 +40,7 @@ export class BrowserComponent implements OnInit {
   scripts: any;
   dataSrc: MatTableDataSource<TableSessionData>;
   displayedColumns: string[] = [
-    'name'
+    'name', 'options'
   ];
 
   constructor(private _router: Router,
@@ -84,6 +84,11 @@ export class BrowserComponent implements OnInit {
       }
     });
   }
+
+  removeScript(event, script) {
+    event.stopPropagation();
+    console.log(script);
+  } 
 
 }
 

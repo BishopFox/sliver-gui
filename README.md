@@ -16,7 +16,9 @@ Because I value my development time more than your RAM.
 
 ### Features
 
+* You can click on stuff!
 * Sandboxed JavaScript scripting engine
+* Built-in scripting editor
 
 ### Build
 

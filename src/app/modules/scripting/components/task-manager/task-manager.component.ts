@@ -13,8 +13,8 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 import { WorkersService } from '@app/providers/workers.service';
@@ -44,13 +44,18 @@ export class TaskManagerComponent implements OnInit {
   private workers: Map<string, string>;
   dataSrc: MatTableDataSource<TableSessionData>;
   displayedColumns: string[] = [
-    'id', 'name'
+    'id', 'name', 'options'
   ];
 
-  constructor(private _workerService: WorkersService,
+  constructor(public dialog: MatDialog,
+              private _workerService: WorkersService,
               private _router: Router) { }
 
   ngOnInit(): void {
+    this.fetchWorkers();
+  }
+
+  fetchWorkers() {
     this.workers = this._workerService.workers();
     this.dataSrc = new MatTableDataSource(this.tableData());
   }
@@ -64,7 +69,7 @@ export class TaskManagerComponent implements OnInit {
         name: name.toString(),
       });
     }
-    return table.sort((a, b) => (a.id > b.id) ? 1 : -1);
+    return table.sort((a, b) => (a.name > b.name) ? 1 : -1);
   }
 
   applyFilter(filterValue: string) {
@@ -84,6 +89,41 @@ export class TaskManagerComponent implements OnInit {
         default: return 0;
       }
     });
+  }
+
+  async stopTask(event, task) {
+    event.stopPropagation();
+    const dialogRef = this.dialog.open(StopTaskDialogComponent, {
+      data: task,
+    });
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result) {
+        await this._workerService.stopWorker(task.id);
+        this.fetchWorkers();
+      }
+    });
+  }
+
+}
+
+
+@Component({
+  selector: 'scripting-stop-task-dialog',
+  templateUrl: 'stop-task.dialog.html',
+})
+export class StopTaskDialogComponent implements OnInit {
+
+  result: any;
+
+  constructor(public dialogRef: MatDialogRef<StopTaskDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  ngOnInit() {
+    this.result = this.data;
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }
