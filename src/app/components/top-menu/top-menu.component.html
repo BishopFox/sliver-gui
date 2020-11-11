@@ -73,11 +73,15 @@
   <mat-menu style="-webkit-app-region: no-drag" #settings="matMenu">
     <button mat-menu-item [routerLink]="['/settings']">
       <i class="fas fa-fw fa-cogs"></i>
-      &nbsp;Settings
+      &nbsp;
+      <ng-container i18n>
+        Settings
+      </ng-container>
     </button>
     <button mat-menu-item (click)="onExit()">
       <i class="fas fa-fw fa-sign-out-alt"></i>
-      &nbsp;Exit
+      &nbsp;
+      <ng-container i18n>Exit</ng-container>
     </button>
   </mat-menu>
 

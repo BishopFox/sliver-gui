@@ -1,20 +1,24 @@
 <h1 mat-dialog-title>
-    <i class="fas fa-fw fa-file-code"></i>
+  <i class="fas fa-fw fa-file-code"></i>
+  <ng-container i18n>
     Delete Script?
-  </h1>
-  <div mat-dialog-content>
-  
+  </ng-container>
+</h1>
+<div mat-dialog-content>
+
+  <ng-container i18n>
     Are you sure you want to delete the <strong>{{data.name}}</strong> script?
-  
-  </div>
-  <div mat-dialog-actions align="center">
-  
-      <button mat-button [mat-dialog-close]="result" color="warn">
-        &nbsp;&nbsp;Delete&nbsp;&nbsp;
-      </button>
-      
-      <button mat-button (click)="onNoClick()">
-        &nbsp;&nbsp;Cancel&nbsp;&nbsp;
-      </button>
-  
-  </div>
+  </ng-container>
+
+</div>
+<div mat-dialog-actions align="center">
+
+  <button mat-button [mat-dialog-close]="result" color="warn">
+    &nbsp;&nbsp;<ng-container i18n>Delete</ng-container>&nbsp;&nbsp;
+  </button>
+
+  <button mat-button (click)="onNoClick()">
+    &nbsp;&nbsp;<ng-container i18n>Cancel</ng-container>&nbsp;&nbsp;
+  </button>
+
+</div>

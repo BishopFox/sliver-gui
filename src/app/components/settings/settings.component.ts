@@ -25,15 +25,27 @@ import { ClientService, Settings } from '@app/providers/client.service';
 export class SettingsComponent implements OnInit {
 
   settings: Settings;
+  locales: Map<string, string>;
+  currentLocale: string;
 
   constructor(private _clientService: ClientService) { }
 
   ngOnInit() {
     this.fetchSettings();
+    this.fetchLocales();
   }
 
   async fetchSettings() {
     this.settings = await this._clientService.getSettings();
+  }
+
+  async fetchLocales() {
+    this.locales = await this._clientService.locales();
+    this.currentLocale = await this._clientService.getCurrentLocale();
+  }
+
+  back() {
+    window.history.back();
   }
 
 }

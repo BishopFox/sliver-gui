@@ -1,0 +1,9 @@
+{
+    "xliffmergeOptions": {
+      "srcDir": "src/locale",
+      "i18nBaseFile": "messages",
+      "i18nFormat": "xlf",
+      "encoding": "UTF-8"
+    }
+  }
+  

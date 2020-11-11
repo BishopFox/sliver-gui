@@ -1,8 +1,5 @@
 .grid-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-column: 1fr 5fr 1fr;
 }
-  
-.grid-container {
-    width: 100%;
-}
+

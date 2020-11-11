@@ -33,9 +33,8 @@ import { isConnected } from './is-connected';
 import { SliverClient, SliverClientConfig } from 'sliver-script';
 
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
-import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb';
 
-import { getClientDir } from '../locale';
+import { getLocalesJSON, getClientDir, getCurrentLocale, setLocaleSync } from '../locale';
 import { WorkerManager } from '../workers/worker-manager';
 
 
@@ -674,7 +673,7 @@ export class IPCHandlers {
     "required": ["title", "message", "filename", "data"],
     "additionalProperties": false,
   })
-  public client_saveFile(self: IPCHandlers, saveFileReq: SaveFileReq): Promise<string> {
+  public async client_saveFile(self: IPCHandlers, saveFileReq: SaveFileReq): Promise<string> {
     return new Promise(async (resolve, reject) => {
       const dialogOptions = {
         title: saveFileReq.title,
@@ -701,7 +700,7 @@ export class IPCHandlers {
     });
   }
 
-  public client_getSettings(self: IPCHandlers): Promise<string> {
+  public async client_getSettings(self: IPCHandlers): Promise<string> {
     return new Promise((resolve, reject) => {
       try {
         if (!fs.existsSync(SETTINGS_PATH)) {
@@ -720,9 +719,22 @@ export class IPCHandlers {
     });
   }
 
+  public async client_listLocales(self: IPCHandlers): Promise<string> {
+    return JSON.stringify(getLocalesJSON());
+  }
+
+  public async client_currentLocale(self: IPCHandlers): Promise<string> {
+    return getCurrentLocale();
+  }
+
+  public async client_setLocale(self: IPCHandlers, req: string): Promise<string> {
+    setLocaleSync(req);
+    return getCurrentLocale();
+  }
+
   // The Node process never interacts with the "settings" values, so
   // we do not validate them, aside from ensuing it's valid JSON
-  public client_saveSettings(self: IPCHandlers, settings: string): Promise<string> {
+  async client_saveSettings(self: IPCHandlers, settings: string): Promise<string> {
     return new Promise(async (resolve, reject) => {
       
       if (!fs.existsSync(CONFIG_DIR)) {

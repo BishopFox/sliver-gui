@@ -29,6 +29,7 @@ npm install
 cd workers/worker && npm install && cd ../..
 npm install -g electron-packager
 npm install -g @angular/cli
+npm install -g ngx-i18nsupport
 npm run electron:local
 ```
 

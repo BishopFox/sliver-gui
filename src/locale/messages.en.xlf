@@ -1,114 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+  <file source-language="en" datatype="plaintext" original="ng2.template" target-language="en">
     <body>
       <trans-unit id="93cda5379c21993be8e215182118fca846149fe3" datatype="html">
-        <source> Settings </source><target state="new"> Settings </target>
+        <source> Settings </source><target state="final"> Settings </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">78,79</context>
         </context-group>
-      </trans-unit><trans-unit id="f65cd8b3e83e39ef08d97d02298eb222a5b04f2f" datatype="html">
-        <source>Exit</source><target state="new">Exit</target>
+      </trans-unit>
+      <trans-unit id="f65cd8b3e83e39ef08d97d02298eb222a5b04f2f" datatype="html">
+        <source>Exit</source><target state="final">Exit</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">84</context>
         </context-group>
-      </trans-unit><trans-unit id="815cad6a13eee2edfed8a43dc3a64d88b1b2db27" datatype="html">
-        <source> Home </source>
-        <target> Domicile </target>
+      </trans-unit>
+      <trans-unit id="815cad6a13eee2edfed8a43dc3a64d88b1b2db27" datatype="html">
+        <source> Home </source><target state="final"> Home </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">8,9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f6e07a2ac281e7bd9dc0cd6b8167417375720af7" datatype="html">
-        <source> Generate </source>
-        <target> Généré </target>
+        <source> Generate </source><target state="final"> Generate </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">15,16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="67fb940f1ed5951b31fe7507b87f553951b874d3" datatype="html">
-        <source> New Implant </source>
+        <source> New Implant </source><target state="final"> New Implant </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">22,23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="37ab69a6c6ea3e0e4a4bb72c5227f95ea5a1fc32" datatype="html">
-        <source> Canaries </source>
+        <source> Canaries </source><target state="final"> Canaries </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">28,29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="09b10f01c821308d8fbffafb681775c8ea1df32a" datatype="html">
-        <source> History </source>
+        <source> History </source><target state="final"> History </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">34,35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="79709dedbeb98b51516beb4bedb74c24ee01c66b" datatype="html">
-        <source> Sessions </source>
+        <source> Sessions </source><target state="final"> Sessions </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">42,43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9153b3a9ac928c5e352e6266b9a1d7301d1400bf" datatype="html">
-        <source> Jobs </source>
+        <source> Jobs </source><target state="final"> Jobs </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">49,50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="92c6fa0a20f9aec805ffaff70f97dbf4dcce318d" datatype="html">
-        <source> Scripting </source>
+        <source> Scripting </source><target state="final"> Scripting </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">56,57</context>
         </context-group>
-      </trans-unit><trans-unit id="45493a221c09f4d2550f928e73f2e8ea49ceef55" datatype="html">
-        <source> Back </source><target state="new"> Back </target>
+      </trans-unit>
+      <trans-unit id="45493a221c09f4d2550f928e73f2e8ea49ceef55" datatype="html">
+        <source> Back </source><target state="final"> Back </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/settings/settings.component.html</context>
           <context context-type="linenumber">9,10</context>
         </context-group>
-      </trans-unit><trans-unit id="c5aaa7cb8e2bca91ffe63c9e189e66f3efb88126" datatype="html">
-        <source> Scripts </source><target state="new"> Scripts </target>
+      </trans-unit>
+      <trans-unit id="c5aaa7cb8e2bca91ffe63c9e189e66f3efb88126" datatype="html">
+        <source> Scripts </source><target state="final"> Scripts </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/scripting/components/browser/browser.component.html</context>
           <context context-type="linenumber">8,9</context>
         </context-group>
-      </trans-unit><trans-unit id="7aafd81526e4dbfbfe16413c3e1350f66939ec96" datatype="html">
-        <source> Delete </source><target state="new"> Delete </target>
+      </trans-unit>
+      <trans-unit id="7aafd81526e4dbfbfe16413c3e1350f66939ec96" datatype="html">
+        <source> Delete </source><target state="final"> Delete </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/scripting/components/browser/browser.component.html</context>
           <context context-type="linenumber">36,37</context>
         </context-group>
-      </trans-unit><trans-unit id="c6229de296573e1153e3fb23e5ef780a07514fb5" datatype="html">
-        <source> Delete Script? </source><target state="new"> Delete Script? </target>
+      </trans-unit>
+      <trans-unit id="c6229de296573e1153e3fb23e5ef780a07514fb5" datatype="html">
+        <source> Delete Script? </source><target state="final"> Delete Script? </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context>
           <context context-type="linenumber">4,5</context>
         </context-group>
-      </trans-unit><trans-unit id="0d678cdeec31bf13e982397161e64abd782b69fc" datatype="html">
-        <source> Are you sure you want to delete the <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>{{data.name}}"/><x id="INTERPOLATION" equiv-text="{{data.name}}&lt;/strong>"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong> "/> script? </source><target state="new"> Are you sure you want to delete the <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>{{data.name}}"/><x id="INTERPOLATION" equiv-text="{{data.name}}&lt;/strong>"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong> "/> script? </target>
+      </trans-unit>
+      <trans-unit id="0d678cdeec31bf13e982397161e64abd782b69fc" datatype="html">
+        <source> Are you sure you want to delete the <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>{{data.name}}"/><x id="INTERPOLATION" equiv-text="{{data.name}}&lt;/strong>"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong> "/> script? </source><target state="final"> Are you sure you want to delete the <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>{{data.name}}"/><x id="INTERPOLATION" equiv-text="{{data.name}}&lt;/strong>"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong> "/> script? </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context>
           <context context-type="linenumber">10,11</context>
         </context-group>
-      </trans-unit><trans-unit id="826b25211922a1b46436589233cb6f1a163d89b7" datatype="html">
-        <source>Delete</source><target state="new">Delete</target>
+      </trans-unit>
+      <trans-unit id="826b25211922a1b46436589233cb6f1a163d89b7" datatype="html">
+        <source>Delete</source><target state="final">Delete</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
-      </trans-unit><trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
-        <source>Cancel</source><target state="new">Cancel</target>
+      </trans-unit>
+      <trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
+        <source>Cancel</source><target state="final">Cancel</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context>
           <context context-type="linenumber">21</context>

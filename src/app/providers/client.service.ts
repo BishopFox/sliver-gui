@@ -70,6 +70,22 @@ export class ClientService {
 
   constructor(private _ipc: IPCService) { }
 
+  async locales(): Promise<Map<string, string>> {
+    const rawLocales = await this._ipc.request('client_listLocales');
+    const localLocales = JSON.parse(rawLocales);
+    
+    // Covert JSON back to map<str, str>
+    const locales = new Map<string, string>();
+    Object.keys(localLocales).forEach((key: string) => {
+      locales.set(key, localLocales[key]);
+    });
+    return locales;
+  }
+
+  async getCurrentLocale(): Promise<string> {
+    return this._ipc.request('client_currentLocale');
+  }
+
   async getActiveConfig(): Promise<sliver.SliverClientConfig> {
     const rawConfig = await this._ipc.request('client_activeConfig');
     return rawConfig ? JSON.parse(rawConfig) : null;
