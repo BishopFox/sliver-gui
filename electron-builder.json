@@ -20,19 +20,19 @@
       "!tslint.json"
   ],
   "win": {
-    "icon": "dist",
+    "icon": "dist/en",
     "target": [
       "portable"
     ]
   },
   "mac": {
-    "icon": "dist",
+    "icon": "dist/en",
     "target": [
       "dmg"
     ]
   },
   "linux": {
-    "icon": "dist",
+    "icon": "dist/en",
     "target": [
       "deb",
       "rpm"

@@ -36,7 +36,7 @@ protocol.registerSchemesAsPrivileged([{
 }]);
 
 
-function createMainWindow() {
+function createMainWindow(handlers: IPCHandlers) {
 
   const electronScreen = screen;
   const size = electronScreen.getPrimaryDisplay().workAreaSize;
@@ -86,6 +86,8 @@ function createMainWindow() {
 
   console.log('Main window done');
 
+  startIPCHandlers(mainWindow, handlers);
+
   return mainWindow;
 }
 
@@ -99,16 +101,16 @@ function main() {
 
     // Custom protocol handler
     app.on('ready', () => {
+
       protocol.registerBufferProtocol(AppProtocol.scheme, AppProtocol.requestHandler);
       protocol.registerBufferProtocol(WorkerProtocol.scheme, (req, next) => {
         WorkerProtocol.requestHandler(workerManager, req, next);
       });
-      const mainWindow = createMainWindow();
-      startIPCHandlers(mainWindow, handlers);
 
+      let mainWindow = createMainWindow(handlers);
       app.on('activate', () => {
         if (mainWindow === null) {
-          createMainWindow();
+          mainWindow = createMainWindow(handlers);
         }
       });
 

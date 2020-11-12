@@ -95,6 +95,7 @@
     "rxjs": "^6.5.3",
     "sliver-script": "^1.0.26",
     "tslib": "^2.0.0",
+    "uuid": "^8.3.1",
     "xterm": "^4.4.0",
     "xterm-addon-fit": "^0.4.0"
   }
