@@ -19,7 +19,7 @@ import { BaseMaterialModule } from '../../base-material';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-import { SessionsComponent } from './sessions.component';
+import { SessionsComponent } from './components/sessions/sessions.component';
 import { InteractComponent } from './components/interact/interact.component';
 import {
   FileBrowserComponent, MkdirDialogComponent, RmDialogComponent,
