@@ -17,7 +17,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BaseMaterialModule } from '@app/base-material';
-import { JobsComponent } from './jobs.component';
+import { JobsComponent } from './components/jobs/jobs.component';
 import { StartListenerComponent } from './components/start-listener/start-listener.component';
 import { JobComponent } from './components/job/job.component';
 
