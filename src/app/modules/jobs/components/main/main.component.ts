@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-main',
+  selector: 'jobs-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })

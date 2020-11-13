@@ -18,7 +18,7 @@ import { ModuleWithProviders } from '@angular/core';
 
 import { ActiveConfig } from '@app/app-routing-guards.module';
 import { MainComponent } from './components/main/main.component';
-import { SessionsComponent } from './components/sessions/sessions.component';
+import { StandaloneInteractComponent } from './components/standalone-interact/standalone-interact.component';
 import { InteractComponent } from './components/interact/interact.component';
 import { InfoComponent } from './components/info/info.component';
 import { PsComponent } from './components/ps/ps.component';
@@ -28,14 +28,26 @@ import { ShellComponent } from './components/shell/shell.component';
 
 const routes: Routes = [
 
-    { path: 'sessions', component: MainComponent, canActivate: [ActiveConfig] },
-    { path: 'sessions/:session-id', component: InteractComponent, canActivate: [ActiveConfig],
-      children: [
-        { path: 'info', component: InfoComponent, canActivate: [ActiveConfig] },
-        { path: 'ps', component: PsComponent, canActivate: [ActiveConfig] },
-        { path: 'file-browser', component: FileBrowserComponent, canActivate: [ActiveConfig] },
-        { path: 'shell', component: ShellComponent, canActivate: [ActiveConfig] },
-      ]
+  { path: 'sessions', component: MainComponent, canActivate: [ActiveConfig] },
+
+  { 
+    path: 'sessions/:session-id', component: InteractComponent, canActivate: [ActiveConfig],
+    children: [
+      { path: 'info', component: InfoComponent, canActivate: [ActiveConfig] },
+      { path: 'ps', component: PsComponent, canActivate: [ActiveConfig] },
+      { path: 'file-browser', component: FileBrowserComponent, canActivate: [ActiveConfig] },
+      { path: 'shell', component: ShellComponent, canActivate: [ActiveConfig] },
+    ]
+  },
+
+  { 
+    path: 'sessions-standalone/:session-id', component: StandaloneInteractComponent, canActivate: [ActiveConfig],
+    children: [
+      { path: 'info', component: InfoComponent, canActivate: [ActiveConfig] },
+      { path: 'ps', component: PsComponent, canActivate: [ActiveConfig] },
+      { path: 'file-browser', component: FileBrowserComponent, canActivate: [ActiveConfig] },
+      { path: 'shell', component: ShellComponent, canActivate: [ActiveConfig] },
+    ]
   },
 
 ];

@@ -15,10 +15,7 @@
 
 import { app,  protocol } from 'electron';
 
-import { createMainWindow } from './windows/main';
-import { IPCHandlers } from './ipc/ipc';
-import { WorkerManager } from './workers/worker-manager';
-
+import { WindowManager } from './windows/window-manager';
 import * as WorkerProtocol from './workers/worker-protocol';
 import * as AppProtocol from './app-protocol';
 
@@ -35,29 +32,24 @@ protocol.registerSchemesAsPrivileged([{
 
 
 // ----------------------------------------- [ MAIN ] -----------------------------------------
-let mainWindow;
-
 function main() {
   try {
 
-    let workerManager = new WorkerManager();
-    let handlers = new IPCHandlers(workerManager);
+    let mainWindow;
+    const windowManager = new WindowManager();
 
     // Custom protocol handler
     app.on('ready', () => {
-
       protocol.registerBufferProtocol(AppProtocol.scheme, AppProtocol.requestHandler);
       protocol.registerBufferProtocol(WorkerProtocol.scheme, (req, next) => {
-        WorkerProtocol.requestHandler(workerManager, req, next);
+        WorkerProtocol.requestHandler(windowManager.workerManager, req, next);
       });
-
-      mainWindow = createMainWindow(handlers);
-
+      mainWindow = windowManager.createMainWindow();
     });
 
     app.on('activate', () => {
       if (mainWindow === null) {
-        mainWindow = createMainWindow(handlers);
+        mainWindow = windowManager.createMainWindow();
       }
     });
 

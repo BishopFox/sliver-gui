@@ -35,8 +35,8 @@ import { SliverClient, SliverClientConfig } from 'sliver-script';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 import { getLocalesJSON, getClientDir, getCurrentLocale, setLocaleSync } from '../locale';
+import { WindowManager } from '../windows/window-manager';
 import { WorkerManager } from '../workers/worker-manager';
-import { createSessionWindow } from '../windows/session';
 
 
 const CONFIG_DIR = path.join(getClientDir(), 'configs');
@@ -92,10 +92,12 @@ async function makeConfigDir(): Promise<NodeJS.ErrnoException|null> {
 export class IPCHandlers {
 
   public client: SliverClient;
+  private _windowManager: WindowManager;
   private _workerManager: WorkerManager;
 
-  constructor(workerManager: WorkerManager) {
-    this._workerManager = workerManager;
+  constructor(windowManager: WindowManager) {
+    this._windowManager = windowManager;
+    this._workerManager = windowManager.workerManager;
   }
 
   // ----------
@@ -771,7 +773,7 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   public client_sessionWindow(self: IPCHandlers, req: any) {
-    createSessionWindow(self, req.sessionId);
+    self._windowManager.createSessionWindow(req.sessionId);
   }
 
   public client_exit(self: IPCHandlers) {
@@ -781,7 +783,8 @@ export class IPCHandlers {
 
 }
 
-async function dispatchIPC(handlers: IPCHandlers, method: string, data: string): Promise<any> {
+  // Dispatcher
+export async function dispatchIPC(handlers: IPCHandlers, method: string, data: string): Promise<any> {
   console.log(`IPC Dispatch: ${method}`);
 
   // IPC handlers must start with "namespace_" this helps ensure we do not inadvertently
@@ -797,6 +800,7 @@ async function dispatchIPC(handlers: IPCHandlers, method: string, data: string):
     return Promise.reject(`Invalid method handler namespace for "${method}"`);
   }
 }
+
 
 export function startIPCHandlers(window: BrowserWindow, handlers: IPCHandlers) {
 

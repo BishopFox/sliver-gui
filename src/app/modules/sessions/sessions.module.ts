@@ -30,6 +30,7 @@ import { PsComponent } from './components/ps/ps.component';
 import { InfoComponent } from './components/info/info.component';
 import { SharedModule } from '../../shared/shared.module';
 import { MainComponent } from './components/main/main.component';
+import { StandaloneInteractComponent } from './components/standalone-interact/standalone-interact.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { MainComponent } from './components/main/main.component';
     ShellComponent,
     PsComponent,
     InfoComponent,
-    MainComponent
+    MainComponent,
+    StandaloneInteractComponent
   ],
   imports: [
 

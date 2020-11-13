@@ -1,6 +1,6 @@
 /*
   Sliver Implant Framework
-  Copyright (C) 2019  Bishop Fox
+  Copyright (C) 2020  Bishop Fox
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -23,12 +23,12 @@ import { ClientService } from '@app/providers/client.service';
 
 
 @Component({
-  selector: 'sessions-interact',
-  templateUrl: './interact.component.html',
-  styleUrls: ['./interact.component.scss'],
+  selector: 'app-standalone-interact',
+  templateUrl: './standalone-interact.component.html',
+  styleUrls: ['./standalone-interact.component.scss'],
   animations: [FadeInOut]
 })
-export class InteractComponent implements OnInit {
+export class StandaloneInteractComponent implements OnInit {
 
   sessionId: number;
   session: clientpb.Session;
@@ -59,5 +59,4 @@ export class InteractComponent implements OnInit {
   back() {
     window.history.back();
   }
-
 }
