@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>
   <i class="fas fa-fw fa-folder-plus"></i>
-  Make Directory
+  <ng-container i18n>Make Directory</ng-container>
 </h1>
 <div mat-dialog-content>
   <form>
@@ -11,9 +11,9 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button [mat-dialog-close]="result" color="primary">
-    &nbsp;&nbsp;Mkdir&nbsp;&nbsp;
+    &nbsp;&nbsp;<ng-container i18n>Mkdir</ng-container>&nbsp;&nbsp;
   </button>
   <button mat-button (click)="onNoClick()">
-    &nbsp;&nbsp;Cancel&nbsp;&nbsp;
+    &nbsp;&nbsp;<ng-container i18n>Cancel</ng-container>&nbsp;&nbsp;
   </button>
 </div>

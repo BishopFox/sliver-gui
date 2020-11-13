@@ -29,16 +29,22 @@ import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 })
 export class AppComponent {
 
+  mainWindow = window.location.origin == "app://sliver";
+
   constructor(private _router: Router,
               private _eventsService: EventsService,
-              private _snackBar: MatSnackBar) {
+              private _snackBar: MatSnackBar) 
+  {
+    if (this.mainWindow) {
+      this.initAlerts();
+    }
+  }
+
+  initAlerts() {
     console.log(AppConfig);
     this._eventsService.events$.subscribe((event: clientpb.Event) => {
 
       const eventType = event.getEventtype();
-
-      console.log(`[push event] ${eventType}`);
-
       switch (eventType) {
 
         // Sessions

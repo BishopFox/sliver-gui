@@ -70,6 +70,12 @@ export class ClientService {
 
   constructor(private _ipc: IPCService) { }
 
+  async openSessionWindow(sessionId: number): Promise<void> {
+    await this._ipc.request('client_sessionWindow', JSON.stringify({
+      sessionId: sessionId
+    }));
+  }
+
   async locales(): Promise<Map<string, string>> {
     const rawLocales = await this._ipc.request('client_listLocales');
     const localLocales = JSON.parse(rawLocales);

@@ -1,11 +1,17 @@
 <h1 mat-dialog-title>
   <i class="fas fa-fw fa-times-circle"></i>
-  Delete
-  <span *ngIf="data.isDir">Directory</span>
-  <span *ngIf="!data.isDir">File</span>
+  <ng-container i18n>Delete</ng-container>
+  <span *ngIf="data.isDir">
+    <ng-container i18n>Directory</ng-container>
+  </span>
+  <span *ngIf="!data.isDir">
+    <ng-container i18n>File</ng-container>
+  </span>
 </h1>
 <div mat-dialog-content>
-  Please type <span class="monospace">{{data.name}}</span> below to confirm:
+  <ng-container i18n>
+    Please type <span class="monospace">{{data.name}}</span> below to confirm:
+  </ng-container>
   <br />
   <br />
   <mat-form-field style="width: 100%">
@@ -16,9 +22,9 @@
 </div>
 <div mat-dialog-actions>
   <button [disabled]="!isConfirmed" mat-button [mat-dialog-close]="data" color="warn">
-    &nbsp;&nbsp;Delete&nbsp;&nbsp;
+    &nbsp;&nbsp;<ng-container i18n>Delete</ng-container>&nbsp;&nbsp;
   </button>
   <button mat-button (click)="onNoClick()" cdkFocusInitial>
-    &nbsp;&nbsp;Cancel&nbsp;&nbsp;
+    &nbsp;&nbsp;<ng-container i18n>Cancel</ng-container>&nbsp;&nbsp;
   </button>
 </div>

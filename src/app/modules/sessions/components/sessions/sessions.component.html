@@ -7,7 +7,6 @@
 
 <div [@fadeInOut] *ngIf="dataSrc">
 
-
   <div class="table-header">
     <div>
       <h3 *ngIf="title">
@@ -25,36 +24,47 @@
     </div>
   </div>
 
-
   <table mat-table [dataSource]="dataSrc" matSort (matSortChange)="sortData($event)">
 
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <ng-container i18n>ID</ng-container>
+      </th>
       <td mat-cell *matCellDef="let session"> {{session.id}} </td>
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <ng-container i18n>Name</ng-container>
+      </th>
       <td mat-cell *matCellDef="let session"> {{session.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="transport">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Transport</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <ng-container i18n>Transport</ng-container>
+      </th>
       <td mat-cell *matCellDef="let session"> {{session.transport}} </td>
     </ng-container>
 
     <ng-container matColumnDef="remoteaddress">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Remote Address</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <ng-container i18n>Remote Address</ng-container>
+      </th>
       <td mat-cell *matCellDef="let session" class="monospace"> {{session.remoteaddress}} </td>
     </ng-container>
 
     <ng-container matColumnDef="username">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <ng-container i18n>Username</ng-container>
+      </th>
       <td mat-cell *matCellDef="let session" class="monospace"> {{session.username}} </td>
     </ng-container>
 
     <ng-container matColumnDef="os">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Operating System</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <ng-container i18n>Operating System</ng-container>
+      </th>
       <td mat-cell *matCellDef="let session"> 
         <i *ngIf="session.os === 'darwin'" class="fab fa-fw fa-apple"></i>
         <i *ngIf="session.os === 'windows'" class="fab fa-fw fa-windows"></i>
@@ -63,7 +73,9 @@
     </ng-container>
 
     <ng-container matColumnDef="checkin">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Check-in</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <ng-container i18n>Last Check-in</ng-container>
+      </th>
       <td mat-cell *matCellDef="let session"> {{session.checkin}} </td>
     </ng-container>
 

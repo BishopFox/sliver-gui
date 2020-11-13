@@ -22,12 +22,12 @@ const { ipcRenderer } = require('electron');
 
 
 /** App Listener */
-
-const APP_ORIGIN = 'app://sliver';
+const APP_PROTOCOL = 'app:';
 const appPrefixes = ['client_', 'config_', 'rpc_', 'script_'];
 
 window.addEventListener('message', (event) => {
-  if (event.origin !== APP_ORIGIN || typeof(event.data) !== 'string') {
+  const url = new URL(event.origin);
+  if (url.protocol !== APP_PROTOCOL || typeof(event.data) !== 'string') {
     return;
   }
   try {
@@ -45,12 +45,13 @@ window.addEventListener('message', (event) => {
 });
 
 ipcRenderer.on('ipc', (_, msg, origin) => {
-  if (origin !== APP_ORIGIN) {
+  const url = new URL(origin);
+  if (url.protocol !== APP_PROTOCOL) {
     return;
   }
   try {
     if (msg.type === 'response') {
-      window.postMessage(JSON.stringify(msg), APP_ORIGIN);
+      window.postMessage(JSON.stringify(msg), origin);
     }
   } catch (err) {
     console.trace(err);
@@ -62,7 +63,7 @@ ipcRenderer.on('push', (event, data) => {
   window.postMessage(JSON.stringify({
     type: 'push',
     data: data,
-  }), APP_ORIGIN);
+  }), window.location.origin);
 });
 
 

@@ -2,24 +2,24 @@
   <mat-sidenav #sidenav mode="side" opened class="interact-sidenav" [fixedInViewport]="false">
     <button mat-menu-item [routerLink]="['/sessions']">
       <i class="fas fa-fw fa-arrow-left"></i>
-      Back
+      <ng-container i18n>Back</ng-container>
     </button>
     <mat-divider></mat-divider>
     <button mat-menu-item [routerLink]="['info']">
       <i class="fas fa-fw fa-info"></i>
-      Info
+      <ng-container i18n>Info</ng-container>
     </button>
     <button mat-menu-item [routerLink]="['ps']">
       <i class="fas fa-fw fa-list"></i>
-      Process List
+      <ng-container i18n>Process List</ng-container>
     </button>
     <button mat-menu-item [routerLink]="['file-browser']">
       <i class="fas fa-fw fa-folder-open"></i>
-      File Browser
+      <ng-container i18n>File Browser</ng-container>
     </button>
     <button mat-menu-item [routerLink]="['shell']">
       <i class="fas fa-fw fa-terminal"></i>
-      Shell
+      <ng-container i18n>Shell</ng-container>
     </button>
   </mat-sidenav>
 
@@ -30,7 +30,7 @@
 </mat-sidenav-container>
 
 <mat-toolbar [@fadeInOut] *ngIf="session" color="primary" class="interact-footer">
-  Session #{{session.getId()}} - {{session.getName()}}
+  <ng-container i18n>Session</ng-container> #{{session.getId()}} - {{session.getName()}}
   <span style="flex: 1 1 auto;"></span>
   <span class="monospace">{{session.getUsername()}}@{{session.getHostname()}} - {{session.getRemoteaddress()}}</span>
 </mat-toolbar>

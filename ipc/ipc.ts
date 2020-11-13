@@ -36,6 +36,7 @@ import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 import { getLocalesJSON, getClientDir, getCurrentLocale, setLocaleSync } from '../locale';
 import { WorkerManager } from '../workers/worker-manager';
+import { createSessionWindow } from '../windows/session';
 
 
 const CONFIG_DIR = path.join(getClientDir(), 'configs');
@@ -759,6 +760,18 @@ export class IPCHandlers {
         reject(err);
       }
     });
+  }
+
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "sessionId": {"type": "number"},
+    },
+    "required": ["sessionId"],
+    "additionalProperties": false,
+  })
+  public client_sessionWindow(self: IPCHandlers, req: any) {
+    createSessionWindow(self, req.sessionId);
   }
 
   public client_exit(self: IPCHandlers) {

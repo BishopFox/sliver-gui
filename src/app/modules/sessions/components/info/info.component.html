@@ -20,15 +20,23 @@
         <mat-card-content>
           <br />
           <p>
-            <strong>Transport</strong><br />
+            <strong>
+              <ng-container i18n>Transport</ng-container>
+            </strong><br />
             {{ session.getTransport() }}
           </p>
           <p>
-            <strong>Last Check-in</strong><br />
+            <strong>
+              <ng-container i18n>Last Check-in</ng-container>
+            </strong>
+            <br />
             {{ session.getLastcheckin() }}
           </p>
           <p>
-            <strong>Filename</strong><br />
+            <strong>
+              <ng-container i18n>Filename</ng-container>
+            </strong>
+            <br />
             <span class="monospace">{{ session.getFilename() }}</span>
           </p>
         </mat-card-content>
