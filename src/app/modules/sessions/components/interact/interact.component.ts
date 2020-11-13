@@ -19,6 +19,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FadeInOut } from '@app/shared/animations';
 import { SliverService } from '@app/providers/sliver.service';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
+import { ClientService } from '@app/providers/client.service';
 
 
 @Component({
@@ -32,7 +33,8 @@ export class InteractComponent implements OnInit {
   session: clientpb.Session;
 
   constructor(private _route: ActivatedRoute,
-              private _sliverService: SliverService) { }
+              private _sliverService: SliverService,
+              private _clientService: ClientService) { }
 
   ngOnInit() {
     this._route.params.subscribe((params) => {
