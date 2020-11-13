@@ -13,7 +13,7 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
@@ -39,7 +39,7 @@ function compare(a: number | string, b: number | string, isAsc: boolean) {
 
 
 @Component({
-  selector: 'app-jobs',
+  selector: 'jobs',
   templateUrl: './jobs.component.html',
   styleUrls: ['./jobs.component.scss'],
   animations: [FadeInOut]
@@ -48,7 +48,9 @@ export class JobsComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
   dataSrc: MatTableDataSource<TableJobData>;
-  displayedColumns: string[] = [
+  
+  @Input() title = false;
+  @Input() displayedColumns: string[] = [
     'id', 'name', 'protocol', 'port', 'description',
   ];
 
@@ -63,10 +65,6 @@ export class JobsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-  }
-
-  startListener() {
-    this._router.navigate(['jobs', 'new']);
   }
 
   async fetchJobs() {

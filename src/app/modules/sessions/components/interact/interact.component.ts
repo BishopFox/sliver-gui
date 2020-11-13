@@ -22,7 +22,7 @@ import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 
 
 @Component({
-  selector: 'app-interact',
+  selector: 'sessions-interact',
   templateUrl: './interact.component.html',
   styleUrls: ['./interact.component.scss'],
   animations: [FadeInOut]

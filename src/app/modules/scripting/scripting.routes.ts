@@ -17,8 +17,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
 import { ActiveConfig } from '@app/app-routing-guards.module';
-import { ScriptingComponent } from './components/scripting/scripting.component';
 
+import { ScriptingComponent } from './components/scripting/scripting.component';
 import { EditorComponent } from './components/editor/editor.component';
 import { TaskComponent } from './components/task/task.component';
 

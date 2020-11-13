@@ -29,6 +29,7 @@ import { ShellComponent } from './components/shell/shell.component';
 import { PsComponent } from './components/ps/ps.component';
 import { InfoComponent } from './components/info/info.component';
 import { SharedModule } from '../../shared/shared.module';
+import { MainComponent } from './components/main/main.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { SharedModule } from '../../shared/shared.module';
     DownloadDialogComponent,
     ShellComponent,
     PsComponent,
-    InfoComponent
+    InfoComponent,
+    MainComponent
   ],
   imports: [
 
@@ -53,6 +55,9 @@ import { SharedModule } from '../../shared/shared.module';
 
     SharedModule
 
+  ],
+  exports: [
+    SessionsComponent
   ],
   entryComponents: [MkdirDialogComponent, RmDialogComponent, DownloadDialogComponent]
 })

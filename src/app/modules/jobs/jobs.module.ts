@@ -20,14 +20,18 @@ import { BaseMaterialModule } from '@app/base-material';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { StartListenerComponent } from './components/start-listener/start-listener.component';
 import { JobComponent } from './components/job/job.component';
+import { MainComponent } from './components/main/main.component';
 
 @NgModule({
-  declarations: [JobsComponent, StartListenerComponent, JobComponent],
+  declarations: [JobsComponent, StartListenerComponent, JobComponent, MainComponent],
   imports: [
     CommonModule,
     BaseMaterialModule,
     FormsModule,
     ReactiveFormsModule
+  ],
+  exports: [
+    JobsComponent
   ]
 })
 export class JobsModule { }

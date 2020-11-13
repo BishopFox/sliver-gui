@@ -7,9 +7,24 @@
 
 <div [@fadeInOut] *ngIf="dataSrc">
 
-  <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-  </mat-form-field>
+
+  <div class="table-header">
+    <div>
+      <h3 *ngIf="title">
+        <i class="fas fa-fw fa-project-diagram"></i>
+        <ng-container i18n>
+          Sessions
+        </ng-container>
+      </h3>
+    </div>
+
+    <div class="table-filter">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+  </div>
+
 
   <table mat-table [dataSource]="dataSrc" matSort (matSortChange)="sortData($event)">
 

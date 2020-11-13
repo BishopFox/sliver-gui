@@ -22,7 +22,7 @@ import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb'; // Protobuf
 
 
 @Component({
-  selector: 'app-info',
+  selector: 'sessions-info',
   templateUrl: './info.component.html',
   styleUrls: ['./info.component.scss']
 })

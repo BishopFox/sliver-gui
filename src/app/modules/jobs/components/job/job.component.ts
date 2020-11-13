@@ -22,7 +22,7 @@ import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 
 
 @Component({
-  selector: 'app-job',
+  selector: 'jobs-job',
   templateUrl: './job.component.html',
   styleUrls: ['./job.component.scss'],
   animations: [FadeInOut]

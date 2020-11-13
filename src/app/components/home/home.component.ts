@@ -14,9 +14,9 @@
 */
 
 import { Component, OnInit } from '@angular/core';
-import { FadeInOut } from '../../shared/animations';
 
-import { SliverService } from '../../providers/sliver.service';
+import { FadeInOut } from '@app/shared/animations';
+import { SliverService } from '@app/providers/sliver.service';
 
 
 @Component({

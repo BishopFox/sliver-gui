@@ -21,7 +21,7 @@ import { FitAddon } from 'xterm-addon-fit';
 
 
 @Component({
-  selector: 'app-task',
+  selector: 'scripting-task',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss']
 })

@@ -41,7 +41,7 @@ function compare(a: number | string | boolean, b: number | string | boolean, isA
 
 
 @Component({
-  selector: 'app-file-browser',
+  selector: 'sessions-file-browser',
   templateUrl: './file-browser.component.html',
   styleUrls: ['./file-browser.component.scss'],
   animations: [FadeInOut]
@@ -215,7 +215,7 @@ export class FileBrowserComponent implements OnInit {
 
 
 @Component({
-  selector: 'app-mkdir-dialog',
+  selector: 'sessions-mkdir-dialog',
   templateUrl: 'mkdir-dialog.html',
 })
 export class MkdirDialogComponent implements OnInit {
@@ -237,7 +237,7 @@ export class MkdirDialogComponent implements OnInit {
 
 
 @Component({
-  selector: 'app-rm-dialog',
+  selector: 'sessions-rm-dialog',
   templateUrl: 'rm-dialog.html',
 })
 export class RmDialogComponent {

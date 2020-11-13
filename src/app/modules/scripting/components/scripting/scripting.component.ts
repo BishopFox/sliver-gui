@@ -6,7 +6,7 @@ import { FadeInOut } from '@app/shared/animations';
 
 
 @Component({
-  selector: 'app-scripting',
+  selector: 'scripting',
   templateUrl: './scripting.component.html',
   styleUrls: ['./scripting.component.scss'],
   animations: [FadeInOut]

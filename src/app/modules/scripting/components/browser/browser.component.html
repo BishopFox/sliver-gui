@@ -1,7 +1,7 @@
 <div *ngIf="dataSrc">
 
   <div class="table-header">
-    <div>
+    <div *ngIf="title">
       <h3>
         <i class="fas fa-fw fa-code"></i>
         <ng-container i18n>
@@ -9,7 +9,7 @@
         </ng-container>
       </h3>
     </div>
-    <div>
+    <div class="table-filter">
       <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
       </mat-form-field>

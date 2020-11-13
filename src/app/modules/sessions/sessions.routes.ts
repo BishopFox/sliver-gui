@@ -16,8 +16,9 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
-import { ActiveConfig } from '../../app-routing-guards.module';
-import { SessionsComponent } from './sessions.component';
+import { ActiveConfig } from '@app/app-routing-guards.module';
+import { MainComponent } from './components/main/main.component';
+import { SessionsComponent } from './components/sessions/sessions.component';
 import { InteractComponent } from './components/interact/interact.component';
 import { InfoComponent } from './components/info/info.component';
 import { PsComponent } from './components/ps/ps.component';
@@ -27,7 +28,7 @@ import { ShellComponent } from './components/shell/shell.component';
 
 const routes: Routes = [
 
-    { path: 'sessions', component: SessionsComponent, canActivate: [ActiveConfig] },
+    { path: 'sessions', component: MainComponent, canActivate: [ActiveConfig] },
     { path: 'sessions/:session-id', component: InteractComponent, canActivate: [ActiveConfig],
       children: [
         { path: 'info', component: InfoComponent, canActivate: [ActiveConfig] },

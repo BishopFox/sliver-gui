@@ -39,7 +39,7 @@ function compare(a: number | string, b: number | string, isAsc: boolean) {
 
 
 @Component({
-  selector: 'app-ps',
+  selector: 'sessions-ps',
   templateUrl: './ps.component.html',
   styleUrls: ['./ps.component.scss'],
   animations: [FadeInOut]

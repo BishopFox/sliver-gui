@@ -23,7 +23,7 @@ import { JobsService } from '@app/providers/jobs.service';
 
 
 @Component({
-  selector: 'app-start-listener',
+  selector: 'jobs-start-listener',
   templateUrl: './start-listener.component.html',
   styleUrls: ['./start-listener.component.scss'],
   animations: [FadeInOut]

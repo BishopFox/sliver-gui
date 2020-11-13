@@ -14,7 +14,7 @@
 */
 
 
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
@@ -40,7 +40,9 @@ export class BrowserComponent implements OnInit {
 
   scripts: any;
   dataSrc: MatTableDataSource<TableSessionData>;
-  displayedColumns: string[] = [
+
+  @Input() title = true;
+  @Input() displayedColumns: string[] = [
     'name', 'options'
   ];
 

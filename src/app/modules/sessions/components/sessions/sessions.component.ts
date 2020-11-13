@@ -13,7 +13,7 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
@@ -42,7 +42,7 @@ function compare(a: number | string, b: number | string, isAsc: boolean) {
 
 
 @Component({
-  selector: 'app-sessions',
+  selector: 'sessions',
   templateUrl: './sessions.component.html',
   styleUrls: ['./sessions.component.scss'],
   animations: [FadeInOut]
@@ -51,7 +51,9 @@ export class SessionsComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
   dataSrc: MatTableDataSource<TableSessionData>;
-  displayedColumns: string[] = [
+  
+  @Input() title = false;
+  @Input() displayedColumns: string[] = [
     'id', 'name', 'transport', 'remoteaddress', 'username', 'os', 'checkin'
   ];
 

@@ -16,15 +16,16 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
-import { ActiveConfig } from '../../app-routing-guards.module';
-import { JobsComponent } from './jobs.component';
+import { ActiveConfig } from '@app/app-routing-guards.module';
+import { MainComponent } from './components/main/main.component';
+import { JobsComponent } from './components/jobs/jobs.component';
 import { JobComponent } from './components/job/job.component';
 import { StartListenerComponent } from './components/start-listener/start-listener.component';
 
 
 const routes: Routes = [
 
-  { path: 'jobs', component: JobsComponent, canActivate: [ActiveConfig] },
+  { path: 'jobs', component: MainComponent, canActivate: [ActiveConfig] },
   { path: 'jobs/new', component: StartListenerComponent, canActivate: [ActiveConfig] },
   { path: 'jobs/:job-id', component: JobComponent, canActivate: [ActiveConfig] },
 
