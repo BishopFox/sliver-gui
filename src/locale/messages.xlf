@@ -257,7 +257,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="0d678cdeec31bf13e982397161e64abd782b69fc" datatype="html">
-        <source> Are you sure you want to delete the <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;{{data.name}}"/><x id="INTERPOLATION" equiv-text="{{data.name}}&lt;/strong&gt;"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt; "/> script? </source>
+        <source> Are you sure you want to delete the <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{data.name}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt; "/> script? </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context>
           <context context-type="linenumber">10,11</context>
@@ -359,7 +359,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="1ebb07a3797618330ec9de8a3b6b7fd248f8e6b4" datatype="html">
-        <source> Please type <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;monospace&quot;&gt;{{data.name}}"/><x id="INTERPOLATION" equiv-text="{{data.name}}&lt;/span&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt; "/> below to confirm: </source>
+        <source> Please type <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;monospace&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{data.name}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt; "/> below to confirm: </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context>
           <context context-type="linenumber">13,14</context>
@@ -414,39 +414,66 @@
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="197c6a6173dd4a413f617965f2d9308bc263abfe" datatype="html">
+        <source>External Window</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="321e4419a943044e674beb55b8039f42a9761ca5" datatype="html">
         <source>Info</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/standalone-interact/standalone-interact.component.html</context>
+          <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2b079d3461afd21f2323f0f626395e5819546664" datatype="html">
         <source>Process List</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/standalone-interact/standalone-interact.component.html</context>
+          <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ab25ac74c11d68558725fc9c033fd1e85cb23f6c" datatype="html">
         <source>File Browser</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/standalone-interact/standalone-interact.component.html</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3b6c56d75c689019f8f994edc7dc6fc67937e52d" datatype="html">
         <source>Shell</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/standalone-interact/standalone-interact.component.html</context>
+          <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="fd521ce46bdd9d53f628777e1919076b38f4824c" datatype="html">
         <source>Session</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/standalone-interact/standalone-interact.component.html</context>
+          <context context-type="linenumber">2</context>
         </context-group>
       </trans-unit>
     </body>

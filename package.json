@@ -22,7 +22,7 @@
     "electron:linux": "npm run build:prod && electron-builder build --linux",
     "electron:windows": "npm run build:prod && electron-builder build --windows",
     "electron:mac": "npm run build:prod && electron-builder build --mac --publish=never",
-    "i18n": "ng xi18n --ivy --output-path ./src/locale/ && xliffmerge --profile ./src/locale/xliffmerge.json en fr",
+    "i18n": "ng extract-i18n --ivy --output-path ./src/locale/ && xliffmerge --profile ./src/locale/xliffmerge.json en fr",
     "test": "ng test",
     "e2e": "npm run build:prod && mocha --timeout 300000 --require ts-node/register e2e/**/*.spec.ts"
   },
