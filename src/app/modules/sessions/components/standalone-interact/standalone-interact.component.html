@@ -1,12 +1,11 @@
 <mat-toolbar *ngIf="session" class="app-toolbar" color="primary" style="-webkit-app-region: drag">
-  <div>
-    <ng-container i18n>Session</ng-container> #{{session.getId()}} - {{session.getName()}}
-    <span style="flex: 1 1 auto;"></span>
-    <span class="monospace">{{session.getUsername()}}@{{session.getHostname()}} - {{session.getRemoteaddress()}}</span>
-  </div>
+  <ng-container i18n>Session</ng-container> #{{session.getId()}} - {{session.getName()}}
+  <span style="flex: 1 1 auto;"></span>
+  <span class="monospace">{{session.getUsername()}}@{{session.getHostname()}} - {{session.getRemoteaddress()}}</span>
 </mat-toolbar>
 
 <mat-sidenav-container [@fadeInOut] *ngIf="session" class="interact-container">
+
   <mat-sidenav #sidenav mode="side" opened class="interact-sidenav" [fixedInViewport]="false">
 
     <button mat-menu-item [routerLink]="['info']">
@@ -32,3 +31,6 @@
   </mat-sidenav-content>
 
 </mat-sidenav-container>
+
+<mat-toolbar [@fadeInOut] color="primary" class="interact-footer" style="-webkit-app-region: drag">
+</mat-toolbar>
