@@ -22,7 +22,7 @@
     "electron:serve-tsc": "tsc -p tsconfig-serve.json",
     "electron:local": "npm run build:dev && electron .",
     "electron:linux": "npm run build:prod && electron-builder build --linux",
-    "electron:windows": "npm run build:prod && electron-builders build --windows",
+    "electron:windows": "npm run build:prod && electron-builder build --windows",
     "electron:mac": "npm run build:prod && electron-builder build --mac --publish=never",
     "i18n": "ng xi18n --ivy --output-path ./src/locale/ && xliffmerge --profile ./src/locale/xliffmerge.json en fr",
     "test": "npm run postinstall:web && ng test",
