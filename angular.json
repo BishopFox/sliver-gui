@@ -159,6 +159,18 @@
           "fr": {
             "translation": "src/locale/messages.fr.xlf",
             "baseHref": ""
+          },
+          "es": {
+            "translation": "src/locale/messages.es.xlf",
+            "baseHref": ""
+          },
+          "ja": {
+            "translation": "src/locale/messages.ja.xlf",
+            "baseHref": ""
+          },
+          "zh": {
+            "translation": "src/locale/messages.zh.xlf",
+            "baseHref": ""
           }
         }
       }
