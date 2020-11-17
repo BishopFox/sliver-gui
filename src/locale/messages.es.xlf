@@ -1,86 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en" datatype="plaintext" original="ng2.template" target-language="fr">
+  <file source-language="en" datatype="plaintext" original="ng2.template" target-language="es">
     <body>
       <trans-unit id="0d98653d70a7074599226a5320c0c16cbe77572e" datatype="html">
-        <source> Add Config </source><target state="translated">Ajouter une configuration</target>
+        <source> Add Config </source><target state="translated">Agregar configuración</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/select-server/select-server.component.html</context>
           <context context-type="linenumber">8,9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="383a25ee6d9b9a3f8efdb7d5ebc952206d1b8336" datatype="html">
-        <source> Connect </source><target state="translated">Relier</target>
+        <source> Connect </source><target state="translated">Conectar</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/select-server/select-server.component.html</context>
           <context context-type="linenumber">42,43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1e8787a343691f0024051832ae34371e57ddaf32" datatype="html">
-        <source> You must select a configuration. </source><target state="translated">Vous devez sélectionner une configuration.</target>
+        <source> You must select a configuration. </source><target state="translated">Debes seleccionar una configuración.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/select-server/select-server.component.html</context>
           <context context-type="linenumber">27,28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="93cda5379c21993be8e215182118fca846149fe3" datatype="html">
-        <source> Settings </source><target state="translated">Réglages</target>
+        <source> Settings </source><target state="translated">Configuraciones</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">78,79</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f65cd8b3e83e39ef08d97d02298eb222a5b04f2f" datatype="html">
-        <source>Exit</source><target state="translated">Sortie</target>
+        <source>Exit</source><target state="translated">Salida</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="815cad6a13eee2edfed8a43dc3a64d88b1b2db27" datatype="html">
-        <source> Home </source><target state="translated">Accueil</target>
+        <source> Home </source><target state="translated">Hogar</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">8,9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f6e07a2ac281e7bd9dc0cd6b8167417375720af7" datatype="html">
-        <source> Generate </source><target state="translated">produire</target>
+        <source> Generate </source><target state="translated">Generar</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">15,16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="67fb940f1ed5951b31fe7507b87f553951b874d3" datatype="html">
-        <source> New Implant </source><target state="translated">Nouvel implant</target>
+        <source> New Implant </source><target state="translated">Implante nuevo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">22,23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="37ab69a6c6ea3e0e4a4bb72c5227f95ea5a1fc32" datatype="html">
-        <source> Canaries </source><target state="translated">Canaris</target>
+        <source> Canaries </source><target state="translated">Canarias</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">28,29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="09b10f01c821308d8fbffafb681775c8ea1df32a" datatype="html">
-        <source> History </source><target state="translated">Histoire</target>
+        <source> History </source><target state="translated">Historia</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">34,35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="79709dedbeb98b51516beb4bedb74c24ee01c66b" datatype="html">
-        <source> Sessions </source><target state="translated">Séances</target>
+        <source> Sessions </source><target state="translated">Sesiones</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">42,43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9153b3a9ac928c5e352e6266b9a1d7301d1400bf" datatype="html">
-        <source> Jobs </source><target state="translated">Emplois</target>
+        <source> Jobs </source><target state="translated">Trabajos</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">49,50</context>
@@ -94,7 +94,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="45493a221c09f4d2550f928e73f2e8ea49ceef55" datatype="html">
-        <source> Back </source><target state="translated">Retour</target>
+        <source> Back </source><target state="translated">atrás</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/settings/settings.component.html</context>
           <context context-type="linenumber">9,10</context>
@@ -105,49 +105,49 @@
         </context-group>
       </trans-unit>
       <trans-unit id="fe46ccaae902ce974e2441abe752399288298619" datatype="html">
-        <source>Language</source><target state="translated">Langue</target>
+        <source>Language</source><target state="translated">Idioma</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/settings/settings.component.html</context>
           <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="fae2a21959315be80f69be06da6fd3a0fb3c272c" datatype="html">
-        <source> Restart Required </source><target state="translated">Redémarrage requis</target>
+        <source> Restart Required </source><target state="translated">Reinicio requerido</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/settings/restart.dialog.html</context>
           <context context-type="linenumber">5,6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c78dfd1e7b580800ae1ab9832fc08e018c2d64e2" datatype="html">
-        <source> You must restart the application for these changes to take affect. </source><target state="translated">Vous devez redémarrer l'application pour que ces modifications prennent effet.</target>
+        <source> You must restart the application for these changes to take affect. </source><target state="translated">Debe reiniciar la aplicación para que estos cambios surtan efecto.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/settings/restart.dialog.html</context>
           <context context-type="linenumber">10,11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a7868521fbf6d9fb7b97f910c3f060bbd995a118" datatype="html">
-        <source>Okay</source><target state="translated">d'accord</target>
+        <source>Okay</source><target state="translated">Bueno</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/settings/restart.dialog.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8c19acfb82292c105887731b727164b5c20303e2" datatype="html">
-        <source> Sessions </source><target state="translated">Séances</target>
+        <source> Sessions </source><target state="translated">Sesiones</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/sessions/sessions.component.html</context>
           <context context-type="linenumber">15,16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="45cc8ca94b5a50842a9a8ef804a5ab089a38ae5c" datatype="html">
-        <source>ID</source><target state="translated">ID</target>
+        <source>ID</source><target state="translated">CARNÉ DE IDENTIDAD</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/sessions/sessions.component.html</context>
           <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cff1428d10d59d14e45edec3c735a27b5482db59" datatype="html">
-        <source>Name</source><target state="translated">Nom</target>
+        <source>Name</source><target state="translated">Nombre</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/sessions/sessions.component.html</context>
           <context context-type="linenumber">38</context>
@@ -158,7 +158,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="af1396bdc49f45ea6c4a1e414769f5e2a382c834" datatype="html">
-        <source>Transport</source><target state="translated">Transport</target>
+        <source>Transport</source><target state="translated">Transporte</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/sessions/sessions.component.html</context>
           <context context-type="linenumber">45</context>
@@ -169,28 +169,28 @@
         </context-group>
       </trans-unit>
       <trans-unit id="4ea97e94fe65f30b5477c509744f276e100e458e" datatype="html">
-        <source>Remote Address</source><target state="translated">Adresse distante</target>
+        <source>Remote Address</source><target state="translated">Dirección remota</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/sessions/sessions.component.html</context>
           <context context-type="linenumber">52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="08c74dc9762957593b91f6eb5d65efdfc975bf48" datatype="html">
-        <source>Username</source><target state="translated">Nom d'utilisateur</target>
+        <source>Username</source><target state="translated">Nombre de usuario</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/sessions/sessions.component.html</context>
           <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5c9636885876c00a7b72416bd841b36a1109b4d9" datatype="html">
-        <source>Operating System</source><target state="translated">Système opérateur</target>
+        <source>Operating System</source><target state="translated">Sistema operativo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/sessions/sessions.component.html</context>
           <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a0ad8e29ff6de0aef19586738980a6fba9a8113c" datatype="html">
-        <source>Last Check-in</source><target state="translated">Dernier enregistrement</target>
+        <source>Last Check-in</source><target state="translated">Último registro</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/sessions/sessions.component.html</context>
           <context context-type="linenumber">77</context>
@@ -201,70 +201,70 @@
         </context-group>
       </trans-unit>
       <trans-unit id="da9ae5a77bb5879ad064faa05ee6b709a2183b19" datatype="html">
-        <source> Jobs </source><target state="translated">Emplois</target>
+        <source> Jobs </source><target state="translated">Trabajos</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/jobs/jobs.component.html</context>
           <context context-type="linenumber">16,17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="dc7e9ce244026bb6007e82e04f4d1f6e909f28a3" datatype="html">
-        <source> Name </source><target state="translated">Nom</target>
+        <source> Name </source><target state="translated">Nombre</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/jobs/jobs.component.html</context>
           <context context-type="linenumber">39,40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="30db56b3f69dd18afd3ba3b8ed1cf985fcef9484" datatype="html">
-        <source> Protocol </source><target state="translated">Protocole</target>
+        <source> Protocol </source><target state="translated">Protocolo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/jobs/jobs.component.html</context>
           <context context-type="linenumber">48,49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f8829ff036d8a3be8e28d2be202e72282cadb963" datatype="html">
-        <source> Port </source><target state="translated">Port</target>
+        <source> Port </source><target state="translated">Puerto</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/jobs/jobs.component.html</context>
           <context context-type="linenumber">57,58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c7b9dabe8eae521d3c6f82a7a45af5549ed7c85f" datatype="html">
-        <source> Description </source><target state="translated">La description</target>
+        <source> Description </source><target state="translated">Descripción</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/jobs/jobs.component.html</context>
           <context context-type="linenumber">66,67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c5aaa7cb8e2bca91ffe63c9e189e66f3efb88126" datatype="html">
-        <source> Scripts </source><target state="translated">Les scripts</target>
+        <source> Scripts </source><target state="translated">Guiones</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/scripting/components/browser/browser.component.html</context>
           <context context-type="linenumber">8,9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7aafd81526e4dbfbfe16413c3e1350f66939ec96" datatype="html">
-        <source> Delete </source><target state="translated">Supprimer</target>
+        <source> Delete </source><target state="translated">Eliminar</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/scripting/components/browser/browser.component.html</context>
           <context context-type="linenumber">36,37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c6229de296573e1153e3fb23e5ef780a07514fb5" datatype="html">
-        <source> Delete Script? </source><target state="translated">Supprimer le script?</target>
+        <source> Delete Script? </source><target state="translated">¿Eliminar secuencia de comandos?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context>
           <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="0d678cdeec31bf13e982397161e64abd782b69fc" datatype="html">
-        <source> Are you sure you want to delete the <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>"/><x id="INTERPOLATION" equiv-text="{{data.name}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong> "/> script? </source><target state="translated">Voulez-vous vraiment supprimer le script <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>"/><x id="INTERPOLATION"/><x id="CLOSE_TAG_STRONG" ctype="x-strong"/> ?</target>
+        <source> Are you sure you want to delete the <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>"/><x id="INTERPOLATION" equiv-text="{{data.name}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong> "/> script? </source><target state="translated">¿Está seguro de que desea eliminar la secuencia de comandos <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>"/><x id="INTERPOLATION"/><x id="CLOSE_TAG_STRONG" ctype="x-strong"/> ?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context>
           <context context-type="linenumber">10,11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="826b25211922a1b46436589233cb6f1a163d89b7" datatype="html">
-        <source>Delete</source><target state="translated">Supprimer</target>
+        <source>Delete</source><target state="translated">Eliminar</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context>
           <context context-type="linenumber">17</context>
@@ -287,7 +287,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
-        <source>Cancel</source><target state="translated">Annuler</target>
+        <source>Cancel</source><target state="translated">Cancelar</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context>
           <context context-type="linenumber">21</context>
@@ -306,35 +306,35 @@
         </context-group>
       </trans-unit>
       <trans-unit id="4c27cd467bacebe1d9a182fa8970234b6bcd89bd" datatype="html">
-        <source> Start Listener </source><target state="translated">Démarrer l'auditeur</target>
+        <source> Start Listener </source><target state="translated">Iniciar oyente</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/main/main.component.html</context>
           <context context-type="linenumber">9,10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="eeae1f653579a72c51eef0809b36555e66e6ddc7" datatype="html">
-        <source>Show Hidden Files</source><target state="translated">Montrer les fichiers cachés</target>
+        <source>Show Hidden Files</source><target state="translated">Mostrar archivos ocultos</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context>
           <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7faaaa08f56427999f3be41df1093ce4089bbd75" datatype="html">
-        <source>Size</source><target state="translated">Taille</target>
+        <source>Size</source><target state="translated">Talla</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context>
           <context context-type="linenumber">70</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c9039b1b13b3ef165b66b3c5d79f810ab1ebb050" datatype="html">
-        <source>Open</source><target state="translated">Ouvert</target>
+        <source>Open</source><target state="translated">Abierto</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context>
           <context context-type="linenumber">100</context>
         </context-group>
       </trans-unit>
       <trans-unit id="dc75033a5238fdc4f462212c847a45ba8018a3fd" datatype="html">
-        <source>Download</source><target state="translated">Télécharger</target>
+        <source>Download</source><target state="translated">Descargar</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context>
           <context context-type="linenumber">103</context>
@@ -345,7 +345,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="8ecc7ad6de089639c6ef0de66a25aa97547f5b30" datatype="html">
-        <source>Make Directory</source><target state="translated">Créer un répertoire</target>
+        <source>Make Directory</source><target state="translated">Hacer directorio</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/mkdir-dialog.html</context>
           <context context-type="linenumber">3</context>
@@ -359,63 +359,63 @@
         </context-group>
       </trans-unit>
       <trans-unit id="1ebb07a3797618330ec9de8a3b6b7fd248f8e6b4" datatype="html">
-        <source> Please type <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;monospace&quot;>"/><x id="INTERPOLATION" equiv-text="{{data.name}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span> "/> below to confirm: </source><target state="translated">Veuillez saisir <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span>"/><x id="INTERPOLATION"/><x id="CLOSE_TAG_SPAN" ctype="x-span"/> ci-dessous pour confirmer:</target>
+        <source> Please type <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;monospace&quot;>"/><x id="INTERPOLATION" equiv-text="{{data.name}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span> "/> below to confirm: </source><target state="translated">Escriba <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span>"/><x id="INTERPOLATION"/> a<x id="CLOSE_TAG_SPAN" ctype="x-span"/> continuación para confirmar:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context>
           <context context-type="linenumber">13,14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="03d84645f6e019c5a43909bbf2ea1696ee88332c" datatype="html">
-        <source>Directory</source><target state="translated">Annuaire</target>
+        <source>Directory</source><target state="translated">Directorio</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="48139a8f408fb79f24e82673e89e23c2ac314f23" datatype="html">
-        <source>File</source><target state="translated">Fichier</target>
+        <source>File</source><target state="translated">Archivo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a9440bc19049d4223f2a0a264cfd18f12ee220e0" datatype="html">
-        <source> Download File </source><target state="translated">Télécharger un fichier</target>
+        <source> Download File </source><target state="translated">Descargar archivo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context>
           <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="38b21a77c169dc1d573d1959b82ee0d1bc2382a4" datatype="html">
-        <source>File Name:</source><target state="translated">Nom de fichier:</target>
+        <source>File Name:</source><target state="translated">Nombre del archivo:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bbcd87921d19dc8354eaae57c3e28619b244fa11" datatype="html">
-        <source>File Size:</source><target state="translated">Taille du fichier:</target>
+        <source>File Size:</source><target state="translated">Tamaño del archivo:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="56b5044b468ec079b4881a470e9b00b35a24db54" datatype="html">
-        <source>Filename</source><target state="translated">Nom de fichier</target>
+        <source>Filename</source><target state="translated">Nombre del archivo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/info/info.component.html</context>
           <context context-type="linenumber">37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cda31dbd724cf5f4fa7a4274d9120651490c8a8c" datatype="html">
-        <source>Back</source><target state="translated">Retour</target>
+        <source>Back</source><target state="translated">atrás</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="197c6a6173dd4a413f617965f2d9308bc263abfe" datatype="html">
-        <source>External Window</source><target state="translated">Fenêtre externe</target>
+        <source>External Window</source><target state="translated">Ventana externa</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context>
           <context context-type="linenumber">9</context>
@@ -433,7 +433,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="2b079d3461afd21f2323f0f626395e5819546664" datatype="html">
-        <source>Process List</source><target state="translated">Liste des processus</target>
+        <source>Process List</source><target state="translated">Lista de procesos</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context>
           <context context-type="linenumber">20</context>
@@ -444,7 +444,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ab25ac74c11d68558725fc9c033fd1e85cb23f6c" datatype="html">
-        <source>File Browser</source><target state="translated">Navigateur de fichiers</target>
+        <source>File Browser</source><target state="translated">Explorador de archivos</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context>
           <context context-type="linenumber">24</context>
@@ -455,7 +455,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="3b6c56d75c689019f8f994edc7dc6fc67937e52d" datatype="html">
-        <source>Shell</source><target state="translated">coquille</target>
+        <source>Shell</source><target state="translated">Cáscara</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context>
           <context context-type="linenumber">28</context>
@@ -466,7 +466,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="fd521ce46bdd9d53f628777e1919076b38f4824c" datatype="html">
-        <source>Session</source><target state="translated">Session</target>
+        <source>Session</source><target state="translated">Sesión</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context>
           <context context-type="linenumber">39</context>
