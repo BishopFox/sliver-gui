@@ -84,29 +84,15 @@ export class HistoryComponent implements OnInit {
   }
 
   tableData(builds: clientpb.ImplantBuilds): TableSliverBuildData[] {
-
-    // For some reason Google thought it'd be cool to not give you any useful
-    // data types, and their docs on how to use protobuf 'maps' in JavaScript
-    // comes down to "read the code bitch." So we just convert these bullshit
-    // types into something useful.
-
-    // .entries() - Returns one of these bullshit un-useful nonsense, but there's an
-    // undocumented attribute within this object `.arr_` that contains the actual
-    // data we want. It's an array of arrays containing [key, value]'s
-
-    // TODO: Refactor
-    const entries = builds.getConfigsMap().getEntryList();
     const table: TableSliverBuildData[] = [];
-    for (const entry of entries) {
-      const name: string = entry[0];
-      const config: clientpb.ImplantConfig = entry[1];
+    for (const [name, build] of builds.toObject().configsMap) {
       table.push({
         name: name,
-        os: config.getGoos(),
-        arch: config.getGoarch(),
-        debug: config.getDebug(),
-        format: this.formatToName(config.getFormat()),
-        c2URLs: this.c2sToURLs(config.getC2List())
+        os: build.goos,
+        arch: build.goarch,
+        debug: build.debug,
+        format: this.formatToName(build.format),
+        c2URLs: this.c2sToURLs(build.c2List)
       });
     }
     return table.sort((a, b) => (a.name > b.name) ? 1 : -1);
@@ -136,10 +122,10 @@ export class HistoryComponent implements OnInit {
     });
   }
 
-  c2sToURLs(sliverC2s: clientpb.ImplantC2[]): string[] {
+  c2sToURLs(sliverC2s: clientpb.ImplantC2.AsObject[]): string[] {
     const c2URLs: string[] = [];
     for (let index = 0; index < sliverC2s.length; ++index) {
-      c2URLs.push(sliverC2s[index].getUrl());
+      c2URLs.push(sliverC2s[index].url);
     }
     return c2URLs;
   }

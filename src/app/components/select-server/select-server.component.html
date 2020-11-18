@@ -30,7 +30,7 @@
           <mat-error *ngIf="selectConfigForm.controls['config'].hasError('connectionError')">
             {{connectionError}}
           </mat-error>
-          <mat-select placeholder="Select a Server" [formControl]="selectConfigForm.controls['config']">
+          <mat-select i18n-placeholder placeholder="Select a Server" [formControl]="selectConfigForm.controls['config']">
             <mat-option value=""></mat-option>
             <mat-option *ngFor="let config of configs" [value]="config">{{ config.lhost }} ({{ config.operator }})
             </mat-option>

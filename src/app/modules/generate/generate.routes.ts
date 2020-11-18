@@ -25,7 +25,7 @@ import { CanariesComponent } from './components/canaries/canaries.component';
 const routes: Routes = [
 
     { path: 'generate/new-implant', component: NewImplantComponent, canActivate: [ActiveConfig] },
-    { path: 'generate/history', component: HistoryComponent, canActivate: [ActiveConfig] },
+    { path: 'generate/builds', component: HistoryComponent, canActivate: [ActiveConfig] },
     { path: 'generate/canaries', component: CanariesComponent, canActivate: [ActiveConfig] },
 
 ];

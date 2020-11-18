@@ -48,7 +48,7 @@ export class SliverService {
   }
 
   async implantBuilds(): Promise<clientpb.ImplantBuilds> {
-    let builds: string = await this._ipc.request('rpc_sessions');
+    let builds: string = await this._ipc.request('rpc_implantBuilds');
     if (builds.length) {
       return clientpb.ImplantBuilds.deserializeBinary(Base64.toUint8Array(builds));
     }
