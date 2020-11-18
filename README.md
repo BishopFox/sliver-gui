@@ -14,11 +14,15 @@ Download the [latest release](https://github.com/moloch--/sliver-gui/releases) a
 
 Because I value my development time more than your RAM.
 
+#### Why Not a Web Interface?
+
+Sliver clients connect over mTLS, which is not available from within a browser. Futhermore, Electron allows us to implement file system and other native-host interactions that would otherwise not be possible.
+
 ### Features
 
 * You can click on stuff!
 * Sandboxed JavaScript scripting engine
-* Built-in scripting editor
+* Built-in script editor
 * i18n Language Support
 
 

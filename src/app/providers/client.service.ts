@@ -80,7 +80,7 @@ export class ClientService {
     const rawLocales = await this._ipc.request('client_listLocales');
     const localLocales = JSON.parse(rawLocales);
     
-    // Covert JSON back to map<str, str>
+    // Convert JSON back to map<str, str>
     const locales = new Map<string, string>();
     Object.keys(localLocales).forEach((key: string) => {
       locales.set(key, localLocales[key]);

@@ -17,13 +17,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BaseMaterialModule } from '../../base-material';
-import { NewImplantComponent } from './components/new-implant/new-implant.component';
+import { ImplantConfigComponent } from './components/implant-config/implant-config.component';
 import { BuildsComponent, RegenerateDialogComponent } from './components/builds/builds.component';
 import { CanariesComponent } from './components/canaries/canaries.component';
+import { GenerateComponent } from './components/generate/generate.component';
 
 
 @NgModule({
-  declarations: [NewImplantComponent, BuildsComponent, RegenerateDialogComponent, CanariesComponent],
+  declarations: [ImplantConfigComponent, BuildsComponent, RegenerateDialogComponent, CanariesComponent, GenerateComponent],
   imports: [
     CommonModule,
     FormsModule,

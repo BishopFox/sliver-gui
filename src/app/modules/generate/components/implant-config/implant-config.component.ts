@@ -13,17 +13,15 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 
 import { FadeInOut } from '@app/shared/animations';
-import { SliverService } from '@app/providers/sliver.service';
 import { JobsService } from '@app/providers/jobs.service';
 import { EventsService } from '@app/providers/events.service';
-import { ClientService } from '@app/providers/client.service';
 
 
 interface Listener {
@@ -39,14 +37,14 @@ interface C2 {
 
 
 @Component({
-  selector: 'app-new-implant',
-  templateUrl: './new-implant.component.html',
-  styleUrls: ['./new-implant.component.scss'],
+  selector: 'generate-implant-config',
+  templateUrl: './implant-config.component.html',
+  styleUrls: ['./implant-config.component.scss'],
   animations: [FadeInOut]
 })
-export class NewImplantComponent implements OnInit, OnDestroy {
+export class ImplantConfigComponent implements OnInit, OnDestroy {
 
-  isGenerating = false;
+  @Output() onImplantConfigEvent = new EventEmitter<clientpb.ImplantConfig>();
 
   genTargetForm: FormGroup;
   formSub: Subscription;
@@ -58,10 +56,8 @@ export class NewImplantComponent implements OnInit, OnDestroy {
   listeners: Listener[];
 
   constructor(private _fb: FormBuilder,
-              private _clientService: ClientService,
               private _eventsService: EventsService,
-              private _jobsService: JobsService,
-              private _sliverService: SliverService) { }
+              private _jobsService: JobsService) { }
 
   ngOnInit() {
 
@@ -134,6 +130,10 @@ export class NewImplantComponent implements OnInit, OnDestroy {
   get C2s(): C2[] {
     const c2s = [];
 
+    if (!this.listeners) {
+      return c2s;
+    }
+
     // Get checked listeners
     this.listeners.forEach((listener) => {
       if (listener.checked) {
@@ -149,7 +149,7 @@ export class NewImplantComponent implements OnInit, OnDestroy {
   }
 
   isValidC2Config(): boolean {
-    return this.C2s.length ? true : false;
+    return this.C2s?.length ? true : false;
   }
 
   get mtlsEndpoints(): C2[] {
@@ -188,15 +188,8 @@ export class NewImplantComponent implements OnInit, OnDestroy {
     return urls;
   }
 
-  async onGenerate() {
-    this.isGenerating = true;
-    const config = new clientpb.ImplantConfig();
-
-
-    const generated = await this._sliverService.generate(config);
-    const msg = `Save new implant ${generated.getName()}`;
-    const save = await this._clientService.saveFile('Save File', msg, generated.getName(), generated.getData_asU8());
-    console.log(`Saved file to: ${save}`);
+  emitImplantConfig() {
+    console.log(`Emit ImplantConfig`);
   }
 
 }
