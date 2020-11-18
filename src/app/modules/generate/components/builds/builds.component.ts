@@ -57,12 +57,12 @@ export class RegenerateDialogComponent {
 
 
 @Component({
-  selector: 'app-history',
-  templateUrl: './history.component.html',
-  styleUrls: ['./history.component.scss'],
+  selector: 'generate-builds',
+  templateUrl: './builds.component.html',
+  styleUrls: ['./builds.component.scss'],
   animations: [FadeInOut]
 })
-export class HistoryComponent implements OnInit {
+export class BuildsComponent implements OnInit {
 
   dataSrc: MatTableDataSource<TableSliverBuildData>;
   displayedColumns: string[] = [
@@ -75,10 +75,10 @@ export class HistoryComponent implements OnInit {
               private _sliverService: SliverService) { }
 
   ngOnInit() {
-    this.fetchSliverBuilds();
+    this.fetchImplantBuilds();
   }
 
-  async fetchSliverBuilds() {
+  async fetchImplantBuilds() {
     const implantBuilds = await this._sliverService.implantBuilds();
     this.dataSrc = new MatTableDataSource(this.tableData(implantBuilds));
   }

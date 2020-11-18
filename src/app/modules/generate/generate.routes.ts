@@ -18,14 +18,14 @@ import { ModuleWithProviders } from '@angular/core';
 
 import { ActiveConfig } from '../../app-routing-guards.module';
 import { NewImplantComponent } from './components/new-implant/new-implant.component';
-import { HistoryComponent } from './components/history/history.component';
+import { BuildsComponent } from './components/builds/builds.component';
 import { CanariesComponent } from './components/canaries/canaries.component';
 
 
 const routes: Routes = [
 
     { path: 'generate/new-implant', component: NewImplantComponent, canActivate: [ActiveConfig] },
-    { path: 'generate/builds', component: HistoryComponent, canActivate: [ActiveConfig] },
+    { path: 'generate/builds', component: BuildsComponent, canActivate: [ActiveConfig] },
     { path: 'generate/canaries', component: CanariesComponent, canActivate: [ActiveConfig] },
 
 ];
