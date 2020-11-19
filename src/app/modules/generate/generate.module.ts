@@ -21,15 +21,28 @@ import { ImplantConfigComponent } from './components/implant-config/implant-conf
 import { BuildsComponent, RegenerateDialogComponent } from './components/builds/builds.component';
 import { CanariesComponent } from './components/canaries/canaries.component';
 import { GenerateComponent } from './components/generate/generate.component';
+import {
+  C2TableComponent, AddMTLSDialogComponent, AddHTTPDialogComponent, AddDNSDialogComponent
+} from './components/c2-table/c2-table.component';
 
 
 @NgModule({
-  declarations: [ImplantConfigComponent, BuildsComponent, RegenerateDialogComponent, CanariesComponent, GenerateComponent],
+  declarations: [
+    ImplantConfigComponent,
+    BuildsComponent,
+    RegenerateDialogComponent,
+    CanariesComponent,
+    GenerateComponent,
+    C2TableComponent,
+    AddMTLSDialogComponent,
+    AddHTTPDialogComponent,
+    AddDNSDialogComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    BaseMaterialModule
+    BaseMaterialModule,
   ],
   entryComponents: [RegenerateDialogComponent]
 })

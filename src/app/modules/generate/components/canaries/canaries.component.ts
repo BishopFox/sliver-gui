@@ -35,7 +35,7 @@ interface TableCanaryData {
 }
 
 @Component({
-  selector: 'app-canaries',
+  selector: 'generate-canaries',
   templateUrl: './canaries.component.html',
   styleUrls: ['./canaries.component.scss'],
   animations: [FadeInOut]

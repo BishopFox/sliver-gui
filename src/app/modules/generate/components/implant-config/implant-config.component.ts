@@ -1,6 +1,6 @@
 /*
   Sliver Implant Framework
-  Copyright (C) 2019  Bishop Fox
+  Copyright (C) 2020  Bishop Fox
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -48,7 +48,6 @@ export class ImplantConfigComponent implements OnInit, OnDestroy {
 
   genTargetForm: FormGroup;
   formSub: Subscription;
-  genC2Form: FormGroup;
   compileTimeOptionsForm: FormGroup;
 
   jobs: clientpb.Job[];
@@ -79,12 +78,6 @@ export class ImplantConfigComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.genC2Form = this._fb.group({
-      mtls: [''],
-      http: [''],
-      dns: [''],
-    }, { validator: this.validateGenC2Form });
-
     this.compileTimeOptionsForm = this._fb.group({
       reconnect: [60],
       maxErrors: [1000],
@@ -109,7 +102,7 @@ export class ImplantConfigComponent implements OnInit, OnDestroy {
     const jobs = await this._jobsService.jobs();
     this.listeners = [];
     for (let index = 0; index < jobs.length; ++index) {
-      if (jobs[index].getName() === 'rpc') {
+      if (jobs[index].getName().toLowerCase() === 'grpc') {
         continue;
       }
       this.listeners.push({
@@ -119,32 +112,9 @@ export class ImplantConfigComponent implements OnInit, OnDestroy {
     }
   }
 
-  validateGenC2Form(formGroup: FormGroup): ValidationErrors {
-    const mtls = formGroup.controls['mtls'].value;
-    const http = formGroup.controls['http'].value;
-    const dns = formGroup.controls['dns'].value;
-    const validC2 = [mtls, http, dns].some(c2 => c2 !== '');
-    return validC2 ? null : { invalidC2: 'You must specify at least one C2 endpoint' };
-  }
-
   get C2s(): C2[] {
     const c2s = [];
 
-    if (!this.listeners) {
-      return c2s;
-    }
-
-    // Get checked listeners
-    this.listeners.forEach((listener) => {
-      if (listener.checked) {
-        c2s.push({
-          protocol: listener.job.getProtocol(),
-          lport: listener.job.getPort(),
-          domains: []
-        });
-      }
-    });
-    c2s.concat(this.mtlsEndpoints);
     return c2s;
   }
 
@@ -153,17 +123,7 @@ export class ImplantConfigComponent implements OnInit, OnDestroy {
   }
 
   get mtlsEndpoints(): C2[] {
-    const c2s: C2[] = [];
-    const mtls = this.genC2Form.controls['mtls'].value;
-    const urls = this.parseURLs(mtls);
-    urls.forEach((url) => {
-      c2s.push({
-        protocol: 'mtls',
-        lport: url.port ? parseInt(url.port, 10) : 8888,
-        domains: [url.hostname]
-      });
-    });
-    return c2s;
+    return [];
   }
 
   parseURLs(value: string): URL[] {

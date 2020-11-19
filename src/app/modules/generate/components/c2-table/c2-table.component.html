@@ -1,0 +1,43 @@
+<div [@fadeInOut]>
+
+  <div class="table-header">
+    <div>
+      <h3>
+        <i class="fas fa-fw fa-project-diagram"></i>
+        <ng-container i18n>
+          C2 Endpoints
+        </ng-container>
+      </h3>
+    </div>
+    <div>
+      <button mat-raised-button>Add MTLS</button>
+    </div>
+    <div>
+      <button mat-raised-button>Add HTTP(S)</button>
+    </div>
+    <div>
+      <button mat-raised-button>Add DNS</button>
+    </div>
+  </div>
+
+  <table mat-table [dataSource]="dataSrc">
+
+    <ng-container matColumnDef="priority">
+      <th mat-header-cell *matHeaderCellDef>
+        <ng-container i18n>Priority</ng-container>
+      </th>
+      <td mat-cell *matCellDef="let c2"> {{c2.getPriority()}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="url">
+      <th mat-header-cell *matHeaderCellDef>
+        <ng-container i18n>URL</ng-container>
+      </th>
+      <td mat-cell *matCellDef="let c2"> {{c2.getUrl()}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row (click)="onRowSelection(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</div>

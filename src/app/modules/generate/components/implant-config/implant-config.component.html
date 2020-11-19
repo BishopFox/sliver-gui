@@ -1,12 +1,12 @@
-<div [@fadeInOut] class="form-container">
+<div [@fadeInOut] class="grid-container">
 
-  <mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-horizontal-stepper [linear]="true" #stepper class="stepper-root">
 
     <!-- Step 1: Executable -->
     <mat-step [stepControl]="genTargetForm" [completed]="false">
 
-      <div class="grid-container">
-        <form [formGroup]="genTargetForm">
+      <div class="grid-executable-container">
+        <form [formGroup]="genTargetForm" class="executable-form">
           <ng-template matStepLabel>
             <ng-container i18n>Executable</ng-container>
           </ng-template>
@@ -58,6 +58,7 @@
           <div>
             <button mat-raised-button matStepperNext>
               <ng-container i18n>Next</ng-container>
+              <i class="fas fa-fw fa-chevron-right"></i>
             </button>
           </div>
         </form>
@@ -65,82 +66,49 @@
     </mat-step>
 
     <!-- Step 2: Command & Control -->
-    <mat-step [stepControl]="genC2Form" [completed]="false">
-      <mat-grid-list cols="2" rowHeight="400px">
-        <mat-grid-tile>
-          <form [formGroup]="genC2Form" style="width: 100%">
-            <ng-template matStepLabel>
-              Command and Control
-            </ng-template>
-            <div>
-              <mat-form-field appearance="outline" style="width: 100%">
-                <mat-label>Mutual TLS Endpoints</mat-label>
-                <input matInput [formControl]="genC2Form.controls['mtls']" placeholder="mTLS Endpoints">
-              </mat-form-field>
-            </div>
-            <div>
-              <mat-form-field appearance="outline" style="width: 100%">
-                <mat-label>HTTP(S) Endpoints</mat-label>
-                <input matInput [formControl]="genC2Form.controls['http']" placeholder="HTTP(S) Endpoints">
-              </mat-form-field>
-            </div>
-            <div>
-              <mat-form-field appearance="outline" style="width: 100%">
-                <mat-label>DNS Endpoints</mat-label>
-                <input matInput [formControl]="genC2Form.controls['dns']" placeholder="DNS Endpoints">
-              </mat-form-field>
-            </div>
-            <div>
-              <button mat-raised-button matStepperPrevious>Back</button>
-              &nbsp;
-              <button [disabled]="isValidC2Config()" mat-raised-button matStepperNext>Next</button>
-            </div>
-          </form>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-progress-spinner *ngIf="listeners === undefined" mode="indeterminate">
-          </mat-progress-spinner>
+    <mat-step [completed]="isValidC2Config()">
+      <ng-template matStepLabel>
+        Command and Control
+      </ng-template>
 
-          <mat-card *ngIf="listeners !== undefined">
-            <mat-card-content *ngIf="listeners.length">
-              <h2>
-                <ng-container i18n>Listeners</ng-container>
-              </h2>
-              <ng-container *ngFor="let listener of listeners">
-                <mat-checkbox [(ngModel)]="listener.checked"></mat-checkbox>
-                Job #{{listener.job.getId()}}
-                Protocol: {{listener.job.getName()}}
-                LPort: {{listener.job.getPort()}}
-                <br />
-              </ng-container>
-            </mat-card-content>
+      <div class="grid-c2-container">
 
-            <mat-card-content *ngIf="!listeners.length">
-              <h2>
-                <i class="fas fa-fw fa-times-circle"></i>
-                <ng-container i18n>No Active Listeners</ng-container>
-              </h2>
-            </mat-card-content>
+        <div class="c2-table">
+          <generate-c2-table style="width: 100%;"></generate-c2-table>
+        </div>
 
-          </mat-card>
+        <div class="c2-back-next">
+          <button mat-raised-button matStepperPrevious>
+            <i class="fas fa-fw fa-chevron-left"></i>
+            <ng-container i18n>Back</ng-container>
+          </button>
+          &nbsp;
+          <button [disabled]="!isValidC2Config()" mat-raised-button matStepperNext>
+            <ng-container i18n>Next</ng-container>
+            <i class="fas fa-fw fa-chevron-right"></i>
+          </button>
+        </div>
 
-        </mat-grid-tile>
-      </mat-grid-list>
+      </div>
     </mat-step>
 
 
-    <mat-step [stepControl]="genC2Form" [completed]="false">
+    <mat-step [stepControl]="compileTimeOptionsForm">
 
       <form [formGroup]="compileTimeOptionsForm">
-        <ng-template matStepLabel>Compile Time Options</ng-template>
+        <ng-template matStepLabel>
+          Compile Time Options
+        </ng-template>
         <div>
           <mat-form-field>
-            <input matInput [formControl]="compileTimeOptionsForm.controls['reconnect']" placeholder="Reconnect">
+            <input matInput [formControl]="compileTimeOptionsForm.controls['reconnect']" i18n-placeholder
+              placeholder="Reconnect">
           </mat-form-field>
         </div>
         <div>
           <mat-form-field>
-            <input matInput [formControl]="compileTimeOptionsForm.controls['maxErrors']" placeholder="Max Errors">
+            <input matInput [formControl]="compileTimeOptionsForm.controls['maxErrors']" i18n-placeholder
+              placeholder="Max Errors">
           </mat-form-field>
         </div>
         <div>
@@ -155,11 +123,13 @@
         </div>
         <div>
           <button mat-raised-button matStepperPrevious>
+            <i class="fas fa-fw fa-chevron-left"></i>
             <ng-container i18n>Back</ng-container>
           </button>
           &nbsp;
           <button mat-raised-button matStepperNext>
             <ng-container i18n>Next</ng-container>
+            <i class="fas fa-fw fa-chevron-right"></i>
           </button>
         </div>
       </form>
@@ -184,8 +154,7 @@
           <i class="fas fa-fw fa-dragon"></i>
           <ng-container i18n>Next</ng-container>
         </button>
-      </
-      div>
+        </ div>
     </mat-step>
 
   </mat-horizontal-stepper>

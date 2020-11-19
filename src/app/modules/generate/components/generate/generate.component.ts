@@ -20,7 +20,7 @@ import { SliverService } from '@app/providers/sliver.service';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 
 @Component({
-  selector: 'app-generate',
+  selector: 'generate-generate',
   templateUrl: './generate.component.html',
   styleUrls: ['./generate.component.scss']
 })
