@@ -46,13 +46,11 @@ export class ImplantConfigComponent implements OnInit, OnDestroy {
 
   @Output() onImplantConfigEvent = new EventEmitter<clientpb.ImplantConfig>();
 
-  genTargetForm: FormGroup;
+  targetForm: FormGroup;
   formSub: Subscription;
   compileTimeOptionsForm: FormGroup;
 
-  jobs: clientpb.Job[];
-  jobsSubscription: Subscription;
-  listeners: Listener[];
+  c2s: clientpb.ImplantC2[] = [];
 
   constructor(private _fb: FormBuilder,
               private _eventsService: EventsService,
@@ -60,7 +58,7 @@ export class ImplantConfigComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.genTargetForm = this._fb.group({
+    this.targetForm = this._fb.group({
       os: ['windows', Validators.compose([
         Validators.required,
       ])],
@@ -72,9 +70,9 @@ export class ImplantConfigComponent implements OnInit, OnDestroy {
       ])],
     });
 
-    this.formSub = this.genTargetForm.controls['os'].valueChanges.subscribe((os) => {
+    this.formSub = this.targetForm.controls['os'].valueChanges.subscribe((os) => {
       if (os !== 'windows') {
-        this.genTargetForm.controls['format'].setValue('exe');
+        this.targetForm.controls['format'].setValue('exe');
       }
     });
 
@@ -84,68 +82,21 @@ export class ImplantConfigComponent implements OnInit, OnDestroy {
       skipSymbols: [false],
       debug: [false],
     });
-
-    this.fetchJobs();
-    this.jobsSubscription = this._eventsService.jobs$.subscribe(this.fetchJobs);
   }
 
   ngOnDestroy() {
     if (this.formSub) {
       this.formSub.unsubscribe();
     }
-    if (this.jobsSubscription) {
-      this.jobsSubscription.unsubscribe();
-    }
   }
 
-  async fetchJobs() {
-    const jobs = await this._jobsService.jobs();
-    this.listeners = [];
-    for (let index = 0; index < jobs.length; ++index) {
-      if (jobs[index].getName().toLowerCase() === 'grpc') {
-        continue;
-      }
-      this.listeners.push({
-        job: jobs[index],
-        checked: false,
-      });
-    }
-  }
-
-  get C2s(): C2[] {
-    const c2s = [];
-
-    return c2s;
+  onC2sUpdate(c2s: clientpb.ImplantC2[]) {
+    console.log(c2s);
+    this.c2s = c2s;
   }
 
   isValidC2Config(): boolean {
-    return this.C2s?.length ? true : false;
-  }
-
-  get mtlsEndpoints(): C2[] {
-    return [];
-  }
-
-  parseURLs(value: string): URL[] {
-    const urls: URL[] = [];
-    try {
-      value.split(',').forEach((rawValue) => {
-        if (rawValue === '') {
-          return;
-        }
-        if (rawValue.indexOf('://') !== -1) {
-          rawValue = rawValue.slice(rawValue.indexOf('://') + 3, rawValue.length);
-        }
-        // Basically because JavaScript is a total piece of shit language, if the
-        // url is not prefixed with "http" it won't be parsed correctly. Because
-        // why would you ever want to parse a non-HTTP URL? Do those even exist?
-        const url: URL = new URL(`http://${rawValue}`);
-        urls.push(url);
-      });
-    } catch (err) {
-      console.error(err);
-    }
-    return urls;
+    return this.c2s?.length ? true : false;
   }
 
   emitImplantConfig() {

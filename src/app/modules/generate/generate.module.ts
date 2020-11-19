@@ -16,7 +16,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BaseMaterialModule } from '../../base-material';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { BaseMaterialModule } from '@app/base-material';
 import { ImplantConfigComponent } from './components/implant-config/implant-config.component';
 import { BuildsComponent, RegenerateDialogComponent } from './components/builds/builds.component';
 import { CanariesComponent } from './components/canaries/canaries.component';
@@ -43,6 +44,7 @@ import {
     FormsModule,
     ReactiveFormsModule,
     BaseMaterialModule,
+    DragDropModule,
   ],
   entryComponents: [RegenerateDialogComponent]
 })

@@ -3,16 +3,16 @@
   <mat-horizontal-stepper [linear]="true" #stepper class="stepper-root">
 
     <!-- Step 1: Executable -->
-    <mat-step [stepControl]="genTargetForm" [completed]="false">
+    <mat-step [stepControl]="targetForm" [completed]="false">
 
       <div class="grid-executable-container">
-        <form [formGroup]="genTargetForm" class="executable-form">
+        <form [formGroup]="targetForm" class="executable-form">
           <ng-template matStepLabel>
             <ng-container i18n>Executable</ng-container>
           </ng-template>
           <div>
             <mat-form-field>
-              <mat-select [formControl]="genTargetForm.controls['os']" i18n-placeholder placeholder="Operating System">
+              <mat-select [formControl]="targetForm.controls['os']" i18n-placeholder placeholder="Operating System">
                 <mat-option value="windows">
                   Windows
                 </mat-option>
@@ -27,7 +27,7 @@
           </div>
           <div>
             <mat-form-field>
-              <mat-select [formControl]="genTargetForm.controls['arch']" i18n-placeholder
+              <mat-select [formControl]="targetForm.controls['arch']" i18n-placeholder
                 placeholder="CPU Architecture">
                 <mat-option value="amd64">
                   64-bit
@@ -41,14 +41,14 @@
 
           <div>
             <mat-form-field>
-              <mat-select [formControl]="genTargetForm.controls['format']" placeholder="File Format">
+              <mat-select [formControl]="targetForm.controls['format']" placeholder="File Format">
                 <mat-option value="exe">
                   Executable
                 </mat-option>
-                <mat-option [disabled]="genTargetForm.controls['os'].value !== 'windows'" value="shared">
+                <mat-option [disabled]="targetForm.controls['os'].value !== 'windows'" value="shared">
                   Shared Library
                 </mat-option>
-                <mat-option [disabled]="genTargetForm.controls['os'].value !== 'windows'" value="shellcode">
+                <mat-option [disabled]="targetForm.controls['os'].value !== 'windows'" value="shellcode">
                   Shellcode
                 </mat-option>
               </mat-select>
@@ -74,7 +74,8 @@
       <div class="grid-c2-container">
 
         <div class="c2-table">
-          <generate-c2-table style="width: 100%;"></generate-c2-table>
+          <generate-c2-table (onC2sUpdateEvent)="onC2sUpdate($event)">
+          </generate-c2-table>
         </div>
 
         <div class="c2-back-next">

@@ -14,6 +14,7 @@
 */
 
 import { Component, EventEmitter, Input, OnInit, Output, Inject } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -35,13 +36,13 @@ interface TableSessionData {
 })
 export class C2TableComponent implements OnInit {
 
-  @Input() initC2s: clientpb.ImplantC2[] = [];
-  @Input() title = false;
+  @Input() c2s: clientpb.ImplantC2[] = [];
+  @Input() title = true;
   @Input() editable = true;
   @Input() displayedColumns: string[] = [
     'priority', 'url',
   ];
-  @Output() onC2sUpdate = new EventEmitter<clientpb.ImplantC2[]>();
+  @Output() onC2sUpdateEvent = new EventEmitter<clientpb.ImplantC2[]>();
 
   table: TableSessionData[];
   dataSrc: MatTableDataSource<TableSessionData>;
@@ -49,25 +50,31 @@ export class C2TableComponent implements OnInit {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.dataSrc = new MatTableDataSource(this.tableData(this.initC2s));
+    this.refreshTable();
   }
 
-  tableData(c2s: clientpb.ImplantC2[]): TableSessionData[] {
+  refreshTable() {
+    this.dataSrc = new MatTableDataSource(this.tableData());
+    this.onC2sUpdateEvent.emit(this.c2s);
+  }
+
+  tableData(): TableSessionData[] {
     this.table = [];
-    for (let index = 0; index < c2s.length; index++) {
-      const c2 = c2s[index];
+    for (let index = 0; index < this.c2s.length; index++) {
+      const c2 = this.c2s[index];
+      console.log(`${index}: ${c2}`);
       c2.setPriority(index);
       this.table.push({
         priority: c2.getPriority(),
         url: c2.getUrl(),
       });
     }
-    return this.table.sort((a, b) => (a.priority > b.priority) ? 1 : -1);
+    return this.table
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    console.log(event);
-    moveItemInArray(this.table, event.previousIndex, event.currentIndex);
+  onListDrop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.c2s, event.previousIndex, event.currentIndex);
+    this.refreshTable();
   }
 
   applyFilter(filterValue: string) {
@@ -78,19 +85,106 @@ export class C2TableComponent implements OnInit {
     
   }
 
+  addMtls() {
+    const dialogRef = this.dialog.open(AddMTLSDialogComponent);
+    dialogRef.afterClosed().subscribe(async (result: clientpb.ImplantC2|null) => {
+      if (result) {
+        this.c2s.push(result);
+        this.refreshTable();
+      }
+    });
+  }
+
+  addHttp() {
+    const dialogRef = this.dialog.open(AddHTTPDialogComponent);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result) {
+        this.c2s.push(result);
+        this.refreshTable();
+      }
+    });
+  }
+
+  addDns() {
+    const dialogRef = this.dialog.open(AddDNSDialogComponent);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result) {
+        this.c2s.push(result);
+        this.refreshTable();
+      }
+    });
+  }
+
+}
+
+
+class BaseC2Validators {
+
+  validatePort(control: AbstractControl): {[key: string]: any} | null {
+    const port = parseInt(control.value);
+    const invalid = port < 1 || 65535 < port ? true : false;
+    return invalid ? {badPortNumber: {value: control.value}} : null;
+  }
+
+  validateHost(control: AbstractControl): {[key: string]: any} | null {
+    const host = String(control.value).trim();
+    if (host.length < 1) {
+      return {badHostLength: {value: control.value}};
+    }
+    if (!RegExp('^[a-zA-Z0-9\.\-]*$').test(host)) {
+      return {badHostPattern: {value: control.value}};
+    }
+    return null;
+  }
 }
 
 @Component({
   selector: 'generate-add-mtls-dialog',
   templateUrl: 'add-mtls.dialog.html',
 })
-export class AddMTLSDialogComponent {
+export class AddMTLSDialogComponent extends BaseC2Validators implements OnInit {
+
+  mtlsForm: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<AddMTLSDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) { }
+              private _fb: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: any)
+  { 
+    super();
+  }
+
+  ngOnInit() {
+    this.mtlsForm = this._fb.group({
+      host: ['', Validators.compose([
+        Validators.required, this.validateHost,
+      ])],
+      port: [8888, Validators.compose([
+        Validators.required, this.validatePort,
+      ])]
+    });
+  }
+
+  getHost(): string {
+    return String(this.mtlsForm.controls['host'].value).trim();
+  }
+
+  getPort(): number {
+    return parseInt(this.mtlsForm.controls['port'].value);
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  complete(): void {
+    const host = this.getHost();
+    const port = this.getPort();
+    
+    // There's just no good way to programmatically build a URL in JavaScript
+    // because JavaScript is a *fucking awful* programming language.
+    const c2 = new clientpb.ImplantC2();
+    c2.setUrl(`mtls://${host}:${port}`);
+    this.dialogRef.close(c2);
   }
 
 }
@@ -99,10 +193,27 @@ export class AddMTLSDialogComponent {
   selector: 'generate-add-http-dialog',
   templateUrl: 'add-http.dialog.html',
 })
-export class AddHTTPDialogComponent {
+export class AddHTTPDialogComponent extends BaseC2Validators implements OnInit {
+
+  httpForm: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<AddHTTPDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) { }
+              private _fb: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: any)
+  {
+    super();
+  }
+
+  ngOnInit() {
+    this.httpForm = this._fb.group({
+      host: ['', Validators.compose([
+        Validators.required, this.validateHost,
+      ])],
+      port: [8888, Validators.compose([
+        Validators.required, this.validatePort,
+      ])]
+    });
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -114,10 +225,24 @@ export class AddHTTPDialogComponent {
   selector: 'generate-add-dns-dialog',
   templateUrl: 'add-dns.dialog.html',
 })
-export class AddDNSDialogComponent {
+export class AddDNSDialogComponent extends BaseC2Validators implements OnInit {
+
+  dnsForm: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<AddDNSDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) { }
+              private _fb: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: any)
+  {
+    super();
+  }
+
+  ngOnInit() {
+    this.dnsForm = this._fb.group({
+      host: ['', Validators.compose([
+        Validators.required, this.validateHost,
+      ])],
+    });
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
