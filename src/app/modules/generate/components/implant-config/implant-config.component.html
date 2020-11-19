@@ -66,7 +66,7 @@
     </mat-step>
 
     <!-- Step 2: Command & Control -->
-    <mat-step [completed]="isValidC2Config()">
+    <mat-step [stepControl]="isValidC2Config()" [completed]="false">
       <ng-template matStepLabel>
         Command and Control
       </ng-template>
@@ -94,7 +94,7 @@
     </mat-step>
 
 
-    <mat-step [stepControl]="compileTimeOptionsForm">
+    <mat-step [stepControl]="compileTimeOptionsForm" [completed]="false">
 
       <form [formGroup]="compileTimeOptionsForm">
         <ng-template matStepLabel>

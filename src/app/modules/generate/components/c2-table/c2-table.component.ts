@@ -40,7 +40,7 @@ export class C2TableComponent implements OnInit {
   @Input() title = true;
   @Input() editable = true;
   @Input() displayedColumns: string[] = [
-    'priority', 'url',
+    'priority', 'url', 'options'
   ];
   @Output() onC2sUpdateEvent = new EventEmitter<clientpb.ImplantC2[]>();
 
@@ -81,8 +81,11 @@ export class C2TableComponent implements OnInit {
     this.dataSrc.filter = filterValue.trim().toLowerCase();
   }
 
-  onRowSelection(row: any) {
-    
+  removeC2(c2TableEntry) {
+    if (c2TableEntry.priority < this.c2s.length) {
+      this.c2s.splice(c2TableEntry.priority, 1);
+      this.refreshTable();
+    }
   }
 
   addMtls() {
