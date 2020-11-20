@@ -47,8 +47,8 @@ export class ImplantConfigComponent implements OnInit, OnDestroy {
   @Output() onImplantConfigEvent = new EventEmitter<clientpb.ImplantConfig>();
 
   targetForm: FormGroup;
-  formSub: Subscription;
-  compileTimeOptionsForm: FormGroup;
+  targetFormSub: Subscription;
+  compileTimeForm: FormGroup;
 
   c2s: clientpb.ImplantC2[] = [];
 
@@ -57,7 +57,6 @@ export class ImplantConfigComponent implements OnInit, OnDestroy {
               private _jobsService: JobsService) { }
 
   ngOnInit() {
-
     this.targetForm = this._fb.group({
       os: ['windows', Validators.compose([
         Validators.required,
@@ -69,14 +68,13 @@ export class ImplantConfigComponent implements OnInit, OnDestroy {
         Validators.required,
       ])],
     });
-
-    this.formSub = this.targetForm.controls['os'].valueChanges.subscribe((os) => {
+    this.targetFormSub = this.targetForm.controls['os'].valueChanges.subscribe((os) => {
       if (os !== 'windows') {
         this.targetForm.controls['format'].setValue('exe');
       }
     });
 
-    this.compileTimeOptionsForm = this._fb.group({
+    this.compileTimeForm = this._fb.group({
       reconnect: [60],
       maxErrors: [1000],
       skipSymbols: [false],
@@ -85,8 +83,8 @@ export class ImplantConfigComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.formSub) {
-      this.formSub.unsubscribe();
+    if (this.targetFormSub) {
+      this.targetFormSub.unsubscribe();
     }
   }
 
@@ -98,15 +96,59 @@ export class ImplantConfigComponent implements OnInit, OnDestroy {
     return this.c2s?.length ? true : false;
   }
 
+  getOs(): string {
+    return String(this.targetForm.controls['os'].value);
+  }
+
+  getArch(): string {
+    return String(this.targetForm.controls['arch'].value);
+  }
+
+  getFormat(): any {
+    switch (String(this.targetForm.controls['format'].value).toLowerCase()) {
+      case 'exe':
+        return clientpb.ImplantConfig.OutputFormat.EXECUTABLE;
+      case 'shared':
+        return clientpb.ImplantConfig.OutputFormat.SHARED_LIB;
+      case 'shellcode':
+        return clientpb.ImplantConfig.OutputFormat.SHELLCODE;
+      default:
+        return clientpb.ImplantConfig.OutputFormat.EXECUTABLE;
+    }
+  }
+
+  getReconnect(): number {
+    return this.compileTimeForm.controls['reconnect'].value;
+  }
+
+  getMaxErrors(): number {
+    return this.compileTimeForm.controls['maxErrors'].value;
+  }
+
+  getSkipSymbols(): boolean {
+    return this.compileTimeForm.controls['skipSymbols'].value;
+  }
+
+  getDebug(): boolean {
+    return this.compileTimeForm.controls['debug'].value;
+  }
+
   emitImplantConfig() {
     const implantConfig = new clientpb.ImplantConfig();
-    implantConfig.setGoos(this.targetForm['os'].value);
-    implantConfig.setGoarch(this.targetForm['arch'].value);
-    implantConfig.setFormat(this.targetForm['format'].value);
-    implantConfig.setMaxconnectionerrors(this.compileTimeOptionsForm['maxErrors'].value);
-    implantConfig.setReconnectinterval(this.compileTimeOptionsForm['reconnect'].value);
-    implantConfig.setObfuscatesymbols(this.compileTimeOptionsForm['skipSymbols'].value);
+
+    // Target values
+    implantConfig.setGoos(this.getOs());
+    implantConfig.setGoarch(this.getArch());
+    implantConfig.setFormat(this.getFormat());
+
+    // Compile time values
+    implantConfig.setReconnectinterval(this.getReconnect());
+    implantConfig.setMaxconnectionerrors(this.getMaxErrors());
+    implantConfig.setObfuscatesymbols(this.getSkipSymbols());
+    implantConfig.setDebug(this.getDebug());
+
     implantConfig.setC2List(this.c2s);
+    console.log(implantConfig);
     this.onImplantConfigEvent.emit(implantConfig);
   }
 

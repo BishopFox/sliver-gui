@@ -1,1 +1,9 @@
-<generate-implant-config (onImplantConfigEvent)="onImplantConfig($event)" ></generate-implant-config>
+<generate-implant-config *ngIf="!isGenerating" (onImplantConfigEvent)="onImplantConfig($event)">
+</generate-implant-config>
+
+<div *ngIf="isGenerating" class="grid-spinner-wrapper">
+  <div class="spinner">
+    <mat-progress-spinner mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+</div>

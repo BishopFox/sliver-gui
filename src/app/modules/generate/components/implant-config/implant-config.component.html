@@ -92,33 +92,33 @@
       </div>
     </mat-step>
 
-    <mat-step [stepControl]="compileTimeOptionsForm" [completed]="false">
+    <mat-step [stepControl]="compileTimeForm" [completed]="false">
       <ng-template matStepLabel>
         Compile Time Options
       </ng-template>
 
       <div class="grid-c2-container">
         <div class="grid-compile-time-options">
-          <form [formGroup]="compileTimeOptionsForm">
+          <form [formGroup]="compileTimeForm">
             <div>
               <mat-form-field>
-                <input matInput [formControl]="compileTimeOptionsForm.controls['reconnect']" i18n-placeholder
+                <input matInput type="number" [formControl]="compileTimeForm.controls['reconnect']" i18n-placeholder
                   placeholder="Reconnect">
               </mat-form-field>
             </div>
             <div>
               <mat-form-field>
-                <input matInput [formControl]="compileTimeOptionsForm.controls['maxErrors']" i18n-placeholder
+                <input matInput type="number" [formControl]="compileTimeForm.controls['maxErrors']" i18n-placeholder
                   placeholder="Max Errors">
               </mat-form-field>
             </div>
             <div>
-              <mat-slide-toggle color="primary" [formControl]="compileTimeOptionsForm.controls['skipSymbols']">
+              <mat-slide-toggle color="primary" [formControl]="compileTimeForm.controls['skipSymbols']">
                 <ng-container i18n>Skip Symbol Obfuscation</ng-container>
               </mat-slide-toggle>
             </div>
             <div>
-              <mat-slide-toggle color="primary" [formControl]="compileTimeOptionsForm.controls['debug']">
+              <mat-slide-toggle color="primary" [formControl]="compileTimeForm.controls['debug']">
                 <ng-container i18n>Debug Mode</ng-container>
               </mat-slide-toggle>
             </div>

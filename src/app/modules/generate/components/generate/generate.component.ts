@@ -38,6 +38,10 @@ export class GenerateComponent implements OnInit {
 
   async onImplantConfig(implantConfig: clientpb.ImplantConfig) {
     console.log(implantConfig);
+    setTimeout(async () => {
+      const file = await this._sliverService.generate(implantConfig);
+      this._clientService.saveFile(file.getName(), 'Save Implant', file.getName(), file.getData_asU8());
+    }, 0);
   }
 
   async onGenerate() {
