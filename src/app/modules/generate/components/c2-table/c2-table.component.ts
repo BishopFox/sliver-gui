@@ -222,6 +222,25 @@ export class AddHTTPDialogComponent extends BaseC2Validators implements OnInit {
     this.dialogRef.close();
   }
 
+  getHost(): string {
+    return String(this.httpForm.controls['host'].value).trim();
+  }
+
+  getPort(): number {
+    return parseInt(this.httpForm.controls['port'].value);
+  }
+
+
+  complete(): void {
+    const host = this.getHost();
+    const port = this.getPort();
+    
+    // There's just no good way to programmatically build a URL in JavaScript
+    // because JavaScript is a *fucking awful* programming language.
+    const c2 = new clientpb.ImplantC2();
+    c2.setUrl(`http://${host}:${port}`);
+    this.dialogRef.close(c2);
+  }
 }
 
 @Component({
@@ -243,7 +262,7 @@ export class AddDNSDialogComponent extends BaseC2Validators implements OnInit {
     this.dnsForm = this._fb.group({
       host: ['', Validators.compose([
         Validators.required, this.validateHost,
-      ])],
+      ])]
     });
   }
 
@@ -251,4 +270,14 @@ export class AddDNSDialogComponent extends BaseC2Validators implements OnInit {
     this.dialogRef.close();
   }
 
+  getHost(): string {
+    return String(this.dnsForm.controls['host'].value).trim();
+  }
+
+  complete(): void {
+    const host = this.getHost();
+    const c2 = new clientpb.ImplantC2();
+    c2.setUrl(`dns://${host}`);
+    this.dialogRef.close(c2);
+  }
 }

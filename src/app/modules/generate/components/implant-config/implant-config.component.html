@@ -27,8 +27,7 @@
           </div>
           <div>
             <mat-form-field>
-              <mat-select [formControl]="targetForm.controls['arch']" i18n-placeholder
-                placeholder="CPU Architecture">
+              <mat-select [formControl]="targetForm.controls['arch']" i18n-placeholder placeholder="CPU Architecture">
                 <mat-option value="amd64">
                   64-bit
                 </mat-option>
@@ -93,47 +92,50 @@
       </div>
     </mat-step>
 
-
     <mat-step [stepControl]="compileTimeOptionsForm" [completed]="false">
+      <ng-template matStepLabel>
+        Compile Time Options
+      </ng-template>
 
-      <form [formGroup]="compileTimeOptionsForm">
-        <ng-template matStepLabel>
-          Compile Time Options
-        </ng-template>
-        <div>
-          <mat-form-field>
-            <input matInput [formControl]="compileTimeOptionsForm.controls['reconnect']" i18n-placeholder
-              placeholder="Reconnect">
-          </mat-form-field>
+      <div class="grid-c2-container">
+        <div class="grid-compile-time-options">
+          <form [formGroup]="compileTimeOptionsForm">
+            <div>
+              <mat-form-field>
+                <input matInput [formControl]="compileTimeOptionsForm.controls['reconnect']" i18n-placeholder
+                  placeholder="Reconnect">
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <input matInput [formControl]="compileTimeOptionsForm.controls['maxErrors']" i18n-placeholder
+                  placeholder="Max Errors">
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-slide-toggle color="primary" [formControl]="compileTimeOptionsForm.controls['skipSymbols']">
+                <ng-container i18n>Skip Symbol Obfuscation</ng-container>
+              </mat-slide-toggle>
+            </div>
+            <div>
+              <mat-slide-toggle color="primary" [formControl]="compileTimeOptionsForm.controls['debug']">
+                <ng-container i18n>Debug Mode</ng-container>
+              </mat-slide-toggle>
+            </div>
+            <div class="c2-back-next">
+              <button mat-raised-button matStepperPrevious>
+                <i class="fas fa-fw fa-chevron-left"></i>
+                <ng-container i18n>Back</ng-container>
+              </button>
+              &nbsp;
+              <button mat-raised-button matStepperNext>
+                <ng-container i18n>Next</ng-container>
+                <i class="fas fa-fw fa-chevron-right"></i>
+              </button>
+            </div>
+          </form>
         </div>
-        <div>
-          <mat-form-field>
-            <input matInput [formControl]="compileTimeOptionsForm.controls['maxErrors']" i18n-placeholder
-              placeholder="Max Errors">
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-slide-toggle color="primary" [formControl]="compileTimeOptionsForm.controls['skipSymbols']">
-            <ng-container i18n>Skip Symbol Obfuscation</ng-container>
-          </mat-slide-toggle>
-        </div>
-        <div>
-          <mat-slide-toggle color="primary" [formControl]="compileTimeOptionsForm.controls['debug']">
-            <ng-container i18n>Debug Mode</ng-container>
-          </mat-slide-toggle>
-        </div>
-        <div>
-          <button mat-raised-button matStepperPrevious>
-            <i class="fas fa-fw fa-chevron-left"></i>
-            <ng-container i18n>Back</ng-container>
-          </button>
-          &nbsp;
-          <button mat-raised-button matStepperNext>
-            <ng-container i18n>Next</ng-container>
-            <i class="fas fa-fw fa-chevron-right"></i>
-          </button>
-        </div>
-      </form>
+      </div>
 
     </mat-step>
 

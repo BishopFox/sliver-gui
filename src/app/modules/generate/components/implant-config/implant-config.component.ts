@@ -91,7 +91,6 @@ export class ImplantConfigComponent implements OnInit, OnDestroy {
   }
 
   onC2sUpdate(c2s: clientpb.ImplantC2[]) {
-    console.log(c2s);
     this.c2s = c2s;
   }
 
@@ -100,7 +99,15 @@ export class ImplantConfigComponent implements OnInit, OnDestroy {
   }
 
   emitImplantConfig() {
-    console.log(`Emit ImplantConfig`);
+    const implantConfig = new clientpb.ImplantConfig();
+    implantConfig.setGoos(this.targetForm['os'].value);
+    implantConfig.setGoarch(this.targetForm['arch'].value);
+    implantConfig.setFormat(this.targetForm['format'].value);
+    implantConfig.setMaxconnectionerrors(this.compileTimeOptionsForm['maxErrors'].value);
+    implantConfig.setReconnectinterval(this.compileTimeOptionsForm['reconnect'].value);
+    implantConfig.setObfuscatesymbols(this.compileTimeOptionsForm['skipSymbols'].value);
+    implantConfig.setC2List(this.c2s);
+    this.onImplantConfigEvent.emit(implantConfig);
   }
 
 }
