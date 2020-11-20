@@ -14,44 +14,86 @@
 */
 
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
+import { Subscription } from 'rxjs';
+
 import { ClientService } from '@app/providers/client.service';
 import { SliverService } from '@app/providers/sliver.service';
+import { FadeInOut } from '@app/shared/animations';
 
-import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+
 
 @Component({
   selector: 'generate-generate',
   templateUrl: './generate.component.html',
-  styleUrls: ['./generate.component.scss']
+  styleUrls: ['./generate.component.scss'],
+  animations: [FadeInOut]
 })
 export class GenerateComponent implements OnInit {
 
-
   isGenerating = false;
+  implantConfig: clientpb.ImplantConfig;
+  generateForm: FormGroup;
+  generateNameFormSub: Subscription;
+  namePattern = RegExp('^[a-zA-Z0-9]*$');
 
   constructor(private _sliverService: SliverService,
-              private _clientService: ClientService) { }
+              private _clientService: ClientService,
+              private _fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.generateForm = this._fb.group({
+      generateCodename: [true],
+      saveAsProfile: [false],
+      codename: [{value: '', disabled: this.generateCodename}],
+      profileName: [{value: '', disabled: this.saveAsProfile}],
+    }, {
+      validators: [
+        this.validatedGenerateForm()
+      ]
+    });
+  }
 
+  get generateCodename(): boolean {
+    return this.generateForm?.controls['generateCodename']?.value ? true : false;
+  }
+
+  get saveAsProfile(): boolean {
+    return this.generateForm?.controls['saveAsProfile']?.value ? true : false;
   }
 
   async onImplantConfig(implantConfig: clientpb.ImplantConfig) {
-    console.log(implantConfig);
+    this.implantConfig = implantConfig;
+  }
+
+  async generate() {
+    this.isGenerating = true;
     setTimeout(async () => {
-      const file = await this._sliverService.generate(implantConfig);
-      this._clientService.saveFile(file.getName(), 'Save Implant', file.getName(), file.getData_asU8());
+      const file = await this._sliverService.generate(this.implantConfig);
+      this._clientService.saveFile('Save', 'Save Implant', file.getName(), file.getData_asU8());
     }, 0);
   }
 
-  async onGenerate() {
-    this.isGenerating = true;
-    const config = new clientpb.ImplantConfig();
+  getCodename() {
+    return String(this.generateForm.controls['codename'].value).trim();
+  }
 
-    const generated = await this._sliverService.generate(config);
-    const msg = `Save new implant ${generated.getName()}`;
-    const save = await this._clientService.saveFile('Save File', msg, generated.getName(), generated.getData_asU8());
-    console.log(`Saved file to: ${save}`);
+  validatedGenerateForm(): ValidatorFn {
+    return (group: AbstractControl): (ValidationErrors | null) => {
+      if (this.generateForm === undefined || this.generateCodename) {
+        return null;
+      }
+      const codename = group.get('codename').value;
+      console.log(`codename: '${codename}'`);
+      if (codename.length < 1) {
+        return {badCodenameLength: {value: codename}};
+      }
+      if (!this.namePattern.test(codename)) {
+        return {badCodenamePattern: {value: codename}};
+      }
+      return null;
+    };
   }
 
 }

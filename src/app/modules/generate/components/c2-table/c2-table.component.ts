@@ -62,7 +62,6 @@ export class C2TableComponent implements OnInit {
     this.table = [];
     for (let index = 0; index < this.c2s.length; index++) {
       const c2 = this.c2s[index];
-      console.log(`${index}: ${c2}`);
       c2.setPriority(index);
       this.table.push({
         priority: c2.getPriority(),

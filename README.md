@@ -18,6 +18,14 @@ Because I value my development time more than your RAM.
 
 Sliver clients connect over mTLS, which is not available from within a browser. Futhermore, Electron allows us to implement file system and other native-host interactions that would otherwise not be possible.
 
+#### Is Electron Secure?
+
+While no one can write perfect code, we strive to adhere to application security best practices in every aspect of the GUI implementation. You can [read more about the application architecture here](). In short:
+ * All content is in a non-`file://` origin.
+ * A strict content content security policy (CSP) is applied to all content.
+ * The renderer process is sandboxed, and preload scripts have context isolation enabled. Methods in the main process can only be called via JSON and all JSON arguments must pass JSON Schema checks.
+ * Extremely limited DOM interactions, nearly the entire interface is implemented via Angular; there are zero calls to `bypassSecurityTrustHtml`.
+
 ### Features
 
 * You can click on stuff!
