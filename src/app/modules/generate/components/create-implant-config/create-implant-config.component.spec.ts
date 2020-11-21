@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ImplantConfigComponent } from './implant-config.component';
+import { CreateImplantConfigComponent } from './create-implant-config.component';
 
 describe('NewImplantComponent', () => {
-  let component: ImplantConfigComponent;
-  let fixture: ComponentFixture<ImplantConfigComponent>;
+  let component: CreateImplantConfigComponent;
+  let fixture: ComponentFixture<CreateImplantConfigComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImplantConfigComponent ]
+      declarations: [ CreateImplantConfigComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ImplantConfigComponent);
+    fixture = TestBed.createComponent(CreateImplantConfigComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

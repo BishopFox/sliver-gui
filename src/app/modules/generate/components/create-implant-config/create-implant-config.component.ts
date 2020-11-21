@@ -38,11 +38,11 @@ interface C2 {
 
 @Component({
   selector: 'generate-implant-config',
-  templateUrl: './implant-config.component.html',
-  styleUrls: ['./implant-config.component.scss'],
+  templateUrl: './create-implant-config.component.html',
+  styleUrls: ['./create-implant-config.component.scss'],
   animations: [FadeInOut]
 })
-export class ImplantConfigComponent implements OnInit, OnDestroy {
+export class CreateImplantConfigComponent implements OnInit, OnDestroy {
 
   @Output() onImplantConfigEvent = new EventEmitter<clientpb.ImplantConfig>();
 

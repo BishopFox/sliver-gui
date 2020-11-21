@@ -1,7 +1,7 @@
 <generate-implant-config *ngIf="!implantConfig" (onImplantConfigEvent)="onImplantConfig($event)">
 </generate-implant-config>
 
-<div [@fadeInOut] *ngIf="implantConfig && !isGenerating" class="grid-wrapper">
+<div [@fadeInOut] *ngIf="implantConfig" class="grid-wrapper">
 
   <form [formGroup]="generateForm" class="grid-generate-form">
     <h3>
@@ -41,11 +41,4 @@
     </p>
   </form>
 
-</div>
-
-<div [@fadeInOut] *ngIf="isGenerating" class="grid-spinner-wrapper">
-  <div class="spinner">
-    <mat-progress-spinner mode="indeterminate">
-    </mat-progress-spinner>
-  </div>
 </div>

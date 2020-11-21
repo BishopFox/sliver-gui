@@ -68,7 +68,6 @@ export class GenerateComponent implements OnInit {
   }
 
   async generate() {
-    this.isGenerating = true;
     setTimeout(async () => {
       const file = await this._sliverService.generate(this.implantConfig);
       this._clientService.saveFile('Save', 'Save Implant', file.getName(), file.getData_asU8());
@@ -85,7 +84,6 @@ export class GenerateComponent implements OnInit {
         return null;
       }
       const codename = group.get('codename').value;
-      console.log(`codename: '${codename}'`);
       if (codename.length < 1) {
         return {badCodenameLength: {value: codename}};
       }
