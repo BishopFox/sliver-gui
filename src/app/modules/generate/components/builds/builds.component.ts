@@ -1,6 +1,6 @@
 /*
   Sliver Implant Framework
-  Copyright (C) 2019  Bishop Fox
+  Copyright (C) 2020  Bishop Fox
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -14,149 +14,46 @@
 */
 
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Sort } from '@angular/material/sort';
+import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
-import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
-
-import { FadeInOut } from '@app/shared/animations';
-import { SliverService } from '@app/providers/sliver.service';
-import { ClientService } from '@app/providers/client.service';
-
-
-interface TableSliverBuildData {
-  name: string;
-  os: string;
-  arch: string;
-  debug: boolean;
-  format: string;
-  c2URLs: string[];
-}
-
-function compare(a: number | string | boolean, b: number | string | boolean, isAsc: boolean) {
-  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-}
-
-
-@Component({
-  selector: 'app-regenerate-dialog',
-  templateUrl: 'regenerate-dialog.html',
-})
-export class RegenerateDialogComponent {
-
-  constructor(public dialogRef: MatDialogRef<RegenerateDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}
 
 
 @Component({
   selector: 'generate-builds',
   templateUrl: './builds.component.html',
-  styleUrls: ['./builds.component.scss'],
-  animations: [FadeInOut]
+  styleUrls: ['./builds.component.scss']
 })
 export class BuildsComponent implements OnInit {
 
-  dataSrc: MatTableDataSource<TableSliverBuildData>;
-  displayedColumns: string[] = [
-    'name', 'os', 'arch', 'debug', 'format'
-  ];
-
   constructor(public dialog: MatDialog,
-              private _snackBar: MatSnackBar,
-              private _clientService: ClientService,
-              private _sliverService: SliverService) { }
+              private _route: ActivatedRoute) { }
 
-  ngOnInit() {
-    this.fetchImplantBuilds();
-  }
-
-  async fetchImplantBuilds() {
-    const implantBuilds = await this._sliverService.implantBuilds();
-    this.dataSrc = new MatTableDataSource(this.tableData(implantBuilds));
-  }
-
-  tableData(builds: clientpb.ImplantBuilds): TableSliverBuildData[] {
-    const table: TableSliverBuildData[] = [];
-    for (const [name, build] of builds.toObject().configsMap) {
-      table.push({
-        name: name,
-        os: build.goos,
-        arch: build.goarch,
-        debug: build.debug,
-        format: this.formatToName(build.format),
-        c2URLs: this.c2sToURLs(build.c2List)
-      });
-    }
-    return table.sort((a, b) => (a.name > b.name) ? 1 : -1);
-  }
-
-  applyFilter(filterValue: string) {
-    this.dataSrc.filter = filterValue.trim().toLowerCase();
-  }
-
-  onRowSelection(row: any) {
-    const dialogRef = this.dialog.open(RegenerateDialogComponent, {
-      data: row,
-    });
-    dialogRef.afterClosed().subscribe(async (targetRow) => {
-      console.log(`Regenerate target sliver: ${targetRow.name}`);
-      this._snackBar.open(`Regenerating ${targetRow.name}, please wait...`, 'Dismiss', {
-        duration: 5000,
-      });
-      const regenerated = await this._sliverService.regenerate(targetRow.name);
-      if (regenerated) {
-        const msg = `Save regenerated file ${regenerated.getName()}`;
-        const path = await this._clientService.saveFile('Save File', msg, regenerated.getName(), regenerated.getData_asU8());
-        console.log(`Saved file to: ${path}`);
-      } else {
-        console.error(`Failed to regenerate sliver ${targetRow.name}`);
+  ngOnInit(): void {
+    this._route.params.subscribe(params => {
+      if (params['dialog'] === 'generating') {
+        this.generatingDialog();
       }
     });
   }
 
-  c2sToURLs(sliverC2s: clientpb.ImplantC2.AsObject[]): string[] {
-    const c2URLs: string[] = [];
-    for (let index = 0; index < sliverC2s.length; ++index) {
-      c2URLs.push(sliverC2s[index].url);
-    }
-    return c2URLs;
+  generatingDialog() {
+    this.dialog.open(GeneratingDialogComponent);
   }
 
-  formatToName(format: number): string {
-    // As defined in `client.proto`
-    switch (format) {
-      case 0:
-        return 'Shared Library';
-      case 1:
-        return 'Shellcode';
-      case 2:
-        return 'Executable';
-      default:
-        return 'Unknown';
-    }
-  }
+}
 
-  // Because MatTableDataSource is absolute piece of shit
-  sortData(event: Sort) {
-    this.dataSrc.data = this.dataSrc.data.slice().sort((a, b) => {
-      const isAsc = event.direction === 'asc';
-      switch (event.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'os': return compare(a.os, b.os, isAsc);
-        case 'arch': return compare(a.arch, b.arch, isAsc);
-        case 'debug': return compare(a.debug, b.debug, isAsc);
-        case 'format': return compare(a.format, b.format, isAsc);
-        default: return 0;
-      }
-    });
+
+@Component({
+  selector: 'generate-generating-dialog',
+  templateUrl: './generating.dialog.html',
+})
+export class GeneratingDialogComponent {
+
+  constructor(public dialogRef: MatDialogRef<GeneratingDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }

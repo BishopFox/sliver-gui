@@ -145,9 +145,8 @@
       </ng-template>
 
       <mat-card>
-
-        summary info
-
+        <generate-implant-config [implantConfig]="implantConfig()">
+        </generate-implant-config>
       </mat-card>
 
       <div>
@@ -157,7 +156,7 @@
           <i class="fas fa-fw fa-dragon"></i>
           <ng-container i18n>Next</ng-container>
         </button>
-        </ div>
+      </div>
     </mat-step>
 
   </mat-horizontal-stepper>

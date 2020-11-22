@@ -17,27 +17,13 @@ import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/cor
 import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 import { FadeInOut } from '@app/shared/animations';
-import { JobsService } from '@app/providers/jobs.service';
-import { EventsService } from '@app/providers/events.service';
-
-
-interface Listener {
-  job: clientpb.Job;
-  checked: boolean;
-}
-
-interface C2 {
-  protocol: string;
-  domains: string[];
-  lport: number;
-}
 
 
 @Component({
-  selector: 'generate-implant-config',
+  selector: 'generate-create-implant-config',
   templateUrl: './create-implant-config.component.html',
   styleUrls: ['./create-implant-config.component.scss'],
   animations: [FadeInOut]
@@ -52,9 +38,7 @@ export class CreateImplantConfigComponent implements OnInit, OnDestroy {
 
   c2s: clientpb.ImplantC2[] = [];
 
-  constructor(private _fb: FormBuilder,
-              private _eventsService: EventsService,
-              private _jobsService: JobsService) { }
+  constructor(private _fb: FormBuilder) { }
 
   ngOnInit() {
     this.targetForm = this._fb.group({
@@ -133,7 +117,7 @@ export class CreateImplantConfigComponent implements OnInit, OnDestroy {
     return this.compileTimeForm.controls['debug'].value;
   }
 
-  emitImplantConfig() {
+  implantConfig(): clientpb.ImplantConfig {
     const implantConfig = new clientpb.ImplantConfig();
 
     // Target values
@@ -148,6 +132,11 @@ export class CreateImplantConfigComponent implements OnInit, OnDestroy {
     implantConfig.setDebug(this.getDebug());
 
     implantConfig.setC2List(this.c2s);
+    return implantConfig;
+  }
+
+  emitImplantConfig() {
+    const implantConfig = this.implantConfig();
     console.log(implantConfig);
     this.onImplantConfigEvent.emit(implantConfig);
   }

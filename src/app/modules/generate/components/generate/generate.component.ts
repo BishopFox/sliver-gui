@@ -14,7 +14,8 @@
 */
 
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { ClientService } from '@app/providers/client.service';
@@ -40,6 +41,7 @@ export class GenerateComponent implements OnInit {
 
   constructor(private _sliverService: SliverService,
               private _clientService: ClientService,
+              private _router: Router,
               private _fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -72,6 +74,7 @@ export class GenerateComponent implements OnInit {
       const file = await this._sliverService.generate(this.implantConfig);
       this._clientService.saveFile('Save', 'Save Implant', file.getName(), file.getData_asU8());
     }, 0);
+    this._router.navigate(['generate', 'builds', { dialog: 'generating' }]);
   }
 
   getCodename() {

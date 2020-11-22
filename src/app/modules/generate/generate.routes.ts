@@ -16,7 +16,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
-import { ActiveConfig } from '../../app-routing-guards.module';
+import { ActiveConfig } from '@app/app-routing-guards.module';
 import { GenerateComponent } from './components/generate/generate.component';
 import { BuildsComponent } from './components/builds/builds.component';
 import { CanariesComponent } from './components/canaries/canaries.component';

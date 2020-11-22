@@ -1,5 +1,5 @@
-<generate-implant-config *ngIf="!implantConfig" (onImplantConfigEvent)="onImplantConfig($event)">
-</generate-implant-config>
+<generate-create-implant-config *ngIf="!implantConfig" (onImplantConfigEvent)="onImplantConfig($event)">
+</generate-create-implant-config>
 
 <div [@fadeInOut] *ngIf="implantConfig" class="grid-wrapper">
 
