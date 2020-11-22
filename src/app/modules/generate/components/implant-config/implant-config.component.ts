@@ -35,4 +35,23 @@ export class ImplantConfigComponent implements OnInit {
     return this.implantConfig?.getGoos();
   }
 
+  getFormat(): string {
+    switch (this.implantConfig.getFormat()) {
+      case clientpb.ImplantConfig.OutputFormat.EXECUTABLE:
+        return "Executable";
+      case clientpb.ImplantConfig.OutputFormat.SERVICE:
+        return "Service";
+      case clientpb.ImplantConfig.OutputFormat.SHARED_LIB:
+        return "Shared Library";
+      case clientpb.ImplantConfig.OutputFormat.SHELLCODE:
+        return "Shellcode";
+      default:
+        return "Unknown";
+    }
+  }
+
+  getC2s(): clientpb.ImplantC2[] {
+    return this.implantConfig.getC2List();
+  }
+
 }

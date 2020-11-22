@@ -15,18 +15,18 @@
 
 import { Component, EventEmitter, Input, OnInit, Output, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FadeInOut } from '@app/shared/animations';
 
-import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+
 
 interface TableSessionData {
   priority: number;
   url: string;
 }
-
 
 @Component({
   selector: 'generate-c2-table',
@@ -39,11 +39,11 @@ export class C2TableComponent implements OnInit {
   @Input() c2s: clientpb.ImplantC2[] = [];
   @Input() title = true;
   @Input() editable = true;
-  @Input() displayedColumns: string[] = [
+  @Output() onC2sUpdateEvent = new EventEmitter<clientpb.ImplantC2[]>();
+  private _displayedColumns: string[] = [
     'priority', 'url', 'options'
   ];
-  @Output() onC2sUpdateEvent = new EventEmitter<clientpb.ImplantC2[]>();
-
+  
   table: TableSessionData[];
   dataSrc: MatTableDataSource<TableSessionData>;
   
@@ -53,16 +53,32 @@ export class C2TableComponent implements OnInit {
     this.refreshTable();
   }
 
+  get displayedColumns() {
+    if (this.editable) {
+      return this._displayedColumns;
+    } else {
+      return this._displayedColumns.filter(column => column !== 'options');
+    }
+  }
+
+  @Input() set displayedColumns(columns: string[]) {
+    this._displayedColumns = columns;
+  }
+
   refreshTable() {
     this.dataSrc = new MatTableDataSource(this.tableData());
-    this.onC2sUpdateEvent.emit(this.c2s);
+    if (this.editable) {
+      this.onC2sUpdateEvent.emit(this.c2s);
+    }
   }
 
   tableData(): TableSessionData[] {
     this.table = [];
     for (let index = 0; index < this.c2s.length; index++) {
       const c2 = this.c2s[index];
-      c2.setPriority(index);
+      if (this.editable) {
+        c2.setPriority(index);
+      }
       this.table.push({
         priority: c2.getPriority(),
         url: c2.getUrl(),
@@ -139,6 +155,7 @@ class BaseC2Validators {
     return null;
   }
 }
+
 
 @Component({
   selector: 'generate-add-mtls-dialog',
