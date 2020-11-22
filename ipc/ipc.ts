@@ -41,7 +41,7 @@ import { WorkerManager } from '../workers/worker-manager';
 
 const CONFIG_DIR = path.join(getClientDir(), 'configs');
 const SETTINGS_PATH = path.join(getClientDir(), 'gui-settings.json');
-
+const MINUTE = 60;
 
 export interface SaveFileReq {
   title: string;
@@ -64,7 +64,6 @@ export interface IPCMessage {
   method: string; // Identifies the target method and in the response if the method call was a success/error
   data: string;
 }
-
 
 async function makeConfigDir(): Promise<NodeJS.ErrnoException|null> {
   return new Promise((resolve, reject) => {
@@ -113,7 +112,7 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   async script_execute(self: IPCHandlers, req: any): Promise<string> {
-    let execId = await self._workerManager.startScriptExecution(req.code);
+    const execId = await self._workerManager.startScriptExecution(req.code);
     return execId;
   }
 
@@ -141,7 +140,7 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   async script_new(self: IPCHandlers, req: any): Promise<string> {
-    let scriptId = await self._workerManager.newScript(req.name, req.code);
+    const scriptId = await self._workerManager.newScript(req.name, req.code);
     return scriptId;
   }
 
@@ -170,7 +169,7 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   async script_load(self: IPCHandlers, req: any): Promise<string> {
-    let script = await self._workerManager.loadScript(req.id);
+    const script = await self._workerManager.loadScript(req.id);
     return JSON.stringify({
       id: script.id,
       name: script.name,
@@ -206,7 +205,7 @@ export class IPCHandlers {
 
   @isConnected()
   async rpc_sessions(self: IPCHandlers): Promise<string[]> {
-    let sessions = await self.client.sessions();
+    const sessions = await self.client.sessions();
     return sessions.map(session => Base64.fromUint8Array(session.serializeBinary()));
   }
 
@@ -220,13 +219,13 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   async rpc_sessionById(self: IPCHandlers, req: any): Promise<string> {
-    let sessionId = req.id;
+    const sessionId = req.id;
     // Remember JS is *terrible* and any direct compares to NaN will
     // return false, for example `sessionId == NaN` is always false
     if (isNaN(sessionId) || sessionId <= 0) {
       return '';
     }
-    let sessions = await self.client.sessions();
+    const sessions = await self.client.sessions();
     for (let index = 0; index < sessions.length; ++index) {
       if (sessions[index].getId() === sessionId) {
         return Base64.fromUint8Array(sessions[index].serializeBinary());
@@ -237,13 +236,13 @@ export class IPCHandlers {
 
   @isConnected()
   async rpc_implantBuilds(self: IPCHandlers): Promise<string>  {
-    let builds = await self.client.implantBuilds();
+    const builds = await self.client.implantBuilds();
     return Base64.fromUint8Array(builds.serializeBinary());
   }
 
   @isConnected()
   async rpc_canaries(self: IPCHandlers): Promise<string[]>  {
-    let canaries = await self.client.canaries();
+    const canaries = await self.client.canaries();
     return canaries.map(canary => Base64.fromUint8Array(canary.serializeBinary()));
   }
 
@@ -257,8 +256,8 @@ export class IPCHandlers {
     "additionalProperties": false
   })
   async rpc_generate(self: IPCHandlers, req: any): Promise<string> {
-    let config = clientpb.ImplantConfig.deserializeBinary(Base64.toUint8Array(req.config));
-    let generated = await self.client.generate(config);
+    const config = clientpb.ImplantConfig.deserializeBinary(Base64.toUint8Array(req.config));
+    const generated = await self.client.generate(config, 120 * MINUTE);
     return Base64.fromUint8Array(generated.serializeBinary());
   }
 
@@ -272,7 +271,7 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   async rpc_regenerate(self: IPCHandlers, req: any): Promise<string> {
-    let regenerated = await self.client.regenerate(req.name);
+    const regenerated = await self.client.regenerate(req.name);
     return Base64.fromUint8Array(regenerated.serializeBinary());
   }
 
@@ -287,8 +286,8 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   async rpc_ps(self: IPCHandlers, req: any): Promise<string[]> {
-    let session = await self.client.interact(req.sessionId);
-    let ps = await session.ps();
+    const session = await self.client.interact(req.sessionId);
+    const ps = await session.ps();
     return ps.map(p => Base64.fromUint8Array(p.serializeBinary()));
   }
 
@@ -303,8 +302,8 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   async rpc_ls(self: IPCHandlers, req: any): Promise<string> {
-    let session = await self.client.interact(req.sessionId);
-    let ls = await session.ls(req.targetDir);
+    const session = await self.client.interact(req.sessionId);
+    const ls = await session.ls(req.targetDir);
     return Base64.fromUint8Array(ls.serializeBinary());
   }
 
@@ -319,8 +318,8 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   async rpc_cd(self: IPCHandlers, req: any): Promise<string> {
-    let session = await self.client.interact(req.sessionId);
-    let cd = await session.cd(req.targetDir);
+    const session = await self.client.interact(req.sessionId);
+    const cd = await session.cd(req.targetDir);
     return Base64.fromUint8Array(cd.serializeBinary());
   }
 
@@ -335,8 +334,8 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   async rpc_rm(self: IPCHandlers, req: any): Promise<string> {
-    let session = await self.client.interact(req.sessionId);
-    let rm = await session.rm(req.target);
+    const session = await self.client.interact(req.sessionId);
+    const rm = await session.rm(req.target);
     return Base64.fromUint8Array(rm.serializeBinary());
   }
 
@@ -351,8 +350,8 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   async rpc_mkdir(self: IPCHandlers, req: any): Promise<string> {
-    let session = await self.client.interact(req.sessionId);
-    let mkdir = await session.mkdir(req.targetDir);
+    const session = await self.client.interact(req.sessionId);
+    const mkdir = await session.mkdir(req.targetDir);
     return Base64.fromUint8Array(mkdir.serializeBinary());
   }
 
@@ -367,8 +366,8 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   async rpc_download(self: IPCHandlers, req: any): Promise<string> {
-    let session = await self.client.interact(req.sessionId);
-    let data = await session.download(req.target);
+    const session = await self.client.interact(req.sessionId);
+    const data = await session.download(req.target);
     return Base64.fromUint8Array(data);
   }
   
@@ -384,9 +383,9 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   async rpc_upload(self: IPCHandlers, req: any): Promise<string> {
-    let session = await self.client.interact(req.sessionId);
-    let data = Base64.toUint8Array(req.data);
-    let upload = await session.upload(req.path, Buffer.from(data));
+    const session = await self.client.interact(req.sessionId);
+    const data = Base64.toUint8Array(req.data);
+    const upload = await session.upload(req.path, Buffer.from(data));
     return Base64.fromUint8Array(upload.serializeBinary());
   }
 
@@ -400,15 +399,15 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   async rpc_ifconfig(self: IPCHandlers, req: any): Promise<string> {
-    let session = await self.client.interact(req.sessionId);
-    let ifconfig = await session.ifconfig();
+    const session = await self.client.interact(req.sessionId);
+    const ifconfig = await session.ifconfig();
     return Base64.fromUint8Array(ifconfig.serializeBinary());
   }
 
   // Jobs
   @isConnected()
   async rpc_jobs(self: IPCHandlers): Promise<string[]> {
-    let jobs = await self.client.jobs();
+    const jobs = await self.client.jobs();
     return jobs.map(job => Base64.fromUint8Array(job.serializeBinary()));
   }
 
@@ -422,11 +421,11 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   async rpc_jobById(self: IPCHandlers, req: any): Promise<string> {
-    let jobId = req.id;
+    const jobId = req.id;
     if (isNaN(jobId) || jobId <= 0) {
       return '';
     }
-    let jobs = await self.client.jobs();
+    const jobs = await self.client.jobs();
     for (let index = 0; index < jobs.length; ++index) {
       if (jobs[index].getId() === jobId) {
         return Base64.fromUint8Array(jobs[index].serializeBinary());
@@ -446,7 +445,7 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   async rpc_startMTLSListener(self: IPCHandlers, req: any): Promise<string> {
-    let job = await self.client.startMTLSListener(req.host, req.port);
+    const job = await self.client.startMTLSListener(req.host, req.port);
     return Base64.fromUint8Array(job.serializeBinary());
   }
 
@@ -463,7 +462,7 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   async rpc_startHTTPListener(self: IPCHandlers, req: any): Promise<string> {
-    let job = await self.client.startHTTPListener(req.domain, req.host, req.port, req.website);
+    const job = await self.client.startHTTPListener(req.domain, req.host, req.port, req.website);
     return Base64.fromUint8Array(job.serializeBinary());
   }
 
@@ -483,7 +482,7 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   async rpc_startHTTPSListener(self: IPCHandlers, req: any): Promise<string> {
-    let job = await self.client.startHTTPSListener(req.domain, req.host, req.port, req.acme, req.website, req.cert, req.key);
+    const job = await self.client.startHTTPSListener(req.domain, req.host, req.port, req.acme, req.website, req.cert, req.key);
     return Base64.fromUint8Array(job.serializeBinary());
   }
 
@@ -504,7 +503,7 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   async rpc_startDNSListener(self: IPCHandlers, req: any): Promise<string> {
-    let job = await self.client.startDNSListener(req.domains, req.canaries, req.host, req.port);
+    const job = await self.client.startDNSListener(req.domains, req.canaries, req.host, req.port);
     return Base64.fromUint8Array(job.serializeBinary());
   }
 

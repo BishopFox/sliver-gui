@@ -24,6 +24,7 @@ import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 import { FadeInOut } from '@app/shared/animations';
 import { SliverService } from '@app/providers/sliver.service';
 import { ClientService } from '@app/providers/client.service';
+import { EventsService } from '@app/providers/events.service';
 
 
 interface TableImplantBuildData {
@@ -55,11 +56,15 @@ export class BuildsTableComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
               private _snackBar: MatSnackBar,
+              private _eventsService: EventsService,
               private _clientService: ClientService,
               private _sliverService: SliverService) { }
 
   ngOnInit() {
     this.fetchImplantBuilds();
+    this._eventsService.builds$.subscribe((_: clientpb.Event) => {
+      this.fetchImplantBuilds();
+    });
   }
 
   async fetchImplantBuilds() {

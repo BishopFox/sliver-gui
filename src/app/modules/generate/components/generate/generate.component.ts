@@ -23,6 +23,7 @@ import { SliverService } from '@app/providers/sliver.service';
 import { FadeInOut } from '@app/shared/animations';
 
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+import { EventsService } from '@app/providers/events.service';
 
 
 @Component({
@@ -33,7 +34,6 @@ import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 })
 export class GenerateComponent implements OnInit {
 
-  isGenerating = false;
   implantConfig: clientpb.ImplantConfig;
   generateForm: FormGroup;
   generateNameFormSub: Subscription;
@@ -41,6 +41,7 @@ export class GenerateComponent implements OnInit {
 
   constructor(private _sliverService: SliverService,
               private _clientService: ClientService,
+              private _eventsService: EventsService,
               private _router: Router,
               private _fb: FormBuilder) { }
 
@@ -72,7 +73,9 @@ export class GenerateComponent implements OnInit {
   async generate() {
     setTimeout(async () => {
       const file = await this._sliverService.generate(this.implantConfig);
-      this._clientService.saveFile('Save', 'Save Implant', file.getName(), file.getData_asU8());
+      this._eventsService.notify(`Build ${file.getName()} completed`, 'Download', 10, () => {
+        this._clientService.saveFile('Save', 'Save Implant', file.getName(), file.getData_asU8());
+      });
     }, 0);
     this._router.navigate(['generate', 'builds', { dialog: 'generating' }]);
   }

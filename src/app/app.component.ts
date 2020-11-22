@@ -14,11 +14,10 @@
 */
 
 import { Component } from '@angular/core';
-import { EventsService, Events } from './providers/events.service';
+import { EventsService, Events, Notification } from './providers/events.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
-import { AppConfig } from '../environments/environment';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 
 
@@ -41,37 +40,54 @@ export class AppComponent {
   }
 
   initAlerts() {
-    console.log(AppConfig);
-    this._eventsService.events$.subscribe((event: clientpb.Event) => {
-
+    this._eventsService.sessions$.subscribe((event: clientpb.Event) => {
       const eventType = event.getEventtype();
       switch (eventType) {
-
-        // Sessions
-        case Events.Connected:
+        case Events.SessionConnected:
           this.sessionConnectedAlert(event.getSession());
           break;
-        case Events.Disconnected:
+        case Events.SessionDisconnected:
           this.sessionDisconnectedAlert(event.getSession());
           break;
-          
-        // Players
-        case Events.Joined:
-          this.playerAlert('joined', event.getClient());
-          break;
-        case Events.Left:
-          this.playerAlert('left', event.getClient());
-          break;
-
-        // Jobs
-        case Events.Stopped:
-          this.jobStoppedAlert(event.getJob());
-          break;
-
-        default:
-          console.error(`Unknown event type: '${eventType}'`);
       }
     });
+
+    this._eventsService.players$.subscribe((event: clientpb.Event) => {
+      const eventType = event.getEventtype();
+      switch (eventType) {
+        case Events.ClientJoined:
+          this.playerAlert('joined', event.getClient());
+          break;
+        case Events.ClientLeft:
+          this.playerAlert('left', event.getClient());
+          break;
+      }
+    });
+
+    this._eventsService.events$.subscribe((event: clientpb.Event) => {
+      const eventType = event.getEventtype();
+      switch (eventType) {
+        case Events.JobStopped:
+          this.jobStoppedAlert(event.getJob());
+          break;
+      }
+    });
+
+    this._eventsService.notifications$.subscribe((notify: Notification) => {
+      this.notificationAlert(notify.message, notify.buttonLabel, notify.seconds, notify.callback);
+    });
+
+  }
+
+  notificationAlert(message: string, buttonLabel: string, seconds: number, callback: Function|null = null) {
+    const snackBarRef = this._snackBar.open(message, buttonLabel, {
+      duration: seconds * 1000,
+    });
+    if (callback !== null) {
+      snackBarRef.onAction().subscribe(() => {
+        callback();
+      });
+    }
   }
 
   playerAlert(action: string, client: clientpb.Client) {
@@ -100,7 +116,7 @@ export class AppComponent {
   }
 
   sessionDisconnectedAlert(session: clientpb.Session) {
-    const snackBarRef = this._snackBar.open(`Lost session #${session.getId()}`, 'Dismiss', {
+    this._snackBar.open(`Lost session #${session.getId()}`, 'Dismiss', {
       duration: 5000,
     });
   }
