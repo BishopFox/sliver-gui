@@ -14,8 +14,6 @@
 */
 
 import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 @Component({
@@ -25,35 +23,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 })
 export class BuildsComponent implements OnInit {
 
-  constructor(public dialog: MatDialog,
-              private _route: ActivatedRoute) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this._route.params.subscribe(params => {
-      if (params['dialog'] === 'generating') {
-        this.generatingDialog();
-      }
-    });
-  }
-
-  generatingDialog() {
-    this.dialog.open(GeneratingDialogComponent);
-  }
-
-}
-
-
-@Component({
-  selector: 'generate-generating-dialog',
-  templateUrl: './generating.dialog.html',
-})
-export class GeneratingDialogComponent {
-
-  constructor(public dialogRef: MatDialogRef<GeneratingDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
+  ngOnInit(): void { }
 
 }

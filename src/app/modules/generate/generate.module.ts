@@ -19,10 +19,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BaseMaterialModule } from '@app/base-material';
 import { CreateImplantConfigComponent } from './components/create-implant-config/create-implant-config.component';
-import { BuildsComponent, GeneratingDialogComponent } from './components/builds/builds.component';
+import { BuildsComponent } from './components/builds/builds.component';
 import { BuildsTableComponent, RegenerateDialogComponent } from './components/builds-table/builds-table.component';
 import { CanariesComponent } from './components/canaries/canaries.component';
-import { GenerateComponent } from './components/generate/generate.component';
+import { GenerateComponent, GeneratingDialogComponent } from './components/generate/generate.component';
 import {
   C2TableComponent, AddMTLSDialogComponent, AddHTTPDialogComponent, AddDNSDialogComponent
 } from './components/c2-table/c2-table.component';

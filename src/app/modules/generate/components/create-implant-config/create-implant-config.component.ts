@@ -13,13 +13,14 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
+import { FadeInOut } from '@app/shared/animations';
 import { Subscription } from 'rxjs';
 
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
-import { FadeInOut } from '@app/shared/animations';
 
 
 @Component({
@@ -31,6 +32,8 @@ import { FadeInOut } from '@app/shared/animations';
 export class CreateImplantConfigComponent implements OnInit, OnDestroy {
 
   @Output() onImplantConfigEvent = new EventEmitter<clientpb.ImplantConfig>();
+  @ViewChild('stepper') stepper: MatStepper;
+  selectedIndex: number;
 
   targetForm: FormGroup;
   targetFormSub: Subscription;
@@ -64,6 +67,7 @@ export class CreateImplantConfigComponent implements OnInit, OnDestroy {
       skipSymbols: [false],
       debug: [false],
     });
+
   }
 
   ngOnDestroy() {
@@ -137,6 +141,10 @@ export class CreateImplantConfigComponent implements OnInit, OnDestroy {
 
   emitImplantConfig() {
     this.onImplantConfigEvent.emit(this.implantConfig());
+  }
+
+  onStepChange(event) {
+    this.selectedIndex = event.selectedIndex;
   }
 
 }
