@@ -82,14 +82,10 @@ export class GenerateComponent implements OnInit {
         });
       } catch (err) {
         console.error(err);
-        setTimeout(() => {
-          if (this.generatingDialogRef) {
-            this.generatingDialogRef.close();
-          }
-          this.dialog.open(BuildErrorDialogComponent, {
-            data: {errorMessage: err.toString()},
-          });
-        }, 500);
+        this.generatingDialogRef?.close();
+        this.dialog.open(BuildErrorDialogComponent, {
+          data: {errorMessage: err.toString()},
+        });
       }
     }, 0);
     this.generatingDialog();
