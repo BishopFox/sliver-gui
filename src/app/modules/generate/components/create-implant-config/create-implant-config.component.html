@@ -113,8 +113,8 @@
               </mat-form-field>
             </div>
             <div>
-              <mat-slide-toggle color="primary" [formControl]="compileTimeForm.controls['skipSymbols']">
-                <ng-container i18n>Skip Symbol Obfuscation</ng-container>
+              <mat-slide-toggle color="primary" [formControl]="compileTimeForm.controls['symbolObfuscation']">
+                <ng-container i18n>Symbol Obfuscation</ng-container>
               </mat-slide-toggle>
             </div>
             <div>
@@ -148,6 +148,7 @@
         </generate-implant-config>
         <div class="c2-back-next">
           <button mat-raised-button matStepperPrevious>
+            <i class="fas fa-fw fa-chevron-left"></i>
             &nbsp;
             <ng-container i18n>Back</ng-container>
             &nbsp;

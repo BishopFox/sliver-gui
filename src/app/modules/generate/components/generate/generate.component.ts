@@ -39,6 +39,7 @@ export class GenerateComponent implements OnInit {
   generateForm: FormGroup;
   generateNameFormSub: Subscription;
   namePattern = RegExp('^[a-zA-Z0-9]*$');
+  generatingDialogRef: MatDialogRef<GeneratingDialogComponent, any>;
 
   constructor(public dialog: MatDialog,
               private _router: Router,
@@ -74,10 +75,22 @@ export class GenerateComponent implements OnInit {
 
   async generate() {
     setTimeout(async () => {
-      const file = await this._sliverService.generate(this.implantConfig);
-      this._eventsService.notify(`Build ${file.getName()} completed`, 'Download', 10, () => {
-        this._clientService.saveFile('Save', 'Save Implant', file.getName(), file.getData_asU8());
-      });
+      try {
+        const file = await this._sliverService.generate(this.implantConfig);
+        this._eventsService.notify(`Build ${file.getName()} completed`, 'Download', 10, () => {
+          this._clientService.saveFile('Save', 'Save Implant', file.getName(), file.getData_asU8());
+        });
+      } catch (err) {
+        console.error(err);
+        setTimeout(() => {
+          if (this.generatingDialogRef) {
+            this.generatingDialogRef.close();
+          }
+          this.dialog.open(BuildErrorDialogComponent, {
+            data: {errorMessage: err.toString()},
+          });
+        }, 500);
+      }
     }, 0);
     this.generatingDialog();
   }
@@ -88,9 +101,12 @@ export class GenerateComponent implements OnInit {
 
   validatedGenerateForm(): ValidatorFn {
     return (group: AbstractControl): (ValidationErrors | null) => {
+
       if (this.generateForm === undefined || this.generateCodename) {
         return null;
       }
+
+      // Codename
       const codename = group.get('codename').value;
       if (codename.length < 1) {
         return {badCodenameLength: {value: codename}};
@@ -98,13 +114,23 @@ export class GenerateComponent implements OnInit {
       if (!this.namePattern.test(codename)) {
         return {badCodenamePattern: {value: codename}};
       }
+
+      // Profile Name
+      const profileName = group.get('profileName').value;
+      if (profileName.length < 1) {
+        return {badProfileNameLength: {value: profileName}};
+      }
+      if (!this.namePattern.test(profileName)) {
+        return {badProfileNamePattern: {value: profileName}};
+      }
+      
       return null;
     };
   }
 
   generatingDialog() {
-    const dialogRef = this.dialog.open(GeneratingDialogComponent);
-    dialogRef.afterClosed().subscribe(() => {
+    this.generatingDialogRef = this.dialog.open(GeneratingDialogComponent);
+    this.generatingDialogRef.afterClosed().subscribe(() => {
       this._router.navigate(['generate', 'builds']);
     });
   }
@@ -118,6 +144,21 @@ export class GenerateComponent implements OnInit {
 export class GeneratingDialogComponent {
 
   constructor(public dialogRef: MatDialogRef<GeneratingDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+
+@Component({
+  selector: 'generate-build-error-dialog',
+  templateUrl: './build-error.dialog.html',
+})
+export class BuildErrorDialogComponent {
+
+  constructor(public dialogRef: MatDialogRef<BuildErrorDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
