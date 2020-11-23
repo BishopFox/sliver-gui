@@ -101,15 +101,9 @@
       </trans-unit>
       <trans-unit id="45493a221c09f4d2550f928e73f2e8ea49ceef55" datatype="html">
         <source> Back </source><target state="translated">atrás</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/settings/settings.component.html</context>
-          <context context-type="linenumber">9,10</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
-          <context context-type="linenumber">9,10</context>
-        </context-group>
-      </trans-unit>
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/components/settings/settings.component.html</context><context context-type="linenumber">9</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context><context context-type="linenumber">9</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/build-details/build-details.component.html</context><context context-type="linenumber">8</context></context-group></trans-unit>
       <trans-unit id="fe46ccaae902ce974e2441abe752399288298619" datatype="html">
         <source>Language</source><target state="translated">Idioma</target>
         <context-group purpose="location">
@@ -133,11 +127,8 @@
       </trans-unit>
       <trans-unit id="a7868521fbf6d9fb7b97f910c3f060bbd995a118" datatype="html">
         <source>Okay</source><target state="translated">Bueno</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/settings/restart.dialog.html</context>
-          <context context-type="linenumber">15</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/components/settings/restart.dialog.html</context><context context-type="linenumber">15</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds/generating.dialog.html</context><context context-type="linenumber">14</context></context-group></trans-unit>
       <trans-unit id="8c19acfb82292c105887731b727164b5c20303e2" datatype="html">
         <source> Sessions </source><target state="translated">Sesiones</target>
         <context-group purpose="location">
@@ -191,7 +182,7 @@
       <trans-unit id="5c9636885876c00a7b72416bd841b36a1109b4d9" datatype="html">
         <source>Operating System</source><target state="translated">Sistema operativo</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/sessions/sessions.component.html</context><context context-type="linenumber">66</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds/builds.component.html</context><context context-type="linenumber">18</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">15</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/sessions/sessions.component.html</context><context context-type="linenumber">66</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">18</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">15</context></context-group></trans-unit>
       <trans-unit id="a0ad8e29ff6de0aef19586738980a6fba9a8113c" datatype="html">
         <source>Last Check-in</source><target state="translated">Último registro</target>
         <context-group purpose="location">
@@ -273,7 +264,7 @@
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context><context context-type="linenumber">17</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">81</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">106</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context><context context-type="linenumber">3</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context><context context-type="linenumber">25</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context><context context-type="linenumber">49</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context><context context-type="linenumber">17</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">81</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">106</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context><context context-type="linenumber">3</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context><context context-type="linenumber">25</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context><context context-type="linenumber">50</context></context-group></trans-unit>
       <trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
         <source>Cancel</source><target state="translated">Cancelar</target>
         
@@ -386,7 +377,7 @@
       <trans-unit id="cda31dbd724cf5f4fa7a4274d9120651490c8a8c" datatype="html">
         <source>Back</source><target state="translated">atrás</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">83</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">128</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">83</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">128</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">152</context></context-group></trans-unit>
       <trans-unit id="197c6a6173dd4a413f617965f2d9308bc263abfe" datatype="html">
         <source>External Window</source><target state="translated">Ventana externa</target>
         <context-group purpose="location">
@@ -478,31 +469,49 @@
           <context context-type="sourcefile">src/app/modules/generate/components/canaries/canaries.component.html</context>
           <context context-type="linenumber">55</context>
         </context-group>
+      </trans-unit><trans-unit id="e8326c55cdbc53d861c5ed4ea326c7579582f8b5" datatype="html">
+        <source> Regenerate </source><target state="translated">Regenerado</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/build-details/build-details.component.html</context>
+          <context context-type="linenumber">17,18</context>
+        </context-group>
+      </trans-unit><trans-unit id="7f1b907062583746e3b9631fa99f548c994845a7" datatype="html">
+        <source> Generating </source><target state="translated">Generando</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/builds/generating.dialog.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit><trans-unit id="93fe2e739e36b8b89561b4c74eb377e6a306aad7" datatype="html">
+        <source> Your build has started, you will get a notification when the build completes. </source><target state="translated">Su compilación ha comenzado, recibirá una notificación cuando se complete la compilación.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/builds/generating.dialog.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
       </trans-unit><trans-unit id="dc9a9853d36d7998ea7fdde3cf4cdee781ac5185" datatype="html">
         <source>Code Name</source><target state="translated">Nombre clave</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/builds/builds.component.html</context>
-          <context context-type="linenumber">29</context>
-        </context-group>
-      </trans-unit><trans-unit id="d2252b2dbce97640eb209224549e3e59c67412c1" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">29</context></context-group></trans-unit><trans-unit id="d2252b2dbce97640eb209224549e3e59c67412c1" datatype="html">
         <source>Architecture</source><target state="translated">Arquitectura</target>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">36</context></context-group></trans-unit><trans-unit id="95108a57be485761f4b8b79d74c25ff577fc19b1" datatype="html">
+        <source> Regenerate </source><target state="translated">Regenerado</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/builds/builds.component.html</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context>
+          <context context-type="linenumber">61,62</context>
         </context-group>
       </trans-unit><trans-unit id="dcfc990a822e11feb00eb91d9cf4d6ec0ed37dd0" datatype="html">
         <source>Debug</source><target state="translated">Depurar</target>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context><context context-type="linenumber">23</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">43</context></context-group></trans-unit><trans-unit id="d6cb5bbe00793446c4e29be6156918840ec37c84" datatype="html">
+        <source>Max Connection Errors</source><target state="translated">Errores de conexión máximos</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/builds/builds.component.html</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit><trans-unit id="7722a92a1fc887570b4f4d8a7bb916f067f32028" datatype="html">
         <source>Format</source><target state="translated">Formato</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/builds/builds.component.html</context>
-          <context context-type="linenumber">50</context>
-        </context-group>
-      </trans-unit><trans-unit id="6a463a3d2386d508d6f02a61c1d32ca80f7c9c70" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context><context context-type="linenumber">22</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">50</context></context-group></trans-unit><trans-unit id="6a463a3d2386d508d6f02a61c1d32ca80f7c9c70" datatype="html">
         <source>Generate Implant</source><target state="translated">Generar implante</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context>
@@ -546,6 +555,12 @@
           <context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context>
           <context context-type="linenumber">34</context>
         </context-group>
+      </trans-unit><trans-unit id="ccfe7475ab3ae7ade17ba83c4363e0870f69551d" datatype="html">
+        <source>Implant Configuration</source><target state="translated">Configuración del implante</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
       </trans-unit><trans-unit id="fde62d191d1cd9815ebe84f408e220b8984522f6" datatype="html">
         <source> C2 Endpoints </source><target state="translated">Puntos finales C2</target>
         <context-group purpose="location">
@@ -572,17 +587,11 @@
         </context-group>
       </trans-unit><trans-unit id="b74af38005e8a8914e45af2ec412e11ceafef8b6" datatype="html">
         <source>Priority</source><target state="translated">Prioridad</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
-          <context context-type="linenumber">33</context>
-        </context-group>
-      </trans-unit><trans-unit id="801b98c6f02fe3b32f6afa3ee854c99ed83474e6" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context><context context-type="linenumber">34</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context><context context-type="linenumber">64</context></context-group></trans-unit><trans-unit id="801b98c6f02fe3b32f6afa3ee854c99ed83474e6" datatype="html">
         <source>URL</source><target state="translated">URL</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
-          <context context-type="linenumber">40</context>
-        </context-group>
-      </trans-unit><trans-unit id="c02d1d65725438cb4bfc394363322e88e01e3ee1" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context><context context-type="linenumber">41</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context><context context-type="linenumber">71</context></context-group></trans-unit><trans-unit id="c02d1d65725438cb4bfc394363322e88e01e3ee1" datatype="html">
         <source> mTLS C2 Endpoint </source><target state="translated">Punto final mTLS C2</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context>
@@ -666,23 +675,11 @@
         </context-group>
       </trans-unit><trans-unit id="f732c304c7433e5a83ffcd862c3dce709a0f4982" datatype="html">
         <source>Next</source><target state="translated">próximo</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">59</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">87</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">132</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">158</context>
-        </context-group>
-      </trans-unit><trans-unit id="a4e954c980eda25bf2a28a6411710aee8757ef17" datatype="html">
+        
+        
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">59</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">87</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">132</context></context-group></trans-unit><trans-unit id="a4e954c980eda25bf2a28a6411710aee8757ef17" datatype="html">
         <source>Reconnect</source><target state="translated">Reconectar</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
@@ -706,11 +703,23 @@
           <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
           <context context-type="linenumber">122</context>
         </context-group>
+      </trans-unit><trans-unit id="68e710782ccb5398b3acb8844caf0b199da2c3da" datatype="html">
+        <source>Confirm</source><target state="translated">Confirmar</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">159</context>
+        </context-group>
       </trans-unit><trans-unit id="9e13a9d45e3734f20f1cd780f5d10fdf4ae0a3f9" datatype="html">
         <source>Executable</source><target state="translated">Ejecutable</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
           <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit><trans-unit id="a8233de047500bf0f0d9f9f1712ddb071501a283" datatype="html">
+        <source>Summary</source><target state="translated">Resumen</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">144</context>
         </context-group>
       </trans-unit>
     </body>
