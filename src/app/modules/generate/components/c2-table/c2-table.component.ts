@@ -15,7 +15,7 @@
 
 import { Component, EventEmitter, Input, OnInit, Output, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FadeInOut } from '@app/shared/animations';
@@ -43,7 +43,7 @@ export class C2TableComponent implements OnInit {
   private _displayedColumns: string[] = [
     'priority', 'url', 'options'
   ];
-  
+
   table: TableSessionData[];
   dataSrc: MatTableDataSource<TableSessionData>;
   
@@ -66,6 +66,7 @@ export class C2TableComponent implements OnInit {
   }
 
   refreshTable() {
+    console.log(this.tableData());
     this.dataSrc = new MatTableDataSource(this.tableData());
     if (this.editable) {
       this.onC2sUpdateEvent.emit(this.c2s);

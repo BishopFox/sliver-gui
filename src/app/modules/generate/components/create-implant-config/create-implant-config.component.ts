@@ -136,9 +136,7 @@ export class CreateImplantConfigComponent implements OnInit, OnDestroy {
   }
 
   emitImplantConfig() {
-    const implantConfig = this.implantConfig();
-    console.log(implantConfig);
-    this.onImplantConfigEvent.emit(implantConfig);
+    this.onImplantConfigEvent.emit(this.implantConfig());
   }
 
 }

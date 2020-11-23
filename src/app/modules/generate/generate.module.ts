@@ -27,6 +27,7 @@ import {
   C2TableComponent, AddMTLSDialogComponent, AddHTTPDialogComponent, AddDNSDialogComponent
 } from './components/c2-table/c2-table.component';
 import { ImplantConfigComponent } from './components/implant-config/implant-config.component';
+import { BuildDetailsComponent } from './components/build-details/build-details.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { ImplantConfigComponent } from './components/implant-config/implant-conf
     AddHTTPDialogComponent,
     AddDNSDialogComponent,
     ImplantConfigComponent,
+    BuildDetailsComponent,
   ],
   imports: [
     CommonModule,

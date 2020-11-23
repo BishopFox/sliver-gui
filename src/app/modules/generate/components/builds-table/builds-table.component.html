@@ -52,6 +52,18 @@
       <td mat-cell *matCellDef="let build"> {{ build.format }} </td>
     </ng-container>
 
+    <ng-container matColumnDef="regenerate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      </th>
+      <td mat-cell *matCellDef="let build">
+        <button mat-button color="primary" (click)="regenerate($event, build)">
+          <ng-container i18n>
+            Regenerate
+          </ng-container>
+        </button>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row (click)="onRowSelection(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>

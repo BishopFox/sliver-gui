@@ -14,6 +14,7 @@
 */
 
 import { Component, OnInit, Inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
@@ -51,10 +52,11 @@ export class BuildsTableComponent implements OnInit {
 
   dataSrc: MatTableDataSource<TableImplantBuildData>;
   displayedColumns: string[] = [
-    'name', 'os', 'arch', 'debug', 'format'
+    'name', 'os', 'arch', 'debug', 'format', 'regenerate'
   ];
 
   constructor(public dialog: MatDialog,
+              private _router: Router,
               private _snackBar: MatSnackBar,
               private _eventsService: EventsService,
               private _clientService: ClientService,
@@ -92,23 +94,7 @@ export class BuildsTableComponent implements OnInit {
   }
 
   onRowSelection(row: any) {
-    const dialogRef = this.dialog.open(RegenerateDialogComponent, {
-      data: row,
-    });
-    dialogRef.afterClosed().subscribe(async (targetRow) => {
-      console.log(`Regenerate target sliver: ${targetRow.name}`);
-      this._snackBar.open(`Regenerating ${targetRow.name}, please wait...`, 'Dismiss', {
-        duration: 5000,
-      });
-      const regenerated = await this._sliverService.regenerate(targetRow.name);
-      if (regenerated) {
-        const msg = `Save regenerated file ${regenerated.getName()}`;
-        const path = await this._clientService.saveFile('Save File', msg, regenerated.getName(), regenerated.getData_asU8());
-        console.log(`Saved file to: ${path}`);
-      } else {
-        console.error(`Failed to regenerate sliver ${targetRow.name}`);
-      }
-    });
+    this._router.navigate(['generate', 'build-details', row.name]);
   }
 
   c2sToURLs(sliverC2s: clientpb.ImplantC2.AsObject[]): string[] {
@@ -144,6 +130,29 @@ export class BuildsTableComponent implements OnInit {
         case 'debug': return compare(a.debug, b.debug, isAsc);
         case 'format': return compare(a.format, b.format, isAsc);
         default: return 0;
+      }
+    });
+  }
+
+  regenerate(event, row) {
+    event.stopPropagation();
+    const dialogRef = this.dialog.open(RegenerateDialogComponent, {
+      data: row,
+    });
+    dialogRef.afterClosed().subscribe(async (build) => {
+      if (build) {
+        console.log(`Regenerate target sliver: ${build.name}`);
+        this._snackBar.open(`Regenerating ${build.name}, please wait...`, 'Dismiss', {
+          duration: 5000,
+        });
+        const regenerated = await this._sliverService.regenerate(build.name);
+        if (regenerated) {
+          const msg = `Save regenerated file ${regenerated.getName()}`;
+          const path = await this._clientService.saveFile('Save File', msg, regenerated.getName(), regenerated.getData_asU8());
+          console.log(`Saved file to: ${path}`);
+        } else {
+          console.error(`Failed to regenerate sliver ${build.name}`);
+        }
       }
     });
   }
