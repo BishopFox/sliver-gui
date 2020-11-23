@@ -16,19 +16,45 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BaseMaterialModule } from '../../base-material';
-import { NewImplantComponent } from './components/new-implant/new-implant.component';
-import { HistoryComponent, RegenerateDialogComponent } from './components/history/history.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { BaseMaterialModule } from '@app/base-material';
+import { CreateImplantConfigComponent } from './components/create-implant-config/create-implant-config.component';
+import { BuildsComponent, GeneratingDialogComponent } from './components/builds/builds.component';
+import { BuildsTableComponent, RegenerateDialogComponent } from './components/builds-table/builds-table.component';
 import { CanariesComponent } from './components/canaries/canaries.component';
+import { GenerateComponent } from './components/generate/generate.component';
+import {
+  C2TableComponent, AddMTLSDialogComponent, AddHTTPDialogComponent, AddDNSDialogComponent
+} from './components/c2-table/c2-table.component';
+import { ImplantConfigComponent } from './components/implant-config/implant-config.component';
+import { BuildDetailsComponent } from './components/build-details/build-details.component';
 
 
 @NgModule({
-  declarations: [NewImplantComponent, HistoryComponent, RegenerateDialogComponent, CanariesComponent],
+  declarations: [
+    CreateImplantConfigComponent,
+    BuildsComponent,
+    GeneratingDialogComponent,
+    BuildsTableComponent,
+    RegenerateDialogComponent,
+    CanariesComponent,
+    GenerateComponent,
+    C2TableComponent,
+    AddMTLSDialogComponent,
+    AddHTTPDialogComponent,
+    AddDNSDialogComponent,
+    ImplantConfigComponent,
+    BuildDetailsComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    BaseMaterialModule
+    BaseMaterialModule,
+    DragDropModule,
+  ],
+  exports: [
+    ImplantConfigComponent,
   ],
   entryComponents: [RegenerateDialogComponent]
 })

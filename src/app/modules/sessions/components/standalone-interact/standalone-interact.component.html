@@ -1,13 +1,11 @@
-<mat-toolbar *ngIf="session" class="app-toolbar" color="primary" style="-webkit-app-region: drag">
+<mat-toolbar *ngIf="session" color="primary" style="-webkit-app-region: drag">
   <ng-container i18n>Session</ng-container> #{{session.getId()}} - {{session.getName()}}
   <span style="flex: 1 1 auto;"></span>
   <span class="monospace">{{session.getUsername()}}@{{session.getHostname()}} - {{session.getRemoteaddress()}}</span>
 </mat-toolbar>
 
-<mat-sidenav-container [@fadeInOut] *ngIf="session" class="interact-container">
-
+<mat-sidenav-container [@fadeInOut] class="interact-container">
   <mat-sidenav #sidenav mode="side" opened class="interact-sidenav" [fixedInViewport]="false">
-
     <button mat-menu-item [routerLink]="['info']">
       <i class="fas fa-fw fa-info"></i>&nbsp;
       <ng-container i18n>Info</ng-container>

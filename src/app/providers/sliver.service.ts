@@ -48,11 +48,16 @@ export class SliverService {
   }
 
   async implantBuilds(): Promise<clientpb.ImplantBuilds> {
-    let builds: string = await this._ipc.request('rpc_sessions');
+    let builds: string = await this._ipc.request('rpc_implantBuilds');
     if (builds.length) {
       return clientpb.ImplantBuilds.deserializeBinary(Base64.toUint8Array(builds));
     }
     return Promise.reject(`Empty IPC response`);
+  }
+
+  async implantBuildByName(name: string): Promise<[string, clientpb.ImplantConfig]> {
+    const builds = await this.implantBuilds();
+    return [name, builds.getConfigsMap().get(name)];
   }
 
   async canaries(): Promise<clientpb.DNSCanary[]> {

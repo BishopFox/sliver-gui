@@ -1,0 +1,44 @@
+<generate-create-implant-config *ngIf="!implantConfig" (onImplantConfigEvent)="onImplantConfig($event)">
+</generate-create-implant-config>
+
+<div [@fadeInOut] *ngIf="implantConfig" class="grid-wrapper">
+
+  <form [formGroup]="generateForm" class="grid-generate-form">
+    <h3>
+      <i class="fas fa-fw fa-tractor"></i>&nbsp;
+      <ng-container i18n>Generate Implant</ng-container>
+    </h3>
+    <p>
+      <mat-slide-toggle color="primary" [formControl]="generateForm.controls['generateCodename']" style="width: 100%;">
+        <ng-container i18n>Generate Codename</ng-container>
+      </mat-slide-toggle>
+    </p>
+    <p *ngIf="!generateCodename">
+      <mat-form-field appearance="outline">
+        <mat-label>
+          <ng-container i18n>Codename</ng-container>
+        </mat-label>
+        <input matInput [formControl]="generateForm.controls['codename']" i18n-placeholder placeholder="Codename" style="width: 100%;">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-slide-toggle color="primary" [formControl]="generateForm.controls['saveAsProfile']" style="width: 100%;">
+        <ng-container i18n>Save as Profile</ng-container>
+      </mat-slide-toggle>
+    </p>
+    <p *ngIf="saveAsProfile">
+      <mat-form-field appearance="outline">
+        <mat-label>
+          <ng-container i18n>Profile Name</ng-container>
+        </mat-label>
+        <input matInput [formControl]="generateForm.controls['profileName']" i18n-placeholder placeholder="Profile Name" style="width: 100%;">
+      </mat-form-field>
+    </p>
+    <p>
+      <button mat-raised-button color="primary" [disabled]="!generateForm.valid" (click)="generate()" style="width: 100%;">
+        <ng-container i18n>Start Build</ng-container>
+      </button>
+    </p>
+  </form>
+
+</div>

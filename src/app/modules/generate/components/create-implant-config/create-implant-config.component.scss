@@ -1,0 +1,51 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 7fr 1fr;
+}
+
+.stepper-root {
+    grid-column: 2/3;
+    grid-row: 1/2;
+}
+
+.grid-executable-container {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-rows: minmax(50px, auto);
+    justify-items: center;
+    align-items: center;
+}
+
+.executable-form {
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+
+.grid-c2-container {
+    display: grid;
+    grid-template-columns: 1fr 7fr 1fr;
+    justify-items: center;
+    align-items: center;
+    grid-template-rows: minmax(50px, auto);
+}
+
+.c2-table {
+    grid-column: 2/3;
+    grid-row: 1/2;
+}
+
+.c2-summary {
+    grid-column: 2/3;
+    grid-row: 1/2;
+}
+
+.c2-back-next {
+    grid-column: 2/3;
+    grid-row: 3/4;
+    margin: 50px;
+}
+
+.grid-compile-time-options {
+    grid-column: 2/3;
+    grid-row: 1/2;
+}

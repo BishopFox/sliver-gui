@@ -15,6 +15,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { FadeInOut } from '@app/shared/animations';
 import { SliverService } from '@app/providers/sliver.service';
@@ -23,7 +24,7 @@ import { ClientService } from '@app/providers/client.service';
 
 
 @Component({
-  selector: 'app-standalone-interact',
+  selector: 'sessions-standalone-interact',
   templateUrl: './standalone-interact.component.html',
   styleUrls: ['./standalone-interact.component.scss'],
   animations: [FadeInOut]
@@ -33,7 +34,8 @@ export class StandaloneInteractComponent implements OnInit {
   sessionId: number;
   session: clientpb.Session;
 
-  constructor(private _route: ActivatedRoute,
+  constructor(public dialog: MatDialog,
+              private _route: ActivatedRoute,
               private _sliverService: SliverService,
               private _clientService: ClientService) { }
 
@@ -52,11 +54,4 @@ export class StandaloneInteractComponent implements OnInit {
     return this.session ? this.session.getActivec2() : null;
   }
 
-  openSessionWindow() {
-    this._clientService.openSessionWindow(this.sessionId);
-  }
-
-  back() {
-    window.history.back();
-  }
 }

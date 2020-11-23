@@ -22,7 +22,10 @@ const DEFAULT_CLIENT_DIR = path.join(os.homedir(), '.sliver-client');
 export const DEFAULT_LOCALE = "en";
 export const Locales = new Map<string, string>([
     [DEFAULT_LOCALE, "English"],
-    ["fr", "French"]
+    ["fr", "French"],
+    ["es", "Spanish"],
+    ["ja", "Japanese"],
+    ["zh", "Chinese"]
 ]);
 
 export function setLocaleSync(locale: string): void {

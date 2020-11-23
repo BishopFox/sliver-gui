@@ -1,0 +1,168 @@
+<div [@fadeInOut] class="grid-container">
+
+  <mat-horizontal-stepper [linear]="true" #stepper class="stepper-root">
+
+    <!-- Step 1: Executable -->
+    <mat-step [stepControl]="targetForm" [completed]="false">
+
+      <div class="grid-executable-container">
+        <form [formGroup]="targetForm" class="executable-form">
+          <ng-template matStepLabel>
+            <ng-container i18n>Executable</ng-container>
+          </ng-template>
+          <div>
+            <mat-form-field>
+              <mat-select [formControl]="targetForm.controls['os']" i18n-placeholder placeholder="Operating System">
+                <mat-option value="windows">
+                  Windows
+                </mat-option>
+                <mat-option value="darwin">
+                  MacOS
+                </mat-option>
+                <mat-option value="linux">
+                  Linux
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-select [formControl]="targetForm.controls['arch']" i18n-placeholder placeholder="CPU Architecture">
+                <mat-option value="amd64">
+                  64-bit
+                </mat-option>
+                <mat-option value="386">
+                  32-bit
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field>
+              <mat-select [formControl]="targetForm.controls['format']" placeholder="File Format">
+                <mat-option value="exe">
+                  Executable
+                </mat-option>
+                <mat-option [disabled]="targetForm.controls['os'].value !== 'windows'" value="shared">
+                  Shared Library
+                </mat-option>
+                <mat-option [disabled]="targetForm.controls['os'].value !== 'windows'" value="shellcode">
+                  Shellcode
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <button mat-raised-button matStepperNext>
+              <ng-container i18n>Next</ng-container>
+              <i class="fas fa-fw fa-chevron-right"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+
+    <!-- Step 2: Command & Control -->
+    <mat-step [stepControl]="isValidC2Config()" [completed]="false">
+      <ng-template matStepLabel>
+        Command and Control
+      </ng-template>
+
+      <div class="grid-c2-container">
+
+        <div class="c2-table">
+          <generate-c2-table (onC2sUpdateEvent)="onC2sUpdate($event)">
+          </generate-c2-table>
+        </div>
+
+        <div class="c2-back-next">
+          <button mat-raised-button matStepperPrevious>
+            <i class="fas fa-fw fa-chevron-left"></i>
+            <ng-container i18n>Back</ng-container>
+          </button>
+          &nbsp;
+          <button [disabled]="!isValidC2Config()" mat-raised-button matStepperNext>
+            <ng-container i18n>Next</ng-container>
+            <i class="fas fa-fw fa-chevron-right"></i>
+          </button>
+        </div>
+
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="compileTimeForm" [completed]="false">
+      <ng-template matStepLabel>
+        Compile Time Options
+      </ng-template>
+
+      <div class="grid-c2-container">
+        <div class="grid-compile-time-options">
+          <form [formGroup]="compileTimeForm">
+            <div>
+              <mat-form-field>
+                <input matInput type="number" [formControl]="compileTimeForm.controls['reconnect']" i18n-placeholder
+                  placeholder="Reconnect">
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <input matInput type="number" [formControl]="compileTimeForm.controls['maxErrors']" i18n-placeholder
+                  placeholder="Max Errors">
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-slide-toggle color="primary" [formControl]="compileTimeForm.controls['skipSymbols']">
+                <ng-container i18n>Skip Symbol Obfuscation</ng-container>
+              </mat-slide-toggle>
+            </div>
+            <div>
+              <mat-slide-toggle color="primary" [formControl]="compileTimeForm.controls['debug']">
+                <ng-container i18n>Debug Mode</ng-container>
+              </mat-slide-toggle>
+            </div>
+            <div class="c2-back-next">
+              <button mat-raised-button matStepperPrevious>
+                <i class="fas fa-fw fa-chevron-left"></i>
+                <ng-container i18n>Back</ng-container>
+              </button>
+              &nbsp;
+              <button mat-raised-button matStepperNext>
+                <ng-container i18n>Next</ng-container>
+                <i class="fas fa-fw fa-chevron-right"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </mat-step>
+
+    <mat-step [completed]="false">
+      <ng-template matStepLabel>
+        <ng-container i18n>Summary</ng-container>
+      </ng-template>
+      <div class="grid-c2-container">
+        <generate-implant-config class="c2-summary" [implantConfig]="implantConfig()">
+        </generate-implant-config>
+        <div class="c2-back-next">
+          <button mat-raised-button matStepperPrevious>
+            &nbsp;
+            <ng-container i18n>Back</ng-container>
+            &nbsp;
+          </button>
+          &nbsp;
+          <button mat-raised-button color="primary" (click)="emitImplantConfig()">
+            <i class="fas fa-fw fa-dragon"></i>
+            &nbsp;
+            <ng-container i18n>Confirm</ng-container>
+            &nbsp;
+          </button>
+        </div>
+      </div>
+    </mat-step>
+
+  </mat-horizontal-stepper>
+
+</div>

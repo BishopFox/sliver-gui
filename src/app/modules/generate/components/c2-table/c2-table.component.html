@@ -1,0 +1,80 @@
+<div [@fadeInOut]>
+
+  <div class="table-header">
+    <div>
+      <h3 *ngIf="title">
+        <i class="fas fa-fw fa-project-diagram"></i>
+        <ng-container i18n>
+          C2 Endpoints
+        </ng-container>
+      </h3>
+    </div>
+    <div>
+      <button *ngIf="editable" mat-stroked-button (click)="addMtls()">
+        <ng-container i18n>Add mTLS</ng-container>
+      </button>
+    </div>
+    <div>
+      <button *ngIf="editable" mat-stroked-button (click)="addHttp()">
+        <ng-container i18n>Add HTTP(S)</ng-container>
+      </button>
+    </div>
+    <div>
+      <button *ngIf="editable" mat-stroked-button (click)="addDns()">
+        <ng-container i18n>Add DNS</ng-container>
+      </button>
+    </div>
+  </div>
+
+  <!-- Editable -->
+  <table *ngIf="editable" mat-table [dataSource]="dataSrc" cdkDropList (cdkDropListDropped)="onListDrop($event)">
+
+    <ng-container matColumnDef="priority">
+      <th mat-header-cell *matHeaderCellDef>
+        <ng-container i18n>Priority</ng-container>
+      </th>
+      <td mat-cell *matCellDef="let c2"> {{c2.priority}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="url">
+      <th mat-header-cell *matHeaderCellDef>
+        <ng-container i18n>URL</ng-container>
+      </th>
+      <td mat-cell *matCellDef="let c2" class="monospace"> {{c2.url}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="options">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let c2">
+        <button mat-button color="warn" (click)="removeC2(c2)">
+          <ng-container i18n>Delete</ng-container>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row cdkDrag *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- Not Editable -->
+  <table *ngIf="!editable" mat-table [dataSource]="dataSrc">
+
+    <ng-container matColumnDef="priority">
+      <th mat-header-cell *matHeaderCellDef>
+        <ng-container i18n>Priority</ng-container>
+      </th>
+      <td mat-cell *matCellDef="let c2"> {{c2.priority}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="url">
+      <th mat-header-cell *matHeaderCellDef>
+        <ng-container i18n>URL</ng-container>
+      </th>
+      <td mat-cell *matCellDef="let c2" class="monospace"> {{c2.url}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</div>

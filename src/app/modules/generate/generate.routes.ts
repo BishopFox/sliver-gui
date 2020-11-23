@@ -16,16 +16,18 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
-import { ActiveConfig } from '../../app-routing-guards.module';
-import { NewImplantComponent } from './components/new-implant/new-implant.component';
-import { HistoryComponent } from './components/history/history.component';
+import { ActiveConfig } from '@app/app-routing-guards.module';
+import { GenerateComponent } from './components/generate/generate.component';
+import { BuildsComponent } from './components/builds/builds.component';
+import { BuildDetailsComponent } from './components/build-details/build-details.component';
 import { CanariesComponent } from './components/canaries/canaries.component';
 
 
 const routes: Routes = [
 
-    { path: 'generate/new-implant', component: NewImplantComponent, canActivate: [ActiveConfig] },
-    { path: 'generate/history', component: HistoryComponent, canActivate: [ActiveConfig] },
+    { path: 'generate/new-implant', component: GenerateComponent, canActivate: [ActiveConfig] },
+    { path: 'generate/builds', component: BuildsComponent, canActivate: [ActiveConfig] },
+    { path: 'generate/build-details/:name', component: BuildDetailsComponent, canActivate: [ActiveConfig] },
     { path: 'generate/canaries', component: CanariesComponent, canActivate: [ActiveConfig] },
 
 ];

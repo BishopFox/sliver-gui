@@ -14,6 +14,7 @@
 */
 
 import { Component, OnInit, Inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
@@ -24,9 +25,10 @@ import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 import { FadeInOut } from '@app/shared/animations';
 import { SliverService } from '@app/providers/sliver.service';
 import { ClientService } from '@app/providers/client.service';
+import { EventsService } from '@app/providers/events.service';
 
 
-interface TableSliverBuildData {
+interface TableImplantBuildData {
   name: string;
   os: string;
   arch: string;
@@ -41,72 +43,47 @@ function compare(a: number | string | boolean, b: number | string | boolean, isA
 
 
 @Component({
-  selector: 'app-regenerate-dialog',
-  templateUrl: 'regenerate-dialog.html',
-})
-export class RegenerateDialogComponent {
-
-  constructor(public dialogRef: MatDialogRef<RegenerateDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}
-
-
-@Component({
-  selector: 'app-history',
-  templateUrl: './history.component.html',
-  styleUrls: ['./history.component.scss'],
+  selector: 'generate-builds-table',
+  templateUrl: './builds-table.component.html',
+  styleUrls: ['./builds-table.component.scss'],
   animations: [FadeInOut]
 })
-export class HistoryComponent implements OnInit {
+export class BuildsTableComponent implements OnInit {
 
-  dataSrc: MatTableDataSource<TableSliverBuildData>;
+  dataSrc: MatTableDataSource<TableImplantBuildData>;
   displayedColumns: string[] = [
-    'name', 'os', 'arch', 'debug', 'format'
+    'name', 'os', 'arch', 'debug', 'format', 'regenerate'
   ];
 
   constructor(public dialog: MatDialog,
+              private _router: Router,
               private _snackBar: MatSnackBar,
+              private _eventsService: EventsService,
               private _clientService: ClientService,
               private _sliverService: SliverService) { }
 
   ngOnInit() {
-    this.fetchSliverBuilds();
+    this.fetchImplantBuilds();
+    this._eventsService.builds$.subscribe((_: clientpb.Event) => {
+      this.fetchImplantBuilds();
+    });
   }
 
-  async fetchSliverBuilds() {
+  async fetchImplantBuilds() {
     const implantBuilds = await this._sliverService.implantBuilds();
     this.dataSrc = new MatTableDataSource(this.tableData(implantBuilds));
   }
 
-  tableData(builds: clientpb.ImplantBuilds): TableSliverBuildData[] {
-
-    // For some reason Google thought it'd be cool to not give you any useful
-    // data types, and their docs on how to use protobuf 'maps' in JavaScript
-    // comes down to "read the code bitch." So we just convert these bullshit
-    // types into something useful.
-
-    // .entries() - Returns one of these bullshit un-useful nonsense, but there's an
-    // undocumented attribute within this object `.arr_` that contains the actual
-    // data we want. It's an array of arrays containing [key, value]'s
-
-    // TODO: Refactor
-    const entries = builds.getConfigsMap().getEntryList();
-    const table: TableSliverBuildData[] = [];
-    for (const entry of entries) {
-      const name: string = entry[0];
-      const config: clientpb.ImplantConfig = entry[1];
+  tableData(builds: clientpb.ImplantBuilds): TableImplantBuildData[] {
+    const table: TableImplantBuildData[] = [];
+    for (const [name, build] of builds.toObject().configsMap) {
       table.push({
         name: name,
-        os: config.getGoos(),
-        arch: config.getGoarch(),
-        debug: config.getDebug(),
-        format: this.formatToName(config.getFormat()),
-        c2URLs: this.c2sToURLs(config.getC2List())
+        os: build.goos,
+        arch: build.goarch,
+        debug: build.debug,
+        format: this.formatToName(build.format),
+        c2URLs: this.c2sToURLs(build.c2List)
       });
     }
     return table.sort((a, b) => (a.name > b.name) ? 1 : -1);
@@ -117,29 +94,13 @@ export class HistoryComponent implements OnInit {
   }
 
   onRowSelection(row: any) {
-    const dialogRef = this.dialog.open(RegenerateDialogComponent, {
-      data: row,
-    });
-    dialogRef.afterClosed().subscribe(async (targetRow) => {
-      console.log(`Regenerate target sliver: ${targetRow.name}`);
-      this._snackBar.open(`Regenerating ${targetRow.name}, please wait...`, 'Dismiss', {
-        duration: 5000,
-      });
-      const regenerated = await this._sliverService.regenerate(targetRow.name);
-      if (regenerated) {
-        const msg = `Save regenerated file ${regenerated.getName()}`;
-        const path = await this._clientService.saveFile('Save File', msg, regenerated.getName(), regenerated.getData_asU8());
-        console.log(`Saved file to: ${path}`);
-      } else {
-        console.error(`Failed to regenerate sliver ${targetRow.name}`);
-      }
-    });
+    this._router.navigate(['generate', 'build-details', row.name]);
   }
 
-  c2sToURLs(sliverC2s: clientpb.ImplantC2[]): string[] {
+  c2sToURLs(sliverC2s: clientpb.ImplantC2.AsObject[]): string[] {
     const c2URLs: string[] = [];
     for (let index = 0; index < sliverC2s.length; ++index) {
-      c2URLs.push(sliverC2s[index].getUrl());
+      c2URLs.push(sliverC2s[index].url);
     }
     return c2URLs;
   }
@@ -171,6 +132,44 @@ export class HistoryComponent implements OnInit {
         default: return 0;
       }
     });
+  }
+
+  regenerate(event, row) {
+    event.stopPropagation();
+    const dialogRef = this.dialog.open(RegenerateDialogComponent, {
+      data: row,
+    });
+    dialogRef.afterClosed().subscribe(async (build) => {
+      if (build) {
+        console.log(`Regenerate target sliver: ${build.name}`);
+        this._snackBar.open(`Regenerating ${build.name}, please wait...`, 'Dismiss', {
+          duration: 5000,
+        });
+        const regenerated = await this._sliverService.regenerate(build.name);
+        if (regenerated) {
+          const msg = `Save regenerated file ${regenerated.getName()}`;
+          const path = await this._clientService.saveFile('Save File', msg, regenerated.getName(), regenerated.getData_asU8());
+          console.log(`Saved file to: ${path}`);
+        } else {
+          console.error(`Failed to regenerate sliver ${build.name}`);
+        }
+      }
+    });
+  }
+
+}
+
+@Component({
+  selector: 'generate-regenerate-dialog',
+  templateUrl: 'regenerate-dialog.html',
+})
+export class RegenerateDialogComponent {
+
+  constructor(public dialogRef: MatDialogRef<RegenerateDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }

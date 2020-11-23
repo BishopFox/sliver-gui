@@ -18,19 +18,26 @@ import { IPCService } from './ipc.service';
 import { Subject } from 'rxjs';
 
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
-import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb'; // Protobuf
 
 
-export const Events = {
-  ServerError: 'server',
-  Connected: 'connected',
-  Disconnected: 'disconnected',
-  Joined: 'joined',
-  Left: 'left',
-  Canary: 'canary',
-  Started: 'started',
-  Stopped: 'stopped'
+export enum Events {
+  ServerError = 'server-error',
+  SessionConnected = 'session-connected',
+  SessionDisconnected = 'session-disconnected',
+  ClientJoined = 'client-joined',
+  ClientLeft = 'client-left',
+  Canary = 'canary',
+  JobStarted = 'job-started',
+  JobStopped = 'job-stopped',
+  BuildCompleted = 'build-completed'
 };
+
+export interface Notification {
+  message: string;
+  buttonLabel: string;
+  seconds: number;
+  callback: Function|null;
+}
 
 
 @Injectable({
@@ -43,6 +50,9 @@ export class EventsService {
   players$ = new Subject<clientpb.Event>();
   jobs$ = new Subject<clientpb.Event>();
   sessions$ = new Subject<clientpb.Event>();
+  builds$ = new Subject<clientpb.Event>();
+
+  notifications$ = new Subject<Notification>();
 
   constructor(private _ipc: IPCService) {
 
@@ -54,21 +64,26 @@ export class EventsService {
         switch (eventType) {
 
           // Players
-          case Events.Joined:
-          case Events.Left:
+          case Events.ClientJoined:
+          case Events.ClientLeft:
             this.players$.next(event);
             break;
 
           // Jobs
-          case Events.Started:
-          case Events.Stopped:
+          case Events.JobStarted:
+          case Events.JobStopped:
             this.jobs$.next(event);
             break;
 
           // Sessions
-          case Events.Connected:
-          case Events.Disconnected:
+          case Events.SessionConnected:
+          case Events.SessionDisconnected:
             this.sessions$.next(event);
+            break;
+
+          // Builds
+          case Events.BuildCompleted:
+            this.builds$.next(event);
             break;
 
           default:
@@ -78,6 +93,15 @@ export class EventsService {
       } catch (err) {
         console.error(err);
       }
+    });
+  }
+
+  notify(message: string, buttonLabel: string, seconds: number = 10, callback: Function|null = null) {
+    this.notifications$.next({
+      message: message,
+      buttonLabel: buttonLabel,
+      seconds: seconds,
+      callback: callback,
     });
   }
 

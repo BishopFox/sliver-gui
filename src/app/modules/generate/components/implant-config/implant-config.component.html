@@ -1,0 +1,32 @@
+<div *ngIf="implantConfig">
+  <br />
+  <mat-card>
+    <mat-card-header>
+      <div mat-card-avatar>
+        <i *ngIf="implantConfig.getGoos() === 'windows'" class="fab fa-fw fa-3x fa-windows"></i>
+        <i *ngIf="implantConfig.getGoos() === 'linux'" class="fab fa-fw fa-3x fa-linux"></i>
+        <i *ngIf="implantConfig.getGoos() === 'darwin'" class="fab fa-fw fa-3x fa-apple"></i>
+        <i *ngIf="implantConfig.getGoos() === 'bsd'" class="fab fa-fw fa-3x fa-free-bsd"></i>
+      </div>
+      <mat-card-title>
+        &nbsp;
+        <ng-container i18n>Implant Configuration</ng-container>
+      </mat-card-title>
+      <mat-card-subtitle>
+        &nbsp;
+        {{ implantConfig.getGoos()}}/{{implantConfig.getGoarch() }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        <strong i18n>Format</strong>:  {{ getFormat() }} <br />
+        <strong i18n>Debug</strong>: {{implantConfig.getDebug() }} <br />
+        <strong i18n>Max Connection Errors</strong>: {{ implantConfig.getMaxconnectionerrors() }} <br />
+      </p>
+      <p>
+        <generate-c2-table [c2s]="getC2s()" [title]="false" [editable]="false">
+        </generate-c2-table>
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
