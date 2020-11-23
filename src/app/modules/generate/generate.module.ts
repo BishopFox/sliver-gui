@@ -22,7 +22,7 @@ import { CreateImplantConfigComponent } from './components/create-implant-config
 import { BuildsComponent } from './components/builds/builds.component';
 import { BuildsTableComponent, RegenerateDialogComponent } from './components/builds-table/builds-table.component';
 import { CanariesComponent } from './components/canaries/canaries.component';
-import { GenerateComponent, GeneratingDialogComponent } from './components/generate/generate.component';
+import { GenerateComponent, GeneratingDialogComponent, BuildErrorDialogComponent } from './components/generate/generate.component';
 import {
   C2TableComponent, AddMTLSDialogComponent, AddHTTPDialogComponent, AddDNSDialogComponent
 } from './components/c2-table/c2-table.component';
@@ -35,6 +35,7 @@ import { BuildDetailsComponent } from './components/build-details/build-details.
     CreateImplantConfigComponent,
     BuildsComponent,
     GeneratingDialogComponent,
+    BuildErrorDialogComponent,
     BuildsTableComponent,
     RegenerateDialogComponent,
     CanariesComponent,

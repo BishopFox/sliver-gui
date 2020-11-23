@@ -8,6 +8,14 @@
 
 Download the [latest release](https://github.com/moloch--/sliver-gui/releases) and connect to a Sliver server using a standard operator profile. See the [wiki](https://github.com/moloch--/sliver-gui/wiki) for more details.
 
+### Features
+
+* You can click on stuff!
+* Sandboxed JavaScript scripting engine
+* Built-in script editor
+* i18n Language Support
+
+
 ### FAQ
 
 #### Why Electron!?
@@ -20,18 +28,11 @@ Sliver clients connect over mTLS, which is not available from within a browser. 
 
 #### Is Electron Secure?
 
-While no one can write perfect code, we strive to adhere to application security best practices in every aspect of the GUI implementation. You can [read more about the application architecture here](). In short:
+Hey I tried, you can [read more about the application architecture here](https://github.com/moloch--/reasonably-secure-electron). In short:
  * All content is in a non-`file://` origin.
  * A strict content content security policy (CSP) is applied to all content.
  * The renderer process is sandboxed, and preload scripts have context isolation enabled. Methods in the main process can only be called via JSON and all JSON arguments must pass JSON Schema checks.
  * Extremely limited DOM interactions, nearly the entire interface is implemented via Angular; there are zero calls to `bypassSecurityTrustHtml`.
-
-### Features
-
-* You can click on stuff!
-* Sandboxed JavaScript scripting engine
-* Built-in script editor
-* i18n Language Support
 
 
 ### Build

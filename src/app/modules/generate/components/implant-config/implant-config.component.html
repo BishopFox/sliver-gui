@@ -22,6 +22,8 @@
         <strong i18n>Format</strong>:  {{ getFormat() }} <br />
         <strong i18n>Debug</strong>: {{implantConfig.getDebug() }} <br />
         <strong i18n>Max Connection Errors</strong>: {{ implantConfig.getMaxconnectionerrors() }} <br />
+        <strong i18n>Symbol Obfuscation</strong>: {{ implantConfig.getObfuscatesymbols() }} <br />
+        <strong i18n>Evasion</strong>: {{ implantConfig.getEvasion() }} <br />
       </p>
       <p>
         <generate-c2-table [c2s]="getC2s()" [title]="false" [editable]="false">

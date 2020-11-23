@@ -64,7 +64,7 @@ export class CreateImplantConfigComponent implements OnInit, OnDestroy {
     this.compileTimeForm = this._fb.group({
       reconnect: [60],
       maxErrors: [1000],
-      skipSymbols: [false],
+      symbolObfuscation: [true],
       debug: [false],
     });
 
@@ -113,8 +113,8 @@ export class CreateImplantConfigComponent implements OnInit, OnDestroy {
     return this.compileTimeForm.controls['maxErrors'].value;
   }
 
-  getSkipSymbols(): boolean {
-    return this.compileTimeForm.controls['skipSymbols'].value;
+  getSymbolObfuscation(): boolean {
+    return this.compileTimeForm.controls['symbolObfuscation'].value;
   }
 
   getDebug(): boolean {
@@ -132,7 +132,7 @@ export class CreateImplantConfigComponent implements OnInit, OnDestroy {
     // Compile time values
     implantConfig.setReconnectinterval(this.getReconnect());
     implantConfig.setMaxconnectionerrors(this.getMaxErrors());
-    implantConfig.setObfuscatesymbols(this.getSkipSymbols());
+    implantConfig.setObfuscatesymbols(this.getSymbolObfuscation());
     implantConfig.setDebug(this.getDebug());
 
     implantConfig.setC2List(this.c2s);
