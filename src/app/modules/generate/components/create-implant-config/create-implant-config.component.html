@@ -1,6 +1,6 @@
 <div [@fadeInOut] class="grid-container">
 
-  <mat-horizontal-stepper [linear]="true" #stepper class="stepper-root">
+  <mat-horizontal-stepper class="stepper-root" [linear]="true" #stepper (selectionChange)="onStepChange($event)">
 
     <!-- Step 1: Executable -->
     <mat-step [stepControl]="targetForm" [completed]="false">
@@ -144,7 +144,7 @@
         <ng-container i18n>Summary</ng-container>
       </ng-template>
       <div class="grid-c2-container">
-        <generate-implant-config class="c2-summary" [implantConfig]="implantConfig()">
+        <generate-implant-config *ngIf="selectedIndex === 3" class="c2-summary" [implantConfig]="implantConfig()">
         </generate-implant-config>
         <div class="c2-back-next">
           <button mat-raised-button matStepperPrevious>

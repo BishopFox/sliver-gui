@@ -13,9 +13,10 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 
 import { ClientService } from '@app/providers/client.service';
@@ -39,10 +40,11 @@ export class GenerateComponent implements OnInit {
   generateNameFormSub: Subscription;
   namePattern = RegExp('^[a-zA-Z0-9]*$');
 
-  constructor(private _sliverService: SliverService,
+  constructor(public dialog: MatDialog,
+              private _router: Router,
+              private _sliverService: SliverService,
               private _clientService: ClientService,
               private _eventsService: EventsService,
-              private _router: Router,
               private _fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -77,7 +79,7 @@ export class GenerateComponent implements OnInit {
         this._clientService.saveFile('Save', 'Save Implant', file.getName(), file.getData_asU8());
       });
     }, 0);
-    this._router.navigate(['generate', 'builds', { dialog: 'generating' }]);
+    this.generatingDialog();
   }
 
   getCodename() {
@@ -98,6 +100,28 @@ export class GenerateComponent implements OnInit {
       }
       return null;
     };
+  }
+
+  generatingDialog() {
+    const dialogRef = this.dialog.open(GeneratingDialogComponent);
+    dialogRef.afterClosed().subscribe(() => {
+      this._router.navigate(['generate', 'builds']);
+    });
+  }
+
+}
+
+@Component({
+  selector: 'generate-generating-dialog',
+  templateUrl: './generating.dialog.html',
+})
+export class GeneratingDialogComponent {
+
+  constructor(public dialogRef: MatDialogRef<GeneratingDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }
