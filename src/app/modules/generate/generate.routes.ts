@@ -19,6 +19,8 @@ import { ModuleWithProviders } from '@angular/core';
 import { ActiveConfig } from '@app/app-routing-guards.module';
 import { GenerateComponent } from './components/generate/generate.component';
 import { BuildsComponent } from './components/builds/builds.component';
+import { ProfilesComponent } from './components/profiles/profiles.component';
+import { CreateProfileComponent } from './components/create-profile/create-profile.component';
 import { BuildDetailsComponent } from './components/build-details/build-details.component';
 import { CanariesComponent } from './components/canaries/canaries.component';
 
@@ -27,6 +29,8 @@ const routes: Routes = [
 
     { path: 'generate/new-implant', component: GenerateComponent, canActivate: [ActiveConfig] },
     { path: 'generate/builds', component: BuildsComponent, canActivate: [ActiveConfig] },
+    { path: 'generate/profiles', component: ProfilesComponent, canActivate: [ActiveConfig] },
+    { path: 'generate/new-profile', component: CreateProfileComponent, canActivate: [ActiveConfig] },
     { path: 'generate/build-details/:name', component: BuildDetailsComponent, canActivate: [ActiveConfig] },
     { path: 'generate/canaries', component: CanariesComponent, canActivate: [ActiveConfig] },
 

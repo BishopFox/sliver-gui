@@ -13,21 +13,23 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { IPCHandlers } from './ipc';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-export function isConnected() {
-  return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
 
-    const originalMethod = descriptor.value;
-    descriptor.value = (self: IPCHandlers, arg: string) => {
-      if (self?.client.isConnected) {
-        return originalMethod(self, arg);
-      } else {
-        console.error(`RPC call but client is not connected`);
-        return Promise.reject(`RPC client is not connected`);
-      }
-    };
+@Component({
+  selector: 'generate-profiles',
+  templateUrl: './profiles.component.html',
+  styleUrls: ['./profiles.component.scss']
+})
+export class ProfilesComponent implements OnInit {
 
-    return descriptor;
-  };
+  constructor(private _router: Router) { }
+
+  ngOnInit(): void { }
+
+  newProfile() {
+    this._router.navigate(['generate', 'new-profile']);
+  }
+
 }

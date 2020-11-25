@@ -28,6 +28,9 @@ import {
 } from './components/c2-table/c2-table.component';
 import { ImplantConfigComponent } from './components/implant-config/implant-config.component';
 import { BuildDetailsComponent } from './components/build-details/build-details.component';
+import { CreateProfileComponent } from './components/create-profile/create-profile.component';
+import { ProfilesComponent } from './components/profiles/profiles.component';
+import { ProfilesTableComponent } from './components/profiles-table/profiles-table.component';
 
 
 @NgModule({
@@ -46,6 +49,9 @@ import { BuildDetailsComponent } from './components/build-details/build-details.
     AddDNSDialogComponent,
     ImplantConfigComponent,
     BuildDetailsComponent,
+    CreateProfileComponent,
+    ProfilesComponent,
+    ProfilesTableComponent,
   ],
   imports: [
     CommonModule,
