@@ -275,6 +275,27 @@ export class IPCHandlers {
     return Base64.fromUint8Array(regenerated.serializeBinary());
   }
 
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "profile": {"type": "string", "minLength": 1},
+    },
+    "required": ["profile"],
+    "additionalProperties": false
+  })
+  async rpc_saveImplantProfile(self: IPCHandlers, req: any): Promise<string> {
+    const profile = clientpb.ImplantProfile.deserializeBinary(Base64.toUint8Array(req.profile));
+    const savedProfile = await self.client.saveImplantProfile(profile);
+    return Base64.fromUint8Array(savedProfile.serializeBinary());
+  }
+
+  @isConnected()
+  async rpc_implantProfiles(self: IPCHandlers): Promise<string[]> {
+    const profiles = await self.client.implantProfiles();
+    return profiles.map(profile => Base64.fromUint8Array(profile.serializeBinary()));
+  }
+
   // Session Interaction
   @isConnected()
   @jsonSchema({
