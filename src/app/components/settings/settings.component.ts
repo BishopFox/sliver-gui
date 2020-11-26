@@ -15,7 +15,7 @@
 
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ClientService, Settings } from '@app/providers/client.service';
+import { ClientService, Settings, Themes, DEFAULT_THEME } from '@app/providers/client.service';
 
 
 @Component({
@@ -28,6 +28,9 @@ export class SettingsComponent implements OnInit {
   settings: Settings;
   locales: Map<string, string>;
   currentLocale: string;
+  currentTheme: string;
+
+  themes = [Themes.Auto, Themes.Dark, Themes.Light];
 
   constructor(public dialog: MatDialog,
               private _clientService: ClientService) { }
@@ -39,6 +42,13 @@ export class SettingsComponent implements OnInit {
 
   async fetchSettings() {
     this.settings = await this._clientService.getSettings();
+    this.currentTheme = this.settings.theme ? this.settings.theme : DEFAULT_THEME;
+  }
+
+  async saveSettings() {
+    console.log(`[Save Settings] ${JSON.stringify(this.settings)}`);
+    await this._clientService.saveSettings(this.settings);
+    await this.fetchSettings();
   }
 
   async fetchLocales() {
@@ -53,6 +63,12 @@ export class SettingsComponent implements OnInit {
   async selectLanguage(event) {
     await this._clientService.setLocale(event.value);
     this.dialog.open(RestartDialogComponent);
+  }
+
+  async selectTheme(event) {
+    console.log(event.value);
+    this.settings.theme = event.value;
+    this.saveSettings();
   }
 
 }
