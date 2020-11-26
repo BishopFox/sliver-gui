@@ -17,8 +17,7 @@
 
   <div class="grid-container">
     
-    <div class="language">
-
+    <div *ngIf="locales" class="language">
       <mat-form-field appearance="fill">
         <mat-label i18n>Language</mat-label>
         <mat-select [(value)]="currentLocale" (selectionChange)="selectLanguage($event)">
@@ -27,7 +26,17 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+    </div>
 
+    <div *ngIf="currentTheme" class="theme">
+      <mat-form-field appearance="fill">
+        <mat-label i18n>Theme</mat-label>
+        <mat-select [(value)]="currentTheme" (selectionChange)="selectTheme($event)">
+          <mat-option *ngFor="let theme of themes" [value]="theme">
+            {{ theme }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
     
   </div>

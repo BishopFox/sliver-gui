@@ -733,26 +733,13 @@ export class IPCHandlers {
           if (err) {
             return reject(err);
           }
-          JSON.parse(data);
+          JSON.parse(data); // Just make sure we can parse it
           resolve(data);
         });
       } catch (err) {
         reject(err);
       }
     });
-  }
-
-  public async client_listLocales(self: IPCHandlers): Promise<string> {
-    return JSON.stringify(getLocalesJSON());
-  }
-
-  public async client_currentLocale(self: IPCHandlers): Promise<string> {
-    return getCurrentLocale();
-  }
-
-  public async client_setLocale(self: IPCHandlers, req: string): Promise<string> {
-    setLocaleSync(req);
-    return getCurrentLocale();
   }
 
   // The Node process never interacts with the "settings" values, so
@@ -782,6 +769,19 @@ export class IPCHandlers {
         reject(err);
       }
     });
+  }
+
+  public async client_listLocales(self: IPCHandlers): Promise<string> {
+    return JSON.stringify(getLocalesJSON());
+  }
+
+  public async client_currentLocale(self: IPCHandlers): Promise<string> {
+    return getCurrentLocale();
+  }
+
+  public async client_setLocale(self: IPCHandlers, req: string): Promise<string> {
+    setLocaleSync(req);
+    return getCurrentLocale();
   }
 
   @jsonSchema({

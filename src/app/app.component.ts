@@ -14,11 +14,13 @@
 */
 
 import { Component } from '@angular/core';
+import {OverlayContainer} from '@angular/cdk/overlay';
 import { EventsService, Events, Notification } from './providers/events.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
+import { ClientService, Settings } from './providers/client.service';
 
 
 @Component({
@@ -28,15 +30,36 @@ import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 })
 export class AppComponent {
 
+  private readonly DARK_CSS = 'unicorn-dark-theme';
+  
   mainWindow = window.location.origin == "app://sliver";
+  settings: Settings;
 
   constructor(private _router: Router,
+              private _overlayContainer: OverlayContainer,
               private _eventsService: EventsService,
+              private _clientService: ClientService,
               private _snackBar: MatSnackBar) 
   {
     if (this.mainWindow) {
       this.initAlerts();
     }
+    this.fetchSettings();
+    this.setDarkTheme();
+  }
+
+  async fetchSettings() {
+    this.settings = await this._clientService.getSettings();
+  }
+
+  setDarkTheme() {
+    document.body.classList.add(this.DARK_CSS);
+    this._overlayContainer.getContainerElement().classList.add(this.DARK_CSS);
+  }
+
+  setLightTheme() {
+    document.body.classList.remove(this.DARK_CSS);
+    this._overlayContainer.getContainerElement().classList.remove(this.DARK_CSS);
   }
 
   initAlerts() {

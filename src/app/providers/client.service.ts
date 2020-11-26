@@ -27,6 +27,14 @@ import { IPCService } from './ipc.service';
 import { FileFilter } from 'electron';
 
 
+export enum Themes {
+  Auto = 'Auto',
+  Dark = 'Dark',
+  Light = 'Light'
+}
+
+export const DEFAULT_THEME = Themes.Auto;
+
 export interface SaveFileReq {
   title: string;
   message: string;
@@ -46,6 +54,7 @@ export interface ReadFiles {
 
 export interface Settings {
 
+  theme: string;
   preferredServer: string;
 
   notifications: {
@@ -112,9 +121,14 @@ export class ClientService {
     return data ? JSON.parse(data) : {};
   }
 
-  async setSettings(settings: Settings): Promise<Settings> {
-    await this._ipc.request('client_setSettings', JSON.stringify(settings));
-    return this.getSettings();
+  async saveSettings(settings: Settings): Promise<Settings> {
+    const updated = await this._ipc.request('client_saveSettings', JSON.stringify(settings));
+    return JSON.parse(updated);
+  }
+
+  async getTheme(): Promise<string> {
+    const settings = await this.getSettings();
+    return settings.theme ? settings.theme : DEFAULT_THEME;
   }
 
   async listConfigs(): Promise<sliver.SliverClientConfig[]> {

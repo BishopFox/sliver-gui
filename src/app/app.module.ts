@@ -20,8 +20,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { registerLocaleData } from '@angular/common';
-import localeFr from '@angular/common/locales/fr';
 
 import { AppRoutingModule } from './app-routing.module';
 
