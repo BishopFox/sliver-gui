@@ -13,14 +13,15 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {OverlayContainer} from '@angular/cdk/overlay';
 import { EventsService, Events, Notification } from './providers/events.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
-import { ClientService, Settings } from './providers/client.service';
+import { ClientService, Settings, Themes } from './providers/client.service';
 
 
 @Component({
@@ -28,12 +29,13 @@ import { ClientService, Settings } from './providers/client.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
 
   private readonly DARK_CSS = 'unicorn-dark-theme';
   
   mainWindow = window.location.origin == "app://sliver";
   settings: Settings;
+  settingsSub: Subscription;
 
   constructor(private _router: Router,
               private _overlayContainer: OverlayContainer,
@@ -44,20 +46,58 @@ export class AppComponent {
     if (this.mainWindow) {
       this.initAlerts();
     }
+  }
+
+  ngOnInit(): void {
     this.fetchSettings();
-    this.setDarkTheme();
+    this.settingsSub = this._clientService.settings$.subscribe((settings: Settings) => {
+      console.log(`Emitted: ${settings}`);
+      this.settings = settings;
+      this.setTheme();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.settingsSub?.unsubscribe();
   }
 
   async fetchSettings() {
     this.settings = await this._clientService.getSettings();
+    this.setTheme();
   }
 
-  setDarkTheme() {
+  setTheme() {
+    console.log(`Set theme to: ${this.settings.theme}`);
+    switch(this.settings.theme) {
+      case Themes.Auto:
+        this.setAutoTheme();
+        break;
+      case Themes.Dark:
+        this.setDarkTheme();
+        break;
+      case Themes.Light:
+        this.setLightTheme();
+        break;
+      default:
+        this.setAutoTheme();
+    }
+  }
+
+  async setAutoTheme(): Promise<void> {
+    const isDark = await this._clientService.getSystemThemeIsDark();
+    if (isDark) {
+      this.setDarkTheme();
+    } else {
+      this.setLightTheme();
+    }
+  }
+
+  setDarkTheme(): void {
     document.body.classList.add(this.DARK_CSS);
     this._overlayContainer.getContainerElement().classList.add(this.DARK_CSS);
   }
 
-  setLightTheme() {
+  setLightTheme(): void {
     document.body.classList.remove(this.DARK_CSS);
     this._overlayContainer.getContainerElement().classList.remove(this.DARK_CSS);
   }
