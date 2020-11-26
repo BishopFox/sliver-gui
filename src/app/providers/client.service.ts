@@ -17,7 +17,7 @@ This service is talks to the mTLS client and manages configs/etc.
 
 */
 
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Base64 } from 'js-base64';
 
@@ -76,6 +76,7 @@ export interface Settings {
 export class ClientService {
 
   isConnected$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  settings$ = new EventEmitter<Settings>();
 
   constructor(private _ipc: IPCService) { }
 
@@ -122,13 +123,20 @@ export class ClientService {
   }
 
   async saveSettings(settings: Settings): Promise<Settings> {
-    const updated = await this._ipc.request('client_saveSettings', JSON.stringify(settings));
-    return JSON.parse(updated);
+    const raw = await this._ipc.request('client_saveSettings', JSON.stringify(settings));
+    const updated = JSON.parse(raw);
+    this.settings$.next(updated);
+    return updated;
   }
 
   async getTheme(): Promise<string> {
     const settings = await this.getSettings();
     return settings.theme ? settings.theme : DEFAULT_THEME;
+  }
+
+  async getSystemThemeIsDark(): Promise<boolean> {
+    const isDark = await this._ipc.request('client_systemThemeIsDark');
+    return isDark === 'true' ? true : false;
   }
 
   async listConfigs(): Promise<sliver.SliverClientConfig[]> {
