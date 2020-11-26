@@ -51,7 +51,6 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.fetchSettings();
     this.settingsSub = this._clientService.settings$.subscribe((settings: Settings) => {
-      console.log(`Emitted: ${settings}`);
       this.settings = settings;
       this.setTheme();
     });

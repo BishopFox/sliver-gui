@@ -1,0 +1,104 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$bf-purple: (
+    50 : #eee6f4,
+    100 : #d4c1e3,
+    200 : #b798d0,
+    300 : #9a6ebd,
+    400 : #854fae,
+    500 : #6f30a0,
+    600 : #672b98,
+    700 : #5c248e,
+    800 : #521e84,
+    900 : #401373,
+    A100 : #cea9ff,
+    A200 : #b176ff,
+    A400 : #9443ff,
+    A700 : #852aff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$bf-red: (
+    50 : #f9e8e5,
+    100 : #f1c6be,
+    200 : #e8a093,
+    300 : #df7967,
+    400 : #d85d47,
+    500 : #d14026,
+    600 : #cc3a22,
+    700 : #c6321c,
+    800 : #c02a17,
+    900 : #b51c0d,
+    A100 : #ffe4e2,
+    A200 : #ffb4af,
+    A400 : #ff857c,
+    A700 : #ff6d63,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+// -------------------
+//  Light Theme
+// -------------------
+$candy-app-primary: mat-palette($bf-purple);
+$candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$candy-app-warn: mat-palette($bf-red);
+$candy-app-theme:   mat-light-theme((
+  color: (
+    primary: $candy-app-primary,
+    accent: $candy-app-accent,
+    warn: $candy-app-warn,
+  )
+));
+@include angular-material-theme($candy-app-theme);
+
+
+// -------------------
+//  Dark Theme
+// -------------------
+$dark-primary: mat-palette($bf-purple);
+$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
+$dark-warn:    mat-palette($bf-red);
+$dark-theme:   mat-dark-theme((
+  color: (
+    primary: $dark-primary,
+    accent: $dark-accent,
+    warn: $dark-warn,
+  )
+));
+
+// Guardrail Dark Theme with CSS Class
+.unicorn-dark-theme {
+  @include angular-material-color($dark-theme);
+}
