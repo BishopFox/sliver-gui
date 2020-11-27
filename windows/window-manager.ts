@@ -20,6 +20,10 @@ export class WindowManager {
     this.handlers = new IPCHandlers(this);
   }
 
+  async init() {
+    await this.workerManager.init();
+  }
+
   private startIPCHandlers() {
     ipcMain.on('ipc', async (event: IpcMainEvent, msg: IPCMessage, origin: string) => {
       dispatchIPC(this.handlers, msg.method, msg.data).then((result: any) => {

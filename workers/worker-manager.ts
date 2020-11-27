@@ -1,6 +1,6 @@
 /*
   Sliver Implant Framework
-  Copyright (C) 2019  Bishop Fox
+  Copyright (C) 2020  Bishop Fox
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -14,116 +14,87 @@
 */
 
 import { homedir } from 'os';
-
+import { Sequelize, Model, ModelCtor } from 'sequelize';
 import * as os from 'os';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as uuid from 'uuid';
 
+import { ScriptModel } from './models';
+
 
 const CLIENT_DIR = path.join(homedir(), '.sliver-client');
 const SCRIPTS_DIR = path.join(CLIENT_DIR, 'scripts');
 const SAVED_DIR = path.join(SCRIPTS_DIR, 'saved');
-const SAVED_INDEX = path.join(SAVED_DIR, 'index.json');
+const SCRIPTS_DB = path.join(SCRIPTS_DIR, 'scripts.db');
 const SCRIPT_FILE = 'code.js';
 
 
 export class WorkerManager {
 
   private execDir = os.tmpdir();
+  private sequelize: Sequelize;
+  private Script: ModelCtor<Model<any, any>>;
 
   constructor() {
     console.log(`[WorkerManager] execDir: ${this.execDir}`);
     fs.mkdirSync(SAVED_DIR, { mode: 0o700, recursive: true });
   }
 
-  private async saveScriptIndex(scriptIndex: Map<string, string>): Promise<void> {
-    const data = JSON.stringify(this.indexToJSON(scriptIndex));
-    const fileOptions = { mode: 0o600, encoding: 'utf-8' };
-    return new Promise((resolve, reject) => {
-      fs.writeFile(SAVED_INDEX, data, fileOptions, (err) => {
-        err ? reject(err) : resolve();
-      });
+  async init() {
+    console.log(`Init sqlite database ...`);
+    this.sequelize = new Sequelize({
+      dialect: 'sqlite',
+      storage: SCRIPTS_DB,
     });
-  }
-
-  private indexToJSON(scriptIndex: Map<string, string>): any {
-    return Array.from(scriptIndex.entries()).reduce((obj, [key, value]) => { 
-        obj[key] = value; 
-        return obj; 
-      }, {});
-  }
-
-  private async loadScriptIndex(): Promise<Map<string, string>> {
-    const scriptIndex = new Map<string, string>();
-    if (!fs.existsSync(SAVED_INDEX)) {
-      return new Map<string, string>();
-    }
-    return new Promise((resolve, reject) => {
-      fs.readFile(SAVED_INDEX, (err, data: Buffer) => {
-        if (err) {
-          return reject(err);
-        }
-        try {
-          const saved = JSON.parse(data.toString());
-          Object.keys(saved).forEach((key: string) => {
-            scriptIndex.set(key, saved[key]);
-          });
-          resolve(scriptIndex);
-        } catch(err) {
-          reject(err);
-        }
-      });
-    });
+    this.Script = ScriptModel(this.sequelize);
+    await this.sequelize.sync();
+    console.log(`Database initialization completed`);
   }
 
   async newScript(name: string, code: string): Promise<string> {
-    const scriptIndex = await this.loadScriptIndex();
-    let id = uuid.v4();
-    scriptIndex.set(id, name);
+    const script: any = await this.Script.create({name: name});
+    console.log(script);
     return new Promise(async (resolve, reject) => {
       const fileOptions = { mode: 0o600, encoding: 'utf-8' };
-      fs.writeFile(path.join(SAVED_DIR, id), code, fileOptions, async (err) => {
+      fs.writeFile(path.join(SAVED_DIR, script.id), code, fileOptions, async (err) => {
         if (err) {
           return reject(err);
         }
-        await this.saveScriptIndex(scriptIndex);
-        resolve(id);
+        resolve(script.id);
       });
     });
   }
 
   async updateScript(id: string, name: string, code: string) {
-    const scriptIndex = await this.loadScriptIndex();
-    if (!scriptIndex.has(id)) {
-      return;
+    const script = await this.Script.findByPk(id);
+    if (script.getDataValue('name') !== name) {
+      await this.Script.update({name: name}, {where: {id: script.getDataValue('id')}});
     }
-    scriptIndex.set(id, name);
-    await this.saveScriptIndex(scriptIndex);
     return new Promise((resolve, reject) => {
       const fileOptions = { mode: 0o600, encoding: 'utf-8' };
-      fs.writeFile(path.join(SAVED_DIR, id), code, fileOptions, (err) => {
+      fs.writeFile(path.join(SAVED_DIR, script.getDataValue('id')), code, fileOptions, (err) => {
         err ? reject(err) : resolve();
       });
     });
   }
 
-  async listScripts(): Promise<any> {
-    const scriptIndex = await this.loadScriptIndex();
-    return this.indexToJSON(scriptIndex);
+  async scripts(): Promise<any> {
+    const dbScripts = await this.Script.findAll();
+    const scripts = {};
+    dbScripts.forEach((script: any) => {
+      scripts[script.getDataValue('id')] = script.getDataValue('name');
+    });
+    return scripts;
   }
 
   async loadScript(id: string): Promise<any> {
-    const scriptIndex = await this.loadScriptIndex();
-    if (!scriptIndex.has(id)) {
-      return null;
-    }
-    const name = scriptIndex.get(id);
+    const script: any = await this.Script.findByPk(id);
     return new Promise((resolve, reject) => {
-      fs.readFile(path.join(SAVED_DIR, id), (err, data: Buffer) => {
+      fs.readFile(path.join(SAVED_DIR, script.getDataValue('id')), (err, data: Buffer) => {
         err ? reject(err) : resolve({
           id: id,
-          name: name,
+          name: script.getDataValue('name'),
           code: data.toString()
         });
       });
@@ -131,13 +102,8 @@ export class WorkerManager {
   }
 
   async removeScript(id: string): Promise<void> {
-    const scriptIndex = await this.loadScriptIndex();
-    if (!scriptIndex.has(id)) {
-      return;
-    }
+    await this.Script.destroy({where: { id: id }});
     fs.unlink(path.join(SAVED_DIR, id), (err) => { console.error(err) });
-    scriptIndex.delete(id);
-    await this.saveScriptIndex(scriptIndex);
   }
 
   async startScriptExecution(script: string): Promise<string> {

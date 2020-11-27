@@ -23,17 +23,14 @@ import {
 } from 'electron';
 import { homedir } from 'os';
 import { Base64 } from 'js-base64';
-
 import * as fs from 'fs';
 import * as path from 'path';
 import * as uuid from 'uuid';
+import { SliverClient, SliverClientConfig } from 'sliver-script';
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 import { jsonSchema } from './json-schema';
 import { isConnected } from './is-connected';
-import { SliverClient, SliverClientConfig } from 'sliver-script';
-
-import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
-
 import { getLocalesJSON, getClientDir, getCurrentLocale, setLocaleSync } from '../locale';
 import { WindowManager } from '../windows/window-manager';
 import { WorkerManager } from '../workers/worker-manager';
@@ -41,6 +38,7 @@ import { WorkerManager } from '../workers/worker-manager';
 
 const CONFIG_DIR = path.join(getClientDir(), 'configs');
 const SETTINGS_PATH = path.join(getClientDir(), 'gui-settings.json');
+const DB_PATH = path.join(getClientDir(), '');
 const MINUTE = 60;
 
 export interface SaveFileReq {
@@ -179,7 +177,7 @@ export class IPCHandlers {
 
   @isConnected()
   async script_list(self: IPCHandlers): Promise<string> {
-    const scripts = await self._workerManager.listScripts();
+    const scripts = await self._workerManager.scripts();
     return JSON.stringify(scripts);
   }
 

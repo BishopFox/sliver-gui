@@ -213,9 +213,15 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 
 // Theme Init
 @include angular-material-theme($theme);
+.mat-row:hover {
+  background-color: #2c2c2c;
+}
 
 .light-theme {
   @include angular-material-theme($altTheme);
+  .mat-row:hover {
+    background-color: #f5f5f5;
+  }
 }
 
 // Specific component overrides, pieces that are not in line with the general theming
