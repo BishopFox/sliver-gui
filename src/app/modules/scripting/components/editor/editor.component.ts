@@ -22,6 +22,7 @@ import { debounceTime, filter, take } from 'rxjs/operators';
 
 import { WorkersService, Script } from '@app/providers/workers.service';
 import { FadeInOut } from '@app/shared/animations';
+import { ClientService, Themes } from '@app/providers/client.service';
 
 
 @Component({
@@ -34,12 +35,7 @@ export class EditorComponent implements OnInit {
 
   siaf: boolean = true;
   editor: MonacoEditorComponent;
-  editorOptions = {
-    theme: 'vs',
-    fontFamily: 'Source Code Pro',
-    fontSize: 13,
-    language: 'javascript'
-  };
+  editorOptions: any;
 
   scriptId: string;
   name: string;
@@ -51,6 +47,7 @@ export class EditorComponent implements OnInit {
   constructor(private _route: ActivatedRoute,
               private _router: Router,
               private _workersService: WorkersService,
+              private _clientService: ClientService,
               private _monacoLoaderService: MonacoEditorLoaderService) 
   {
     this._monacoLoaderService.isMonacoLoaded$.pipe(
@@ -63,6 +60,7 @@ export class EditorComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initEditorOptions();
 
     this._route.params.subscribe((params) => {
       this.scriptId = params['script-id'];
@@ -93,7 +91,7 @@ export class EditorComponent implements OnInit {
     this._workersService.updateScript(this.scriptId, this.name, this.code);
   }
 
-  editorInit(editor: MonacoEditorComponent) {
+  async editorInit(editor: MonacoEditorComponent) {
     this.editor = editor;
   }
 
@@ -102,6 +100,29 @@ export class EditorComponent implements OnInit {
     const execId = await this._workersService.startWorker(this.name, execCode);
     console.log(`Started execution with id ${execId}`);
     this._router.navigate(['scripting', 'tasks', execId]);
+  }
+
+  async initEditorOptions() {
+    let theme = await this._clientService.getTheme();
+    if (theme === Themes.Auto) {
+      const isDark = await this._clientService.getSystemThemeIsDark();
+      theme = isDark ? Themes.Dark : Themes.Light;
+    }
+    if (theme === Themes.Dark) {
+      this.editorOptions =  {
+        theme: 'vs-dark',
+        fontFamily: 'Source Code Pro',
+        fontSize: 13,
+        language: 'javascript'
+      };
+    } else {
+      this.editorOptions = {
+        theme: 'vs',
+        fontFamily: 'Source Code Pro',
+        fontSize: 13,
+        language: 'javascript'
+      };
+    }
   }
 
   // --------------------
