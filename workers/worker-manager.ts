@@ -35,6 +35,7 @@ export class WorkerManager {
   private execDir = os.tmpdir();
   private sequelize: Sequelize;
   private Script: ModelCtor<Model<any, any>>;
+  private ScriptFileSystemAccess: ModelCtor<Model<any, any>>;
 
   constructor() {
     console.log(`[WorkerManager] execDir: ${this.execDir}`);
@@ -47,14 +48,13 @@ export class WorkerManager {
       dialect: 'sqlite',
       storage: SCRIPTS_DB,
     });
-    this.Script = ScriptModel(this.sequelize);
+    [this.Script, this.ScriptFileSystemAccess] = ScriptModel(this.sequelize);
     await this.sequelize.sync();
     console.log(`Database initialization completed`);
   }
 
   async newScript(name: string, code: string): Promise<string> {
     const script: any = await this.Script.create({name: name});
-    console.log(script);
     return new Promise(async (resolve, reject) => {
       const fileOptions = { mode: 0o600, encoding: 'utf-8' };
       fs.writeFile(path.join(SAVED_DIR, script.id), code, fileOptions, async (err) => {

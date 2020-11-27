@@ -128,7 +128,7 @@ $mat-dark-theme-background: (
   dialog:                   $dark-bg-lighter-5,
   tooltip:                  $dark-bg-lighter-20,
   disabled-button:          $light-bg-alpha-12,
-  raised-button:            $dark-bg-lighter-5,
+  raised-button:            $dark-bg-lighter-20,
   focused-button:           $light-focused,
   selected-button:          $dark-bg-lighter-20,
   selected-disabled-button: $dark-bg-lighter-30,
@@ -214,7 +214,7 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 // Theme Init
 @include angular-material-theme($theme);
 .mat-row:hover {
-  background-color: #2c2c2c;
+  background-color: $dark-bg-lighter-10;
 }
 
 .light-theme {

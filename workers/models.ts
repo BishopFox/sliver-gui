@@ -15,7 +15,24 @@
 
 import { Sequelize, DataTypes, Model, ModelCtor, UUIDV4 } from 'sequelize';
 
-export function ScriptModel(sequelize: Sequelize): ModelCtor<Model<any, any>> {
+
+
+export function ScriptModel(sequelize: Sequelize): [ModelCtor<Model<any, any>>, ModelCtor<Model<any, any>>] {
+  const ScriptFileSystemAccess = sequelize.define('Script', {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: UUIDV4,
+      primaryKey: true
+    },
+    path: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+  }, {
+    timestamps: true,
+  });
+
+
   const Script = sequelize.define('Script', {
     id: {
       type: DataTypes.UUID,
@@ -29,5 +46,7 @@ export function ScriptModel(sequelize: Sequelize): ModelCtor<Model<any, any>> {
   }, {
     timestamps: true,
   });
-  return Script;
+  Script.hasMany(ScriptFileSystemAccess, { as: 'access' });
+
+  return [Script, ScriptFileSystemAccess];
 }
