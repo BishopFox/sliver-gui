@@ -31,7 +31,7 @@ import { ClientService, Settings, Themes } from './providers/client.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  private readonly DARK_CSS = 'unicorn-dark-theme';
+  private readonly LIGHT_CSS = 'light-theme';
   
   mainWindow = window.location.origin == "app://sliver";
   settings: Settings;
@@ -92,13 +92,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   setDarkTheme(): void {
-    document.body.classList.add(this.DARK_CSS);
-    this._overlayContainer.getContainerElement().classList.add(this.DARK_CSS);
+    document.body.classList.remove(this.LIGHT_CSS);
+    this._overlayContainer.getContainerElement().classList.remove(this.LIGHT_CSS);
   }
 
   setLightTheme(): void {
-    document.body.classList.remove(this.DARK_CSS);
-    this._overlayContainer.getContainerElement().classList.remove(this.DARK_CSS);
+    document.body.classList.add(this.LIGHT_CSS);
+    this._overlayContainer.getContainerElement().classList.add(this.LIGHT_CSS);
   }
 
   initAlerts() {
