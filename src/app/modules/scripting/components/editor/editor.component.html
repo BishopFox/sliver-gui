@@ -23,7 +23,7 @@
 
     </mat-toolbar>
   </div>
-  <div>
+  <div *ngIf="editorOptions">
     <ngx-monaco-editor style="height: 600px" [options]="editorOptions" [(ngModel)]="code" (init)="editorInit($event)">
     </ngx-monaco-editor>
   </div>
