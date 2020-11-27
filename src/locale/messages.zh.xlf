@@ -91,9 +91,12 @@
       <context-group purpose="location"><context context-type="sourcefile">src/app/components/settings/settings.component.html</context><context context-type="linenumber">9</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context><context context-type="linenumber">9</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/build-details/build-details.component.html</context><context context-type="linenumber">8</context></context-group></trans-unit>
       <trans-unit id="fe46ccaae902ce974e2441abe752399288298619" datatype="html">
         <source>Language</source><target state="translated">语言</target>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/components/settings/settings.component.html</context><context context-type="linenumber">22</context></context-group></trans-unit><trans-unit id="27a56aad79d8b61269ed303f11664cc78bcc2522" datatype="html">
+        <source>Theme</source><target state="translated">主题</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/settings/settings.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="fae2a21959315be80f69be06da6fd3a0fb3c272c" datatype="html">

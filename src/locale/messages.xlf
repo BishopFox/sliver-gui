@@ -126,7 +126,14 @@
         <source>Language</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/settings/settings.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="27a56aad79d8b61269ed303f11664cc78bcc2522" datatype="html">
+        <source>Theme</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/settings/settings.component.html</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="fae2a21959315be80f69be06da6fd3a0fb3c272c" datatype="html">
@@ -584,13 +591,6 @@
           <context context-type="linenumber">17,18</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4c37ff662409730f928d07f3088b7192705f9cc6" datatype="html">
-        <source> New Profile </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/profiles/profiles.component.html</context>
-          <context context-type="linenumber">8,9</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="994363f08f9fbfa3b3994ff7b35c6904fdff18d8" datatype="html">
         <source>Profile</source>
         <context-group purpose="location">
@@ -622,6 +622,13 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/create-profile/create-profile.component.html</context>
           <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4c37ff662409730f928d07f3088b7192705f9cc6" datatype="html">
+        <source> New Profile </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/profiles/profiles.component.html</context>
+          <context context-type="linenumber">8,9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6a463a3d2386d508d6f02a61c1d32ca80f7c9c70" datatype="html">
