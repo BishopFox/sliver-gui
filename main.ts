@@ -32,11 +32,12 @@ protocol.registerSchemesAsPrivileged([{
 
 
 // ----------------------------------------- [ MAIN ] -----------------------------------------
-function main() {
+async function main() {
   try {
 
     let mainWindow;
     const windowManager = new WindowManager();
+    windowManager.init();
 
     // Custom protocol handler
     app.on('ready', () => {

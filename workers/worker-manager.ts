@@ -1,6 +1,6 @@
 /*
   Sliver Implant Framework
-  Copyright (C) 2019  Bishop Fox
+  Copyright (C) 2020  Bishop Fox
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -29,6 +29,7 @@ import { ScriptModels } from './models';
 const CLIENT_DIR = path.join(homedir(), '.sliver-client');
 const SCRIPTS_DIR = path.join(CLIENT_DIR, 'scripts');
 const SAVED_DIR = path.join(SCRIPTS_DIR, 'saved');
+const SCRIPTS_DB = path.join(SCRIPTS_DIR, 'scripts.db');
 const SCRIPT_FILE = 'code.js';
 
 enum FileSystemPermissions {
@@ -129,6 +130,7 @@ export class WorkerManager {
   async removeScript(id: string): Promise<void> {
     const script = await this.Script.findByPk(id);
     await script.destroy();
+    await this.Script.destroy({where: { id: id }});
     fs.unlink(path.join(SAVED_DIR, id), (err) => { console.error(err) });
   }
 
