@@ -15,112 +15,53 @@
 
 import { homedir } from 'os';
 
+import { dialog } from 'electron';
+import { Sequelize, Model, ModelCtor } from 'sequelize';
+
 import * as os from 'os';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as uuid from 'uuid';
 
+import { ScriptModels } from './models';
+
 
 const CLIENT_DIR = path.join(homedir(), '.sliver-client');
 const SCRIPTS_DIR = path.join(CLIENT_DIR, 'scripts');
 const SAVED_DIR = path.join(SCRIPTS_DIR, 'saved');
-const SAVED_INDEX = path.join(SAVED_DIR, 'index.json');
 const SCRIPT_FILE = 'code.js';
+
+enum FileSystemPermissions {
+  ReadOnly = 'Read-only',
+  Writable = 'Writable'
+}
 
 
 export class WorkerManager {
 
   private execDir = os.tmpdir();
+  private sequelize: Sequelize;
+
+  // ExecId <-> ScriptId
+  private scriptExecutions = new Map<string, string>();
+  Script: ModelCtor<Model<any, any>>;
+  ScriptFileSystemAccess: ModelCtor<Model<any, any>>;
 
   constructor() {
     console.log(`[WorkerManager] execDir: ${this.execDir}`);
     fs.mkdirSync(SAVED_DIR, { mode: 0o700, recursive: true });
   }
 
-  private async saveScriptIndex(scriptIndex: Map<string, string>): Promise<void> {
-    const data = JSON.stringify(this.indexToJSON(scriptIndex));
-    const fileOptions = { mode: 0o600, encoding: 'utf-8' };
-    return new Promise((resolve, reject) => {
-      fs.writeFile(SAVED_INDEX, data, fileOptions, (err) => {
-        err ? reject(err) : resolve();
-      });
-    });
-  }
-
-  private indexToJSON(scriptIndex: Map<string, string>): any {
-    return Array.from(scriptIndex.entries()).reduce((obj, [key, value]) => { 
-        obj[key] = value; 
-        return obj; 
-      }, {});
-  }
-
-  private async loadScriptIndex(): Promise<Map<string, string>> {
-    const scriptIndex = new Map<string, string>();
-    if (!fs.existsSync(SAVED_INDEX)) {
-      return new Map<string, string>();
-    }
-    return new Promise((resolve, reject) => {
-      fs.readFile(SAVED_INDEX, (err, data: Buffer) => {
-        if (err) {
-          return reject(err);
-        }
-        try {
-          const saved = JSON.parse(data.toString());
-          Object.keys(saved).forEach((key: string) => {
-            scriptIndex.set(key, saved[key]);
-          });
-          resolve(scriptIndex);
-        } catch(err) {
-          reject(err);
-        }
-      });
-    });
-  }
-
-  async newScript(name: string, code: string): Promise<string> {
-    const scriptIndex = await this.loadScriptIndex();
-    let id = uuid.v4();
-    scriptIndex.set(id, name);
-    return new Promise(async (resolve, reject) => {
-      const fileOptions = { mode: 0o600, encoding: 'utf-8' };
-      fs.writeFile(path.join(SAVED_DIR, id), code, fileOptions, async (err) => {
-        if (err) {
-          return reject(err);
-        }
-        await this.saveScriptIndex(scriptIndex);
-        resolve(id);
-      });
-    });
-  }
-
-  async updateScript(id: string, name: string, code: string) {
-    const scriptIndex = await this.loadScriptIndex();
-    if (!scriptIndex.has(id)) {
-      return;
-    }
-    scriptIndex.set(id, name);
-    await this.saveScriptIndex(scriptIndex);
-    return new Promise((resolve, reject) => {
-      const fileOptions = { mode: 0o600, encoding: 'utf-8' };
-      fs.writeFile(path.join(SAVED_DIR, id), code, fileOptions, (err) => {
-        err ? reject(err) : resolve();
-      });
-    });
-  }
-
-  async listScripts(): Promise<any> {
-    const scriptIndex = await this.loadScriptIndex();
-    return this.indexToJSON(scriptIndex);
+  async init() {
+    [this.Script, this.ScriptFileSystemAccess] = ScriptModels(this.sequelize);
+    await this.sequelize.sync();
+    console.log(`Database initialization completed`);
   }
 
   async loadScript(id: string): Promise<any> {
-    const scriptIndex = await this.loadScriptIndex();
-    if (!scriptIndex.has(id)) {
-      return null;
-    }
-    const name = scriptIndex.get(id);
+    const script = await this.Script.findByPk(id);
     return new Promise((resolve, reject) => {
-      fs.readFile(path.join(SAVED_DIR, id), (err, data: Buffer) => {
+      fs.readFile(path.join(SAVED_DIR, script.getDataValue('id')), (err, data: Buffer) => {
         err ? reject(err) : resolve({
           id: id,
           name: name,
@@ -130,30 +71,90 @@ export class WorkerManager {
     });
   }
 
-  async removeScript(id: string): Promise<void> {
-    const scriptIndex = await this.loadScriptIndex();
-    if (!scriptIndex.has(id)) {
+  async addFileSystemAccess(id: string): Promise<void> {
+    const script: any = await this.Script.findByPk(id);
+    const open = await dialog.showOpenDialog(null, {
+      title: 'File System Access',
+      message: `Grant access to ${script.getDataValue('name')}`,
+      properties: ['openDirectory', 'showHiddenFiles'],
+    });
+    if (open.filePaths.length < 1) {
       return;
     }
-    fs.unlink(path.join(SAVED_DIR, id), (err) => { console.error(err) });
-    scriptIndex.delete(id);
-    await this.saveScriptIndex(scriptIndex);
+    const filePath = open.filePaths[0];
+    const buttons = [
+      FileSystemPermissions.ReadOnly,
+      FileSystemPermissions.Writable
+    ];
+    const permission = await dialog.showMessageBox(null, {
+      title: 'File System Access',
+      message: `Grant access to ${filePath}`,
+      buttons: buttons,
+    });
+    const writable = permission.response === buttons.indexOf(FileSystemPermissions.Writable);
+    await this.ScriptFileSystemAccess.create({
+      scriptId: script.getDataValue('id'),
+      path: filePath,
+      write: writable,
+    });
   }
 
-  async startScriptExecution(script: string): Promise<string> {
+  async getFileSystemAccess(id: string): Promise<[string, boolean][]> {
+    const permissions = await this.ScriptFileSystemAccess.findAll({where: {scriptId: id}});
+    return permissions.map((permission: any) => { 
+      return [
+        permission.getDataValue('path'),
+        permission.getDataValue('write')
+      ];
+    });
+  }
+
+  async execFileSystemAccess(execId: string): Promise<[string, boolean][]> {
+    const scriptId = this.scriptExecutions.get(execId);
+    return this.getFileSystemAccess(scriptId);
+  }
+  
+  async removeFileSystemAccess(id: string, path: string): Promise<void> {
+    const permissions = await this.ScriptFileSystemAccess.findAll({ 
+      where: {
+        scriptId: id, 
+        path: path,
+      }
+    });
+    permissions.forEach(async (permission) => {
+      await permission.destroy();
+    });
+  }
+
+  async removeScript(id: string): Promise<void> {
+    const script = await this.Script.findByPk(id);
+    await script.destroy();
+    fs.unlink(path.join(SAVED_DIR, id), (err) => { console.error(err) });
+  }
+
+  async startScriptExecution(id: string): Promise<string> {
+    const script = await this.loadScript('id');
     const execId = uuid.v4();
     const scriptExecDir = path.join(this.execDir, execId);
     fs.mkdirSync(scriptExecDir, { mode: 0o700 });
     return new Promise((resolve, reject) => {
       const fileOptions = { mode: 0o600, encoding: 'utf-8' };
-      fs.writeFile(path.join(scriptExecDir, SCRIPT_FILE), script, fileOptions, (err) => {
-        err ? reject(err) : resolve(execId);
+      fs.writeFile(path.join(scriptExecDir, SCRIPT_FILE), script.code, fileOptions, (err) => {
+        if (!err) {
+          this.scriptExecutions.set(execId, script.id);
+          resolve(execId);
+        } else {
+          reject(err);
+        }
       });
     });
   }
 
   async stopScriptExecutionById(execId: string): Promise<void> {
     const scriptExecDir = path.join(this.execDir, path.basename(execId));
+    if (this.scriptExecutions.has(execId)) {
+      this.scriptExecutions.delete(execId);
+    }
     if (fs.existsSync(scriptExecDir)) {
       fs.unlinkSync(path.join(scriptExecDir, SCRIPT_FILE));
     }

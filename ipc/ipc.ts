@@ -65,10 +65,10 @@ export interface IPCMessage {
   data: string;
 }
 
-async function makeConfigDir(): Promise<NodeJS.ErrnoException|null> {
+async function makeConfigDir(): Promise<NodeJS.ErrnoException | null> {
   return new Promise((resolve, reject) => {
     const dirOptions = {
-      mode: 0o700, 
+      mode: 0o700,
       recursive: true
     };
     fs.mkdir(CONFIG_DIR, dirOptions, (err) => {
@@ -106,7 +106,7 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "code": {"type": "string"},
+      "code": { "type": "string" },
     },
     "required": ["code"],
     "additionalProperties": false,
@@ -120,7 +120,7 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "id": {"type": "string"},
+      "id": { "type": "string" },
     },
     "required": ["id"],
     "additionalProperties": false,
@@ -133,8 +133,8 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "name": {"type": "string"},
-      "code": {"type": "string"},
+      "name": { "type": "string" },
+      "code": { "type": "string" },
     },
     "required": ["name", "code"],
     "additionalProperties": false,
@@ -148,9 +148,9 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "id": {"type": "string"},
-      "name": {"type": "string"},
-      "code": {"type": "string"},
+      "id": { "type": "string" },
+      "name": { "type": "string" },
+      "code": { "type": "string" },
     },
     "required": ["id", "name", "code"],
     "additionalProperties": false,
@@ -163,7 +163,7 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "id": {"type": "string"},
+      "id": { "type": "string" },
     },
     "required": ["id"],
     "additionalProperties": false,
@@ -187,7 +187,7 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "id": {"type": "string"},
+      "id": { "type": "string" },
     },
     "required": ["id"],
     "additionalProperties": false,
@@ -196,6 +196,88 @@ export class IPCHandlers {
     await self._workerManager.removeScript(req.id);
   }
 
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "id": { "type": "string" },
+    },
+    "required": ["id"],
+    "additionalProperties": false,
+  })
+  async script_addFileSystemAccess(self: IPCHandlers, req: any): Promise<void> {
+    return self._workerManager.addFileSystemAccess(req.id);
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "id": { "type": "string" },
+      "path": { "type": "string" },
+    },
+    "required": ["id", "path"],
+    "additionalProperties": false,
+  })
+  async script_removeFileSystemAccess(self: IPCHandlers, req: any): Promise<void> {
+    return self._workerManager.removeFileSystemAccess(req.id, req.path);
+  }
+
+  // ----------
+  // > Local
+  // ----------
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "path": { "type": "string" },
+    },
+    "required": ["path"],
+    "additionalProperties": false,
+  })
+  async local_readFile(self: IPCHandlers, origin: string, req: any): Promise<string> {
+    const execId = new URL(origin).hostname;
+    const reqPath = path.normalize(req.path);
+    const permissions = await self._workerManager.execFileSystemAccess(execId);
+    permissions.forEach(permission => {
+      if (reqPath.startsWith(permission[0])) {
+        return new Promise((resolve, reject) => {
+          fs.readFile(reqPath, (err, data: Buffer) => {
+            err ? reject(err) : resolve(Base64.fromUint8Array(data));
+          });
+        });
+      }
+    });
+    return Promise.reject('Permission denied');
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "path": { "type": "string" },
+      "data": { "type": "string" },
+    },
+    "required": ["path", "data"],
+    "additionalProperties": false,
+  })
+  async local_writeFile(self: IPCHandlers, origin: string, req: any): Promise<void> {
+    const execId = new URL(origin).hostname;
+    const reqPath = path.normalize(req.path);
+    const data = Base64.toUint8Array(req.data);
+    const permissions = await self._workerManager.execFileSystemAccess(execId);
+    permissions.forEach(permission => {
+      if (reqPath.startsWith(permission[0]) && permission[1]) {
+        return new Promise((resolve, reject) => {
+          fs.writeFile(reqPath, data, (err) => {
+            err ? reject(err) : resolve();
+          });
+        });
+      }
+    });
+    return Promise.reject('Permission denied');
+  }
 
   // ----------
   // > RPC
@@ -213,7 +295,7 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "id": {"type": "number"},
+      "id": { "type": "number" },
     },
     "required": ["id"],
     "additionalProperties": false,
@@ -235,13 +317,13 @@ export class IPCHandlers {
   }
 
   @isConnected()
-  async rpc_implantBuilds(self: IPCHandlers): Promise<string>  {
+  async rpc_implantBuilds(self: IPCHandlers): Promise<string> {
     const builds = await self.client.implantBuilds();
     return Base64.fromUint8Array(builds.serializeBinary());
   }
 
   @isConnected()
-  async rpc_canaries(self: IPCHandlers): Promise<string[]>  {
+  async rpc_canaries(self: IPCHandlers): Promise<string[]> {
     const canaries = await self.client.canaries();
     return canaries.map(canary => Base64.fromUint8Array(canary.serializeBinary()));
   }
@@ -250,7 +332,7 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "config": {"type": "string", "minLength": 1},
+      "config": { "type": "string", "minLength": 1 },
     },
     "required": ["config"],
     "additionalProperties": false
@@ -265,7 +347,7 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "name": {"type": "string", "minLength": 1},
+      "name": { "type": "string", "minLength": 1 },
     },
     "required": ["name"],
     "additionalProperties": false,
@@ -279,7 +361,7 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "profile": {"type": "string", "minLength": 1},
+      "profile": { "type": "string", "minLength": 1 },
     },
     "required": ["profile"],
     "additionalProperties": false
@@ -301,7 +383,7 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "sessionId": {"type": "number"}
+      "sessionId": { "type": "number" }
     },
     "required": ["sessionId"],
     "additionalProperties": false,
@@ -316,8 +398,8 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "sessionId": {"type": "number"},
-      "targetDir": {"type": "string"},
+      "sessionId": { "type": "number" },
+      "targetDir": { "type": "string" },
     },
     "required": ["sessionId"],
     "additionalProperties": false,
@@ -332,8 +414,8 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "sessionId": {"type": "number"},
-      "targetDir": {"type": "string"},
+      "sessionId": { "type": "number" },
+      "targetDir": { "type": "string" },
     },
     "required": ["sessionId"],
     "additionalProperties": false,
@@ -348,8 +430,8 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "sessionId": {"type": "number"},
-      "target": {"type": "string"},
+      "sessionId": { "type": "number" },
+      "target": { "type": "string" },
     },
     "required": ["sessionId"],
     "additionalProperties": false,
@@ -364,8 +446,8 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "sessionId": {"type": "number"},
-      "targetDir": {"type": "string"},
+      "sessionId": { "type": "number" },
+      "targetDir": { "type": "string" },
     },
     "required": ["sessionId"],
     "additionalProperties": false,
@@ -380,8 +462,8 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "sessionId": {"type": "number"},
-      "target": {"type": "string"},
+      "sessionId": { "type": "number" },
+      "target": { "type": "string" },
     },
     "required": ["sessionId"],
     "additionalProperties": false,
@@ -391,14 +473,14 @@ export class IPCHandlers {
     const data = await session.download(req.target);
     return Base64.fromUint8Array(data);
   }
-  
+
   @isConnected()
   @jsonSchema({
     "type": "object",
     "properties": {
-      "sessionId": {"type": "number"},
-      "data": {"type": "string"},
-      "path": {"type": "string"},
+      "sessionId": { "type": "number" },
+      "data": { "type": "string" },
+      "path": { "type": "string" },
     },
     "required": ["sessionId"],
     "additionalProperties": false,
@@ -414,7 +496,7 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "sessionId": {"type": "number"},
+      "sessionId": { "type": "number" },
     },
     "required": ["sessionId"],
     "additionalProperties": false,
@@ -436,7 +518,7 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "id": {"type": "number"},
+      "id": { "type": "number" },
     },
     "required": ["id"],
     "additionalProperties": false,
@@ -459,8 +541,8 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "host": {"type": "string"},
-      "port": {"type": "number"},
+      "host": { "type": "string" },
+      "port": { "type": "number" },
     },
     "required": ["host", "port"],
     "additionalProperties": false,
@@ -474,10 +556,10 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "host": {"type": "string"},
-      "domain": {"type": "string"},
-      "website": {"type": "string"},
-      "port": {"type": "number"},
+      "host": { "type": "string" },
+      "domain": { "type": "string" },
+      "website": { "type": "string" },
+      "port": { "type": "number" },
     },
     "required": ["host", "port"],
     "additionalProperties": false,
@@ -491,13 +573,13 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "host": {"type": "string"},
-      "domain": {"type": "string"},
-      "website": {"type": "string"},
-      "port": {"type": "number"},
-      "acme": {"type": "boolean"},
-      "cert": {"type": "string"},
-      "key": {"type": "string"}
+      "host": { "type": "string" },
+      "domain": { "type": "string" },
+      "website": { "type": "string" },
+      "port": { "type": "number" },
+      "acme": { "type": "boolean" },
+      "cert": { "type": "string" },
+      "key": { "type": "string" }
     },
     "required": ["host", "port"],
     "additionalProperties": false,
@@ -513,12 +595,12 @@ export class IPCHandlers {
     "properties": {
       "domains": {
         "type": "array",
-        "items": {"type": "string"},
+        "items": { "type": "string" },
         "additionalItems": false,
       },
-      "canaries": {"type": "boolean"},
-      "host": {"type": "string"},
-      "port": {"type": "number"},
+      "canaries": { "type": "boolean" },
+      "host": { "type": "string" },
+      "port": { "type": "number" },
     },
     "required": ["host", "port"],
     "additionalProperties": false,
@@ -559,12 +641,12 @@ export class IPCHandlers {
         "items": {
           "type": "object",
           "properties": {
-            "operator": {"type": "string", "minLength": 1},
-            "lhost": {"type": "string", "minLength": 1},
-            "lport": {"type": "number"},
-            "ca_certificate": {"type": "string", "minLength": 1},
-            "certificate": {"type": "string", "minLength": 1},
-            "private_key": {"type": "string", "minLength": 1},
+            "operator": { "type": "string", "minLength": 1 },
+            "lhost": { "type": "string", "minLength": 1 },
+            "lport": { "type": "number" },
+            "ca_certificate": { "type": "string", "minLength": 1 },
+            "certificate": { "type": "string", "minLength": 1 },
+            "private_key": { "type": "string", "minLength": 1 },
           },
           "additionalProperties": false,
         },
@@ -581,9 +663,9 @@ export class IPCHandlers {
         return Promise.reject(`Failed to create config dir: ${err}`);
       }
     }
-    
+
     const fileOptions = { mode: 0o600, encoding: 'utf-8' };
-    await Promise.all(configs.map((config) => { 
+    await Promise.all(configs.map((config) => {
       return new Promise((resolve) => {
         const fileName: string = uuid.v4();
         const data = JSON.stringify(config);
@@ -606,12 +688,12 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "operator": {"type": "string", "minLength": 1},
-      "lhost": {"type": "string", "minLength": 1},
-      "lport": {"type": "number"},
-      "ca_certificate": {"type": "string", "minLength": 1},
-      "certificate": {"type": "string", "minLength": 1},
-      "private_key": {"type": "string", "minLength": 1},
+      "operator": { "type": "string", "minLength": 1 },
+      "lhost": { "type": "string", "minLength": 1 },
+      "lport": { "type": "number" },
+      "ca_certificate": { "type": "string", "minLength": 1 },
+      "certificate": { "type": "string", "minLength": 1 },
+      "private_key": { "type": "string", "minLength": 1 },
     },
     "required": [
       "operator", "lhost", "lport", "ca_certificate", "certificate", "private_key"
@@ -638,19 +720,19 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "title": {"type": "string", "minLength": 1, "maxLength": 100},
-      "message": {"type": "string", "minLength": 1, "maxLength": 100},
-      "openDirectory": {"type": "boolean"},
-      "multiSelection": {"type": "boolean"},
+      "title": { "type": "string", "minLength": 1, "maxLength": 100 },
+      "message": { "type": "string", "minLength": 1, "maxLength": 100 },
+      "openDirectory": { "type": "boolean" },
+      "multiSelection": { "type": "boolean" },
       "filter": {
         "type": "array",
         "items": {
           "type": "object",
           "properties": {
-            "name": {"type": "string"},
+            "name": { "type": "string" },
             "extensions": {
               "type": "array",
-              "items": {"type": "string"},
+              "items": { "type": "string" },
               "additionalItems": false,
             }
           },
@@ -688,10 +770,10 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "title": {"type": "string", "minLength": 1, "maxLength": 100},
-      "message": {"type": "string", "minLength": 1, "maxLength": 100},
-      "filename": {"type": "string", "minLength": 1},
-      "data": {"type": "string"}
+      "title": { "type": "string", "minLength": 1, "maxLength": 100 },
+      "message": { "type": "string", "minLength": 1, "maxLength": 100 },
+      "filename": { "type": "string", "minLength": 1 },
+      "data": { "type": "string" }
     },
     "required": ["title", "message", "filename", "data"],
     "additionalProperties": false,
@@ -746,7 +828,7 @@ export class IPCHandlers {
   // we do not validate them, aside from ensuing it's valid JSON
   async client_saveSettings(self: IPCHandlers, settings: string): Promise<string> {
     return new Promise(async (resolve, reject) => {
-      
+
       if (!fs.existsSync(CONFIG_DIR)) {
         const err = await makeConfigDir();
         if (err) {
@@ -791,7 +873,7 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "sessionId": {"type": "number"},
+      "sessionId": { "type": "number" },
     },
     "required": ["sessionId"],
     "additionalProperties": false,
@@ -807,7 +889,7 @@ export class IPCHandlers {
 
 }
 
-  // Dispatcher
+// Dispatcher
 export async function dispatchIPC(handlers: IPCHandlers, method: string, data: string): Promise<any> {
   console.log(`IPC Dispatch: ${method}`);
 
@@ -825,31 +907,73 @@ export async function dispatchIPC(handlers: IPCHandlers, method: string, data: s
   }
 }
 
+// Dispatcher
+export async function dispatchLocalIPC(handlers: IPCHandlers, origin: string, method: string, data: string): Promise<any> {
+  console.log(`IPC Local Dispatch: ${method}`);
+  if (['local_'].some(prefix => method.startsWith(prefix))) {
+    if (typeof handlers[method] === 'function') {
+      const result: any = await handlers[method](handlers, origin, data);
+      return result;
+    } else {
+      return Promise.reject(`No local handler for method: ${method}`);
+    }
+  } else {
+    return Promise.reject(`Invalid local method handler namespace for "${method}"`);
+  }
+}
 
 export function startIPCHandlers(window: BrowserWindow, handlers: IPCHandlers) {
 
   ipcMain.on('ipc', async (event: IpcMainEvent, msg: IPCMessage, origin: string) => {
-    dispatchIPC(handlers, msg.method, msg.data).then((result: any) => {
-      if (msg.id !== 0) {
-        event.sender.send('ipc', {
-          id: msg.id,
-          type: 'response',
-          method: 'success',
-          data: result
-        }, origin);
-      }
-    }).catch((err) => {
-      console.error(`[ipc handlers](${origin}): ${err}`);
-      console.trace();
-      if (msg.id !== 0) {
-        event.sender.send('ipc', {
-          id: msg.id,
-          type: 'response',
-          method: 'error',
-          data: err.toString()
-        }, origin);
-      }
-    });
+
+    // Local handlers (needs origin)
+    if (msg.method.startsWith('local_')) {
+      dispatchLocalIPC(handlers, origin, msg.method, msg.data).then((result: any) => {
+        if (msg.id !== 0) {
+          event.sender.send('ipc', {
+            id: msg.id,
+            type: 'response',
+            method: 'success',
+            data: result
+          }, origin);
+        }
+      }).catch((err) => {
+        console.error(`[local ipc handlers](${origin}): ${err}`);
+        console.trace();
+        if (msg.id !== 0) {
+          event.sender.send('ipc', {
+            id: msg.id,
+            type: 'response',
+            method: 'error',
+            data: err.toString()
+          }, origin);
+        }
+      });
+    } else {
+
+      // default handlers
+      dispatchIPC(handlers, msg.method, msg.data).then((result: any) => {
+        if (msg.id !== 0) {
+          event.sender.send('ipc', {
+            id: msg.id,
+            type: 'response',
+            method: 'success',
+            data: result
+          }, origin);
+        }
+      }).catch((err) => {
+        console.error(`[ipc handlers](${origin}): ${err}`);
+        console.trace();
+        if (msg.id !== 0) {
+          event.sender.send('ipc', {
+            id: msg.id,
+            type: 'response',
+            method: 'error',
+            data: err.toString()
+          }, origin);
+        }
+      });
+    }
   });
 
   // I know what you're thinking, why do we need a main<->main event emitter here,

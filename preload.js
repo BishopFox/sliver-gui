@@ -70,7 +70,7 @@ ipcRenderer.on('push', (event, data) => {
 /** Worker Listener */
 
 const WORKER_PROTOCOL = 'worker:';
-const workerPrefixes = ['rpc_'];
+const workerPrefixes = ['rpc_', 'local_'];
 
 window.addEventListener('message', (event) => {
   let url = new URL(event.origin);

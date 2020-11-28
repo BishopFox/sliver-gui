@@ -7,8 +7,8 @@
     <input cdkFocusInitial matInput [(ngModel)]="result" placeholder="Script Name">
   </mat-form-field>
 </div>
-<div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="result" color="primary">
+<div mat-dialog-actions align="center">
+  <button mat-raised-button [mat-dialog-close]="result" color="primary">
     &nbsp;&nbsp;Create&nbsp;&nbsp;
   </button>
   <button mat-button (click)="onNoClick()">
