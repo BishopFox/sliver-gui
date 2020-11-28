@@ -39,7 +39,7 @@ export async function requestHandler(workerManager: WorkerManager, req: Protocol
     return;
   }
 
-  const reqPath = path.normalize(reqUrl.pathname);
+  const reqPath = path.resolve(reqUrl.pathname);
 
   /* Index Request */
   if (reqPath === '/' || reqPath === '/index.html') {

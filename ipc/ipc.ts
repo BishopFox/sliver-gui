@@ -38,7 +38,6 @@ import { WorkerManager } from '../workers/worker-manager';
 
 const CONFIG_DIR = path.join(getClientDir(), 'configs');
 const SETTINGS_PATH = path.join(getClientDir(), 'gui-settings.json');
-const DB_PATH = path.join(getClientDir(), '');
 const MINUTE = 60;
 
 export interface SaveFileReq {
@@ -236,7 +235,10 @@ export class IPCHandlers {
   })
   async local_readFile(self: IPCHandlers, origin: string, req: any): Promise<string> {
     const execId = new URL(origin).hostname;
-    const reqPath = path.normalize(req.path);
+    const reqPath = path.resolve(req.path);
+    if (!path.isAbsolute(reqPath)) {
+      return Promise.reject('Unable to determine absolute path');
+    }
     const permissions = await self._workerManager.execFileSystemAccess(execId);
     permissions.forEach(permission => {
       if (reqPath.startsWith(permission[0])) {
@@ -262,7 +264,10 @@ export class IPCHandlers {
   })
   async local_writeFile(self: IPCHandlers, origin: string, req: any): Promise<void> {
     const execId = new URL(origin).hostname;
-    const reqPath = path.normalize(req.path);
+    const reqPath = path.resolve(req.path);
+    if (!path.isAbsolute(reqPath)) {
+      return Promise.reject('Unable to determine absolute path');
+    }
     const data = Base64.toUint8Array(req.data);
     const permissions = await self._workerManager.execFileSystemAccess(execId);
     permissions.forEach(permission => {

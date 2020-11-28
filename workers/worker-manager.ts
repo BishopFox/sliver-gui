@@ -134,14 +134,14 @@ export class WorkerManager {
     });
     const writable = permission.response === buttons.indexOf(FileSystemPermissions.Writable);
     await this.ScriptFileSystemAccess.create({
-      scriptId: script.getDataValue('id'),
+      ScriptId: script.getDataValue('id'),
       path: filePath,
       write: writable,
     });
   }
 
   async getFileSystemAccess(id: string): Promise<[string, boolean][]> {
-    const permissions = await this.ScriptFileSystemAccess.findAll({where: {scriptId: id}});
+    const permissions = await this.ScriptFileSystemAccess.findAll({where: {ScriptId: id}});
     return permissions.map((permission: any) => { 
       return [
         permission.getDataValue('path'),
@@ -158,7 +158,7 @@ export class WorkerManager {
   async removeFileSystemAccess(id: string, path: string): Promise<void> {
     const permissions = await this.ScriptFileSystemAccess.findAll({ 
       where: {
-        scriptId: id, 
+        ScriptId: id, 
         path: path,
       }
     });

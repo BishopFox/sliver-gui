@@ -56,7 +56,7 @@ function mime(filename: string): string {
 
 export function requestHandler(req: Electron.ProtocolRequest, next: ProtocolCallback) {
   const reqUrl = new URL(req.url);
-  let reqPath = path.normalize(reqUrl.pathname);
+  let reqPath = path.resolve(reqUrl.pathname);
   
   if (reqPath === '/') {
     reqPath = '/index.html';
