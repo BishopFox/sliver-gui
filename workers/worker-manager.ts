@@ -54,6 +54,11 @@ export class WorkerManager {
   }
 
   async init() {
+    console.log(`Init sqlite database ...`);
+    this.sequelize = new Sequelize({
+      dialect: 'sqlite',
+      storage: SCRIPTS_DB,
+    });
     [this.Script, this.ScriptFileSystemAccess] = ScriptModels(this.sequelize);
     await this.sequelize.sync();
     console.log(`Database initialization completed`);
@@ -100,7 +105,7 @@ export class WorkerManager {
       fs.readFile(path.join(SAVED_DIR, script.getDataValue('id')), (err, data: Buffer) => {
         err ? reject(err) : resolve({
           id: id,
-          name: name,
+          name: script.getDataValue('name'),
           code: data.toString()
         });
       });
