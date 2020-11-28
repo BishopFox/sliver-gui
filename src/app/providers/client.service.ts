@@ -159,6 +159,15 @@ export class ClientService {
     }));
   }
 
+  async saveFileB64(title: string, message: string, filename: string, data: string): Promise<string> {
+    return await this._ipc.request('client_saveFile', JSON.stringify({
+      title: title,
+      message: message,
+      filename: filename,
+      data: data,
+    }));
+  }
+
   async readFile(title: string, message: string, openDirectory?: boolean,
                  multiSelection?: boolean, filter?: FileFilter[]): Promise<ReadFiles|null> {
     const resp = await this._ipc.request('client_readFile', JSON.stringify({

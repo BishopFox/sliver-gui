@@ -19,7 +19,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import * as Base64 from 'js-base64';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 
 import { FadeInOut } from '@app/shared/animations';
@@ -148,7 +148,7 @@ export class BuildsTableComponent implements OnInit {
         const regenerated = await this._sliverService.regenerate(build.name);
         if (regenerated) {
           const msg = `Save regenerated file ${regenerated.getName()}`;
-          const path = await this._clientService.saveFile('Save File', msg, regenerated.getName(), regenerated.getData_asU8());
+          const path = await this._clientService.saveFileB64('Save File', msg, regenerated.getName(), regenerated.getData_asB64());
           console.log(`Saved file to: ${path}`);
         } else {
           console.error(`Failed to regenerate sliver ${build.name}`);

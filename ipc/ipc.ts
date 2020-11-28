@@ -804,7 +804,7 @@ export class IPCHandlers {
         mode: 0o644,
         encoding: 'binary',
       };
-      const data = Buffer.from(Base64.decode(saveFileReq.data));
+      const data = Buffer.from(Base64.toUint8Array(saveFileReq.data));
       fs.writeFile(save.filePath, data, fileOptions, (err) => {
         if (err) {
           reject(err);

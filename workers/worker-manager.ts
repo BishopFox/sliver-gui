@@ -14,10 +14,8 @@
 */
 
 import { homedir } from 'os';
-
 import { dialog } from 'electron';
 import { Sequelize, Model, ModelCtor } from 'sequelize';
-
 import * as os from 'os';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -62,6 +60,7 @@ export class WorkerManager {
     this.sequelize = new Sequelize({
       dialect: 'sqlite',
       storage: SCRIPTS_DB,
+      logging: false,
     });
     [this.Script, this.ScriptFileSystemAccess] = ScriptModels(this.sequelize);
     await this.sequelize.sync();
@@ -104,16 +103,18 @@ export class WorkerManager {
   }
 
   async loadScript(id: string): Promise<any> {
-    const script = await this.Script.findByPk(id);
+    const script: any = await this.Script.findByPk(id);
     if (script === null) {
       return Promise.reject(`No script with id ${id} found`);
     }
+    const access = await script.getAccess();
     return new Promise((resolve, reject) => {
       fs.readFile(path.join(SAVED_DIR, script.getDataValue('id')), (err, data: Buffer) => {
         err ? reject(err) : resolve({
           id: script.getDataValue('id'),
           name: script.getDataValue('name'),
-          code: data.toString()
+          code: data.toString(),
+          access: access,
         });
       });
     });
