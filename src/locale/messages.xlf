@@ -355,15 +355,15 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">39</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">39</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-dns.dialog.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4c27cd467bacebe1d9a182fa8970234b6bcd89bd" datatype="html">
@@ -885,19 +885,11 @@
           <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="f6755cff4957d5c3c89bafce5651f1b6fa2b1fd9" datatype="html">
-        <source>Add</source>
+      <trans-unit id="4ce6e4af12827a94e05b9ff0b0fc8818b0e2a2e2" datatype="html">
+        <source> Add </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context>
-          <context context-type="linenumber">31</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context>
-          <context context-type="linenumber">31</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-dns.dialog.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">34,35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1f4234e868ab505ac68e6675902ab75db9f7dc25" datatype="html">
@@ -905,6 +897,17 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context>
           <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4f8b427aaa2aa317429d0cf79edeac2110635686" datatype="html">
+        <source> Add </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-dns.dialog.html</context>
+          <context context-type="linenumber">27,28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cf7bcbc14b4048f39e7c52d7381ffb3170c32e5d" datatype="html">
