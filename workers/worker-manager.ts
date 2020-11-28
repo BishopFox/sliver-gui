@@ -59,6 +59,41 @@ export class WorkerManager {
     console.log(`Database initialization completed`);
   }
 
+  async newScript(name: string, code: string): Promise<string> {
+    const script: any = await this.Script.create({name: name});
+    return new Promise(async (resolve, reject) => {
+      const fileOptions = { mode: 0o600, encoding: 'utf-8' };
+      fs.writeFile(path.join(SAVED_DIR, script.id), code, fileOptions, async (err) => {
+        if (err) {
+          return reject(err);
+        }
+        resolve(script.id);
+      });
+    });
+  }
+
+  async updateScript(id: string, name: string, code: string) {
+    const script = await this.Script.findByPk(id);
+    if (script.getDataValue('name') !== name) {
+      await this.Script.update({name: name}, {where: {id: script.getDataValue('id')}});
+    }
+    return new Promise((resolve, reject) => {
+      const fileOptions = { mode: 0o600, encoding: 'utf-8' };
+      fs.writeFile(path.join(SAVED_DIR, script.getDataValue('id')), code, fileOptions, (err) => {
+        err ? reject(err) : resolve();
+      });
+    });
+  }
+
+  async scripts(): Promise<any> {
+    const dbScripts = await this.Script.findAll();
+    const scripts = {};
+    dbScripts.forEach((script: any) => {
+      scripts[script.getDataValue('id')] = script.getDataValue('name');
+    });
+    return scripts;
+  }
+
   async loadScript(id: string): Promise<any> {
     const script = await this.Script.findByPk(id);
     return new Promise((resolve, reject) => {
