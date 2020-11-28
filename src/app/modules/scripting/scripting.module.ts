@@ -23,7 +23,7 @@ import { BaseMaterialModule } from '@app/base-material';
 import { MonacoEditorModule } from '@materia-ui/ngx-monaco-editor';
 import { BrowserComponent, DeleteScriptDialogComponent } from './components/browser/browser.component';
 import { TaskManagerComponent, StopTaskDialogComponent } from './components/task-manager/task-manager.component';
-import { ScriptingComponent, NewScriptDialogComponent } from './components/scripting/scripting.component';
+import { MainComponent, NewScriptDialogComponent } from './components/main/main.component';
 import { TaskComponent } from './components/task/task.component';
 
 
@@ -35,7 +35,7 @@ import { TaskComponent } from './components/task/task.component';
     NewScriptDialogComponent,
     StopTaskDialogComponent,
     TaskManagerComponent,
-    ScriptingComponent,
+    MainComponent,
     TaskComponent,
   ],
   imports: [

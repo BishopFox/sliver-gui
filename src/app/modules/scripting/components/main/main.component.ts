@@ -7,11 +7,11 @@ import { FadeInOut } from '@app/shared/animations';
 
 @Component({
   selector: 'scripting',
-  templateUrl: './scripting.component.html',
-  styleUrls: ['./scripting.component.scss'],
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.scss'],
   animations: [FadeInOut]
 })
-export class ScriptingComponent implements OnInit {
+export class MainComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
               private _router: Router,

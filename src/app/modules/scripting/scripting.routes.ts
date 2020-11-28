@@ -18,13 +18,13 @@ import { ModuleWithProviders } from '@angular/core';
 
 import { ActiveConfig } from '@app/app-routing-guards.module';
 
-import { ScriptingComponent } from './components/scripting/scripting.component';
+import { MainComponent } from './components/main/main.component';
 import { EditorComponent } from './components/editor/editor.component';
 import { TaskComponent } from './components/task/task.component';
 
 const routes: Routes = [
 
-  { path: 'scripting', component: ScriptingComponent, canActivate: [ActiveConfig] },
+  { path: 'scripting', component: MainComponent, canActivate: [ActiveConfig] },
   { path: 'scripting/tasks/:exec-id', component: TaskComponent, canActivate: [ActiveConfig] },
   { path: 'scripting/editor/:script-id', component: EditorComponent, canActivate: [ActiveConfig] },
 
