@@ -37,6 +37,10 @@ enum FileSystemPermissions {
   Writable = 'Writable'
 }
 
+export interface WorkerOptions {
+  siaf: boolean;
+}
+
 
 export class WorkerManager {
 
@@ -101,10 +105,13 @@ export class WorkerManager {
 
   async loadScript(id: string): Promise<any> {
     const script = await this.Script.findByPk(id);
+    if (script === null) {
+      return Promise.reject(`No script with id ${id} found`);
+    }
     return new Promise((resolve, reject) => {
       fs.readFile(path.join(SAVED_DIR, script.getDataValue('id')), (err, data: Buffer) => {
         err ? reject(err) : resolve({
-          id: id,
+          id: script.getDataValue('id'),
           name: script.getDataValue('name'),
           code: data.toString()
         });
@@ -174,8 +181,8 @@ export class WorkerManager {
     fs.unlink(path.join(SAVED_DIR, id), (err) => { console.error(err) });
   }
 
-  async startScriptExecution(id: string): Promise<string> {
-    const script = await this.loadScript('id');
+  async startScriptExecution(id: string, options: WorkerOptions): Promise<string> {
+    const script = await this.loadScript(id);
     const execId = uuid.v4();
     const scriptExecDir = path.join(this.execDir, execId);
     fs.mkdirSync(scriptExecDir, { mode: 0o700 });

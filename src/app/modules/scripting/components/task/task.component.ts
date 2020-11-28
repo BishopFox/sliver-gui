@@ -49,7 +49,6 @@ export class TaskComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    
     if (!this.isTerminalInitialized) {
       this.isTerminalInitialized = true;
       this.terminal.loadAddon(this.fitAddon);

@@ -103,13 +103,20 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "code": { "type": "string" },
+      "id": { "type": "string" },
+      "options": {
+        "type": "object",
+        "properties": {
+          "siaf": { "type": "boolean" },
+        },
+        "additionalProperties": false,
+      },
     },
-    "required": ["code"],
+    "required": ["id", "options"],
     "additionalProperties": false,
   })
   async script_execute(self: IPCHandlers, req: any): Promise<string> {
-    const execId = await self._workerManager.startScriptExecution(req.code);
+    const execId = await self._workerManager.startScriptExecution(req.id, req.options);
     return execId;
   }
 

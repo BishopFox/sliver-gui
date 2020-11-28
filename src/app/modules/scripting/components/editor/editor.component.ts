@@ -96,8 +96,10 @@ export class EditorComponent implements OnInit {
   }
 
   async executeScript() {
-    let execCode = this.siaf ? `(async () => { ${this.code} })();` : this.code;
-    const execId = await this._workersService.startWorker(this.name, execCode);
+    await this.save();
+    const execId = await this._workersService.startWorker(this.scriptId, this.name, {
+      siaf: true,
+    });
     console.log(`Started execution with id ${execId}`);
     this._router.navigate(['scripting', 'tasks', execId]);
   }

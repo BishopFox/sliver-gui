@@ -10,6 +10,10 @@ export interface Script {
   code: string;
 }
 
+export interface WorkerOptions {
+  siaf: boolean;
+}
+
 const WORKER_PROTOCOL = 'worker:';
 
 @Injectable({
@@ -43,10 +47,13 @@ export class WorkersService {
     return document.getElementById(this.elemId);
   }
 
-  async startWorker(name: string, code: string): Promise<string> {
+  async startWorker(scriptId: string, name: string, options: WorkerOptions): Promise<string> {
     
     const execId = await this._ipcService.request('script_execute', JSON.stringify({
-      code: code
+      id: scriptId,
+      options: {
+        siaf: options.siaf,
+      }
     }));
 
     const iframe = document.createElement('iframe');
@@ -78,7 +85,7 @@ export class WorkersService {
 
   getWorkerName(execId: string): string {
     const iframe = this._workers.get(execId);
-    return iframe?.getAttribute("name");
+    return iframe.getAttribute("name");
   }
 
   async stopWorker(execId: string): Promise<void> {
