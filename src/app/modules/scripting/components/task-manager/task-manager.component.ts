@@ -13,7 +13,7 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
@@ -40,6 +40,8 @@ function compare(a: number | string, b: number | string, isAsc: boolean) {
   animations: [FadeInOut],
 })
 export class TaskManagerComponent implements OnInit {
+
+  @Input() title = true;
 
   private workers: Map<string, string>;
   dataSrc: MatTableDataSource<TableSessionData>;

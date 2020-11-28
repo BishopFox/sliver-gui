@@ -8,13 +8,13 @@
 <div [@fadeInOut] *ngIf="dataSrc">
 
   <div class="table-header">
-    <div>
-      <h3 *ngIf="title">
+    <div style="position: relative;">
+      <h2 *ngIf="title" style="position: absolute; height: 10px; bottom: 15px; right: 0; left: 0;">
         <i class="fas fa-fw fa-project-diagram"></i>
         <ng-container i18n>
           Sessions
         </ng-container>
-      </h3>
+      </h2>
     </div>
 
     <div class="table-filter">

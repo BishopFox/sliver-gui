@@ -66,7 +66,6 @@ export class C2TableComponent implements OnInit {
   }
 
   refreshTable() {
-    console.log(this.tableData());
     this.dataSrc = new MatTableDataSource(this.tableData());
     if (this.editable) {
       this.onC2sUpdateEvent.emit(this.c2s);
@@ -229,7 +228,7 @@ export class AddHTTPDialogComponent extends BaseC2Validators implements OnInit {
       host: ['', Validators.compose([
         Validators.required, this.validateHost,
       ])],
-      port: [8888, Validators.compose([
+      port: [443, Validators.compose([
         Validators.required, this.validatePort,
       ])]
     });

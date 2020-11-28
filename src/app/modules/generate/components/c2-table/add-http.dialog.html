@@ -4,7 +4,7 @@
       HTTP(S) C2 Endpoint
     </ng-container>
   </h1>
-  <div mat-dialog-content>
+  <div mat-dialog-content align="center">
 
     <form [formGroup]="httpForm">
       <p>
@@ -26,9 +26,14 @@
     </form>
   
   </div>
-  <div mat-dialog-actions>
+  <div mat-dialog-actions align="center">
     <button mat-raised-button (click)="complete()" [disabled]="!httpForm.valid" color="primary">
-      &nbsp;&nbsp;<ng-container i18n>Add</ng-container>&nbsp;&nbsp;
+      &nbsp;&nbsp;
+      <i class="fas fa-fw fa-plus"></i>
+      <ng-container i18n>
+        Add
+      </ng-container>
+      &nbsp;&nbsp;
     </button>
     <button mat-button (click)="onNoClick()">
       &nbsp;&nbsp;<ng-container i18n>Cancel</ng-container>&nbsp;&nbsp;
