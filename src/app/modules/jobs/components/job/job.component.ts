@@ -13,12 +13,13 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { FadeInOut } from '@app/shared/animations';
 import { JobsService } from '@app/providers/jobs.service';
-import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 
 @Component({
@@ -31,7 +32,9 @@ export class JobComponent implements OnInit {
 
   job: clientpb.Job;
 
-  constructor(private _route: ActivatedRoute,
+  constructor(public dialog: MatDialog,
+              private _route: ActivatedRoute,
+              private _router: Router,
               private _jobsService: JobsService) { }
 
   ngOnInit() {
@@ -47,8 +50,42 @@ export class JobComponent implements OnInit {
     });
   }
 
+  stopJob() {
+    const dialogRef = this.dialog.open(StopJobDialogComponent, {
+      data: {
+        job: this.job
+      },
+    });
+    dialogRef.afterClosed().subscribe(async (job) => {
+      if (job) {
+        const killed = await this._jobsService.killJob(job.getId());
+        if (killed.getSuccess()) {
+          this._router.navigate(['jobs']);
+        } else {
+          alert(`Failed to kill job`);
+        }
+      }
+    });
+  }
+
   back() {
     window.history.back();
+  }
+
+}
+
+
+@Component({
+  selector: 'jobs-stop-job-dialog',
+  templateUrl: 'stop-job.dialog.html',
+})
+export class StopJobDialogComponent {
+
+  constructor(public dialogRef: MatDialogRef<StopJobDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }

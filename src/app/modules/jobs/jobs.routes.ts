@@ -18,7 +18,6 @@ import { ModuleWithProviders } from '@angular/core';
 
 import { ActiveConfig } from '@app/app-routing-guards.module';
 import { MainComponent } from './components/main/main.component';
-import { JobsComponent } from './components/jobs/jobs.component';
 import { JobComponent } from './components/job/job.component';
 import { StartListenerComponent } from './components/start-listener/start-listener.component';
 

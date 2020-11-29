@@ -16,19 +16,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BaseMaterialModule } from '@app/base-material';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { StartListenerComponent } from './components/start-listener/start-listener.component';
-import { JobComponent } from './components/job/job.component';
+import { JobComponent, StopJobDialogComponent } from './components/job/job.component';
 import { MainComponent } from './components/main/main.component';
 
 @NgModule({
-  declarations: [JobsComponent, StartListenerComponent, JobComponent, MainComponent],
+  declarations: [
+    JobsComponent,
+    StopJobDialogComponent,
+    StartListenerComponent,
+    JobComponent,
+    MainComponent
+  ],
   imports: [
     CommonModule,
     BaseMaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexLayoutModule
   ],
   exports: [
     JobsComponent

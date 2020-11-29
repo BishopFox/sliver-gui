@@ -17,6 +17,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BaseMaterialModule } from '@app/base-material';
 import { CreateImplantConfigComponent } from './components/create-implant-config/create-implant-config.component';
 import { BuildsComponent } from './components/builds/builds.component';
@@ -59,6 +60,7 @@ import { ProfilesTableComponent } from './components/profiles-table/profiles-tab
     ReactiveFormsModule,
     BaseMaterialModule,
     DragDropModule,
+    FlexLayoutModule,
   ],
   exports: [
     ImplantConfigComponent,

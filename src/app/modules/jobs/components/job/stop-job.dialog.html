@@ -1,24 +1,19 @@
 <h1 mat-dialog-title align="center">
-  <i class="fas fa-fw fa-file-code"></i>
+  <i class="fas fa-fw fa-exclamation-triangle"></i>
   <ng-container i18n>
-    Delete Script?
+    Stop Job?
   </ng-container>
 </h1>
 <div mat-dialog-content align="center">
-
   <ng-container i18n>
-    Are you sure you want to delete the <strong>{{data.name}}</strong> script?
+    Are you sure you want to stop job #{{data.job.getId()}}?
   </ng-container>
-
 </div>
 <div mat-dialog-actions align="center">
-
-  <button mat-raised-button [mat-dialog-close]="result" color="warn">
-    &nbsp;&nbsp;<ng-container i18n>Delete</ng-container>&nbsp;&nbsp;
+  <button mat-raised-button [mat-dialog-close]="data.job" color="warn">
+    &nbsp;&nbsp;<ng-container i18n>Stop</ng-container>&nbsp;&nbsp;
   </button>
-
   <button mat-button (click)="onNoClick()">
     &nbsp;&nbsp;<ng-container i18n>Cancel</ng-container>&nbsp;&nbsp;
   </button>
-
 </div>

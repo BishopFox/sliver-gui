@@ -1,28 +1,32 @@
 <div *ngIf="implantConfig">
-  <div>
-    <mat-toolbar>
 
-      <button mat-raised-button class="toolbar-button" (click)="back()">
-        <i class="fas fa-fw fa-chevron-left"></i>
-        <ng-container i18n>
-          Back
-        </ng-container>
-      </button>
+  <mat-toolbar fxLayout="row" fxLayoutAlign="start center">
 
-      <span class="toolbar-spacer"></span>
+    <button mat-raised-button (click)="back()">
+      <i class="fas fa-fw fa-chevron-left"></i>
+      <ng-container i18n>
+        Back
+      </ng-container>
+    </button>
 
-      <button mat-raised-button color="primary" class="toolbar-button" (click)="regenerate()">
-        <i class="fas fa-fw fa-undo-alt"></i>
-        <ng-container i18n>
-          Regenerate
-        </ng-container>
-      </button>
+    <span fxFlex></span>
+    <span>
+      <h3>{{ name }}</h3>
+    </span>
+    <span fxFlex></span>
 
-    </mat-toolbar>
-  </div>
+    <button mat-raised-button color="primary" (click)="regenerate()">
+      <i class="fas fa-fw fa-undo-alt"></i>
+      <ng-container i18n>
+        Regenerate
+      </ng-container>
+    </button>
+
+  </mat-toolbar>
+
   
   <div class="grid-wrapper">
-    <div class="grid-details">
+    <div class="grid-details" style="width: 33%">
       <generate-implant-config [implantConfig]="implantConfig">
       </generate-implant-config>
     </div>

@@ -546,6 +546,24 @@ export class IPCHandlers {
     }
     return '';
   }
+  
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "id": { "type": "number" },
+    },
+    "required": ["id"],
+    "additionalProperties": false,
+  })
+  async rpc_killJob(self: IPCHandlers, req: any): Promise<string> {
+    const jobId = req.id;
+    if (isNaN(jobId) || jobId <= 0) {
+      return '';
+    }
+    const killedJob = await self.client.killJob(jobId);
+    return Base64.fromUint8Array(killedJob.serializeBinary());
+  }
 
   @isConnected()
   @jsonSchema({

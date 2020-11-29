@@ -42,6 +42,13 @@ export class JobsService {
     return clientpb.Job.deserializeBinary(Base64.toUint8Array(job));
   }
 
+  async killJob(jobId: number): Promise<clientpb.KillJob> {
+    let kill: string = await this._ipc.request('rpc_killJob', JSON.stringify({
+      id: jobId
+    }));
+    return clientpb.KillJob.deserializeBinary(Base64.toUint8Array(kill));
+  }
+
   async startMTLSListener(host: string, port: number): Promise<clientpb.Job> {
     console.log(`Starting mTLS listener on port ${port}`);
     if (port < 1 || 65535 <= port) {

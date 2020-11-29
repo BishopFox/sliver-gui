@@ -18,7 +18,7 @@
 
       <span>
         <strong>Last Save:</strong><br />
-        {{lastSave}}
+        {{ lastSave }}
       </span>
 
     </mat-toolbar>
@@ -26,8 +26,5 @@
   <div *ngIf="editorOptions">
     <ngx-monaco-editor style="height: 600px" [options]="editorOptions" [(ngModel)]="code" (init)="editorInit($event)">
     </ngx-monaco-editor>
-  </div>
-  <div>
-    
   </div>
 </div>

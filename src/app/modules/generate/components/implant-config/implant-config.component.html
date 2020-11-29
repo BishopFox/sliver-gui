@@ -13,18 +13,23 @@
         <ng-container i18n>Implant Configuration</ng-container>
       </mat-card-title>
       <mat-card-subtitle>
-        &nbsp;
-        {{ implantConfig.getGoos()}}/{{implantConfig.getGoarch() }}
+        &nbsp;&nbsp;
+        {{ implantConfig.getGoos()}} / {{implantConfig.getGoarch() }}
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <p>
-        <strong i18n>Format</strong>:  {{ getFormat() }} <br />
-        <strong i18n>Debug</strong>: {{implantConfig.getDebug() }} <br />
-        <strong i18n>Max Connection Errors</strong>: {{ implantConfig.getMaxconnectionerrors() }} <br />
-        <strong i18n>Symbol Obfuscation</strong>: {{ implantConfig.getObfuscatesymbols() }} <br />
-        <strong i18n>Evasion</strong>: {{ implantConfig.getEvasion() }} <br />
-      </p>
+
+      <hr />
+
+      <strong i18n>Format</strong>:  {{ getFormat() }} <br />
+      <div *ngIf="getFormat() === 'Executable'">
+        <strong i18n>Service Executable</strong>: {{ implantConfig.getIsservice() }} <br />
+      </div>
+      <strong i18n>Debug</strong>: {{implantConfig.getDebug() }} <br />
+      <strong i18n>Max Connection Errors</strong>: {{ implantConfig.getMaxconnectionerrors() }} <br />
+      <strong i18n>Symbol Obfuscation</strong>: {{ implantConfig.getObfuscatesymbols() }} <br />
+      <strong i18n>Evasion</strong>: {{ implantConfig.getEvasion() }} <br />
+
       <p>
         <generate-c2-table [c2s]="getC2s()" [title]="false" [editable]="false">
         </generate-c2-table>

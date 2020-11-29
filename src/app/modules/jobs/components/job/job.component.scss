@@ -1,4 +1,11 @@
-.toolbar-spacer {
-    flex: 1 1 auto;
+.grid-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 7fr 1fr;
+    grid-template-rows: minmax(50px, auto);
+    margin-top: 10px;
 }
-  
+
+.grid-details {
+    grid-column: 2/3;
+    grid-row: 1/2;
+}
