@@ -1,26 +1,22 @@
 <div [@fadeInOut]>
 
-  <div>
-    <mat-toolbar>
+  <mat-toolbar>
+    <button mat-raised-button class="toolbar-button" (click)="back()">
+      <i class="fas fa-fw fa-chevron-left"></i>
+      <ng-container i18n>
+        Back
+      </ng-container>
+    </button>
+  </mat-toolbar>
 
-      <button mat-raised-button class="toolbar-button" (click)="back()">
-        <i class="fas fa-fw fa-chevron-left"></i>
-        <ng-container i18n>
-          Back
-        </ng-container>
-      </button>
-    </mat-toolbar>
-  </div>
-
-  <div class="form-container">
-    <mat-vertical-stepper [linear]="true" #stepper>
-
+  <div class="grid-container">
+    <mat-vertical-stepper class="stepper-root" [linear]="true" #stepper>
       <mat-step [stepControl]="selectProtocolForm" [completed]="false">
         <form style="width: 100%;" [formGroup]="selectProtocolForm">
           <ng-template matStepLabel>Protocol</ng-template>
           <p>
             <mat-form-field>
-              <mat-select [formControl]="selectProtocolForm.controls['protocol']" placeholder="Operating System">
+              <mat-select [formControl]="selectProtocolForm.controls['protocol']" placeholder="Protocol">
                 <mat-option value="mtls">
                   mTLS
                 </mat-option>
@@ -51,7 +47,7 @@
           <ng-template matStepLabel>Mutual TLS</ng-template>
           <p>
             <mat-form-field>
-              <input matInput [formControl]="mtlsOptionsForm.controls['lport']" placeholder="Listen Port">
+              <input matInput type="number" [formControl]="mtlsOptionsForm.controls['lport']" placeholder="Listen Port">
             </mat-form-field>
           </p>
         </form>
@@ -60,7 +56,7 @@
           <ng-template matStepLabel>HTTP</ng-template>
           <p>
             <mat-form-field>
-              <input matInput [formControl]="httpOptionsForm.controls['lport']" placeholder="Listen Port">
+              <input matInput type="number" [formControl]="httpOptionsForm.controls['lport']" placeholder="Listen Port">
             </mat-form-field>
           </p>
         </form>
@@ -69,7 +65,8 @@
           <ng-template matStepLabel>HTTPS</ng-template>
           <p>
             <mat-form-field>
-              <input matInput [formControl]="httpsOptionsForm.controls['lport']" placeholder="Listen Port">
+              <input matInput type="number" [formControl]="httpsOptionsForm.controls['lport']"
+                placeholder="Listen Port">
             </mat-form-field>
           </p>
         </form>
@@ -92,6 +89,5 @@
       </mat-step>
 
     </mat-vertical-stepper>
-
   </div>
 </div>

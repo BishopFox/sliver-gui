@@ -1,0 +1,10 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 7fr 1fr;
+    margin-top: 10px;
+}
+
+.stepper-root {
+    grid-column: 2/3;
+    grid-row: 1/2;
+}

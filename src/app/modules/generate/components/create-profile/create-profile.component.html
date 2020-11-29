@@ -3,7 +3,7 @@
 
 <div [@fadeInOut] *ngIf="implantConfig" class="grid-wrapper">
 
-  <form [formGroup]="profileForm" class="grid-generate-form">
+  <form [formGroup]="profileForm" class="grid-profile-form">
     <h3>
       <i class="fas fa-fw fa-tractor"></i>&nbsp;
       <ng-container i18n>Profile</ng-container>
@@ -13,11 +13,11 @@
         <mat-label>
           <ng-container i18n>Profile Name</ng-container>
         </mat-label>
-        <input matInput [formControl]="profileForm.controls['profileName']" i18n-placeholder placeholder="Profile Name" style="width: 100%;">
+        <input matInput [formControl]="profileForm.controls['profileName']" i18n-placeholder placeholder="Profile Name">
       </mat-form-field>
     </p>
     <p>
-      <button mat-raised-button color="primary" [disabled]="!profileForm.valid" (click)="saveProfile()" style="width: 100%;">
+      <button mat-raised-button color="primary" [disabled]="!profileForm.valid" (click)="saveProfile()">
         <ng-container i18n>Save</ng-container>
       </button>
     </p>

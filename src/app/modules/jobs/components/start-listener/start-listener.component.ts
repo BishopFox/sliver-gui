@@ -20,6 +20,7 @@ import { Router } from '@angular/router';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 import { FadeInOut } from '@app/shared/animations';
 import { JobsService } from '@app/providers/jobs.service';
+import { ClientService } from '@app/providers/client.service';
 
 
 @Component({
@@ -41,25 +42,30 @@ export class StartListenerComponent implements OnInit {
               private _jobsService: JobsService) { }
 
   ngOnInit() {
+
+    // Protocol selector
     this.selectProtocolForm = this._fb.group({
       protocol: ['mtls', Validators.required]
     });
 
+    // Protocol-specific forms
     this.mtlsOptionsForm = this._fb.group({
-      lport: [8888, Validators.required]
+      lport: [8888],
     });
-
     this.httpOptionsForm = this._fb.group({
-      lport: [80, Validators.required]
+      domains: [''],
+      lport: [80],
     });
-
     this.httpsOptionsForm = this._fb.group({
-      lport: [443, Validators.required]
+      domain: [''],
+      acme: [false],
+      cert: [''],
+      key: [''],
+      lport: [443],
     });
-
     this.dnsOptionsForm = this._fb.group({
-      domains: ['', Validators.required],
-      canarydomains: ['', Validators.required]
+      domains: [''],
+      canarydomains: [false],
     });
   }
 

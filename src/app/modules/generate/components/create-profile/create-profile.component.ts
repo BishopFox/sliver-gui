@@ -14,17 +14,18 @@
 */
 
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SliverService } from '@app/providers/sliver.service';
-
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+import { SliverService } from '@app/providers/sliver.service';
+import { FadeInOut } from '@app/shared/animations';
 
 
 @Component({
   selector: 'generate-create-profile',
   templateUrl: './create-profile.component.html',
-  styleUrls: ['./create-profile.component.scss']
+  styleUrls: ['./create-profile.component.scss'],
+  animations: [FadeInOut]
 })
 export class CreateProfileComponent implements OnInit {
 
@@ -37,7 +38,7 @@ export class CreateProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileForm = this._fb.group({
-      profileName: [{value: ''}],
+      profileName: ['', Validators.required],
     });
   }
 
