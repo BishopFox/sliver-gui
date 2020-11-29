@@ -1,7 +1,10 @@
-<mat-toolbar *ngIf="session" color="primary" style="-webkit-app-region: drag">
-  <ng-container i18n>Session</ng-container> #{{session.getId()}} - {{session.getName()}}
+<mat-toolbar *ngIf="session" class="app-toolbar" color="primary" style="-webkit-app-region: drag">
+  <ng-container i18n>Session</ng-container>
+  #{{session.getId()}} - {{session.getName()}}
   <span style="flex: 1 1 auto;"></span>
-  <span class="monospace">{{session.getUsername()}}@{{session.getHostname()}} - {{session.getRemoteaddress()}}</span>
+  <span class="monospace">
+    {{session.getUsername()}}@{{session.getHostname()}} - {{session.getRemoteaddress()}}
+  </span>
 </mat-toolbar>
 
 <mat-sidenav-container [@fadeInOut] class="interact-container">

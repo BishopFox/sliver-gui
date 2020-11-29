@@ -30,7 +30,7 @@ const routes: Routes = [
 
   { path: 'sessions', component: MainComponent, canActivate: [ActiveConfig] },
 
-  { 
+  {
     path: 'sessions/:session-id', component: InteractComponent, canActivate: [ActiveConfig],
     children: [
       { path: 'info', component: InfoComponent, canActivate: [ActiveConfig] },
@@ -40,7 +40,7 @@ const routes: Routes = [
     ]
   },
 
-  { 
+  {
     path: 'sessions-standalone/:session-id', component: StandaloneInteractComponent, canActivate: [ActiveConfig],
     children: [
       { path: 'info', component: InfoComponent, canActivate: [ActiveConfig] },

@@ -92,7 +92,7 @@ export class WindowManager {
     });
 
     this.mainWindow.loadURL(`${AppProtocol.scheme}://sliver/index.html`);
-    this.mainWindow.webContents.openDevTools();
+    // this.mainWindow.webContents.openDevTools();
 
     // Emitted when the window is closed.
     this.mainWindow.on('closed', () => {
@@ -153,8 +153,8 @@ export class WindowManager {
     });
 
     const windowId = uuid.v4();
-    sessionWindow.loadURL(`${AppProtocol.scheme}://${windowId}/#/sessions-standalone/${sessionId}/info`);
-    sessionWindow.webContents.openDevTools();
+    sessionWindow.loadURL(`${AppProtocol.scheme}://${windowId}/index.html#/sessions-standalone/${sessionId}/file-browser`);
+    // sessionWindow.webContents.openDevTools();
 
     // Emitted when the window is closed.
     sessionWindow.on('closed', () => {

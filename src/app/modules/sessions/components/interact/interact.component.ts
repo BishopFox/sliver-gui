@@ -18,7 +18,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { FadeInOut } from '@app/shared/animations';
 import { SliverService } from '@app/providers/sliver.service';
-import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 import { ClientService } from '@app/providers/client.service';
 
 

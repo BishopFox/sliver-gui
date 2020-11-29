@@ -21,7 +21,7 @@
   <br />
 </div>
 <div mat-dialog-actions>
-  <button [disabled]="!isConfirmed" mat-button [mat-dialog-close]="data" color="warn">
+  <button [disabled]="!isConfirmed" mat-raised-button [mat-dialog-close]="data" color="warn">
     &nbsp;&nbsp;<ng-container i18n>Delete</ng-container>&nbsp;&nbsp;
   </button>
   <button mat-button (click)="onNoClick()" cdkFocusInitial>

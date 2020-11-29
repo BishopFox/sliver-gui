@@ -1,3 +1,10 @@
+.app-toolbar {
+  position: sticky;
+  position: -webkit-sticky; /* For macOS/iOS Safari */
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 100; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
 .interact-container {
   position: absolute;
   top: 60px;
@@ -11,7 +18,7 @@
   align-items: center;
   justify-content: center;
   width: 200px;
-  background: #f5f5f5;
+  background: transparent !important;
 }
 
 .interact-footer {
@@ -19,4 +26,5 @@
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 100;
 }
