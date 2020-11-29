@@ -59,6 +59,10 @@ export class WindowManager {
     const gutterSize = 100;
     this.mainWindow = new BrowserWindow({
       titleBarStyle: 'hidden',
+      transparent:   true,
+      hasShadow:     true,
+      vibrancy:      'ultra-dark',
+
       x: gutterSize,
       y: gutterSize,
       width: size.width - (gutterSize * 2),
@@ -115,9 +119,13 @@ export class WindowManager {
     const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
     // Create the browser window.
-    const gutterSize = 100;
+    const gutterSize = 250;
     let sessionWindow = new BrowserWindow({
       titleBarStyle: 'hidden',
+      transparent:   true,
+      hasShadow:     true,
+      vibrancy:      'ultra-dark',
+      
       x: gutterSize,
       y: gutterSize,
       width: size.width - (gutterSize * 2),

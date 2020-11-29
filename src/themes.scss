@@ -120,7 +120,7 @@ $light-bg-alpha-12:   rgba(#fafafa, 0.12);
 
 // Background palette for dark themes.
 $mat-dark-theme-background: (
-  background:               $dark-background,
+  background:               transparent, // $dark-background,
   status-bar:               $dark-bg-lighter-20,
   app-bar:                  $dark-bg-lighter-5,
   hover:                    $light-bg-alpha-4,
