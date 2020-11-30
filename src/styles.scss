@@ -10,6 +10,10 @@ html, body {
   font-family: 'Source Code Pro';
 }
 
+.slim.mat-card {
+  padding-top: 1px;
+}
+
 .grid-spinner-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

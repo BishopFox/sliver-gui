@@ -61,7 +61,7 @@ export function requestHandler(req: Electron.ProtocolRequest, next: ProtocolCall
   if (reqPath === '/') {
     reqPath = '/index.html';
   }
-  
+
   if (!fs.existsSync(path.join(DIST_PATH, reqPath))) {
     reqPath = '/index.html';
   }

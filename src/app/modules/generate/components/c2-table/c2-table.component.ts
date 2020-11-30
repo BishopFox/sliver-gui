@@ -18,9 +18,9 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { MatTableDataSource } from '@angular/material/table';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FadeInOut } from '@app/shared/animations';
-
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+
+import { FadeInOut } from '@app/shared/animations';
 
 
 interface TableSessionData {
