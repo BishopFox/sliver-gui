@@ -14,13 +14,13 @@
 */
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {OverlayContainer} from '@angular/cdk/overlay';
+import { OverlayContainer } from '@angular/cdk/overlay';
 import { EventsService, Events, Notification } from './providers/events.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
-import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 import { ClientService, Settings, Themes } from './providers/client.service';
 
 

@@ -217,7 +217,7 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
   background-color: $dark-bg-lighter-10;
 }
 .stepper-root {
-  background-color: $dark-background;
+  background-color: transparent !important;
 }
 
 .light-theme {
