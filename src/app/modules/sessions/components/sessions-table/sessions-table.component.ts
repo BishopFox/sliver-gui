@@ -42,9 +42,9 @@ function compare(a: number | string, b: number | string, isAsc: boolean) {
 
 
 @Component({
-  selector: 'sessions',
-  templateUrl: './sessions.component.html',
-  styleUrls: ['./sessions.component.scss'],
+  selector: 'sessions-table',
+  templateUrl: './sessions-table.component.html',
+  styleUrls: ['./sessions-table.component.scss'],
   animations: [FadeInOut]
 })
 export class SessionsComponent implements OnInit, OnDestroy {
@@ -52,7 +52,7 @@ export class SessionsComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   dataSrc: MatTableDataSource<TableSessionData>;
   
-  @Input() title = false;
+  @Input() title = true;
   @Input() displayedColumns: string[] = [
     'id', 'name', 'transport', 'remoteaddress', 'username', 'os', 'checkin'
   ];

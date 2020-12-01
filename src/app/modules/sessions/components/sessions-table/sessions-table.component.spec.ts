@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { SessionsComponent } from './sessions.component';
+import { SessionsComponent } from './sessions-table.component';
 
 describe('SessionsComponent', () => {
   let component: SessionsComponent;

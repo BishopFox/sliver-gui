@@ -44,11 +44,13 @@ function compare(a: number | string | boolean, b: number | string | boolean, isA
 })
 export class ProfilesTableComponent implements OnInit {
 
-  profiles: clientpb.ImplantProfile[];
-  dataSrc: MatTableDataSource<TableImplantProfileData>;
+  @Input() title = true;
   @Input() displayedColumns: string[] = [
     'name', 'os', 'arch', 'debug', 'format'
   ];
+
+  profiles: clientpb.ImplantProfile[];
+  dataSrc: MatTableDataSource<TableImplantProfileData>;
 
   constructor(private _sliverService: SliverService) { }
 
