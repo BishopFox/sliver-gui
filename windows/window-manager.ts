@@ -24,6 +24,13 @@ import * as AppProtocol from '../app-protocol';
 
 const logger = log4js.getLogger(__filename);
 
+// https://nodejs.org/api/process.html#process_process_platform
+export enum Platforms {
+  Windows = 'win32',
+  MacOS = 'darwin',
+  Linux = 'linux',
+};
+
 
 export class WindowManager {
 
@@ -69,40 +76,9 @@ export class WindowManager {
 
 
   createMainWindow() {
-    const electronScreen = screen;
-    const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
-    // Create the browser window.
     const gutterSize = 100;
-    this.mainWindow = new BrowserWindow({
-      titleBarStyle: 'hidden',
-      transparent:   true,
-      hasShadow:     true,
-      vibrancy:      'ultra-dark',
-
-      x: gutterSize,
-      y: gutterSize,
-      width: size.width - (gutterSize * 2),
-      height: size.height - (gutterSize * 2),
-      webPreferences: {
-        scrollBounce: true,
-        // I think I got all of the settings we want here to reasonably lock down
-        // the BrowserWindow - https://electronjs.org/docs/api/browser-window
-        sandbox: true,
-        webSecurity: true,
-        contextIsolation: true,
-        webviewTag: false,
-        enableRemoteModule: false,
-        allowRunningInsecureContent: false,
-        nodeIntegration: false,
-        nodeIntegrationInWorker: false,
-        nodeIntegrationInSubFrames: false,
-        nativeWindowOpen: false,
-        safeDialogs: true,
-        preload: path.join(__dirname, '..', 'preload.js'),
-      },
-      show: false, // hide until 'ready-to-show'
-    });
+    this.mainWindow = this.window(gutterSize, path.join(__dirname, '..', 'preload.js'))
 
     this.mainWindow.once('ready-to-show', () => {
       this.mainWindow.show();
@@ -131,39 +107,9 @@ export class WindowManager {
   }
 
   createSessionWindow(sessionId: number) {
-
-    const electronScreen = screen;
-    const size = electronScreen.getPrimaryDisplay().workAreaSize;
-
     // Create the browser window.
     const gutterSize = 250;
-    let sessionWindow = new BrowserWindow({
-      titleBarStyle: 'hidden',
-      transparent:   true,
-      hasShadow:     true,
-      vibrancy:      'ultra-dark',
-      
-      x: gutterSize,
-      y: gutterSize,
-      width: size.width - (gutterSize * 2),
-      height: size.height - (gutterSize * 2),
-      webPreferences: {
-        scrollBounce: true,
-        sandbox: true,
-        webSecurity: true,
-        contextIsolation: true,
-        webviewTag: false,
-        enableRemoteModule: false,
-        allowRunningInsecureContent: false,
-        nodeIntegration: false,
-        nodeIntegrationInWorker: false,
-        nodeIntegrationInSubFrames: false,
-        nativeWindowOpen: false,
-        safeDialogs: true,
-        preload: path.join(__dirname, '..', 'preload.js'),
-      },
-      show: false, // hide until 'ready-to-show'
-    });
+    let sessionWindow = this.window(gutterSize, path.join(__dirname, '..', 'preload.js'));
 
     sessionWindow.once('ready-to-show', () => {
       sessionWindow.show();
@@ -171,7 +117,6 @@ export class WindowManager {
 
     const windowId = uuid.v4();
     sessionWindow.loadURL(`${AppProtocol.scheme}://${windowId}/index.html#/sessions-standalone/${sessionId}/file-browser`);
-    // sessionWindow.webContents.openDevTools();
 
     // Emitted when the window is closed.
     sessionWindow.on('closed', () => {
@@ -185,6 +130,62 @@ export class WindowManager {
     this.sessionWindows.set(windowId, sessionWindow);
 
     return sessionWindow;
+  }
+
+  private window(gutterSize: number, preload: string): Electron.BrowserWindow {
+    switch(process.platform) {
+      case Platforms.MacOS:
+        return this.glassWindow(gutterSize, preload)
+      default:
+        return this.normalWindow(gutterSize, preload);
+    }
+  }
+
+  private glassWindow(gutterSize: number, preload: string) {
+    const size = screen.getPrimaryDisplay().workAreaSize;
+    return new BrowserWindow({
+      titleBarStyle: 'hidden',
+      transparent: true,
+      hasShadow: true,
+      vibrancy: 'ultra-dark',
+      x: gutterSize,
+      y: gutterSize,
+      width: size.width - (gutterSize * 2),
+      height: size.height - (gutterSize * 2),
+      webPreferences: this.webPreferences(preload),
+      show: false,
+    });
+  }
+
+  private normalWindow(gutterSize: number, preload: string) {
+    const size = screen.getPrimaryDisplay().workAreaSize;
+    return new BrowserWindow({
+      hasShadow: true,
+      x: gutterSize,
+      y: gutterSize,
+      width: size.width - (gutterSize * 2),
+      height: size.height - (gutterSize * 2),
+      webPreferences: this.webPreferences(preload),
+      show: false,
+    });
+  }
+
+  private webPreferences(preload: string) {
+    return {
+      scrollBounce: true,
+      sandbox: true,
+      webSecurity: true,
+      contextIsolation: true,
+      webviewTag: false,
+      enableRemoteModule: false,
+      allowRunningInsecureContent: false,
+      nodeIntegration: false,
+      nodeIntegrationInWorker: false,
+      nodeIntegrationInSubFrames: false,
+      nativeWindowOpen: false,
+      safeDialogs: true,
+      preload: preload,
+    };
   }
 
 }

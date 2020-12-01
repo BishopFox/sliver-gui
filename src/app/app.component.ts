@@ -22,7 +22,7 @@ import { Events } from 'sliver-script/lib/events';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 import { EventsService, Notification } from './providers/events.service';
-import { ClientService, Settings, Themes } from './providers/client.service';
+import { ClientService, Platforms, Settings, Themes } from './providers/client.service';
 
 
 @Component({
@@ -68,14 +68,15 @@ export class AppComponent implements OnInit, OnDestroy {
     this.setTheme();
   }
 
-  setTheme() {
+  async setTheme() {
     console.log(`Set theme to: ${this.settings.theme}`);
+    const platform = await this._clientService.getPlatform();
     switch(this.settings.theme) {
       case Themes.Auto:
         this.setAutoTheme();
         break;
       case Themes.Dark:
-        this.setDarkTheme();
+        platform === Platforms.MacOS ? this.setDarkTheme() : this.setDarkThemeNoGlass();
         break;
       case Themes.DarkNoGlass:
         this.setDarkThemeNoGlass();
@@ -90,8 +91,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
   async setAutoTheme(): Promise<void> {
     const isDark = await this._clientService.getSystemThemeIsDark();
+    const platform = await this._clientService.getPlatform();
     if (isDark) {
-      this.setDarkTheme();
+      if (platform === Platforms.MacOS) {
+        this.setDarkTheme();
+      } else {
+        this.setDarkThemeNoGlass();
+      }
     } else {
       this.setLightTheme();
     }

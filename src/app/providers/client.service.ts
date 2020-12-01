@@ -34,6 +34,13 @@ export enum Themes {
   Light = 'Light'
 }
 
+// https://nodejs.org/api/process.html#process_process_platform
+export enum Platforms {
+  Windows = 'win32',
+  MacOS = 'darwin',
+  Linux = 'linux',
+};
+
 export const DEFAULT_THEME = Themes.Auto;
 
 export interface SaveFileReq {
@@ -138,6 +145,10 @@ export class ClientService {
   async getSystemThemeIsDark(): Promise<boolean> {
     const isDark = await this._ipc.request('client_systemThemeIsDark');
     return isDark === 'true' ? true : false;
+  }
+
+  async getPlatform(): Promise<string> {
+    return this._ipc.request('client_platform');
   }
 
   async listConfigs(): Promise<sliver.SliverClientConfig[]> {

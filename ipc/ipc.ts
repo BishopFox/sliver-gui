@@ -21,7 +21,7 @@ listing/selecting configs to the sandboxed code.
 import {
   ipcMain, dialog, FileFilter, BrowserWindow, IpcMainEvent, nativeTheme
 } from 'electron';
-import { homedir } from 'os';
+import { homedir, platform } from 'os';
 import { Base64 } from 'js-base64';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -885,6 +885,10 @@ export class IPCHandlers {
 
   public async client_systemThemeIsDark(_: IPCHandlers): Promise<string> {
     return nativeTheme.shouldUseDarkColors ? 'true' : 'false';
+  }
+
+  public async client_platform(_: IPCHandlers): Promise<string> {
+    return process.platform;
   }
 
   public async client_listLocales(self: IPCHandlers): Promise<string> {
