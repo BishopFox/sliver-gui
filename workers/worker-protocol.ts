@@ -15,14 +15,16 @@
 
 
 import { ProtocolRequest } from 'electron';
-import { WorkerManager } from './worker-manager';
-import { getDistPath } from '../locale';
-
 import * as Handlebars from 'handlebars';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as log4js from 'log4js';
+
+import { WorkerManager } from './worker-manager';
+import { getDistPath } from '../locale';
 
 
+const logger = log4js.getLogger(__filename);
 type ProtocolCallback = (arg0: { mimeType: string; charset: string; data: Buffer; }) => void;
 const WORKER_PATH = path.join(__dirname);
 const INDEX_FILE = path.join(WORKER_PATH, 'index.html');
@@ -35,7 +37,7 @@ export const scheme = 'worker';
 export async function requestHandler(workerManager: WorkerManager, req: ProtocolRequest, next: ProtocolCallback) {
   const reqUrl = new URL(req.url);
   if (!workerManager.isScriptExecuting(reqUrl.hostname)) {
-    console.warn(`[WorkerProtocol] Script is not executing: ${reqUrl.hostname}`);
+    logger.warn(`[WorkerProtocol] Script is not executing: ${reqUrl.hostname}`);
     return;
   }
 
@@ -43,7 +45,7 @@ export async function requestHandler(workerManager: WorkerManager, req: Protocol
   // resolve all '..' and could lead to path traversal attacks this is
   // because NodeJS is a terrible language designed by terrible people.
   if (!reqUrl.pathname.startsWith("/")) {
-    console.error(`Invalid path '${reqUrl.pathname}', cannot normalize`);
+    logger.error(`Invalid path '${reqUrl.pathname}', cannot normalize`);
     return next({
       mimeType: null,
       charset: null,
@@ -83,7 +85,7 @@ export async function requestHandler(workerManager: WorkerManager, req: Protocol
         data: data
       });
     } else {
-      console.error(`Worker protocol: ${err}`);
+      logger.error(`Worker protocol: ${err}`);
     }
   });
   

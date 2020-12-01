@@ -64,7 +64,7 @@ export function requestHandler(req: Electron.ProtocolRequest, next: ProtocolCall
   // resolve all '..' and could lead to path traversal attacks this is
   // because NodeJS is a terrible language designed by terrible people.
   if (!reqUrl.pathname.startsWith("/")) {
-    console.error(`Invalid path '${reqUrl.pathname}', cannot normalize`);
+    logger.error(`Invalid path '${reqUrl.pathname}', cannot normalize`);
     return next({
       mimeType: null,
       charset: null,
