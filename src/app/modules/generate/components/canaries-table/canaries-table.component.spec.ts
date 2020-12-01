@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { JobsComponent } from './jobs.component';
+import { CanariesTableComponent } from './canaries-table.component';
 
-describe('JobsComponent', () => {
-  let component: JobsComponent;
-  let fixture: ComponentFixture<JobsComponent>;
+describe('CanariesComponent', () => {
+  let component: CanariesTableComponent;
+  let fixture: ComponentFixture<CanariesTableComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ JobsComponent ]
+      declarations: [ CanariesTableComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JobsComponent);
+    fixture = TestBed.createComponent(CanariesTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

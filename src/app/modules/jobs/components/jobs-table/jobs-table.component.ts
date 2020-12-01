@@ -39,17 +39,17 @@ function compare(a: number | string, b: number | string, isAsc: boolean) {
 
 
 @Component({
-  selector: 'jobs',
-  templateUrl: './jobs.component.html',
-  styleUrls: ['./jobs.component.scss'],
+  selector: 'jobs-table',
+  templateUrl: './jobs-table.component.html',
+  styleUrls: ['./jobs-table.component.scss'],
   animations: [FadeInOut]
 })
-export class JobsComponent implements OnInit, OnDestroy {
+export class JobsTableComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
   dataSrc: MatTableDataSource<TableJobData>;
   
-  @Input() title = false;
+  @Input() title = true;
   @Input() displayedColumns: string[] = [
     'id', 'name', 'protocol', 'port', 'description',
   ];

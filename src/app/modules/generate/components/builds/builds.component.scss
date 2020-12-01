@@ -1,0 +1,11 @@
+.grid-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 11fr 1fr;
+    grid-template-rows: minmax(50px, auto);
+    margin-top: 10px;
+}
+
+.builds {
+    grid-column: 2/3;
+    grid-row: 1/2;
+}

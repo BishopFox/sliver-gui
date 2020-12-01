@@ -22,7 +22,7 @@ import { BaseMaterialModule } from '@app/base-material';
 import { CreateImplantConfigComponent } from './components/create-implant-config/create-implant-config.component';
 import { BuildsComponent } from './components/builds/builds.component';
 import { BuildsTableComponent, RegenerateDialogComponent } from './components/builds-table/builds-table.component';
-import { CanariesComponent } from './components/canaries/canaries.component';
+import { CanariesTableComponent } from './components/canaries-table/canaries-table.component';
 import { GenerateComponent, GeneratingDialogComponent, BuildErrorDialogComponent } from './components/generate/generate.component';
 import {
   C2TableComponent, AddMTLSDialogComponent, AddHTTPDialogComponent, AddDNSDialogComponent
@@ -32,6 +32,7 @@ import { BuildDetailsComponent } from './components/build-details/build-details.
 import { CreateProfileComponent } from './components/create-profile/create-profile.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
 import { ProfilesTableComponent } from './components/profiles-table/profiles-table.component';
+import { CanariesComponent } from './components/canaries/canaries.component';
 
 
 @NgModule({
@@ -42,7 +43,7 @@ import { ProfilesTableComponent } from './components/profiles-table/profiles-tab
     BuildErrorDialogComponent,
     BuildsTableComponent,
     RegenerateDialogComponent,
-    CanariesComponent,
+    CanariesTableComponent,
     GenerateComponent,
     C2TableComponent,
     AddMTLSDialogComponent,
@@ -53,6 +54,7 @@ import { ProfilesTableComponent } from './components/profiles-table/profiles-tab
     CreateProfileComponent,
     ProfilesComponent,
     ProfilesTableComponent,
+    CanariesComponent,
   ],
   imports: [
     CommonModule,

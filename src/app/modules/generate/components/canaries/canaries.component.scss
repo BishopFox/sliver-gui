@@ -1,15 +1,11 @@
-table {
-    width: 100%;
-}
-
-
-.mat-form-field {
-    font-size: 14px;
-    width: 25%;
-    float: right;
-}
-
 .grid-wrapper {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 11fr 1fr;
+    grid-template-rows: minmax(50px, auto);
+    margin-top: 10px;
+}
+
+.canaries {
+    grid-column: 2/3;
+    grid-row: 1/2;
 }

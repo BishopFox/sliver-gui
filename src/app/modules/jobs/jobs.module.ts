@@ -18,14 +18,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BaseMaterialModule } from '@app/base-material';
-import { JobsComponent } from './components/jobs/jobs.component';
+import { JobsTableComponent } from './components/jobs-table/jobs-table.component';
 import { StartListenerComponent } from './components/start-listener/start-listener.component';
 import { JobComponent, StopJobDialogComponent } from './components/job/job.component';
 import { MainComponent } from './components/main/main.component';
 
 @NgModule({
   declarations: [
-    JobsComponent,
+    JobsTableComponent,
     StopJobDialogComponent,
     StartListenerComponent,
     JobComponent,
@@ -39,7 +39,7 @@ import { MainComponent } from './components/main/main.component';
     FlexLayoutModule
   ],
   exports: [
-    JobsComponent
+    JobsTableComponent
   ]
 })
 export class JobsModule { }

@@ -13,7 +13,7 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -50,10 +50,12 @@ function compare(a: number | string | boolean, b: number | string | boolean, isA
 })
 export class BuildsTableComponent implements OnInit {
 
-  dataSrc: MatTableDataSource<TableImplantBuildData>;
-  displayedColumns: string[] = [
+  @Input() title = true;
+  @Input() displayedColumns: string[] = [
     'name', 'os', 'arch', 'debug', 'format', 'regenerate'
   ];
+
+  dataSrc: MatTableDataSource<TableImplantBuildData>;
 
   constructor(public dialog: MatDialog,
               private _router: Router,
