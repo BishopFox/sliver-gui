@@ -62,10 +62,6 @@ export function requestHandler(req: Electron.ProtocolRequest, next: ProtocolCall
     reqPath = '/index.html';
   }
 
-  if (!fs.existsSync(path.join(DIST_PATH, reqPath))) {
-    reqPath = '/index.html';
-  }
-
   const reqFilename = path.basename(reqPath);
   fs.readFile(path.join(DIST_PATH, reqPath), (err, data) => {
     const mimeType = mime(reqFilename);
