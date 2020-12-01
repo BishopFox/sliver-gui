@@ -59,8 +59,20 @@ function mime(filename: string): string {
 
 export function requestHandler(req: Electron.ProtocolRequest, next: ProtocolCallback) {
   const reqUrl = new URL(req.url);
-  let reqPath = path.resolve(reqUrl.pathname);
-  
+
+  // If the path doesn't start with "/" then path.normalize will not 
+  // resolve all '..' and could lead to path traversal attacks this is
+  // because NodeJS is a terrible language designed by terrible people.
+  if (!reqUrl.pathname.startsWith("/")) {
+    console.error(`Invalid path '${reqUrl.pathname}', cannot normalize`);
+    return next({
+      mimeType: null,
+      charset: null,
+      data: null,
+    });
+  }
+
+  let reqPath = path.normalize(reqUrl.pathname);
   if (reqPath === '/') {
     reqPath = '/index.html';
   }
@@ -77,6 +89,11 @@ export function requestHandler(req: Electron.ProtocolRequest, next: ProtocolCall
       });
     } else {
       console.error(err);
+      next({
+        mimeType: null,
+        charset: null,
+        data: null,
+      });
     }
   });
 }

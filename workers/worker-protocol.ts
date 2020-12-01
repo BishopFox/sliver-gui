@@ -39,7 +39,18 @@ export async function requestHandler(workerManager: WorkerManager, req: Protocol
     return;
   }
 
-  const reqPath = path.resolve(reqUrl.pathname);
+  // If the path doesn't start with "/" then path.normalize will not 
+  // resolve all '..' and could lead to path traversal attacks this is
+  // because NodeJS is a terrible language designed by terrible people.
+  if (!reqUrl.pathname.startsWith("/")) {
+    console.error(`Invalid path '${reqUrl.pathname}', cannot normalize`);
+    return next({
+      mimeType: null,
+      charset: null,
+      data: null,
+    });
+  }
+  const reqPath = path.normalize(reqUrl.pathname);
 
   /* Index Request */
   if (reqPath === '/' || reqPath === '/index.html') {
