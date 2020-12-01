@@ -30,6 +30,7 @@ import { FileFilter } from 'electron';
 export enum Themes {
   Auto = 'Auto',
   Dark = 'Dark',
+  DarkNoGlass = 'Dark (No Glass)',
   Light = 'Light'
 }
 

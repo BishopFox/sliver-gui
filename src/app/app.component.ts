@@ -32,6 +32,8 @@ import { ClientService, Settings, Themes } from './providers/client.service';
 export class AppComponent implements OnInit, OnDestroy {
 
   private readonly LIGHT_CSS = 'light-theme';
+  private readonly DARK_NO_GLASS_CSS = 'dark-theme-no-glass';
+  private readonly CSS_THEMES = [this.LIGHT_CSS, this.DARK_NO_GLASS_CSS];
   
   mainWindow = window.location.origin == "app://sliver";
   settings: Settings;
@@ -74,6 +76,9 @@ export class AppComponent implements OnInit, OnDestroy {
       case Themes.Dark:
         this.setDarkTheme();
         break;
+      case Themes.DarkNoGlass:
+        this.setDarkThemeNoGlass();
+        break;
       case Themes.Light:
         this.setLightTheme();
         break;
@@ -91,12 +96,25 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
+  clearThemes(): void {
+    this.CSS_THEMES.forEach((css_theme) => {
+      document.body.classList.remove(css_theme);
+      this._overlayContainer.getContainerElement().classList.remove(css_theme);
+    });
+  }
+
   setDarkTheme(): void {
-    document.body.classList.remove(this.LIGHT_CSS);
-    this._overlayContainer.getContainerElement().classList.remove(this.LIGHT_CSS);
+    this.clearThemes(); // Dark theme w/glass is default
+  }
+
+  setDarkThemeNoGlass(): void {
+    this.clearThemes();
+    document.body.classList.add(this.DARK_NO_GLASS_CSS);
+    this._overlayContainer.getContainerElement().classList.add(this.DARK_NO_GLASS_CSS);
   }
 
   setLightTheme(): void {
+    this.clearThemes();
     document.body.classList.add(this.LIGHT_CSS);
     this._overlayContainer.getContainerElement().classList.add(this.LIGHT_CSS);
   }

@@ -137,6 +137,7 @@ $mat-dark-theme-background: (
   disabled-list-option:     $dark-bg-lighter-10,
 );
 
+
 // Compute font config
 @include mat-core($fontConfig);
 
@@ -207,9 +208,29 @@ $mat-warn: (
   )
 );
 $theme-warn: mat-palette($mat-warn, main, lighter, darker);;
-
 $theme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
-$altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
+
+// Dark theme, but with non-transparent background
+$mat-dark-theme-background: (
+  background:               $dark-background,
+  status-bar:               $dark-bg-lighter-20,
+  app-bar:                  $dark-bg-lighter-5,
+  hover:                    $light-bg-alpha-4,
+  card:                     $dark-bg-lighter-5,
+  dialog:                   $dark-bg-lighter-5,
+  tooltip:                  $dark-bg-lighter-20,
+  disabled-button:          $light-bg-alpha-12,
+  raised-button:            $dark-bg-lighter-20,
+  focused-button:           $light-focused,
+  selected-button:          $dark-bg-lighter-20,
+  selected-disabled-button: $dark-bg-lighter-30,
+  disabled-button-toggle:   $dark-bg-lighter-10,
+  unselected-chip:          $dark-bg-lighter-20,
+  disabled-list-option:     $dark-bg-lighter-10,
+);
+$dark-theme-no-glass: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
+
+$light-theme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 
 // Theme Init
 @include angular-material-theme($theme);
@@ -217,11 +238,19 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
   background-color: $dark-bg-lighter-10;
 }
 .stepper-root {
-  background-color: transparent !important;
+  background-color: transparent;
+}
+
+
+.dark-theme-no-glass {
+  @include angular-material-theme($dark-theme-no-glass);
+  .stepper-root {
+    background-color: $dark-background;
+  }
 }
 
 .light-theme {
-  @include angular-material-theme($altTheme);
+  @include angular-material-theme($light-theme);
   .mat-row:hover {
     background-color: #f5f5f5;
   }

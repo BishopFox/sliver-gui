@@ -29,8 +29,9 @@ export class SettingsComponent implements OnInit {
   locales: Map<string, string>;
   currentLocale: string;
   currentTheme: string;
+  glassEffect = true;
 
-  themes = [Themes.Auto, Themes.Dark, Themes.Light];
+  themes = [Themes.Auto, Themes.Dark, Themes.DarkNoGlass, Themes.Light];
 
   constructor(public dialog: MatDialog,
               private _clientService: ClientService) { }
