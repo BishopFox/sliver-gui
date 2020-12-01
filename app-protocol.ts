@@ -88,7 +88,7 @@ export function requestHandler(req: Electron.ProtocolRequest, next: ProtocolCall
         data: data
       });
     } else {
-      console.error(err);
+      logger.error(err);
       next({
         mimeType: null,
         charset: null,
