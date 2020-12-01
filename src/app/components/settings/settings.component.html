@@ -15,7 +15,7 @@
     </mat-toolbar>
   </div>
 
-  <div class="grid-container">
+  <div *ngIf="settings" class="grid-container">
     
     <div *ngIf="locales" class="language">
       <mat-form-field appearance="fill">

@@ -15,7 +15,7 @@
 
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ClientService, Settings, Themes, DEFAULT_THEME } from '@app/providers/client.service';
+import { ClientService, Platforms, Settings, Themes, DEFAULT_THEME } from '@app/providers/client.service';
 
 
 @Component({
@@ -30,8 +30,7 @@ export class SettingsComponent implements OnInit {
   currentLocale: string;
   currentTheme: string;
   glassEffect = true;
-
-  themes = [Themes.Auto, Themes.Dark, Themes.DarkNoGlass, Themes.Light];
+  isMacOS: boolean;
 
   constructor(public dialog: MatDialog,
               private _clientService: ClientService) { }
@@ -42,6 +41,7 @@ export class SettingsComponent implements OnInit {
   }
 
   async fetchSettings() {
+    this.isMacOS = (await this._clientService.getPlatform()) === Platforms.MacOS;
     this.settings = await this._clientService.getSettings();
     this.currentTheme = this.settings.theme ? this.settings.theme : DEFAULT_THEME;
   }
@@ -70,6 +70,10 @@ export class SettingsComponent implements OnInit {
     console.log(event.value);
     this.settings.theme = event.value;
     this.saveSettings();
+  }
+
+  get themes() {
+    return this.isMacOS ? [Themes.Auto, Themes.Dark, Themes.DarkNoGlass, Themes.Light] : [Themes.Auto, Themes.Dark, Themes.Light];
   }
 
 }
