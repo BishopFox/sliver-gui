@@ -55,7 +55,7 @@ protocol.registerSchemesAsPrivileged([{
 
 function getLogLevel(): string {
   const envLogLevel: string = process.env.SLIVER_GUI_LOG_LEVEL;
-  switch(envLogLevel.toLowerCase()) {
+  switch(envLogLevel?.toLowerCase()) {
     case "all":
       return "all";
     case "trace":
