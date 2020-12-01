@@ -13,13 +13,19 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Inject } from '@angular/core';
 import { SliverService } from '@app/providers/sliver.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
-
-import { FadeInOut } from '@app/shared/animations';
+import { Router } from '@angular/router';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+import { Subscription } from 'rxjs';
+
+import { GeneratingDialogComponent, BuildErrorDialogComponent } from '../generate/generate.component';
+import { FadeInOut } from '@app/shared/animations';
+import { EventsService } from '@app/providers/events.service';
+import { ClientService } from '@app/providers/client.service';
 
 
 interface TableImplantProfileData {
@@ -42,7 +48,7 @@ function compare(a: number | string | boolean, b: number | string | boolean, isA
   styleUrls: ['./profiles-table.component.scss'],
   animations: [FadeInOut]
 })
-export class ProfilesTableComponent implements OnInit {
+export class ProfilesTableComponent implements OnInit, OnDestroy {
 
   @Input() title = true;
   @Input() displayedColumns: string[] = [
@@ -51,11 +57,22 @@ export class ProfilesTableComponent implements OnInit {
 
   profiles: clientpb.ImplantProfile[];
   dataSrc: MatTableDataSource<TableImplantProfileData>;
+  profileSub: Subscription;
+  generatingDialogRef: MatDialogRef<GeneratingDialogComponent, any>;
 
-  constructor(private _sliverService: SliverService) { }
+  constructor(public dialog: MatDialog,
+              private _router: Router,
+              private _clientService: ClientService,
+              private _sliverService: SliverService,
+              private _eventsService: EventsService) { }
 
   ngOnInit(): void {
     this.fetchProfiles();
+    this.profileSub = this._eventsService.profiles$.subscribe(this.fetchProfiles);
+  }
+
+  ngOnDestroy(): void {
+    this.profileSub.unsubscribe();
   }
 
   async fetchProfiles() {
@@ -84,7 +101,57 @@ export class ProfilesTableComponent implements OnInit {
   }
 
   onRowSelection(row: any) {
-    console.log(row);
+    let profile: clientpb.ImplantProfile;
+    for (let index = 0; index < this.profiles.length; ++index) {
+      if (this.profiles[index].getName() === row.name) {
+        profile = this.profiles[index];
+        break;
+      }
+    }
+    if (!profile) {
+      return;
+    }
+    this.profileGenerate(profile);
+  }
+
+  profileGenerate(profile: clientpb.ImplantProfile) {
+    const dialogRef = this.dialog.open(ProfileGenerateDialogComponent, {
+      data: profile,
+    });
+    dialogRef.afterClosed().subscribe(async (profile: clientpb.ImplantProfile) => {
+      if (profile) {
+        console.log(`Generating from profile: ${profile.getName()}`);
+        this.generate(profile.getConfig());
+      }
+    });
+  }
+
+  async generate(implantConfig: clientpb.ImplantConfig) {
+    setTimeout(async () => {
+      try {
+        const file = await this._sliverService.generate(implantConfig);
+        this._eventsService.notify(`Build ${file.getName()} completed`, 'Download', 10, () => {
+          this._clientService.saveFile('Save', 'Save Implant', file.getName(), file.getData_asU8());
+        });
+      } catch (err) {
+        console.error(err);
+        this.generatingDialogRef?.close();
+        this.dialog.open(BuildErrorDialogComponent, {
+          data: {
+            errorMessage: err.toString(),
+            stack: err.stack,
+          },
+        });
+      }
+    }, 0);
+    this.generatingDialog();
+  }
+
+  generatingDialog() {
+    this.generatingDialogRef = this.dialog.open(GeneratingDialogComponent);
+    this.generatingDialogRef.afterClosed().subscribe(() => {
+      this._router.navigate(['generate', 'builds']);
+    });
   }
 
   c2sToURLs(sliverC2s: clientpb.ImplantC2.AsObject[]): string[] {
@@ -122,6 +189,23 @@ export class ProfilesTableComponent implements OnInit {
         default: return 0;
       }
     });
+  }
+
+}
+
+
+
+@Component({
+  selector: 'generate-profile-generate-dialog',
+  templateUrl: 'profile-generate.dialog.html',
+})
+export class ProfileGenerateDialogComponent {
+
+  constructor(public dialogRef: MatDialogRef<ProfileGenerateDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public profile: clientpb.ImplantProfile) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }

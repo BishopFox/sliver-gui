@@ -31,7 +31,7 @@ import { ImplantConfigComponent } from './components/implant-config/implant-conf
 import { BuildDetailsComponent } from './components/build-details/build-details.component';
 import { CreateProfileComponent } from './components/create-profile/create-profile.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
-import { ProfilesTableComponent } from './components/profiles-table/profiles-table.component';
+import { ProfilesTableComponent, ProfileGenerateDialogComponent } from './components/profiles-table/profiles-table.component';
 import { CanariesComponent } from './components/canaries/canaries.component';
 
 
@@ -53,6 +53,7 @@ import { CanariesComponent } from './components/canaries/canaries.component';
     BuildDetailsComponent,
     CreateProfileComponent,
     ProfilesComponent,
+    ProfileGenerateDialogComponent,
     ProfilesTableComponent,
     CanariesComponent,
   ],

@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>
+  <i class="fas fa-fw fa-building"></i>
+  <ng-container i18n>
+    Build from Profile
+  </ng-container>
+</h1>
+<div mat-dialog-content>
+  <ng-container i18n>
+    Would you like to build an implant based on the <strong>{{ profile.getName() }}</strong> profile?
+  </ng-container>
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button color="primary" [mat-dialog-close]="profile">
+    &nbsp;&nbsp;<ng-container i18n>Start Build</ng-container>&nbsp;&nbsp;
+  </button>
+  <button mat-button (click)="onNoClick()">
+    &nbsp;&nbsp;<ng-container i18n>Cancel</ng-container>&nbsp;&nbsp;
+  </button>
+</div>

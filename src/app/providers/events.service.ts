@@ -17,20 +17,9 @@ import { Injectable } from '@angular/core';
 import { IPCService } from './ipc.service';
 import { Subject } from 'rxjs';
 
-import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
+import { Events } from 'sliver-script/lib/events';
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
-
-export enum Events {
-  ServerError = 'server-error',
-  SessionConnected = 'session-connected',
-  SessionDisconnected = 'session-disconnected',
-  ClientJoined = 'client-joined',
-  ClientLeft = 'client-left',
-  Canary = 'canary',
-  JobStarted = 'job-started',
-  JobStopped = 'job-stopped',
-  BuildCompleted = 'build-completed'
-};
 
 export interface Notification {
   message: string;
@@ -51,6 +40,7 @@ export class EventsService {
   jobs$ = new Subject<clientpb.Event>();
   sessions$ = new Subject<clientpb.Event>();
   builds$ = new Subject<clientpb.Event>();
+  profiles$ = new Subject<clientpb.Event>();
 
   notifications$ = new Subject<Notification>();
 
@@ -84,6 +74,10 @@ export class EventsService {
           // Builds
           case Events.BuildCompleted:
             this.builds$.next(event);
+            break;
+
+          case Events.Profile:
+            this.profiles$.next(event);
             break;
 
           default:
