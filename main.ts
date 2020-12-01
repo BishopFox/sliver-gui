@@ -14,10 +14,33 @@
 */
 
 import { app,  protocol } from 'electron';
+import * as log4js from 'log4js';
+import * as path from 'path';
 
+import { getClientDir } from './locale';
 import { WindowManager } from './windows/window-manager';
 import * as WorkerProtocol from './workers/worker-protocol';
 import * as AppProtocol from './app-protocol';
+
+
+// Setup Logging
+log4js.configure({
+  appenders: {
+    file: {
+      type: "file", filename: path.join(getClientDir(), 'sliver-gui.log')
+    },
+    console: {
+      type: 'stdout',
+    }
+  },
+  categories: {
+    default: {
+      appenders: ["file", "console"],
+      level: getLogLevel()
+    }
+  }
+});
+const logger = log4js.getLogger(__filename);
 
 
 protocol.registerSchemesAsPrivileged([{
@@ -30,17 +53,38 @@ protocol.registerSchemesAsPrivileged([{
   privileges: { standard: true, secure: true }
 }]);
 
+function getLogLevel(): string {
+  const envLogLevel: string = process.env.SLIVER_GUI_LOG_LEVEL;
+  switch(envLogLevel.toLowerCase()) {
+    case "all":
+      return "all";
+    case "trace":
+      return "trace";
+    case "debug":
+      return "debug";
+    case "info":
+      return "info";
+    case "warn":
+      return "warn";
+    case "error":
+      return "error";
+    default:
+      return "info";
+  }
+}
 
 // ----------------------------------------- [ MAIN ] -----------------------------------------
 async function main() {
+  logger.debug(`Main starting ...`);
   try {
 
-    let mainWindow;
+    let mainWindow: Electron.BrowserWindow;
     const windowManager = new WindowManager();
     windowManager.init();
 
     // Custom protocol handler
     app.on('ready', () => {
+      logger.debug('App ready ...');
       protocol.registerBufferProtocol(AppProtocol.scheme, AppProtocol.requestHandler);
       protocol.registerBufferProtocol(WorkerProtocol.scheme, (req, next) => {
         WorkerProtocol.requestHandler(windowManager.workerManager, req, next);
@@ -49,6 +93,7 @@ async function main() {
     });
 
     app.on('activate', () => {
+      logger.debug('App activate ...');
       if (mainWindow === null) {
         mainWindow = windowManager.createMainWindow();
       }
@@ -59,13 +104,13 @@ async function main() {
     // https://github.com/electron/electron/issues/8841
     app.on('web-contents-created', (_, contents) => {
       contents.on('will-navigate', (event, url) => {
-        console.log(`[will-navigate] ${url}`);
-        console.log(event);
+        logger.warn(`[will-navigate] ${url}`);
+        logger.warn(event);
         event.preventDefault();
       });
       contents.on('will-redirect', (event, url) => {
-        console.log(`[will-redirect] ${url}`);
-        console.log(event);
+        logger.warn(`[will-redirect] ${url}`);
+        logger.warn(event);
         event.preventDefault();
       });
     });

@@ -1,10 +1,28 @@
+/*
+  Sliver Implant Framework
+  Copyright (C) 2020  Bishop Fox
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
 import { ipcMain, BrowserWindow, IpcMainEvent, screen } from 'electron';
 import * as uuid from 'uuid';
 import * as path from 'path';
+import * as log4js from 'log4js';
 
 import { WorkerManager } from '../workers/worker-manager';
 import { dispatchIPC, IPCHandlers, IPCMessage } from '../ipc/ipc';
 import * as AppProtocol from '../app-protocol';
+
+const logger = log4js.getLogger(__filename);
 
 
 export class WindowManager {
@@ -36,8 +54,7 @@ export class WindowManager {
           }, origin);
         }
       }).catch((err) => {
-        console.error(`[ipc handlers](${origin}): ${err}`);
-        console.trace();
+        logger.error(`[ipc handlers](${origin}): ${err}`);
         if (msg.id !== 0) {
           event.sender.send('ipc', {
             id: msg.id,

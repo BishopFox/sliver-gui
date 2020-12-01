@@ -13,10 +13,12 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import * as log4js from 'log4js';
 import * as path from 'path';
 import * as os from 'os';
 import * as fs from 'fs';
 
+const logger = log4js.getLogger(__filename);
 
 const DEFAULT_CLIENT_DIR = path.join(os.homedir(), '.sliver-client');
 export const DEFAULT_LOCALE = "en";
@@ -50,7 +52,7 @@ export async function getCurrentLocale(): Promise<string> {
                 resolve(DEFAULT_LOCALE);
             } else {
                 const locale = data.toString('utf-8').trim();
-                // console.log(`Locale data: ${locale}`);
+                logger.debug(`Locale data: ${locale}`);
                 resolve(matchLocale(locale));
             }
         });
@@ -63,7 +65,7 @@ export function getCurrentLocaleSync(): string {
         return DEFAULT_LOCALE;
     }
     const locale = fs.readFileSync(localePath).toString('utf-8').trim();
-    // console.log(`Locale data: ${locale}`);
+    logger.debug(`Locale data: ${locale}`);
     return matchLocale(locale);
 }
 
@@ -73,13 +75,13 @@ export function getClientDir(): string {
 
 function localeFilePath(): string {
     const localePath = path.join(getClientDir(), 'locale');
-    // console.log(`Locale file path: ${localePath}`);
+    logger.debug(`Locale file path: ${localePath}`);
     return localePath;
 }
 
 export function getDistPath() {
     const distPath = path.join(__dirname, 'dist', getCurrentLocaleSync());
-    console.log(`Locale dist path: ${distPath}`);
+    logger.debug(`Locale dist path: ${distPath}`);
     return distPath;
 }
 

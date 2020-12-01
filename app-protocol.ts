@@ -21,8 +21,10 @@ Implementing a custom protocol achieves two goals:
 
 import * as fs from 'fs';
 import * as path from 'path';
-
+import * as log4js from 'log4js';
 import { getDistPath } from './locale';
+
+const logger = log4js.getLogger(__filename);
 
 type ProtocolCallback = (arg0: { mimeType: string; charset: string; data: Buffer; }) => void;
 const DIST_PATH = getDistPath();
@@ -43,6 +45,7 @@ const mimeTypes = {
   '.map': 'text/plain',
   '.woff': 'application/x-font-woff',
   '.woff2': 'font/woff2',
+  '.ttf': 'font/ttf'
 };
 
 function charset(mimeType: string): string {
@@ -63,6 +66,7 @@ export function requestHandler(req: Electron.ProtocolRequest, next: ProtocolCall
   }
 
   const reqFilename = path.basename(reqPath);
+  logger.debug(`ReqPath: ${path.join(DIST_PATH, reqPath)} (mime: ${mime(reqFilename)})`);
   fs.readFile(path.join(DIST_PATH, reqPath), (err, data) => {
     const mimeType = mime(reqFilename);
     if (!err && mimeType !== null) {

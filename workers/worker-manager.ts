@@ -20,9 +20,13 @@ import * as os from 'os';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as uuid from 'uuid';
+import * as log4js from 'log4js';
 
 import { ScriptModels } from './models';
 
+
+const logger = log4js.getLogger(__filename);
+const sqlLogger = log4js.getLogger("SQL");
 
 const CLIENT_DIR = path.join(homedir(), '.sliver-client');
 const SCRIPTS_DIR = path.join(CLIENT_DIR, 'scripts');
@@ -51,20 +55,22 @@ export class WorkerManager {
   ScriptFileSystemAccess: ModelCtor<Model<any, any>>;
 
   constructor() {
-    console.log(`[WorkerManager] execDir: ${this.execDir}`);
+    logger.debug(`execDir: ${this.execDir}`);
     fs.mkdirSync(SAVED_DIR, { mode: 0o700, recursive: true });
   }
 
   async init() {
-    console.log(`Init sqlite database ...`);
+    logger.debug(`Init sqlite database ...`);
     this.sequelize = new Sequelize({
       dialect: 'sqlite',
       storage: SCRIPTS_DB,
-      logging: false,
+      logging: (msg) => {
+        sqlLogger.debug(msg);
+      },
     });
     [this.Script, this.ScriptFileSystemAccess] = ScriptModels(this.sequelize);
     await this.sequelize.sync();
-    console.log(`Database initialization completed`);
+    logger.debug(`Database initialization completed`);
   }
 
   async newScript(name: string, code: string): Promise<string> {

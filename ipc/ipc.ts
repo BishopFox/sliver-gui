@@ -26,6 +26,7 @@ import { Base64 } from 'js-base64';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as uuid from 'uuid';
+import * as log4js from 'log4js';
 import { SliverClient, SliverClientConfig } from 'sliver-script';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
@@ -36,6 +37,7 @@ import { WindowManager } from '../windows/window-manager';
 import { WorkerManager } from '../workers/worker-manager';
 
 
+const logger = log4js.getLogger(__filename);
 const CONFIG_DIR = path.join(getClientDir(), 'configs');
 const SETTINGS_PATH = path.join(getClientDir(), 'gui-settings.json');
 const MINUTE = 60;
@@ -699,7 +701,7 @@ export class IPCHandlers {
         const data = JSON.stringify(config);
         fs.writeFile(path.join(CONFIG_DIR, fileName), data, fileOptions, (err) => {
           if (err) {
-            console.error(err);
+            logger.error(err);
           }
           resolve();
         });
@@ -731,7 +733,7 @@ export class IPCHandlers {
   public async client_start(self: IPCHandlers, config: SliverClientConfig): Promise<string> {
     self.client = new SliverClient(config);
     await self.client.connect();
-    console.log('Connection successful');
+    logger.debug('Connection successful');
 
     // Pipe realtime events back to renderer process
     self.client.event$.subscribe((event: clientpb.Event) => {
@@ -814,7 +816,7 @@ export class IPCHandlers {
         defaultPath: path.join(homedir(), 'Downloads', path.basename(saveFileReq.filename)),
       };
       const save = await dialog.showSaveDialog(dialogOptions);
-      console.log(`[save file] ${save.filePath}`);
+      logger.debug(`[save file] ${save.filePath}`);
       if (save.canceled) {
         return resolve('');  // Must return to stop execution
       }
@@ -919,7 +921,7 @@ export class IPCHandlers {
 
 // Dispatcher
 export async function dispatchIPC(handlers: IPCHandlers, method: string, data: string): Promise<any> {
-  console.log(`IPC Dispatch: ${method}`);
+  logger.debug(`IPC Dispatch: ${method}`);
 
   // IPC handlers must start with "namespace_" this helps ensure we do not inadvertently
   // expose methods that we don't want exposed to the sandboxed code.
@@ -937,7 +939,7 @@ export async function dispatchIPC(handlers: IPCHandlers, method: string, data: s
 
 // Dispatcher
 export async function dispatchLocalIPC(handlers: IPCHandlers, origin: string, method: string, data: string): Promise<any> {
-  console.log(`IPC Local Dispatch: ${method}`);
+  logger.debug(`IPC Local Dispatch: ${method}`);
   if (['local_'].some(prefix => method.startsWith(prefix))) {
     if (typeof handlers[method] === 'function') {
       const result: any = await handlers[method](handlers, origin, data);
@@ -966,8 +968,7 @@ export function startIPCHandlers(window: BrowserWindow, handlers: IPCHandlers) {
           }, origin);
         }
       }).catch((err) => {
-        console.error(`[local ipc handlers](${origin}): ${err}`);
-        console.trace();
+        logger.error(`[local ipc handlers](${origin}): ${err}`);
         if (msg.id !== 0) {
           event.sender.send('ipc', {
             id: msg.id,
@@ -990,8 +991,7 @@ export function startIPCHandlers(window: BrowserWindow, handlers: IPCHandlers) {
           }, origin);
         }
       }).catch((err) => {
-        console.error(`[ipc handlers](${origin}): ${err}`);
-        console.trace();
+        logger.error(`[ipc handlers](${origin}): ${err}`);
         if (msg.id !== 0) {
           event.sender.send('ipc', {
             id: msg.id,
