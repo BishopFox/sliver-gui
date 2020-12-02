@@ -40,6 +40,7 @@ export async function initMenu(menuEvents: Subject<MenuEvent>) {
             this.menuEvents.next({ button: 'updates' });
           }
         },
+        { type: 'separator' },
         {
           label: 'Exit',
           click: () => {

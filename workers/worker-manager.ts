@@ -192,10 +192,14 @@ export class WorkerManager {
     const script = await this.loadScript(id);
     const execId = uuid.v4();
     const scriptExecDir = path.join(this.execDir, execId);
+
+    // Wrap code in siaf so we can use top level await
+    const code = options.siaf ? `(async () => { ${script.code} })()` : script.code;
+
     fs.mkdirSync(scriptExecDir, { mode: 0o700 });
     return new Promise((resolve, reject) => {
       const fileOptions = { mode: 0o600, encoding: 'utf-8' };
-      fs.writeFile(path.join(scriptExecDir, SCRIPT_FILE), script.code, fileOptions, (err) => {
+      fs.writeFile(path.join(scriptExecDir, SCRIPT_FILE), code, fileOptions, (err) => {
         if (!err) {
           this.scriptExecutions.set(execId, script.id);
           resolve(execId);
