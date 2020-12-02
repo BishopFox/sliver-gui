@@ -22,10 +22,6 @@ Download the [latest release](https://github.com/moloch--/sliver-gui/releases) a
 
 Because I value my development time more than your RAM.
 
-#### Why Not a Web Interface?
-
-Sliver clients connect over mTLS, which is not available from within a browser. Electron allows lets us to implement other native-host interactions that would otherwise not be possible.
-
 #### Is Electron Secure?
 
 I at least tried ¯\_(ツ)_/¯. You can [read more about the application architecture here](https://github.com/moloch--/reasonably-secure-electron). In short:
@@ -35,6 +31,11 @@ I at least tried ¯\_(ツ)_/¯. You can [read more about the application archite
  * Extremely limited DOM interactions, nearly the entire interface is implemented via Angular; there are zero calls to `bypassSecurityTrustHtml`.
 
 Please report any security bugs you may find, see the repo security policy for bounties.
+
+#### Why Not a Web Interface?
+
+Sliver clients connect over mTLS, which is not available from within a browser. Electron allows lets us to implement other native-host interactions that would otherwise not be possible.
+
 
 ### Build
 
