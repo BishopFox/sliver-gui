@@ -18,10 +18,11 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { Events } from 'sliver-script/lib/events';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
-import { EventsService, Notification } from './providers/events.service';
+import { EventsService, Notification, MenuEvent } from './providers/events.service';
 import { ClientService, Platforms, Settings, Themes } from './providers/client.service';
 
 
@@ -164,6 +165,19 @@ export class AppComponent implements OnInit, OnDestroy {
       this.notificationAlert(notify.message, notify.buttonLabel, notify.seconds, notify.callback);
     });
 
+    // Back menu event
+    this._eventsService.menu$.pipe(
+      filter(event => event.button === 'back')
+    ).subscribe(() => {
+      window.history.back();
+    });
+
+    // Forward menu event
+    this._eventsService.menu$.pipe(
+      filter(event => event.button === 'forward')
+    ).subscribe(() => {
+      window.history.forward();
+    });
   }
 
   notificationAlert(message: string, buttonLabel: string, seconds: number, callback: Function|null = null) {

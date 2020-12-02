@@ -13,7 +13,7 @@
     <mat-vertical-stepper class="stepper-root" [linear]="true" #stepper>
       <mat-step [stepControl]="selectProtocolForm" [completed]="false">
         <form style="width: 100%;" [formGroup]="selectProtocolForm">
-          <ng-template matStepLabel>Protocol</ng-template>
+          <ng-template matStepLabel i18n>Protocol</ng-template>
           <p>
             <mat-form-field>
               <mat-select [formControl]="selectProtocolForm.controls['protocol']" placeholder="Protocol">
@@ -34,7 +34,7 @@
           </p>
 
           <div>
-            <button mat-raised-button matStepperNext>
+            <button mat-raised-button matStepperNext i18n>
               Next
             </button>
           </div>
@@ -44,19 +44,30 @@
       <mat-step [stepControl] [completed]="false">
 
         <form *ngIf="protocol === 'mtls'" [formGroup]="mtlsOptionsForm">
-          <ng-template matStepLabel>Mutual TLS</ng-template>
+          <ng-template matStepLabel i18n>Mutual TLS</ng-template>
           <p>
             <mat-form-field>
               <input matInput type="number" [formControl]="mtlsOptionsForm.controls['lport']" placeholder="Listen Port">
+              <mat-error *ngIf="!mtlsOptionsForm.controls['lport'].valid" i18n>
+                Invalid port number
+              </mat-error>
             </mat-form-field>
           </p>
         </form>
 
         <form *ngIf="protocol === 'http'" [formGroup]="httpOptionsForm">
-          <ng-template matStepLabel>HTTP</ng-template>
+          <ng-template matStepLabel i18n>HTTP</ng-template>
+          <p>
+            <mat-form-field>
+              <input matInput [formControl]="httpOptionsForm.controls['domains']" placeholder="Domains">
+            </mat-form-field>
+          </p>
           <p>
             <mat-form-field>
               <input matInput type="number" [formControl]="httpOptionsForm.controls['lport']" placeholder="Listen Port">
+              <mat-error *ngIf="!httpOptionsForm.controls['lport'].valid" i18n>
+                Invalid port number
+              </mat-error>
             </mat-form-field>
           </p>
         </form>
@@ -65,8 +76,16 @@
           <ng-template matStepLabel>HTTPS</ng-template>
           <p>
             <mat-form-field>
+              <input matInput [formControl]="httpsOptionsForm.controls['domain']" placeholder="Domain">
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field>
               <input matInput type="number" [formControl]="httpsOptionsForm.controls['lport']"
                 placeholder="Listen Port">
+                <mat-error *ngIf="!httpsOptionsForm.controls['lport'].valid" i18n>
+                  Invalid port number
+                </mat-error>
             </mat-form-field>
           </p>
         </form>
@@ -76,6 +95,15 @@
           <p>
             <mat-form-field>
               <input matInput [formControl]="dnsOptionsForm.controls['domains']" placeholder="Domains">
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field>
+              <input matInput type="number" [formControl]="dnsOptionsForm.controls['lport']"
+                placeholder="Listen Port">
+                <mat-error *ngIf="!dnsOptionsForm.controls['lport'].valid" i18n>
+                  Invalid port number
+                </mat-error>
             </mat-form-field>
           </p>
         </form>

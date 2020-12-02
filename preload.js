@@ -59,16 +59,22 @@ ipcRenderer.on('ipc', (_, msg, origin) => {
 });
 
 // Push events
-ipcRenderer.on('push', (event, data) => {
+ipcRenderer.on('push', (_, data) => {
   window.postMessage(JSON.stringify({
     type: 'push',
     data: data,
   }), window.location.origin);
 });
 
+// Menu events
+ipcRenderer.on('menu', (_, data) => {
+  window.postMessage(JSON.stringify({
+    type: 'menu',
+    data: data,
+  }), window.location.origin);
+});
 
 /** Worker Listener */
-
 const WORKER_PROTOCOL = 'worker:';
 const workerPrefixes = ['rpc_', 'local_'];
 

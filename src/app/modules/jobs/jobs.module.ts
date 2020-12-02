@@ -19,17 +19,23 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BaseMaterialModule } from '@app/base-material';
 import { JobsTableComponent } from './components/jobs-table/jobs-table.component';
-import { StartListenerComponent } from './components/start-listener/start-listener.component';
+import { StartListenerComponent, InvalidOptionDialogComponent } from './components/start-listener/start-listener.component';
 import { JobComponent, StopJobDialogComponent } from './components/job/job.component';
 import { MainComponent } from './components/main/main.component';
+import { WebsitesTableComponent } from './components/websites-table/websites-table.component';
+import { WebsiteDetailsComponent } from './components/website-details/website-details.component';
+
 
 @NgModule({
   declarations: [
     JobsTableComponent,
     StopJobDialogComponent,
     StartListenerComponent,
+    InvalidOptionDialogComponent,
     JobComponent,
-    MainComponent
+    MainComponent,
+    WebsitesTableComponent,
+    WebsiteDetailsComponent,
   ],
   imports: [
     CommonModule,

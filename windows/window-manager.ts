@@ -14,13 +14,16 @@
 */
 
 import { ipcMain, BrowserWindow, IpcMainEvent, screen } from 'electron';
+import { Subject } from 'rxjs';
 import * as uuid from 'uuid';
 import * as path from 'path';
 import * as log4js from 'log4js';
 
 import { WorkerManager } from '../workers/worker-manager';
+import { initMenu, MenuEvent } from './menu';
 import { dispatchIPC, IPCHandlers, IPCMessage } from '../ipc/ipc';
 import * as AppProtocol from '../app-protocol';
+
 
 const logger = log4js.getLogger(__filename);
 
@@ -39,6 +42,7 @@ export class WindowManager {
 
   private mainWindow: BrowserWindow;
   private sessionWindows = new Map<string, BrowserWindow>();
+  private menuEvents = new Subject<MenuEvent>();
 
   constructor() {
     this.workerManager = new WorkerManager();
@@ -47,6 +51,10 @@ export class WindowManager {
 
   async init() {
     await this.workerManager.init();
+    initMenu(this.menuEvents);
+    this.menuEvents.subscribe(event => {
+      this.mainWindow.webContents.send('menu', JSON.stringify(event));
+    });
   }
 
   private startIPCHandlers() {
@@ -73,7 +81,6 @@ export class WindowManager {
       });
     });
   }
-
 
   createMainWindow() {
 
@@ -107,28 +114,18 @@ export class WindowManager {
   }
 
   createSessionWindow(sessionId: number) {
-    // Create the browser window.
     const gutterSize = 250;
     let sessionWindow = this.window(gutterSize, path.join(__dirname, '..', 'preload.js'));
-
     sessionWindow.once('ready-to-show', () => {
       sessionWindow.show();
     });
-
     const windowId = uuid.v4();
     sessionWindow.loadURL(`${AppProtocol.scheme}://${windowId}/index.html#/sessions-standalone/${sessionId}/file-browser`);
-
-    // Emitted when the window is closed.
     sessionWindow.on('closed', () => {
-      // Dereference the window object, usually you would store window
-      // in an array if your app supports multi windows, this is the time
-      // when you should delete the corresponding element.
       sessionWindow = null;
       this.sessionWindows.delete(windowId);
     });
-
     this.sessionWindows.set(windowId, sessionWindow);
-
     return sessionWindow;
   }
 

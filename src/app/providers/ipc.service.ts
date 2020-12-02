@@ -20,9 +20,9 @@ This service is the common carrier for all IPC messages.
 import { Injectable } from '@angular/core';
 import { Base64 } from 'js-base64';
 import { Subject } from 'rxjs';
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+import { MenuEvent } from './events.service';
 
-import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
-import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb'; // Protobuf
 
 interface IPCMessage {
   id: number;
@@ -38,6 +38,7 @@ export class IPCService {
 
   private _ipcResponse$ = new Subject<IPCMessage>();
   ipcEvent$ = new Subject<clientpb.Event>();
+  menuEvent$ = new Subject<MenuEvent>();
 
   constructor() {
     window.addEventListener('message', (event) => {
@@ -52,6 +53,8 @@ export class IPCService {
         } else if (msg.type === 'push') { 
           const event = clientpb.Event.deserializeBinary(Base64.toUint8Array(msg.data));
           this.ipcEvent$.next(event);
+        } else if (msg.type === 'menu') {
+          this.menuEvent$.next(JSON.parse(msg.data));
         }
       } catch (err) {
         console.error(`[IPCService] ${err}`);

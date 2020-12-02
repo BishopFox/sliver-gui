@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>
+  <i class="fas fa-fw fa-exclamation-triangle"></i>
+  <ng-container i18n>
+    Invalid Listener Option
+  </ng-container>
+</h1>
+<div mat-dialog-content>
+  <ng-container i18n>
+    One or more options are invalid, cannot start listener.
+  </ng-container>
+  <br />
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button color="warn" (click)="onNoClick()">
+    &nbsp;&nbsp;<ng-container i18n>Okay</ng-container>&nbsp;&nbsp;
+  </button>
+</div>

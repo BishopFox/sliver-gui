@@ -28,6 +28,10 @@ export interface Notification {
   callback: Function|null;
 }
 
+export interface MenuEvent {
+  button: string;
+  id?: number;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -35,18 +39,21 @@ export interface Notification {
 export class EventsService {
 
   events$ = new Subject<clientpb.Event>();
-
   players$ = new Subject<clientpb.Event>();
   jobs$ = new Subject<clientpb.Event>();
   sessions$ = new Subject<clientpb.Event>();
   builds$ = new Subject<clientpb.Event>();
   profiles$ = new Subject<clientpb.Event>();
-
   notifications$ = new Subject<Notification>();
+  menu$ = new Subject<MenuEvent>();
 
   constructor(private _ipc: IPCService) {
 
-    this._ipc.ipcEvent$.subscribe((event) => {
+    this._ipc.menuEvent$.subscribe(event => {
+      this.menu$.next(event);
+    });
+
+    this._ipc.ipcEvent$.subscribe(event => {
       try {
         this.events$.next(event);
 
