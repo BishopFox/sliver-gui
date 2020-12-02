@@ -519,6 +519,78 @@ export class IPCHandlers {
     return Base64.fromUint8Array(ifconfig.serializeBinary());
   }
 
+  // Websites
+  @isConnected()
+  async rpc_websites(self: IPCHandlers, _: any): Promise<string[]> {
+    const websites = await self.client.websites();
+    return websites.map(web => Base64.fromUint8Array(web.serializeBinary()));
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "name": { "type": "string", "minLength": 1 },
+      "contents": {
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "additionalItems": false,
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "additionalItems": false,
+          "items": { "type": "string", "minLength": 1 },
+        },
+      },
+    },
+    "required": ["name", "contents"],
+    "additionalProperties": false,
+  })
+  async rpc_addWebContent(self: IPCHandlers, req: any): Promise<string> {
+    const contents = new Map<string, clientpb.WebContent>();
+    req.contents.forEach((key: string, content: string) => {
+      contents.set(key, clientpb.WebContent.deserializeBinary(Base64.toUint8Array(content)));
+    });
+    const website = await self.client.websiteAddContent(req.name, contents);
+    return Base64.fromUint8Array(website.serializeBinary());
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "name": { "type": "string", "minLength": 1 },
+    },
+    "required": ["name"],
+    "additionalProperties": false,
+  })
+  async rpc_removeWebsite(self: IPCHandlers, req: any): Promise<void> {
+    return self.client.websiteRemove(req.name);
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "name": { "type": "string", "minLength": 1 },
+      "paths": {
+        "type": "array",
+        "uniqueItems": true,
+        "additionalItems": false,
+        "items": { "type": "string", "minLength": 1 },
+      },
+    },
+    "required": ["name"],
+    "additionalProperties": false,
+  })
+  async rpc_removeWebContents(self: IPCHandlers, req: any): Promise<string> {
+    const website = await self.client.websiteRemoveContent(req.name, req.paths);
+    return Base64.fromUint8Array(website.serializeBinary());
+  }
+
   // Jobs
   @isConnected()
   async rpc_jobs(self: IPCHandlers): Promise<string[]> {

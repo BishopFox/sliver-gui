@@ -23,7 +23,7 @@ import * as WorkerProtocol from './workers/worker-protocol';
 import * as AppProtocol from './app-protocol';
 
 
-// Setup Logging
+// ----------------------------------------- [ Logs ] -----------------------------------------
 log4js.configure({
   appenders: {
     file: {
@@ -41,17 +41,6 @@ log4js.configure({
   }
 });
 const logger = log4js.getLogger(__filename);
-
-
-protocol.registerSchemesAsPrivileged([{
-  scheme: AppProtocol.scheme,
-  privileges: { standard: true, secure: true }
-}]);
-
-protocol.registerSchemesAsPrivileged([{
-  scheme: WorkerProtocol.scheme,
-  privileges: { standard: true, secure: true }
-}]);
 
 function getLogLevel(): string {
   const envLogLevel: string = process.env.SLIVER_GUI_LOG_LEVEL;
@@ -73,7 +62,18 @@ function getLogLevel(): string {
   }
 }
 
-// ----------------------------------------- [ MAIN ] -----------------------------------------
+// ----------------------------------------- [ Protocols ] -----------------------------------------
+protocol.registerSchemesAsPrivileged([{
+  scheme: AppProtocol.scheme,
+  privileges: { standard: true, secure: true }
+}]);
+
+protocol.registerSchemesAsPrivileged([{
+  scheme: WorkerProtocol.scheme,
+  privileges: { standard: true, secure: true }
+}]);
+
+// ----------------------------------------- [ Main ] -----------------------------------------
 async function main() {
   logger.debug(`Main starting ...`);
   try {

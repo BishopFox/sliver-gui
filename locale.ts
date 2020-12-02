@@ -23,71 +23,71 @@ const logger = log4js.getLogger(__filename);
 const DEFAULT_CLIENT_DIR = path.join(os.homedir(), '.sliver-client');
 export const DEFAULT_LOCALE = "en";
 export const Locales = new Map<string, string>([
-    [DEFAULT_LOCALE, "English"],
-    ["fr", "Français (French)"],
-    ["es", "Español (Spanish)"],
-    ["ja", "日本語 (Japanese)"],
-    ["zh", "中文 (Chinese)"]
+  [DEFAULT_LOCALE, "English"],
+  ["fr", "Français (French)"],
+  ["es", "Español (Spanish)"],
+  ["ja", "日本語 (Japanese)"],
+  ["zh", "中文 (Chinese)"]
 ]);
 
 export function setLocaleSync(locale: string): void {
-    if (Locales.has(locale)) {
-        const fileOptions = { mode: 0o600, encoding: 'utf-8' };
-        fs.writeFileSync(localeFilePath(), locale, fileOptions);
-    }
+  if (Locales.has(locale)) {
+    const fileOptions = { mode: 0o600, encoding: 'utf-8' };
+    fs.writeFileSync(localeFilePath(), locale, fileOptions);
+  }
 }
 
 function matchLocale(locale: string) {
-    return Locales.has(locale) ? locale : DEFAULT_LOCALE;
+  return Locales.has(locale) ? locale : DEFAULT_LOCALE;
 }
 
 export async function getCurrentLocale(): Promise<string> {
-    return new Promise((resolve) => {
-        const localePath = localeFilePath();
-        if (!fs.existsSync(localePath)) {
-            return resolve(DEFAULT_LOCALE);
-        }
-        fs.readFile(localePath, (err, data) => {
-            if (err) {
-                resolve(DEFAULT_LOCALE);
-            } else {
-                const locale = data.toString('utf-8').trim();
-                logger.debug(`Locale data: ${locale}`);
-                resolve(matchLocale(locale));
-            }
-        });
+  return new Promise((resolve) => {
+    const localePath = localeFilePath();
+    if (!fs.existsSync(localePath)) {
+      return resolve(DEFAULT_LOCALE);
+    }
+    fs.readFile(localePath, (err, data) => {
+      if (err) {
+        resolve(DEFAULT_LOCALE);
+      } else {
+        const locale = data.toString('utf-8').trim();
+        logger.debug(`Locale data: ${locale}`);
+        resolve(matchLocale(locale));
+      }
     });
+  });
 }
 
 export function getCurrentLocaleSync(): string {
-    const localePath = localeFilePath();
-    if (!fs.existsSync(localePath)) {
-        return DEFAULT_LOCALE;
-    }
-    const locale = fs.readFileSync(localePath).toString('utf-8').trim();
-    logger.debug(`Locale data: ${locale}`);
-    return matchLocale(locale);
+  const localePath = localeFilePath();
+  if (!fs.existsSync(localePath)) {
+    return DEFAULT_LOCALE;
+  }
+  const locale = fs.readFileSync(localePath).toString('utf-8').trim();
+  logger.debug(`Locale data: ${locale}`);
+  return matchLocale(locale);
 }
 
 export function getClientDir(): string {
-    return DEFAULT_CLIENT_DIR;
+  return DEFAULT_CLIENT_DIR;
 }
 
 function localeFilePath(): string {
-    const localePath = path.join(getClientDir(), 'locale');
-    logger.debug(`Locale file path: ${localePath}`);
-    return localePath;
+  const localePath = path.join(getClientDir(), 'locale');
+  logger.debug(`Locale file path: ${localePath}`);
+  return localePath;
 }
 
 export function getDistPath() {
-    const distPath = path.join(__dirname, 'dist', getCurrentLocaleSync());
-    logger.debug(`Locale dist path: ${distPath}`);
-    return distPath;
+  const distPath = path.join(__dirname, 'dist', getCurrentLocaleSync());
+  logger.debug(`Locale dist path: ${distPath}`);
+  return distPath;
 }
 
 export function getLocalesJSON(): any {
-    return Array.from(Locales.entries()).reduce((obj, [key, value]) => { 
-        obj[key] = value; 
-        return obj; 
-      }, {});
+  return Array.from(Locales.entries()).reduce((obj, [key, value]) => {
+    obj[key] = value;
+    return obj;
+  }, {});
 }

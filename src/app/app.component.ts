@@ -22,7 +22,7 @@ import { filter } from 'rxjs/operators';
 import { Events } from 'sliver-script/lib/events';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
-import { EventsService, Notification, MenuEvent } from './providers/events.service';
+import { EventsService, Notification } from './providers/events.service';
 import { ClientService, Platforms, Settings, Themes } from './providers/client.service';
 
 
