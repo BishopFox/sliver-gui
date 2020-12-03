@@ -1,0 +1,18 @@
+.table-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.table-filter {
+    float: right;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 75%;
+    float: right;
+}

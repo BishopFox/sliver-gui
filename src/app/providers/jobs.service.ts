@@ -17,8 +17,7 @@ import { Injectable } from '@angular/core';
 import { IPCService } from './ipc.service';
 import { Base64 } from 'js-base64';
 
-import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
-import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb'; // Protobuf
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 
 @Injectable({
@@ -26,9 +25,7 @@ import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb'; // Protobuf
 })
 export class JobsService {
 
-  constructor(private _ipc: IPCService) {
-
-  }
+  constructor(private _ipc: IPCService) { }
 
   async jobs(): Promise<clientpb.Job[]> {
     let jobs: string[] = await this._ipc.request('rpc_jobs');
@@ -47,6 +44,16 @@ export class JobsService {
       id: jobId
     }));
     return clientpb.KillJob.deserializeBinary(Base64.toUint8Array(kill));
+  }
+
+  async websites(): Promise<clientpb.Website[]> {
+    const websites = await this._ipc.request('rpc_websites');
+    return websites.map(web => clientpb.Website.deserializeBinary(Base64.toUint8Array(web)));
+  }
+
+  async addWebContent(name: string, path: string): Promise<clientpb.Website> {
+    const website = await this._ipc.request('');
+    return null;
   }
 
   async startMTLSListener(host: string, port: number): Promise<clientpb.Job> {

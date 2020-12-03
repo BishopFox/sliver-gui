@@ -16,7 +16,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-website-details',
+  selector: 'jobs-website-details',
   templateUrl: './website-details.component.html',
   styleUrls: ['./website-details.component.scss']
 })

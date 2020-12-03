@@ -1,11 +1,16 @@
 .grid-wrapper {
     display: grid;
-    grid-template-columns: 1fr 11fr 1fr;
+    grid-template-columns: 1fr 7fr 1fr 7fr 1fr;
     grid-template-rows: minmax(50px, auto);
     margin-top: 10px;
 }
 
 .jobs {
     grid-column: 2/3;
+    grid-row: 1/2;
+}
+
+.websites {
+    grid-column: 4/5;
     grid-row: 1/2;
 }

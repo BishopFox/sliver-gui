@@ -13,19 +13,79 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+import { Sort } from '@angular/material/sort';
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+
+import { JobsService } from '@app/providers/jobs.service';
+
+interface TableWebsiteData {
+  name: string;
+  pages: number;
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+}
+
 
 @Component({
-  selector: 'app-websites-table',
+  selector: 'jobs-websites-table',
   templateUrl: './websites-table.component.html',
   styleUrls: ['./websites-table.component.scss']
 })
 export class WebsitesTableComponent implements OnInit {
 
-  constructor() { }
+  websites: clientpb.Website[];
+  dataSrc: MatTableDataSource<TableWebsiteData>;
+  
+  @Input() title = true;
+  @Input() displayedColumns: string[] = [
+    'name', 'pages'
+  ];
+
+  constructor(private _router: Router,
+              private _jobService: JobsService) { }
 
   ngOnInit(): void {
+    this.fetchWebsites();
+  }
 
+  async fetchWebsites() {
+    this.websites = await this._jobService.websites();
+    this.dataSrc = new MatTableDataSource(this.tableData());
+  }
+
+  tableData(): TableWebsiteData[] {
+    const table: TableWebsiteData[] = [];
+    for (let index = 0; index < this.websites.length; index++) {
+      table.push({
+        name: this.websites[index].getName(),
+        pages: this.websites[index].getContentsMap().keys.length,
+      });
+    }
+    return table.sort((a, b) => (a.name > b.name) ? 1 : -1);
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSrc.filter = filterValue.trim().toLowerCase();
+  }
+
+  onRowSelection(row: any) {
+    this._router.navigate(['websites', row.name]);
+  }
+
+  // Because MatTableDataSource is absolute piece of shit
+  sortData(event: Sort) {
+    this.dataSrc.data = this.dataSrc.data.slice().sort((a, b) => {
+      const isAsc = event.direction === 'asc';
+      switch (event.active) {
+        case 'name': return compare(a.name, b.name, isAsc);
+        default: return 0;
+      }
+    });
   }
 
 }

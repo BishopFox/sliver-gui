@@ -531,31 +531,76 @@ export class IPCHandlers {
     "type": "object",
     "properties": {
       "name": { "type": "string", "minLength": 1 },
-      "contents": {
-        "type": "array",
-        "minItems": 1,
-        "uniqueItems": true,
-        "additionalItems": false,
-        "items": {
-          "type": "array",
-          "minItems": 2,
-          "maxItems": 2,
-          "uniqueItems": true,
-          "additionalItems": false,
-          "items": { "type": "string", "minLength": 1 },
-        },
-      },
+      "contentType": {"type": "string", "minLength": 1 },
+      "path": { "type": "string", "minLength": 1 },
     },
     "required": ["name", "contents"],
     "additionalProperties": false,
   })
-  async rpc_addWebContent(self: IPCHandlers, req: any): Promise<string> {
-    const contents = new Map<string, clientpb.WebContent>();
-    req.contents.forEach((key: string, content: string) => {
-      contents.set(key, clientpb.WebContent.deserializeBinary(Base64.toUint8Array(content)));
+  async rpc_addWebContentFromFile(self: IPCHandlers, req: any): Promise<string> {
+    const openDialog = await dialog.showOpenDialog({
+      title: "Add Web Content",
+      message: "Upload file to website",
+      defaultPath: path.join(homedir()),
+      properties: ["openFile", "showHiddenFiles", "dontAddToRecent"],
     });
-    const website = await self.client.websiteAddContent(req.name, contents);
-    return Base64.fromUint8Array(website.serializeBinary());
+    if (openDialog.canceled || openDialog.filePaths.length < 1) {
+      return Promise.reject('User cancel');
+    }
+
+    const contents = new Map<string, clientpb.WebContent>();
+    return new Promise((resolve, reject) => {
+      fs.readFile(openDialog.filePaths[0], async (err, data: Buffer) => {
+        if (err) {
+          return reject(err);
+        }
+        const webContent = new clientpb.WebContent();
+        webContent.setContenttype(req.contentType);
+        webContent.setContent(data);
+        contents.set(req.path, webContent);
+        const website = await self.client.websiteAddContent(req.name, contents);
+        resolve(Base64.fromUint8Array(website.serializeBinary()));
+      });
+    });
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "name": { "type": "string", "minLength": 1 },
+      "path": { "type": "string", "minLength": 1 },
+    },
+    "required": ["name", "path"],
+    "additionalProperties": false,
+  })
+  async rpc_addWebContentFromDirectory(self: IPCHandlers, req: any): Promise<string> {
+    const openDialog = await dialog.showOpenDialog({
+      title: "Add Web Content",
+      message: "Upload directory to website",
+      defaultPath: path.join(homedir()),
+      properties: ["openDirectory", "showHiddenFiles", "dontAddToRecent"],
+    });
+    if (openDialog.canceled || openDialog.filePaths.length < 1) {
+      return Promise.reject('User cancel');
+    }
+
+    const contents = new Map<string, clientpb.WebContent>();
+    return new Promise(async (resolve, reject) => {
+      
+      // fs.readFile(openDialog.filePaths[0], async (err, data: Buffer) => {
+      //   if (err) {
+      //     return reject(err);
+      //   }
+      //   const webContent = new clientpb.WebContent();
+      //   webContent.setContent(data);
+      //   contents.set(req.path, webContent);
+
+      // });
+
+      const website = await self.client.websiteAddContent(req.name, contents);
+      resolve(Base64.fromUint8Array(website.serializeBinary()));
+    });
   }
 
   @isConnected()
@@ -610,7 +655,7 @@ export class IPCHandlers {
   async rpc_jobById(self: IPCHandlers, req: any): Promise<string> {
     const jobId = req.id;
     if (isNaN(jobId) || jobId <= 0) {
-      return '';
+      return Promise.reject('Invalid Job ID');
     }
     const jobs = await self.client.jobs();
     for (let index = 0; index < jobs.length; ++index) {
@@ -618,7 +663,7 @@ export class IPCHandlers {
         return Base64.fromUint8Array(jobs[index].serializeBinary());
       }
     }
-    return '';
+    return Promise.reject('Invalid Job ID');
   }
   
   @isConnected()
@@ -633,7 +678,7 @@ export class IPCHandlers {
   async rpc_killJob(self: IPCHandlers, req: any): Promise<string> {
     const jobId = req.id;
     if (isNaN(jobId) || jobId <= 0) {
-      return '';
+      return Promise.reject('Invalid Job ID');
     }
     const killedJob = await self.client.killJob(jobId);
     return Base64.fromUint8Array(killedJob.serializeBinary());
