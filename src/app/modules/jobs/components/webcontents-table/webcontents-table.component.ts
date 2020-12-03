@@ -14,19 +14,20 @@
 */
 
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 import { FadeInOut } from '@app/shared/animations';
 import { JobsService } from '@app/providers/jobs.service';
-import { EventsService } from '@app/providers/events.service';
 import { Subscription } from 'rxjs';
+import { EventsService } from '@app/providers/events.service';
 
-interface TableWebsiteData {
-  name: string;
-  pages: number;
+
+interface TableWebContentData {
+  path: string;
+  contentType: string;
+  size: number;
 }
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {
@@ -35,49 +36,50 @@ function compare(a: number | string, b: number | string, isAsc: boolean) {
 
 
 @Component({
-  selector: 'jobs-websites-table',
-  templateUrl: './websites-table.component.html',
-  styleUrls: ['./websites-table.component.scss'],
+  selector: 'jobs-webcontents-table',
+  templateUrl: './webcontents-table.component.html',
+  styleUrls: ['./webcontents-table.component.scss'],
   animations: [FadeInOut]
 })
-export class WebsitesTableComponent implements OnInit, OnDestroy {
+export class WebContentsTableComponent implements OnInit, OnDestroy {
 
-  websites: clientpb.Website[];
-  dataSrc: MatTableDataSource<TableWebsiteData>;
-  websiteEventsSub: Subscription;
-
+  @Input() name: string;
   @Input() title = true;
   @Input() displayedColumns: string[] = [
-    'name', 'pages'
+    'path', 'contentType', 'size'
   ];
 
-  constructor(private _router: Router,
-              private _jobService: JobsService,
+  dataSrc: MatTableDataSource<TableWebContentData>;
+  website: clientpb.Website;
+  private websiteEventsSub: Subscription;
+
+  constructor(private _jobsService: JobsService,
               private _eventsService: EventsService) { }
 
   ngOnInit(): void {
-    this.fetchWebsites();
-    this.websiteEventsSub = this._eventsService.websites$.subscribe(this.fetchWebsites);
+    this.fetchWebsite();
+    this.websiteEventsSub = this._eventsService.websites$.subscribe(this.fetchWebsite);
   }
 
   ngOnDestroy(): void {
     this.websiteEventsSub.unsubscribe();
   }
 
-  async fetchWebsites() {
-    this.websites = await this._jobService.websites();
+  async fetchWebsite() {
+    this.website = await this._jobsService.websiteByName(this.name);
     this.dataSrc = new MatTableDataSource(this.tableData());
   }
 
-  tableData(): TableWebsiteData[] {
-    const table: TableWebsiteData[] = [];
-    for (let index = 0; index < this.websites.length; index++) {
+  tableData(): TableWebContentData[] {
+    const table: TableWebContentData[] = [];
+    this.website.getContentsMap().forEach((content, key) => {
       table.push({
-        name: this.websites[index].getName(),
-        pages: this.websites[index].getContentsMap().getEntryList().length,
+        path: content.getPath(),
+        contentType: content.getContenttype(),
+        size: content.getSize()
       });
-    }
-    return table.sort((a, b) => (a.name > b.name) ? 1 : -1);
+    });
+    return table.sort((a, b) => (a.path > b.path) ? 1 : -1);
   }
 
   applyFilter(filterValue: string) {
@@ -85,7 +87,7 @@ export class WebsitesTableComponent implements OnInit, OnDestroy {
   }
 
   onRowSelection(row: any) {
-    this._router.navigate(['websites', row.name]);
+
   }
 
   // Because MatTableDataSource is absolute piece of shit
@@ -93,7 +95,9 @@ export class WebsitesTableComponent implements OnInit, OnDestroy {
     this.dataSrc.data = this.dataSrc.data.slice().sort((a, b) => {
       const isAsc = event.direction === 'asc';
       switch (event.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
+        case 'path': return compare(a.path, b.path, isAsc);
+        case 'contentType': return compare(a.contentType, b.contentType, isAsc);
+        case 'size': return compare(a.size, b.size, isAsc);
         default: return 0;
       }
     });

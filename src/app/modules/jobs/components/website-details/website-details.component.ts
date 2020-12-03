@@ -14,17 +14,40 @@
 */
 
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+
+import { FadeInOut } from '@app/shared/animations';
+import { JobsService } from '@app/providers/jobs.service';
 
 @Component({
   selector: 'jobs-website-details',
   templateUrl: './website-details.component.html',
-  styleUrls: ['./website-details.component.scss']
+  styleUrls: ['./website-details.component.scss'],
+  animations: [FadeInOut]
 })
 export class WebsiteDetailsComponent implements OnInit {
 
-  constructor() { }
+  name: string;
+  website: clientpb.Website;
+
+  constructor(private _route: ActivatedRoute,
+              private _router: Router,
+              private _jobsService: JobsService) { }
 
   ngOnInit(): void {
+    this._route.params.subscribe((params) => {
+      this.name = params['name']
+      this._jobsService.websiteByName(this.name).then(website => {
+        this.website = website;
+      }).catch(() => {
+        console.log(`No website with name ${this.name}`);
+      });
+    });
+  }
+
+  back() {
+    window.history.back();
   }
 
 }

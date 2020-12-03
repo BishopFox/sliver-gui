@@ -1,1 +1,48 @@
-<p>website-details works!</p>
+<div *ngIf="website">
+
+  <mat-toolbar fxLayout="row" fxLayoutAlign="start center">
+
+    <div>
+      <button mat-raised-button (click)="back()">
+        <i class="fas fa-fw fa-chevron-left"></i>
+        <ng-container i18n>
+          Back
+        </ng-container>
+      </button>
+
+      <button mat-raised-button (click)="back()" style="margin-left: 16px;">
+        <i class="fas fa-fw fa-file"></i>
+        <ng-container i18n>
+          Add File
+        </ng-container>
+      </button>
+
+      <button mat-raised-button (click)="back()" style="margin-left: 16px;">
+        <i class="fas fa-fw fa-folder"></i>
+        <ng-container i18n>
+          Add Directory
+        </ng-container>
+      </button>
+    </div>
+
+    <span fxFlex></span>
+    <span>
+      <h3>{{ name }}</h3>
+    </span>
+    <span fxFlex></span>
+
+    <button mat-raised-button color="warn" >
+      <i class="fas fa-fw fa-trash-alt"></i>
+      <ng-container i18n>
+        Delete
+      </ng-container>
+    </button>
+
+  </mat-toolbar>
+
+  <div class="grid-wrapper">
+    <jobs-webcontents-table [name]="this.name" class="web-contents">
+    </jobs-webcontents-table>
+  </div>
+
+</div>

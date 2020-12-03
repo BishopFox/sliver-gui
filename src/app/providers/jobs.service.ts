@@ -16,7 +16,6 @@
 import { Injectable } from '@angular/core';
 import { IPCService } from './ipc.service';
 import { Base64 } from 'js-base64';
-
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 
@@ -51,9 +50,11 @@ export class JobsService {
     return websites.map(web => clientpb.Website.deserializeBinary(Base64.toUint8Array(web)));
   }
 
-  async addWebContent(name: string, path: string): Promise<clientpb.Website> {
-    const website = await this._ipc.request('');
-    return null;
+  async websiteByName(name: string): Promise<clientpb.Website> {
+    const website: string = await this._ipc.request('rpc_website', JSON.stringify({
+      name: name,
+    }));
+    return website.length ? clientpb.Website.deserializeBinary(Base64.toUint8Array(website)) : null;
   }
 
   async startMTLSListener(host: string, port: number): Promise<clientpb.Job> {

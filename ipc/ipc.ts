@@ -19,7 +19,7 @@ listing/selecting configs to the sandboxed code.
 */
 
 import {
-  ipcMain, dialog, FileFilter, BrowserWindow, IpcMainEvent, nativeTheme
+  app, ipcMain, dialog, FileFilter, BrowserWindow, IpcMainEvent, nativeTheme
 } from 'electron';
 import { homedir, platform } from 'os';
 import { Base64 } from 'js-base64';
@@ -531,6 +531,20 @@ export class IPCHandlers {
     "type": "object",
     "properties": {
       "name": { "type": "string", "minLength": 1 },
+    },
+    "required": ["name"],
+    "additionalProperties": false,
+  })
+  async rpc_website(self: IPCHandlers, req: any): Promise<string> {
+    const website = await self.client.website(req.name);
+    return Base64.fromUint8Array(website.serializeBinary());
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "name": { "type": "string", "minLength": 1 },
       "contentType": {"type": "string", "minLength": 1 },
       "path": { "type": "string", "minLength": 1 },
     },
@@ -1035,7 +1049,7 @@ export class IPCHandlers {
 
   public client_exit(self: IPCHandlers) {
     process.on('unhandledRejection', () => { }); // STFU Node
-    process.exit(0);
+    app.exit();
   }
 
 }

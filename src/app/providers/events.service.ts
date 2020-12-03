@@ -44,6 +44,7 @@ export class EventsService {
   sessions$ = new Subject<clientpb.Event>();
   builds$ = new Subject<clientpb.Event>();
   profiles$ = new Subject<clientpb.Event>();
+  websites$ = new Subject<clientpb.Event>();
   notifications$ = new Subject<Notification>();
   menu$ = new Subject<MenuEvent>();
 
@@ -83,8 +84,14 @@ export class EventsService {
             this.builds$.next(event);
             break;
 
+          // Profiles
           case Events.Profile:
             this.profiles$.next(event);
+            break;
+
+          // Websites
+          case Events.Website:
+            this.websites$.next(event);
             break;
 
           default:

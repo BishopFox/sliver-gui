@@ -24,6 +24,7 @@ import { JobComponent, StopJobDialogComponent } from './components/job/job.compo
 import { MainComponent } from './components/main/main.component';
 import { WebsitesTableComponent } from './components/websites-table/websites-table.component';
 import { WebsiteDetailsComponent } from './components/website-details/website-details.component';
+import { WebContentsTableComponent } from './components/webcontents-table/webcontents-table.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { WebsiteDetailsComponent } from './components/website-details/website-de
     MainComponent,
     WebsitesTableComponent,
     WebsiteDetailsComponent,
+    WebContentsTableComponent,
   ],
   imports: [
     CommonModule,
