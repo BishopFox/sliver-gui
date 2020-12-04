@@ -5,30 +5,30 @@
   </ng-container>
 </h1>
 <div mat-dialog-content align="center">
-  <form [formGroup]="addFileForm">
+  <form [formGroup]="addFileForm" style="width: 100%;">
 
     <p>
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="monospace" style="width: 80%;">
         <mat-label>
           <ng-container i18n>Path</ng-container>
         </mat-label>
-        <input matInput class="monospace" [formControl]="addFileForm.controls['path']" placeholder="/">
+        <input matInput [formControl]="addFileForm.controls['path']" placeholder="/">
       </mat-form-field>
     </p>
     <p>
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline"  class="monospace" style="width: 80%;">
         <mat-label>
           <ng-container i18n>Content-type</ng-container>
         </mat-label>
-        <input matInput class="monospace" [formControl]="addFileForm.controls['contentType']"
-          placeholder="text/html; charset=utf-8">
+        <input matInput [formControl]="addFileForm.controls['contentType']"
+          placeholder="Content-type">
       </mat-form-field>
     </p>
 
   </form>
 </div>
 <div mat-dialog-actions align="center">
-  <button mat-raised-button [disabled]="!addFileForm.valid" color="primary">
+  <button mat-raised-button [disabled]="!addFileForm.valid" color="primary" (click)="complete()">
     &nbsp;&nbsp;
     <i class="fas fa-fw fa-plus"></i>
     <ng-container i18n>

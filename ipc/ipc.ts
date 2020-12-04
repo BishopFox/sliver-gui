@@ -548,7 +548,7 @@ export class IPCHandlers {
       "contentType": {"type": "string", "minLength": 1 },
       "path": { "type": "string", "minLength": 1 },
     },
-    "required": ["name", "contents"],
+    "required": ["name", "path", "contentType"],
     "additionalProperties": false,
   })
   async rpc_addWebContentFromFile(self: IPCHandlers, req: any): Promise<string> {
@@ -571,7 +571,9 @@ export class IPCHandlers {
         const webContent = new clientpb.WebContent();
         webContent.setContenttype(req.contentType);
         webContent.setContent(data);
+        webContent.setPath(req.path);
         contents.set(req.path, webContent);
+        logger.debug(contents);
         const website = await self.client.websiteAddContent(req.name, contents);
         resolve(Base64.fromUint8Array(website.serializeBinary()));
       });

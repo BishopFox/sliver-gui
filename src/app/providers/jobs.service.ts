@@ -74,7 +74,6 @@ export class JobsService {
     return website.length ? clientpb.Website.deserializeBinary(Base64.toUint8Array(website)) : null;
   }
 
-
   async startMTLSListener(host: string, port: number): Promise<clientpb.Job> {
     console.log(`Starting mTLS listener on port ${port}`);
     if (port < 1 || 65535 <= port) {

@@ -53,8 +53,11 @@ export class WebsiteDetailsComponent implements OnInit {
   }
 
   addFile() {
-    const dialogRef = this.dialog.open(AddFileDialogComponent);
+    const dialogRef = this.dialog.open(AddFileDialogComponent, {
+      width: '40%'
+    });
     dialogRef.afterClosed().subscribe(async (result) => {
+      console.log(result);
       if (result) {
         this.website = await this._jobsService.websiteAddContentFromFile(this.name, result.path, result.contentType);
       }
@@ -62,11 +65,25 @@ export class WebsiteDetailsComponent implements OnInit {
   }
 
   addDirectory() {
-
+    const dialogRef = this.dialog.open(AddDirectoryDialogComponent, {
+      width: '40%'
+    });
+    dialogRef.afterClosed().subscribe(async (result) => {
+      console.log(result);
+      if (result) {
+        this.website = await this._jobsService.websiteAddContentFromDirectory(this.name, result.path);
+      }
+    });
   }
 
   deleteWebsite() {
-    
+    const dialogRef = this.dialog.open(DeleteWebsiteDialogComponent);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      console.log(result);
+      if (result) {
+        console.log(result);  
+      }
+    });
   }
 
 }
@@ -87,10 +104,10 @@ export class AddFileDialogComponent {
 
   ngOnInit() {
     this.addFileForm = this._fb.group({
-      path: ['', Validators.compose([
+      path: ['/', Validators.compose([
         Validators.required,
       ])],
-      contentType: [8888, Validators.compose([
+      contentType: ['text/html; charset=utf-8', Validators.compose([
         Validators.required,
       ])]
     });
@@ -110,13 +127,28 @@ export class AddFileDialogComponent {
   selector: 'jobs-add-directory-dialog',
   templateUrl: './add-directory.dialog.html',
 })
-export class AddDirectoryDialogComponent {
+export class AddDirectoryDialogComponent implements OnInit {
+
+  addDirectoryForm: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<AddDirectoryDialogComponent>,
+              private _fb: FormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  ngOnInit() {
+    this.addDirectoryForm = this._fb.group({
+      path: ['/', Validators.compose([
+        Validators.required,
+      ])]
+    });
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  complete() {
+    this.dialogRef.close(this.addDirectoryForm.value);
   }
 
 }

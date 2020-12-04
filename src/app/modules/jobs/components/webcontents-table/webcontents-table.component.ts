@@ -58,7 +58,7 @@ export class WebContentsTableComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchWebsite();
-    this.websiteEventsSub = this._eventsService.websites$.subscribe(this.fetchWebsite);
+    this.websiteEventsSub = this._eventsService.websites$.subscribe(this.fetchWebsite.bind(this));
   }
 
   ngOnDestroy(): void {
@@ -72,6 +72,7 @@ export class WebContentsTableComponent implements OnInit, OnDestroy {
 
   tableData(): TableWebContentData[] {
     const table: TableWebContentData[] = [];
+    console.log(this.website.getContentsMap());
     this.website.getContentsMap().forEach((content, key) => {
       table.push({
         path: content.getPath(),
