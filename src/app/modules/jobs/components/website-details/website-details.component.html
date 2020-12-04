@@ -10,14 +10,14 @@
         </ng-container>
       </button>
 
-      <button mat-raised-button (click)="back()" style="margin-left: 16px;">
+      <button mat-raised-button (click)="addFile()" style="margin-left: 16px;">
         <i class="fas fa-fw fa-file"></i>
         <ng-container i18n>
           Add File
         </ng-container>
       </button>
 
-      <button mat-raised-button (click)="back()" style="margin-left: 16px;">
+      <button mat-raised-button (click)="addDirectory()" style="margin-left: 16px;">
         <i class="fas fa-fw fa-folder"></i>
         <ng-container i18n>
           Add Directory
@@ -31,7 +31,7 @@
     </span>
     <span fxFlex></span>
 
-    <button mat-raised-button color="warn" >
+    <button mat-raised-button color="warn" (click)="deleteWebsite()">
       <i class="fas fa-fw fa-trash-alt"></i>
       <ng-container i18n>
         Delete

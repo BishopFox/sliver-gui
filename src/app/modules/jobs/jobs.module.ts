@@ -23,7 +23,9 @@ import { StartListenerComponent, InvalidOptionDialogComponent } from './componen
 import { JobComponent, StopJobDialogComponent } from './components/job/job.component';
 import { MainComponent } from './components/main/main.component';
 import { WebsitesTableComponent } from './components/websites-table/websites-table.component';
-import { WebsiteDetailsComponent } from './components/website-details/website-details.component';
+import { 
+  WebsiteDetailsComponent, AddFileDialogComponent, AddDirectoryDialogComponent, DeleteWebsiteDialogComponent 
+} from './components/website-details/website-details.component';
 import { WebContentsTableComponent } from './components/webcontents-table/webcontents-table.component';
 
 
@@ -37,6 +39,9 @@ import { WebContentsTableComponent } from './components/webcontents-table/webcon
     MainComponent,
     WebsitesTableComponent,
     WebsiteDetailsComponent,
+    AddFileDialogComponent,
+    AddDirectoryDialogComponent,
+    DeleteWebsiteDialogComponent,
     WebContentsTableComponent,
   ],
   imports: [

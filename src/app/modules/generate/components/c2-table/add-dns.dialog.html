@@ -1,34 +1,34 @@
 <h1 mat-dialog-title>
-    <i class="fas fa-fw fa-network-wired"></i>
+  <i class="fas fa-fw fa-network-wired"></i>
+  <ng-container i18n>
+    DNS C2 Endpoint
+  </ng-container>
+</h1>
+<div mat-dialog-content align="center">
+
+  <form [formGroup]="dnsForm">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>
+          <ng-container i18n>Host</ng-container>
+        </mat-label>
+        <input matInput [formControl]="dnsForm.controls['host']" i18n-placeholder placeholder="Host">
+      </mat-form-field>
+    </p>
+
+  </form>
+
+</div>
+<div mat-dialog-actions align="center">
+  <button mat-raised-button (click)="complete()" [disabled]="!dnsForm.valid" color="primary">
+    &nbsp;&nbsp;
+    <i class="fas fa-fw fa-plus"></i>
     <ng-container i18n>
-      DNS C2 Endpoint
+      Add
     </ng-container>
-  </h1>
-  <div mat-dialog-content align="center">
-
-    <form [formGroup]="dnsForm">
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>
-            <ng-container i18n>Host</ng-container>
-          </mat-label>
-          <input matInput [formControl]="dnsForm.controls['host']" i18n-placeholder placeholder="Host">
-        </mat-form-field>
-      </p>
-
-    </form>
-  
-  </div>
-  <div mat-dialog-actions align="center">
-    <button mat-raised-button (click)="complete()" [disabled]="!dnsForm.valid" color="primary">
-      &nbsp;&nbsp;
-      <i class="fas fa-fw fa-plus"></i>
-      <ng-container i18n>
-        Add
-      </ng-container>
-      &nbsp;&nbsp;
-    </button>
-    <button mat-button (click)="onNoClick()">
-      &nbsp;&nbsp;<ng-container i18n>Cancel</ng-container>&nbsp;&nbsp;
-    </button>
-  </div>
+    &nbsp;&nbsp;
+  </button>
+  <button mat-button (click)="onNoClick()">
+    &nbsp;&nbsp;<ng-container i18n>Cancel</ng-container>&nbsp;&nbsp;
+  </button>
+</div>

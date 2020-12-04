@@ -13,8 +13,10 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, Inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 import { FadeInOut } from '@app/shared/animations';
@@ -31,23 +33,105 @@ export class WebsiteDetailsComponent implements OnInit {
   name: string;
   website: clientpb.Website;
 
-  constructor(private _route: ActivatedRoute,
-              private _router: Router,
+  constructor(public dialog: MatDialog,
+              private _route: ActivatedRoute,
               private _jobsService: JobsService) { }
 
   ngOnInit(): void {
     this._route.params.subscribe((params) => {
-      this.name = params['name']
+      this.name = params['name'];
       this._jobsService.websiteByName(this.name).then(website => {
         this.website = website;
-      }).catch(() => {
-        console.log(`No website with name ${this.name}`);
+      }).catch((err) => {
+        console.error(`Could not fetch website data ${err}`);
       });
     });
   }
 
   back() {
     window.history.back();
+  }
+
+  addFile() {
+    const dialogRef = this.dialog.open(AddFileDialogComponent);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result) {
+        this.website = await this._jobsService.websiteAddContentFromFile(this.name, result.path, result.contentType);
+      }
+    });
+  }
+
+  addDirectory() {
+
+  }
+
+  deleteWebsite() {
+    
+  }
+
+}
+
+
+@Component({
+  selector: 'jobs-add-file-dialog',
+  templateUrl: './add-file.dialog.html',
+})
+export class AddFileDialogComponent {
+
+  addFileForm: FormGroup;
+
+  constructor(public dialogRef: MatDialogRef<AddFileDialogComponent>,
+              private _fb: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+
+  ngOnInit() {
+    this.addFileForm = this._fb.group({
+      path: ['', Validators.compose([
+        Validators.required,
+      ])],
+      contentType: [8888, Validators.compose([
+        Validators.required,
+      ])]
+    });
+  }
+
+  complete(): void {
+    this.dialogRef.close(this.addFileForm.value);
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+
+@Component({
+  selector: 'jobs-add-directory-dialog',
+  templateUrl: './add-directory.dialog.html',
+})
+export class AddDirectoryDialogComponent {
+
+  constructor(public dialogRef: MatDialogRef<AddDirectoryDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+
+@Component({
+  selector: 'jobs-delete-website-dialog',
+  templateUrl: './delete-website.dialog.html',
+})
+export class DeleteWebsiteDialogComponent {
+
+  constructor(public dialogRef: MatDialogRef<DeleteWebsiteDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }

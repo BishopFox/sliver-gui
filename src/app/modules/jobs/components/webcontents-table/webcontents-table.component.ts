@@ -103,4 +103,8 @@ export class WebContentsTableComponent implements OnInit, OnDestroy {
     });
   }
 
+  deleteWebContent() {
+    
+  }
+
 }
