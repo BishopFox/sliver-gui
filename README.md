@@ -24,7 +24,7 @@ Because I value my development time more than your RAM.
 
 #### Is Electron Secure?
 
-I at least tried ¯\_(ツ)_/¯. You can [read more about the application architecture here](https://github.com/moloch--/reasonably-secure-electron). In short:
+I at least tried ¯\\_(ツ)_/¯. You can [read more about the application architecture here](https://github.com/moloch--/reasonably-secure-electron). In short:
  * All content is in a non-`file://` origin.
  * A strict content content security policy (CSP) is applied to all origins.
  * The renderer process is sandboxed, and preload scripts have context isolation enabled. Methods in the main process can only be called via JSON and all JSON arguments must pass JSON Schema checks.
