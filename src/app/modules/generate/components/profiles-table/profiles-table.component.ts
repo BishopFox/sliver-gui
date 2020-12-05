@@ -52,7 +52,7 @@ export class ProfilesTableComponent implements OnInit, OnDestroy {
 
   @Input() title = true;
   @Input() displayedColumns: string[] = [
-    'name', 'os', 'arch', 'debug', 'format'
+    'name', 'os', 'arch', 'debug', 'format', 'options'
   ];
 
   profiles: clientpb.ImplantProfile[];
@@ -68,7 +68,7 @@ export class ProfilesTableComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchProfiles();
-    this.profileSub = this._eventsService.profiles$.subscribe(this.fetchProfiles);
+    this.profileSub = this._eventsService.profiles$.subscribe(this.fetchProfiles.bind(this));
   }
 
   ngOnDestroy(): void {
@@ -191,8 +191,12 @@ export class ProfilesTableComponent implements OnInit, OnDestroy {
     });
   }
 
-}
+  deleteProfile(event, row) {
+    event.stopPropagation();
+    this._sliverService.deleteImplantProfile(row.name);
+  }
 
+}
 
 
 @Component({

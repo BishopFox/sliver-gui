@@ -61,6 +61,11 @@ export class SliverService {
     return [name, builds.getConfigsMap().get(name)];
   }
 
+  async deleteImplantBuild(name: string): Promise<void> {
+    await this._ipc.request('rpc_deleteImplantBuild', JSON.stringify({
+      name: name,
+    }));
+  }
 
   async saveImplantProfile(profile: clientpb.ImplantProfile): Promise<clientpb.ImplantProfile> {
     const saved: string = await this._ipc.request('rpc_saveImplantProfile', JSON.stringify({
@@ -78,6 +83,12 @@ export class SliverService {
     const profiles = await this.implantProfiles();
     const filteredProfiles = profiles.filter(profile => profile.getName() === name);
     return filteredProfiles.length > 0 ? filteredProfiles[0] : null;
+  }
+
+  async deleteImplantProfile(name: string): Promise<void> {
+    await this._ipc.request('rpc_deleteImplantProfile', JSON.stringify({
+      name: name,
+    }));
   }
 
   async canaries(): Promise<clientpb.DNSCanary[]> {

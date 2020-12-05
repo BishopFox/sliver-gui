@@ -80,6 +80,7 @@ export class EventsService {
             break;
 
           // Builds
+          case Events.Build:
           case Events.BuildCompleted:
             this.builds$.next(event);
             break;

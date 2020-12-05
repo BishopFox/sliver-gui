@@ -36,6 +36,7 @@ import { isConnected } from './is-connected';
 import { getLocalesJSON, getClientDir, getCurrentLocale, setLocaleSync } from '../locale';
 import { WindowManager } from '../windows/window-manager';
 import { WorkerManager } from '../workers/worker-manager';
+import { json } from 'sequelize';
 
 
 const logger = log4js.getLogger(__filename);
@@ -336,6 +337,19 @@ export class IPCHandlers {
   }
 
   @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "name": { "type": "string", "minLength": 1 },
+    },
+    "required": ["name"],
+    "additionalProperties": false
+  })
+  async rpc_deleteImplantBuild(self: IPCHandlers, req: any): Promise<void> {
+    return self.client.deleteImplantBuild(req.name);
+  }
+
+  @isConnected()
   async rpc_canaries(self: IPCHandlers): Promise<string[]> {
     const canaries = await self.client.canaries();
     return canaries.map(canary => Base64.fromUint8Array(canary.serializeBinary()));
@@ -389,6 +403,19 @@ export class IPCHandlers {
   async rpc_implantProfiles(self: IPCHandlers): Promise<string[]> {
     const profiles = await self.client.implantProfiles();
     return profiles.map(profile => Base64.fromUint8Array(profile.serializeBinary()));
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "name": { "type": "string", "minLength": 1 },
+    },
+    "required": ["name"],
+    "additionalProperties": false
+  })
+  async rpc_deleteImplantProfile(self: IPCHandlers, req: any): Promise<void> {
+    return self.client.deleteImplantProfile(req.name);
   }
 
   // Session Interaction

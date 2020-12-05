@@ -52,7 +52,7 @@ export class BuildsTableComponent implements OnInit {
 
   @Input() title = true;
   @Input() displayedColumns: string[] = [
-    'name', 'os', 'arch', 'debug', 'format', 'regenerate'
+    'name', 'os', 'arch', 'debug', 'format', 'regenerate', 'options'
   ];
 
   dataSrc: MatTableDataSource<TableImplantBuildData>;
@@ -66,9 +66,7 @@ export class BuildsTableComponent implements OnInit {
 
   ngOnInit() {
     this.fetchImplantBuilds();
-    this._eventsService.builds$.subscribe((_: clientpb.Event) => {
-      this.fetchImplantBuilds();
-    });
+    this._eventsService.builds$.subscribe(this.fetchImplantBuilds.bind(this));
   }
 
   async fetchImplantBuilds() {
@@ -157,6 +155,11 @@ export class BuildsTableComponent implements OnInit {
         }
       }
     });
+  }
+
+  deleteBuild(event, row) {
+    event.stopPropagation();
+    this._sliverService.deleteImplantBuild(row.name);
   }
 
 }
