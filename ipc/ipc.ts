@@ -21,7 +21,7 @@ listing/selecting configs to the sandboxed code.
 import {
   app, ipcMain, dialog, FileFilter, BrowserWindow, IpcMainEvent, nativeTheme
 } from 'electron';
-import { homedir, platform } from 'os';
+import { homedir } from 'os';
 import { Base64 } from 'js-base64';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -30,6 +30,7 @@ import * as log4js from 'log4js';
 import { SliverClient, SliverClientConfig } from 'sliver-script';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
+import { walk } from './util';
 import { jsonSchema } from './json-schema';
 import { isConnected } from './is-connected';
 import { getLocalesJSON, getClientDir, getCurrentLocale, setLocaleSync } from '../locale';
@@ -613,25 +614,25 @@ export class IPCHandlers {
       properties: ["openDirectory", "showHiddenFiles", "dontAddToRecent"],
     });
     if (openDialog.canceled || openDialog.filePaths.length < 1) {
-      return Promise.reject('User cancel');
+      return '';
     }
 
     const contents = new Map<string, clientpb.WebContent>();
-    return new Promise(async (resolve, reject) => {
-      
-      // fs.readFile(openDialog.filePaths[0], async (err, data: Buffer) => {
-      //   if (err) {
-      //     return reject(err);
-      //   }
-      //   const webContent = new clientpb.WebContent();
-      //   webContent.setContent(data);
-      //   contents.set(req.path, webContent);
-
-      // });
-
-      const website = await self.client.websiteAddContent(req.name, contents);
-      resolve(Base64.fromUint8Array(website.serializeBinary()));
-    });
+    const rootPath = openDialog.filePaths[0];
+    for await (const fPath of walk(rootPath)) {
+      let contentPath = path.join(req.path, fPath).replace(rootPath, "");
+      if (!contentPath.startsWith("/")) {
+        contentPath = `/${contentPath}`;
+      }
+      logger.debug(`AddWebContentFromDirectory: ${contentPath}`);
+      const data: Buffer = await fs.promises.readFile(fPath);
+      const webContent = new clientpb.WebContent();
+      webContent.setPath(contentPath);
+      webContent.setContent(data);
+      contents.set(contentPath, webContent);
+    }
+    const website = await self.client.websiteAddContent(req.name, contents);
+    return Base64.fromUint8Array(website.serializeBinary());
   }
 
   @isConnected()
