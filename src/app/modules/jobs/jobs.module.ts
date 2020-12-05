@@ -21,7 +21,7 @@ import { BaseMaterialModule } from '@app/base-material';
 import { JobsTableComponent } from './components/jobs-table/jobs-table.component';
 import { StartListenerComponent, InvalidOptionDialogComponent } from './components/start-listener/start-listener.component';
 import { JobComponent, StopJobDialogComponent } from './components/job/job.component';
-import { MainComponent } from './components/main/main.component';
+import { MainComponent, AddWebsiteDialogComponent } from './components/main/main.component';
 import { WebsitesTableComponent } from './components/websites-table/websites-table.component';
 import { 
   WebsiteDetailsComponent, AddFileDialogComponent, AddDirectoryDialogComponent, DeleteWebsiteDialogComponent 
@@ -37,6 +37,7 @@ import { WebContentsTableComponent } from './components/webcontents-table/webcon
     InvalidOptionDialogComponent,
     JobComponent,
     MainComponent,
+    AddWebsiteDialogComponent,
     WebsitesTableComponent,
     WebsiteDetailsComponent,
     AddFileDialogComponent,

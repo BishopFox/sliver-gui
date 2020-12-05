@@ -57,6 +57,13 @@ export class JobsService {
     return website.length ? clientpb.Website.deserializeBinary(Base64.toUint8Array(website)) : null;
   }
 
+  async addWebsite(name: string): Promise<clientpb.Website> {
+    const website: string = await this._ipc.request('rpc_addWebsite', JSON.stringify({
+      name: name,
+    }));
+    return website.length ? clientpb.Website.deserializeBinary(Base64.toUint8Array(website)) : null;
+  }
+
   async websiteAddContentFromFile(name: string, path: string, contentType: string): Promise<clientpb.Website> {
     const website = await this._ipc.request('rpc_addWebContentFromFile', JSON.stringify({
       name: name,
@@ -72,6 +79,12 @@ export class JobsService {
       path: path,
     }));
     return website.length ? clientpb.Website.deserializeBinary(Base64.toUint8Array(website)) : null;
+  }
+
+  async removeWebsite(name: string): Promise<void> {
+    await this._ipc.request('rpc_removeWebsite', JSON.stringify({
+      name: name,
+    }));
   }
 
   async startMTLSListener(host: string, port: number): Promise<clientpb.Job> {

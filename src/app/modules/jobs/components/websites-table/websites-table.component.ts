@@ -57,7 +57,7 @@ export class WebsitesTableComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchWebsites();
-    this.websiteEventsSub = this._eventsService.websites$.subscribe(this.fetchWebsites);
+    this.websiteEventsSub = this._eventsService.websites$.subscribe(this.fetchWebsites.bind(this));
   }
 
   ngOnDestroy(): void {
@@ -85,7 +85,7 @@ export class WebsitesTableComponent implements OnInit, OnDestroy {
   }
 
   onRowSelection(row: any) {
-    this._router.navigate(['websites', row.name]);
+    this._router.navigate(['jobs', 'websites', row.name]);
   }
 
   // Because MatTableDataSource is absolute piece of shit

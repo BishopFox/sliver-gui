@@ -535,6 +535,21 @@ export class IPCHandlers {
     "required": ["name"],
     "additionalProperties": false,
   })
+  async rpc_addWebsite(self: IPCHandlers, req: any): Promise<string> {
+    const contents = new Map<string, clientpb.WebContent>();
+    const website = await self.client.websiteAddContent(req.name, contents);
+    return Base64.fromUint8Array(website.serializeBinary());
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "name": { "type": "string", "minLength": 1 },
+    },
+    "required": ["name"],
+    "additionalProperties": false,
+  })
   async rpc_website(self: IPCHandlers, req: any): Promise<string> {
     const website = await self.client.website(req.name);
     return Base64.fromUint8Array(website.serializeBinary());

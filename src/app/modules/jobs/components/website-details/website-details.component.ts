@@ -14,13 +14,14 @@
 */
 
 import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 import { FadeInOut } from '@app/shared/animations';
 import { JobsService } from '@app/providers/jobs.service';
+
 
 @Component({
   selector: 'jobs-website-details',
@@ -34,6 +35,7 @@ export class WebsiteDetailsComponent implements OnInit {
   website: clientpb.Website;
 
   constructor(public dialog: MatDialog,
+              private _router: Router,
               private _route: ActivatedRoute,
               private _jobsService: JobsService) { }
 
@@ -81,13 +83,13 @@ export class WebsiteDetailsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (result) => {
       console.log(result);
       if (result) {
-        console.log(result);  
+        await this._jobsService.removeWebsite(this.name);
+        this._router.navigate(['jobs']);
       }
     });
   }
 
 }
-
 
 @Component({
   selector: 'jobs-add-file-dialog',
@@ -164,6 +166,10 @@ export class DeleteWebsiteDialogComponent {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  complete() {
+    this.dialogRef.close(true);
   }
 
 }

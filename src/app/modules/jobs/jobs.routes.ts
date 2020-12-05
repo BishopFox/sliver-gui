@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'jobs', component: MainComponent, canActivate: [ActiveConfig] },
   { path: 'jobs/new', component: StartListenerComponent, canActivate: [ActiveConfig] },
   { path: 'jobs/:job-id', component: JobComponent, canActivate: [ActiveConfig] },
-  { path: 'websites/:name', component: WebsiteDetailsComponent, canActivate: [ActiveConfig] },
+  { path: 'jobs/websites/:name', component: WebsiteDetailsComponent, canActivate: [ActiveConfig] },
 
 ];
 
