@@ -19,9 +19,15 @@
     "build:prod": "npm run version && npm run build:worker && npm run build -- -c production",
     "electron:serve-tsc": "tsc -p tsconfig-serve.json",
     "electron:local": "npm run build:dev && electron .",
-    "electron:linux": "npm run build:prod && electron-builder build --linux",
-    "electron:windows": "npm run build:prod && electron-builder build --windows",
+
+    "electron:linux": "npm run build:prod && electron-builder build --linux --publish=never",
+    "electron:windows": "npm run build:prod && electron-builder build --windows --publish=never",
     "electron:mac": "npm run build:prod && electron-builder build --mac --publish=never",
+    
+    "publish:mac": "npm run build:prod && electron-builder build --mac",
+    "publish:windows": "npm run build:prod && electron-builder build --windows",
+    "publish:linux": "npm run build:prod && electron-builder build --linux",
+
     "i18n": "ng extract-i18n --ivy --output-path ./src/locale/ && xliffmerge --profile ./src/locale/xliffmerge.json en fr ja es zh",
     "version": "ts-node -O '{\"module\": \"commonjs\"}' ./version.ts",
     "test": "ng test",
@@ -84,6 +90,7 @@
     "@fortawesome/fontawesome-free": "^5.12.1",
     "@materia-ui/ngx-monaco-editor": "^4.0.2",
     "ajv": "^6.12.0",
+    "electron-updater": "^4.3.5",
     "google-protobuf": "^3.11.4",
     "handlebars": "^4.7.6",
     "js-base64": "^3.6.0",

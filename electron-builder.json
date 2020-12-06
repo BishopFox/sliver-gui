@@ -23,19 +23,35 @@
     "icon": "dist/en",
     "target": [
       "portable"
-    ]
+    ],
+    "publish": [{
+      "provider": "github",
+      "owner": "moloch--",
+      "repo": "sliver-gui"
+    }]
   },
   "mac": {
     "icon": "dist/en",
     "target": [
       "dmg"
-    ]
+    ],
+    "publish": [{
+      "provider": "github",
+      "owner": "moloch--",
+      "repo": "sliver-gui"
+    }]
   },
   "linux": {
     "icon": "dist/en",
     "target": [
       "deb",
-      "rpm"
-    ]
+      "rpm",
+      "AppImage"
+    ],
+    "publish": [{
+      "provider": "github",
+      "owner": "moloch--",
+      "repo": "sliver-gui"
+    }]
   }
 }

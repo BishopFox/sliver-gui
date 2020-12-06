@@ -19,13 +19,16 @@ async function createVersionsFile(filename: string) {
   const protobuf = packageJSON['dependencies']['google-protobuf'];
   const angular = packageJSON['devDependencies']['@angular/core'];
   const electron = packageJSON['devDependencies']['electron'];
+  const updateUrl = process.env['SLIVER_GUI_UPDATE_URL'] || '';
   const content = `
 // Automatically generated: DO NOT EDIT
+export const UpdateURL = '${updateUrl}';
 export const Version = {
   version: '${process.env.npm_package_version}',
   revision: '${revision}',
   branch: '${branch}',
   dirty: ${dirty},
+  compiled: '${(new Date()).toUTCString()}',
   dependencies: {
     sliverScript: '${sliverScript}',
     protobuf: '${protobuf}',

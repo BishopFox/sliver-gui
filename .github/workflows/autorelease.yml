@@ -36,12 +36,7 @@ jobs:
         npm install -g ngx-i18nsupport
 
     - run: npm run electron:mac
-    
-    - name: MacOS Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: sliver-gui.dmg
-        path: release/sliver-*.dmg
+
 
   linux-build:
 
@@ -69,17 +64,7 @@ jobs:
         npm install -g @angular/cli
         npm install -g ngx-i18nsupport
 
-    - run: npm run electron:linux
-    - name: Linux Artifact (deb)
-      uses: actions/upload-artifact@v2
-      with:
-        name: sliver-gui.deb
-        path: release/sliver-*.deb
-    - name: Linux Artifact (rpm)
-      uses: actions/upload-artifact@v2
-      with:
-        name: sliver-gui.rpm
-        path: release/sliver-*.rpm
+    - run: npm run publish:linux
 
   windows-build:
 
@@ -107,34 +92,4 @@ jobs:
         npm install -g @angular/cli
         npm install -g ngx-i18nsupport
         
-    - run: npm run electron:windows
-    - name: Windows Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: sliver-gui.exe
-        path: release/sliver*.exe
-
-  tagged-release:
-
-    needs: [windows-build, linux-build, macos-build]
-
-    name: "Tagged Release"
-    if: startsWith( github.ref, 'refs/tags/v')
-    runs-on: ubuntu-latest
-
-    steps:
-    - run: mkdir -p ./release
-    - uses: actions/download-artifact@v2
-      with:
-        path: ./release
-
-    - name: "Release"
-      uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        prerelease: false
-        files: |
-          ./release/*.dmg
-          ./release/*.exe
-          ./release/*.deb
-          ./release/*.rpm
+    - run: npm run publish:windows
