@@ -31,13 +31,13 @@ export async function initMenu(menuEvents: Subject<MenuEvent>) {
         {
           label: 'About Sliver',
           click: () => {
-            this.menuEvents.next({ button: 'about' });
+            menuEvents.next({ button: 'about' });
           }
         },
         {
           label: 'Check For Updates...',
           click: () => {
-            this.menuEvents.next({ button: 'updates' });
+            menuEvents.next({ button: 'updates' });
           }
         },
         { type: 'separator' },

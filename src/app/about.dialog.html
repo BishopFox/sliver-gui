@@ -1,0 +1,23 @@
+<h1 mat-dialog-title align="center">
+  Sliver
+</h1>
+<div mat-dialog-content align="center">
+  <h3>Version {{ version.version }}</h3>
+  <p>
+    <span class="monospace">{{ version.branch }}:{{ version.revision }}</span><br />
+    <strong *ngIf="version.dirty">(DIRTY)</strong><br />
+    <br />
+  </p>
+  <hr />
+  <h4>Dependencies</h4>
+  <p>
+    SliverScript <span class="monospace">{{version.dependencies.sliverScript}}</span> <br />
+    Angular <span class="monospace">{{version.dependencies.angular}}</span> <br />
+    Electron <span class="monospace">{{version.dependencies.electron}}</span> <br />
+  </p>
+</div>
+<div mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" (click)="onNoClick()">
+    &nbsp;&nbsp;<ng-container i18n>Okay</ng-container>&nbsp;&nbsp;
+  </button>
+</div>

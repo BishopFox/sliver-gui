@@ -31,7 +31,7 @@ import { EventsService } from './providers/events.service';
 
 import { BaseMaterialModule } from './base-material';
 
-import { AppComponent } from './app.component';
+import { AppComponent, AboutDialogComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { SelectServerComponent } from './components/select-server/select-server.component';
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
@@ -55,6 +55,7 @@ import { ScriptingRoutes } from './modules/scripting/scripting.routes';
 
     // Components
     AppComponent,
+    AboutDialogComponent,
     HomeComponent,
     SelectServerComponent,
     TopMenuComponent,

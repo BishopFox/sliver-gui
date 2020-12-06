@@ -52,9 +52,6 @@ export class WindowManager {
   async init() {
     await this.workerManager.init();
     initMenu(this.menuEvents);
-    this.menuEvents.subscribe(event => {
-      this.mainWindow.webContents.send('menu', JSON.stringify(event));
-    });
   }
 
   private startIPCHandlers() {
@@ -86,6 +83,9 @@ export class WindowManager {
 
     const gutterSize = 100;
     this.mainWindow = this.window(gutterSize, path.join(__dirname, '..', 'preload.js'))
+    this.menuEvents.subscribe(event => {
+      this.mainWindow.webContents.send('menu', JSON.stringify(event));
+    });
 
     this.mainWindow.once('ready-to-show', () => {
       this.mainWindow.show();

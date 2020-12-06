@@ -13,15 +13,17 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { Events } from 'sliver-script/lib/events';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
+import { Version } from '../environments/version';
 import { EventsService, Notification } from './providers/events.service';
 import { ClientService, Platforms, Settings, Themes } from './providers/client.service';
 
@@ -45,7 +47,8 @@ export class AppComponent implements OnInit, OnDestroy {
               private _overlayContainer: OverlayContainer,
               private _eventsService: EventsService,
               private _clientService: ClientService,
-              private _snackBar: MatSnackBar) 
+              private _snackBar: MatSnackBar,
+              public dialog: MatDialog) 
   {
     if (this.mainWindow) {
       this.initAlerts();
@@ -178,6 +181,14 @@ export class AppComponent implements OnInit, OnDestroy {
     ).subscribe(() => {
       window.history.forward();
     });
+
+
+    // About menu event
+    this._eventsService.menu$.pipe(
+      filter(event => event.button === 'about')
+    ).subscribe(() => {
+      this.aboutDialog();
+    });
   }
 
   notificationAlert(message: string, buttonLabel: string, seconds: number, callback: Function|null = null) {
@@ -220,6 +231,28 @@ export class AppComponent implements OnInit, OnDestroy {
     this._snackBar.open(`Lost session #${session.getId()}`, 'Dismiss', {
       duration: 5000,
     });
+  }
+
+  aboutDialog() {
+    this.dialog.open(AboutDialogComponent);
+  }
+
+}
+
+
+@Component({
+  selector: 'app-about-dialog',
+  templateUrl: 'about.dialog.html',
+})
+export class AboutDialogComponent {
+
+  version = Version;
+
+  constructor(public dialogRef: MatDialogRef<AboutDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }
