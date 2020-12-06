@@ -29,7 +29,7 @@
     "publish:linux": "npm run build:prod && electron-builder build --linux",
 
     "i18n": "ng extract-i18n --ivy --output-path ./src/locale/ && xliffmerge --profile ./src/locale/xliffmerge.json en fr ja es zh",
-    "version": "ts-node -O '{\"module\": \"commonjs\"}' ./version.ts",
+    "version": "ts-node -O \"{\\\"module\\\": \\\"commonjs\\\"}\" ./version.ts",
     "test": "ng test",
     "e2e": "npm run build:prod && mocha --timeout 300000 --require ts-node/register e2e/**/*.spec.ts"
   },
