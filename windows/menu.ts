@@ -15,7 +15,6 @@
 
 import { Subject } from 'rxjs';
 import { Menu, app, shell } from 'electron';
-import { autoUpdater } from 'electron-updater';
 
 
 export interface MenuEvent {
@@ -23,8 +22,7 @@ export interface MenuEvent {
   id?: number;
 }
 
-
-export async function initMenu(menuEvents: Subject<MenuEvent>) {
+export async function initMenu(menuEvents: Subject<MenuEvent>, updateCallback: CallableFunction) {
   const menu = Menu.buildFromTemplate([
     {
       label: 'Menu',
@@ -37,9 +35,7 @@ export async function initMenu(menuEvents: Subject<MenuEvent>) {
         },
         {
           label: 'Check For Updates...',
-          click: async () => {
-            await autoUpdater.checkForUpdatesAndNotify();
-          }
+          click: () => { updateCallback(); },
         },
         { type: 'separator' },
         {

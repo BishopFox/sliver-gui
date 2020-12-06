@@ -34,7 +34,25 @@
               {
                 "glob": "**/*",
                 "input": "node_modules/monaco-editor",
-                "output": "assets/monaco-editor/"
+                "output": "assets/monaco-editor/",
+                "ignore": [
+                  "dev/**",
+                  "min-maps/**",
+                  "esm/**",
+                  "min/vs/basic-languages/**",
+                  "**/*.map",
+                  "**/*.d.ts",
+                  "**/*.txt",
+                  "**/*.md",
+                  "package.json",
+                  "LICENSE"
+                ]
+              },            
+              {
+                "glob": "min/vs/basic-languages/javascript/**",
+                "input": "node_modules/monaco-editor",
+                "output": "assets/monaco-editor",
+                "ignore": []
               }
             ],
             "styles": [

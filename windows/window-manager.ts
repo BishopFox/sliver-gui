@@ -18,6 +18,7 @@ import { Subject } from 'rxjs';
 import * as uuid from 'uuid';
 import * as path from 'path';
 import * as log4js from 'log4js';
+import { autoUpdater } from 'electron-updater';
 
 import { WorkerManager } from '../workers/worker-manager';
 import { initMenu, MenuEvent } from './menu';
@@ -34,6 +35,18 @@ export enum Platforms {
   Linux = 'linux',
 };
 
+export interface Progress {
+  bytesPerSecond: number;
+  percent: number;
+  transferred: number;
+  total: number;
+}
+
+export interface UpdateEvent {
+  event: string;
+  progress?: Progress;
+  error?: string;
+}
 
 export class WindowManager {
 
@@ -43,6 +56,7 @@ export class WindowManager {
   private mainWindow: BrowserWindow;
   private sessionWindows = new Map<string, BrowserWindow>();
   private menuEvents = new Subject<MenuEvent>();
+  private updateEvents = new Subject<UpdateEvent>();
 
   constructor() {
     this.workerManager = new WorkerManager();
@@ -51,7 +65,53 @@ export class WindowManager {
 
   async init() {
     await this.workerManager.init();
-    initMenu(this.menuEvents);
+    this.initUpdate();
+    initMenu(this.menuEvents, () => {
+      autoUpdater.checkForUpdatesAndNotify();
+    });
+  }
+
+  initUpdate() {
+    autoUpdater.on('checking-for-update', () => {
+      this.updateEvents.next({
+        event: 'checking-for-update',
+      });
+    });
+
+    autoUpdater.on('update-available', (info) => {
+      logger.debug(info);
+      this.updateEvents.next({
+        event: 'update-available',
+      });
+    });
+
+    autoUpdater.on('update-not-available', (info) => {
+      logger.debug(info);
+      this.updateEvents.next({
+        event: 'update-not-available',
+      });
+    });
+
+    autoUpdater.on('download-progress', (progress) => {
+      logger.debug(progress);
+      this.updateEvents.next({
+        event: 'download-progress',
+        progress: progress,
+      })
+    });
+
+    autoUpdater.on('update-downloaded', (info) => {
+      logger.debug(info);
+      autoUpdater.quitAndInstall();
+    });
+
+    autoUpdater.on('error', (err) => {
+      logger.warn(err);
+      this.updateEvents.next({
+        event: 'error',
+        error: err.toString(),
+      });
+    });
   }
 
   private startIPCHandlers() {
@@ -130,7 +190,7 @@ export class WindowManager {
   }
 
   private window(gutterSize: number, preload: string): Electron.BrowserWindow {
-    switch(process.platform) {
+    switch (process.platform) {
       case Platforms.MacOS:
         return this.glassWindow(gutterSize, preload)
       default:

@@ -22,7 +22,8 @@
   "win": {
     "icon": "dist/en",
     "target": [
-      "portable"
+      "portable",
+      "nsis"
     ],
     "publish": [{
       "provider": "github",
