@@ -28,7 +28,8 @@
     "publish": [{
       "provider": "github",
       "owner": "moloch--",
-      "repo": "sliver-gui"
+      "repo": "sliver-gui",
+      "private": true
     }]
   },
   "mac": {
@@ -39,7 +40,8 @@
     "publish": [{
       "provider": "github",
       "owner": "moloch--",
-      "repo": "sliver-gui"
+      "repo": "sliver-gui",
+      "private": true
     }]
   },
   "linux": {
@@ -52,7 +54,8 @@
     "publish": [{
       "provider": "github",
       "owner": "moloch--",
-      "repo": "sliver-gui"
+      "repo": "sliver-gui",
+      "private": true
     }]
   }
 }
