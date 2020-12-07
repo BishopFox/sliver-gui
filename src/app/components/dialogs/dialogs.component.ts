@@ -13,11 +13,14 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
+import { Observable, Subscription } from 'rxjs';
 
+import { DownloadEvent, Progress } from '@app/providers/events.service';
 import { Version } from '../../../environments/version';
+
 
 @Component({
   selector: 'app-about-dialog',
@@ -78,3 +81,41 @@ export class DownloadSliverClientDialogComponent {
 
 }
 
+
+export interface DownloadProgressSnack {
+  download$: Observable<DownloadEvent>;
+  message: string;
+}
+
+@Component({
+  selector: 'app-download-progress-snack',
+  templateUrl: './download-progress.snack.html',
+})
+export class DownloadProgressSnackComponent implements OnInit, OnDestroy {
+
+  message: string;
+  progress: Progress;
+  private downloadSub: Subscription;
+
+  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: DownloadProgressSnack) { }
+
+  ngOnInit(): void {
+    this.message = this.data.message;
+    this.downloadSub = this.data.download$.subscribe(download => {
+      this.progress = download.progress;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.downloadSub.unsubscribe();
+  }
+
+  getPercent() {
+    return this.progress?.percent ? this.progress.percent : 0;
+  }
+
+  getBytesPerSecond(): number {
+    return this.progress?.bytesPerSecond ? this.progress.bytesPerSecond : 0;
+  }
+
+}

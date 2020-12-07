@@ -1,0 +1,2 @@
+{{ message }} <span *ngIf="0 < getBytesPerSecond()" style="float: right;">{{ getBytesPerSecond() | fileSize: 2 }}/s</span><br />
+<mat-progress-bar mode="determinate" [value]="getPercent()"></mat-progress-bar>

@@ -11,9 +11,8 @@ Download the [latest release](https://github.com/moloch--/sliver-gui/releases) a
 ### Features
 
 * You can click on stuff!
-* Sandboxed JavaScript scripting engine
-* Built-in script editor
-* i18n Language Support
+* Sandboxed JavaScript scripting engine (with built-in script editor)
+* i18n Language Support (French, Spanish, Japanese, Chinese)
 
 ### FAQ
 
@@ -23,11 +22,11 @@ Because I value my development time more than your RAM.
 
 #### Is Electron Secure?
 
-I tried ¯\\_(ツ)_/¯. You can [read more about the application architecture here](https://github.com/moloch--/reasonably-secure-electron). In short:
- * Not content runs in a `file://` origin.
- * A strict content content security policy (CSP) is applied to all origins (`script-src` does not allow `unsafe-inline` or `unsafe-eval`). --Which you should be happy about, I had to patch `protobuf.js` to get that working.
- * The renderer process is sandboxed, and preload scripts have context isolation enabled. Methods in the main process can only be called via `postMessage()` / JSON, and all JSON arguments must pass JSON Schema checks.
- * Extremely limited DOM interactions, nearly the entire interface is implemented via Angular; there are zero calls to `bypassSecurityTrustHtml()`.
+I tried ¯\\_(ツ)_/¯. Having written multiple exploits for Electron apps, I understand the concern and like to think I have a fighting chance. You can [read more about the application architecture here](https://github.com/moloch--/reasonably-secure-electron). In short:
+ * No content runs in a `file://` origin, all content is served from internal Electron protocol handlers (i.e. `app://`).
+ * A strict content content security policy (CSP) is applied to all origins (`script-src` does not allow `unsafe-inline` or `unsafe-eval`).
+ * The renderer process is sandboxed, and preload scripts have context isolation enabled. Methods in the main process can only be called via `postMessage()` / JSON, and all JSON arguments must pass JSON-Schema checks.
+ * Nearly the entire interface is implemented via Angular data binding; there are zero calls to `bypassSecurityTrustHtml()`.
 
 Please report any security bugs you may find, see the repo security policy for bounties.
 

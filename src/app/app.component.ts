@@ -19,12 +19,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, take } from 'rxjs/operators';
 import { Events } from 'sliver-script/lib/events';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 import {
-  AboutDialogComponent, DownloadSliverServerDialogComponent, DownloadSliverClientDialogComponent
+  AboutDialogComponent, DownloadSliverServerDialogComponent, DownloadSliverClientDialogComponent, DownloadProgressSnackComponent
 } from './components/dialogs/dialogs.component';
 import { EventsService, Notification, MenuEvent, DownloadEvent } from './providers/events.service';
 import { ClientService, Platforms, Settings, Themes } from './providers/client.service';
@@ -260,17 +260,53 @@ export class AppComponent implements OnInit, OnDestroy {
   sliverServerDownload() {
     const dialogRef = this.dialog.open(DownloadSliverServerDialogComponent);
     dialogRef.afterClosed().subscribe(async (goos) => {
+      if (!goos) {
+        return;
+      }
       const downloadId = await this._clientService.downloadSliverServer(goos);
-      this._eventsService.download$.pipe(
+      const observe = this._eventsService.download$.pipe(
         filter((download: DownloadEvent) => download.event === downloadId)
-      ).subscribe(download => {
-        console.log(download);
+      );
+      const snackBarRef = this._snackBar.openFromComponent(DownloadProgressSnackComponent, {
+        data: {
+          message: 'Downloading Sliver Server',
+          download$: observe,
+        }
+      });
+      observe.pipe(
+        filter((download: DownloadEvent) => download.progress?.percent >= 100.0)
+      ).pipe(take(1)).subscribe(() => {
+        setTimeout(() => {
+          snackBarRef.dismiss();
+        }, 1000);
       });
     });
   }
 
   sliverClientDownload() {
     const dialogRef = this.dialog.open(DownloadSliverClientDialogComponent);
+    dialogRef.afterClosed().subscribe(async (goos) => {
+      if (!goos) {
+        return;
+      }
+      const downloadId = await this._clientService.downloadSliverClient(goos);
+      const observe = this._eventsService.download$.pipe(
+        filter((download: DownloadEvent) => download.event === downloadId)
+      );
+      const snackBarRef = this._snackBar.openFromComponent(DownloadProgressSnackComponent, {
+        data: {
+          message: 'Downloading Console Client',
+          download$: observe,
+        }
+      });
+      observe.pipe(
+        filter((download: DownloadEvent) => download.progress?.percent >= 100.0)
+      ).pipe(take(1)).subscribe(() => {
+        setTimeout(() => {
+          snackBarRef.dismiss();
+        }, 1000);
+      });
+    });
   }
 
 }

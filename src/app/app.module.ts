@@ -37,7 +37,7 @@ import { SelectServerComponent } from './components/select-server/select-server.
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
 import { SettingsComponent, RestartDialogComponent } from './components/settings/settings.component';
 import {
-  AboutDialogComponent, DownloadSliverServerDialogComponent, DownloadSliverClientDialogComponent
+  AboutDialogComponent, DownloadSliverServerDialogComponent, DownloadSliverClientDialogComponent, DownloadProgressSnackComponent
 } from './components/dialogs/dialogs.component'; 
 
 import { GenerateModule } from './modules/generate/generate.module';
@@ -51,6 +51,7 @@ import { JobsRoutes } from './modules/jobs/jobs.routes';
 
 import { ScriptingModule } from './modules/scripting/scripting.module';
 import { ScriptingRoutes } from './modules/scripting/scripting.routes';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { ScriptingRoutes } from './modules/scripting/scripting.routes';
     SettingsComponent,
     RestartDialogComponent,
     DownloadSliverServerDialogComponent,
-    DownloadSliverClientDialogComponent
+    DownloadSliverClientDialogComponent,
+    DownloadProgressSnackComponent
     
   ],
   imports: [
@@ -88,6 +90,7 @@ import { ScriptingRoutes } from './modules/scripting/scripting.routes';
     SessionsModule,
     JobsModule,
     ScriptingModule,
+    SharedModule,
 
   ],
   providers: [IPCService, ClientService, SliverService, JobsService, EventsService],

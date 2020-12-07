@@ -34,7 +34,7 @@ import { walk, downloadSliverAsset } from './util';
 import { jsonSchema } from './json-schema';
 import { isConnected } from './is-connected';
 import { getLocalesJSON, getClientDir, getCurrentLocale, setLocaleSync } from '../locale';
-import { WindowManager } from '../windows/window-manager';
+import { WindowManager, Progress } from '../windows/window-manager';
 import { WorkerManager } from '../workers/worker-manager';
 
 
@@ -927,7 +927,8 @@ export class IPCHandlers {
     const downloadId = uuid.v4().toString();
     return new Promise(resolve => {
       resolve(downloadId);
-      downloadSliverAsset(DEFAULT_SERVER_URL, 'server', 'linux', '', (progress) => {
+      const saveTo = path.join(homedir(), 'Downloads');
+      downloadSliverAsset(DEFAULT_SERVER_URL, 'server', 'linux', saveTo, (progress: Progress) => {
         self._windowManager.downloadEvents.next({
           event: downloadId,
           progress: progress,
@@ -940,7 +941,8 @@ export class IPCHandlers {
     const downloadId = uuid.v4().toString();
     return new Promise(resolve => {
       resolve(downloadId);
-      downloadSliverAsset(DEFAULT_SERVER_URL, 'client', 'linux', '', (progress) => {
+      const saveTo = path.join(homedir(), 'Downloads');
+      downloadSliverAsset(DEFAULT_SERVER_URL, 'client', 'linux', saveTo, (progress: Progress) => {
         self._windowManager.downloadEvents.next({
           event: downloadId,
           progress: progress,
