@@ -33,6 +33,21 @@ export interface MenuEvent {
   id?: number;
 }
 
+export interface Progress {
+  bytesPerSecond: number;
+  percent: number;
+  transferred: number;
+  total: number;
+  delta: number;
+}
+
+export interface DownloadEvent {
+  event: string;
+  progress?: Progress;
+  error?: string;
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -47,11 +62,15 @@ export class EventsService {
   websites$ = new Subject<clientpb.Event>();
   notifications$ = new Subject<Notification>();
   menu$ = new Subject<MenuEvent>();
+  download$ = new Subject<DownloadEvent>();
 
   constructor(private _ipc: IPCService) {
 
     this._ipc.menuEvent$.subscribe(event => {
       this.menu$.next(event);
+    });
+    this._ipc.downloadEvent$.subscribe(event => {
+      this.download$.next(event);
     });
 
     this._ipc.ipcEvent$.subscribe(event => {

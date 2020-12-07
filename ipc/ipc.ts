@@ -30,16 +30,16 @@ import * as log4js from 'log4js';
 import { SliverClient, SliverClientConfig } from 'sliver-script';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
-import { walk } from './util';
+import { walk, downloadSliverAsset } from './util';
 import { jsonSchema } from './json-schema';
 import { isConnected } from './is-connected';
 import { getLocalesJSON, getClientDir, getCurrentLocale, setLocaleSync } from '../locale';
 import { WindowManager } from '../windows/window-manager';
 import { WorkerManager } from '../workers/worker-manager';
-import { json } from 'sequelize';
 
 
 const logger = log4js.getLogger(__filename);
+const DEFAULT_SERVER_URL = 'https://api.github.com/repos/BishopFox/sliver/releases/latest';
 const CONFIG_DIR = path.join(getClientDir(), 'configs');
 const SETTINGS_PATH = path.join(getClientDir(), 'gui-settings.json');
 const MINUTE = 60;
@@ -921,6 +921,32 @@ export class IPCHandlers {
 
   public async client_activeConfig(self: IPCHandlers): Promise<string> {
     return self.client ? JSON.stringify(self.client.config) : '';
+  }
+
+  public async client_downloadSliverServer(self: IPCHandlers): Promise<string> {
+    const downloadId = uuid.v4().toString();
+    return new Promise(resolve => {
+      resolve(downloadId);
+      downloadSliverAsset(DEFAULT_SERVER_URL, 'server', 'linux', '', (progress) => {
+        self._windowManager.downloadEvents.next({
+          event: downloadId,
+          progress: progress,
+        });
+      });
+    });
+  }
+
+  public async client_downloadSliverClient(self: IPCHandlers): Promise<string> {
+    const downloadId = uuid.v4().toString();
+    return new Promise(resolve => {
+      resolve(downloadId);
+      downloadSliverAsset(DEFAULT_SERVER_URL, 'client', 'linux', '', (progress) => {
+        self._windowManager.downloadEvents.next({
+          event: downloadId,
+          progress: progress,
+        });
+      });
+    });
   }
 
   @jsonSchema({

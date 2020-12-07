@@ -194,6 +194,20 @@ export class ClientService {
     return resp ? JSON.parse(resp) : null;
   }
 
+  async downloadSliverServer(goos: string): Promise<string> {
+    const downloadId = await this._ipc.request('client_downloadSliverServer', JSON.stringify({
+      goos: goos,
+    }));
+    return downloadId;
+  }
+
+  async downloadSliverClient(goos: string): Promise<string> {
+    const downloadId = await this._ipc.request('client_downloadSliverClient', JSON.stringify({
+      goos: goos,
+    }));
+    return downloadId;
+  }
+
   exit() {
     this._ipc.request('client_exit', '');
   }

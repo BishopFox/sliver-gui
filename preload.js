@@ -74,6 +74,15 @@ ipcRenderer.on('menu', (_, data) => {
   }), window.location.origin);
 });
 
+// Download events
+ipcRenderer.on('download', (_, data) => {
+  window.postMessage(JSON.stringify({
+    type: 'download',
+    data: data,
+  }), window.location.origin);
+});
+
+
 /** Worker Listener */
 const WORKER_PROTOCOL = 'worker:';
 const workerPrefixes = ['rpc_', 'local_'];

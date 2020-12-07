@@ -31,11 +31,14 @@ import { EventsService } from './providers/events.service';
 
 import { BaseMaterialModule } from './base-material';
 
-import { AppComponent, AboutDialogComponent } from './app.component';
+import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { SelectServerComponent } from './components/select-server/select-server.component';
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
 import { SettingsComponent, RestartDialogComponent } from './components/settings/settings.component';
+import {
+  AboutDialogComponent, DownloadSliverServerDialogComponent, DownloadSliverClientDialogComponent
+} from './components/dialogs/dialogs.component'; 
 
 import { GenerateModule } from './modules/generate/generate.module';
 import { GenerateRoutes } from './modules/generate/generate.routes';
@@ -61,6 +64,8 @@ import { ScriptingRoutes } from './modules/scripting/scripting.routes';
     TopMenuComponent,
     SettingsComponent,
     RestartDialogComponent,
+    DownloadSliverServerDialogComponent,
+    DownloadSliverClientDialogComponent
     
   ],
   imports: [

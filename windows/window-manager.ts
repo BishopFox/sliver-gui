@@ -40,9 +40,10 @@ export interface Progress {
   percent: number;
   transferred: number;
   total: number;
+  delta: number;
 }
 
-export interface UpdateEvent {
+export interface DownloadEvent {
   event: string;
   progress?: Progress;
   error?: string;
@@ -55,8 +56,8 @@ export class WindowManager {
 
   private mainWindow: BrowserWindow;
   private sessionWindows = new Map<string, BrowserWindow>();
-  private menuEvents = new Subject<MenuEvent>();
-  private updateEvents = new Subject<UpdateEvent>();
+  menuEvents = new Subject<MenuEvent>();
+  downloadEvents = new Subject<DownloadEvent>();
 
   constructor() {
     this.workerManager = new WorkerManager();
@@ -73,28 +74,28 @@ export class WindowManager {
 
   initUpdate() {
     autoUpdater.on('checking-for-update', () => {
-      this.updateEvents.next({
+      this.downloadEvents.next({
         event: 'checking-for-update',
       });
     });
 
     autoUpdater.on('update-available', (info) => {
       logger.debug(info);
-      this.updateEvents.next({
+      this.downloadEvents.next({
         event: 'update-available',
       });
     });
 
     autoUpdater.on('update-not-available', (info) => {
       logger.debug(info);
-      this.updateEvents.next({
+      this.downloadEvents.next({
         event: 'update-not-available',
       });
     });
 
     autoUpdater.on('download-progress', (progress) => {
       logger.debug(progress);
-      this.updateEvents.next({
+      this.downloadEvents.next({
         event: 'download-progress',
         progress: progress,
       })
@@ -107,7 +108,7 @@ export class WindowManager {
 
     autoUpdater.on('error', (err) => {
       logger.warn(err);
-      this.updateEvents.next({
+      this.downloadEvents.next({
         event: 'error',
         error: err.toString(),
       });
@@ -140,25 +141,19 @@ export class WindowManager {
   }
 
   createMainWindow() {
-
     const gutterSize = 100;
     this.mainWindow = this.window(gutterSize, path.join(__dirname, '..', 'preload.js'))
     this.menuEvents.subscribe(event => {
       this.mainWindow.webContents.send('menu', JSON.stringify(event));
     });
-
+    this.downloadEvents.subscribe(event => {
+      this.mainWindow.webContents.send('download', JSON.stringify(event));
+    });
     this.mainWindow.once('ready-to-show', () => {
       this.mainWindow.show();
     });
-
     this.mainWindow.loadURL(`${AppProtocol.scheme}://sliver/index.html`);
-    // this.mainWindow.webContents.openDevTools();
-
-    // Emitted when the window is closed.
     this.mainWindow.on('closed', () => {
-      // Dereference the window object, usually you would store window
-      // in an array if your app supports multi windows, this is the time
-      // when you should delete the corresponding element.
       this.mainWindow = null;
     });
 

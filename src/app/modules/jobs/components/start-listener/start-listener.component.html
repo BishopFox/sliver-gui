@@ -44,7 +44,7 @@
       <mat-step [stepControl] [completed]="false">
 
         <form *ngIf="protocol === 'mtls'" [formGroup]="mtlsOptionsForm">
-          <ng-template matStepLabel i18n>Mutual TLS</ng-template>
+          <ng-template matStepLabel>Mutual TLS</ng-template>
           <p>
             <mat-form-field>
               <input matInput type="number" [formControl]="mtlsOptionsForm.controls['lport']" placeholder="Listen Port">
@@ -56,7 +56,7 @@
         </form>
 
         <form *ngIf="protocol === 'http'" [formGroup]="httpOptionsForm">
-          <ng-template matStepLabel i18n>HTTP</ng-template>
+          <ng-template matStepLabel>HTTP</ng-template>
           <p>
             <mat-form-field>
               <input matInput [formControl]="httpOptionsForm.controls['domains']" placeholder="Domains">

@@ -1,0 +1,29 @@
+<h2 mat-dialog-title align="center">
+  <i class="fa fa-fw fa-download"></i>&nbsp;
+  <ng-container i18n>Download Server</ng-container>
+</h2>
+<div mat-dialog-content align="center">
+  <div>
+    <mat-form-field>
+      <mat-select [(ngModel)]="goos" i18n-placeholder placeholder="Operating System">
+        <mat-option value="windows">
+          Windows
+        </mat-option>
+        <mat-option value="macos">
+          MacOS
+        </mat-option>
+        <mat-option value="linux">
+          Linux
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" [disabled]="!goos" (click)="complete()">
+    &nbsp;&nbsp;<ng-container i18n>Download</ng-container>&nbsp;&nbsp;
+  </button>
+  <button mat-button (click)="onNoClick()">
+    &nbsp;&nbsp;<ng-container i18n>Cancel</ng-container>&nbsp;&nbsp;
+  </button>
+</div>

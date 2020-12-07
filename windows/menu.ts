@@ -25,7 +25,7 @@ export interface MenuEvent {
 export async function initMenu(menuEvents: Subject<MenuEvent>, updateCallback: CallableFunction) {
   const menu = Menu.buildFromTemplate([
     {
-      label: 'Menu',
+      label: 'Sliver',
       submenu: [
         {
           label: 'About Sliver',
@@ -35,13 +35,15 @@ export async function initMenu(menuEvents: Subject<MenuEvent>, updateCallback: C
         },
         {
           label: 'Check For Updates...',
-          click: () => { updateCallback(); },
+          click: () => {
+            updateCallback();
+          },
         },
         { type: 'separator' },
         {
           label: 'Exit',
           click: () => {
-            app.quit()
+            app.quit();
           }
         }
       ]
@@ -93,8 +95,20 @@ export async function initMenu(menuEvents: Subject<MenuEvent>, updateCallback: C
       submenu: [
         {
           label: 'Sliver Wiki',
-          click: async () => {
-            await shell.openExternal('https://github.com/BishopFox/sliver/wiki')
+          click: () => {
+            shell.openExternal('https://github.com/BishopFox/sliver/wiki');
+          }
+        },
+        {
+          label: 'Download Sliver Server',
+          click: () => {
+            menuEvents.next({ button: 'sliver-download-server' });
+          }
+        },
+        {
+          label: 'Download Console Client',
+          click: () => {
+            menuEvents.next({ button: 'sliver-download-client' });
           }
         }
       ]
@@ -102,3 +116,4 @@ export async function initMenu(menuEvents: Subject<MenuEvent>, updateCallback: C
   ])
   Menu.setApplicationMenu(menu);
 }
+
