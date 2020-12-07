@@ -3,7 +3,7 @@
   <ng-container i18n>Download Console Client</ng-container>
 </h2>
 <div mat-dialog-content align="center">
-  <div>
+  <p>
     <mat-form-field>
       <mat-select [(ngModel)]="goos" i18n-placeholder placeholder="Operating System">
         <mat-option value="windows">
@@ -17,7 +17,12 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
+  </p>
+  <p>
+    <mat-slide-toggle  [(ngModel)]="saveToDownloads" color="accent">
+      <ng-container i18n>Save to Downloads</ng-container>
+    </mat-slide-toggle>
+  </p>
 </div>
 <div mat-dialog-actions align="center">
   <button mat-raised-button color="primary" [disabled]="!goos" (click)="complete()">

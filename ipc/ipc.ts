@@ -36,6 +36,7 @@ import { isConnected } from './is-connected';
 import { getLocalesJSON, getClientDir, getCurrentLocale, setLocaleSync } from '../locale';
 import { WindowManager, Progress } from '../windows/window-manager';
 import { WorkerManager } from '../workers/worker-manager';
+import { rejects } from 'assert';
 
 
 const logger = log4js.getLogger(__filename);
@@ -923,12 +924,37 @@ export class IPCHandlers {
     return self.client ? JSON.stringify(self.client.config) : '';
   }
 
-  public async client_downloadSliverServer(self: IPCHandlers): Promise<string> {
+  @jsonSchema({
+    'type': 'object',
+    'properties': {
+      'goos': { 'type': 'string', 'minLength': 1 },
+      'saveToDownloads': { 'type': 'boolean' }
+    },
+    'required': ['goos', 'saveToDownloads'],
+    'additionalProperties': false,
+  })
+  public async client_downloadSliverServer(self: IPCHandlers, req: any): Promise<string> {
+    if (!['linux', 'macos', 'windows'].some(goos => goos === req.goos)) {
+      return Promise.reject('Invalid operating system');
+    }
+    let saveTo = path.join(homedir(), 'Downloads');
+    if ((!req.saveToDownloads) || (!fs.existsSync(saveTo))) {
+      const openDialog = await dialog.showOpenDialog({
+        title: "Server Download",
+        message: "Save Sliver download to ...",
+        defaultPath: path.join(homedir()),
+        properties: ["openDirectory", "showHiddenFiles", "dontAddToRecent"],
+      });
+      if (openDialog.canceled || openDialog.filePaths.length < 1) {
+        return Promise.reject('User canceled');
+      }
+      saveTo = openDialog.filePaths[0];
+    }
+
     const downloadId = uuid.v4().toString();
     return new Promise(resolve => {
       resolve(downloadId);
-      const saveTo = path.join(homedir(), 'Downloads');
-      downloadSliverAsset(DEFAULT_SERVER_URL, 'server', 'linux', saveTo, (progress: Progress) => {
+      downloadSliverAsset(DEFAULT_SERVER_URL, 'server', req.goos, saveTo, (progress: Progress) => {
         self._windowManager.downloadEvents.next({
           event: downloadId,
           progress: progress,
@@ -937,12 +963,38 @@ export class IPCHandlers {
     });
   }
 
-  public async client_downloadSliverClient(self: IPCHandlers): Promise<string> {
+  @jsonSchema({
+    'type': 'object',
+    'properties': {
+      'goos': { 'type': 'string', 'minLength': 1 },
+      'saveToDownloads': { 'type': 'boolean' }
+    },
+    'required': ['goos', 'saveToDownloads'],
+    'additionalProperties': false,
+  })
+  public async client_downloadSliverClient(self: IPCHandlers, req: any): Promise<string> {
+    if (!['linux', 'macos', 'windows'].some(goos => goos === req.goos)) {
+      return Promise.reject('Invalid operating system');
+    }
+    let saveTo = path.join(homedir(), 'Downloads');
+    if (!req.saveToDownloads || !fs.existsSync(saveTo)) {
+      const openDialog = await dialog.showOpenDialog({
+        title: "Server Download",
+        message: "Save Sliver download to ...",
+        defaultPath: path.join(homedir()),
+        properties: ["openDirectory", "showHiddenFiles", "dontAddToRecent"],
+      });
+      if (openDialog.canceled || openDialog.filePaths.length < 1) {
+        return Promise.reject('User canceled');
+      }
+      saveTo = openDialog.filePaths[0];
+    }
+
     const downloadId = uuid.v4().toString();
     return new Promise(resolve => {
       resolve(downloadId);
       const saveTo = path.join(homedir(), 'Downloads');
-      downloadSliverAsset(DEFAULT_SERVER_URL, 'client', 'linux', saveTo, (progress: Progress) => {
+      downloadSliverAsset(DEFAULT_SERVER_URL, 'client', req.goos, saveTo, (progress: Progress) => {
         self._windowManager.downloadEvents.next({
           event: downloadId,
           progress: progress,

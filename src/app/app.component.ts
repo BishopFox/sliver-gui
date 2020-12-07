@@ -259,11 +259,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   sliverServerDownload() {
     const dialogRef = this.dialog.open(DownloadSliverServerDialogComponent);
-    dialogRef.afterClosed().subscribe(async (goos) => {
-      if (!goos) {
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (!result?.goos) {
         return;
       }
-      const downloadId = await this._clientService.downloadSliverServer(goos);
+      const downloadId = await this._clientService.downloadSliverServer(result.goos, result.saveToDownloads);
       const observe = this._eventsService.download$.pipe(
         filter((download: DownloadEvent) => download.event === downloadId)
       );
@@ -285,11 +285,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   sliverClientDownload() {
     const dialogRef = this.dialog.open(DownloadSliverClientDialogComponent);
-    dialogRef.afterClosed().subscribe(async (goos) => {
-      if (!goos) {
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (!result?.goos) {
         return;
       }
-      const downloadId = await this._clientService.downloadSliverClient(goos);
+      const downloadId = await this._clientService.downloadSliverClient(result.goos, result.saveToDownloads);
       const observe = this._eventsService.download$.pipe(
         filter((download: DownloadEvent) => download.event === downloadId)
       );

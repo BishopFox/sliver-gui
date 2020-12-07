@@ -46,6 +46,7 @@ export class AboutDialogComponent {
 export class DownloadSliverServerDialogComponent {
 
   goos: string;
+  saveToDownloads: boolean = true;
 
   constructor(public dialogRef: MatDialogRef<DownloadSliverServerDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -55,7 +56,7 @@ export class DownloadSliverServerDialogComponent {
   }
 
   complete() {
-    this.dialogRef.close(this.goos);
+    this.dialogRef.close({ goos: this.goos, saveToDownloads: this.saveToDownloads });
   }
 
 }
@@ -67,6 +68,7 @@ export class DownloadSliverServerDialogComponent {
 export class DownloadSliverClientDialogComponent {
 
   goos: string;
+  saveToDownloads: boolean = true;
 
   constructor(public dialogRef: MatDialogRef<DownloadSliverClientDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -76,7 +78,7 @@ export class DownloadSliverClientDialogComponent {
   }
 
   complete() {
-    this.dialogRef.close(this.goos);
+    this.dialogRef.close({ goos: this.goos, saveToDownloads: this.saveToDownloads });
   }
 
 }
