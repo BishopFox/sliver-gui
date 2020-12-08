@@ -79,7 +79,7 @@ export class StartListenerComponent implements OnInit, OnDestroy {
     });
     this.httpsOptionsForm = this._fb.group({
       domain: ['', Validators.compose([
-        this.validateDomain
+        this.validateDomain.bind(this)
       ])],
       acme: [false],
       cert: [''],
@@ -160,8 +160,10 @@ export class StartListenerComponent implements OnInit, OnDestroy {
             return this.invalidOptionDialog();
           }
           form = this.dnsOptionsForm.value;
-          job = await this._jobsService.startDNSListener(form.domains, form.canarydomains, "", form.lport);
+          const domains: string[] = form.domains.split(",");
+          job = await this._jobsService.startDNSListener(domains, form.canarydomains, "", form.lport);
           break;
+
       }
       this._router.navigate(['jobs']);
     } catch (err) {
