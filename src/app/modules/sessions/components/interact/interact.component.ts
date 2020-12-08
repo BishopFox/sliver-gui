@@ -15,10 +15,11 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs/operators';
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 import { FadeInOut } from '@app/shared/animations';
 import { SliverService } from '@app/providers/sliver.service';
-import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 import { ClientService } from '@app/providers/client.service';
 
 
@@ -38,7 +39,7 @@ export class InteractComponent implements OnInit {
               private _clientService: ClientService) { }
 
   ngOnInit() {
-    this._route.params.subscribe((params) => {
+    this._route.params.pipe(take(1)).subscribe((params) => {
       this.sessionId = parseInt(params['session-id'], 10);
       this._sliverService.sessionById(this.sessionId).then((session) => {
         this.session = session;

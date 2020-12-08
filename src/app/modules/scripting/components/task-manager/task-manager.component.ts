@@ -16,11 +16,11 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-
-import { WorkersService } from '@app/providers/workers.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
+import { take } from 'rxjs/operators';
 
+import { WorkersService } from '@app/providers/workers.service';
 import { FadeInOut } from '@app/shared/animations';
 
 
@@ -98,7 +98,7 @@ export class TaskManagerComponent implements OnInit {
     const dialogRef = this.dialog.open(StopTaskDialogComponent, {
       data: task,
     });
-    dialogRef.afterClosed().subscribe(async (result) => {
+    dialogRef.afterClosed().pipe(take(1)).subscribe(async (result) => {
       if (result) {
         await this._workerService.stopWorker(task.id);
         this.fetchWorkers();

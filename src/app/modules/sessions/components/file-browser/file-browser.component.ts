@@ -19,13 +19,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { take } from 'rxjs/operators';
 
 import { FadeInOut } from '@app/shared/animations';
 import { SliverService } from '@app/providers/sliver.service';
 import { ClientService } from '@app/providers/client.service';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb';
-
 
 
 interface TableFileData {
@@ -66,7 +66,7 @@ export class FileBrowserComponent implements OnInit {
               private _sliverService: SliverService) { }
 
   ngOnInit() {
-    this._route.parent.params.subscribe((params) => {
+    this._route.parent.params.pipe(take(1)).subscribe((params) => {
       const sessionId: number = parseInt(params['session-id'], 10);
       this._sliverService.sessionById(sessionId).then((session) => {
         this.session = session;
@@ -100,7 +100,7 @@ export class FileBrowserComponent implements OnInit {
           size: row.size,
         }
       });
-      dialogRef.afterClosed().subscribe(async (result) => {
+      dialogRef.afterClosed().pipe(take(1)).subscribe(async (result) => {
         if (result) {
           this.download(result);
         }
@@ -163,7 +163,7 @@ export class FileBrowserComponent implements OnInit {
         isDir: target.isDir
       }
     });
-    dialogRef.afterClosed().subscribe(async (result) => {
+    dialogRef.afterClosed().pipe(take(1)).subscribe(async (result) => {
       if (result) {
         console.log(`[rm] ${result.name} (isDir: ${result.isDir})`);
       }
@@ -172,7 +172,7 @@ export class FileBrowserComponent implements OnInit {
 
   mkdir() {
     const dialogRef = this.dialog.open(MkdirDialogComponent);
-    dialogRef.afterClosed().subscribe(async (result) => {
+    dialogRef.afterClosed().pipe(take(1)).subscribe(async (result) => {
       if (result) {
         console.log(`[mkdir] ${result.name}`);
         this._sliverService.mkdir(this.session.getId(), result.name);

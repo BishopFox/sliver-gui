@@ -17,6 +17,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { take } from 'rxjs/operators';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 import { FadeInOut } from '@app/shared/animations';
@@ -40,7 +41,7 @@ export class WebsiteDetailsComponent implements OnInit {
               private _jobsService: JobsService) { }
 
   ngOnInit(): void {
-    this._route.params.subscribe((params) => {
+    this._route.params.pipe(take(1)).subscribe((params) => {
       this.name = params['name'];
       this._jobsService.websiteByName(this.name).then(website => {
         this.website = website;
@@ -58,7 +59,7 @@ export class WebsiteDetailsComponent implements OnInit {
     const dialogRef = this.dialog.open(AddFileDialogComponent, {
       width: '40%'
     });
-    dialogRef.afterClosed().subscribe(async (result) => {
+    dialogRef.afterClosed().pipe(take(1)).subscribe(async (result) => {
       console.log(result);
       if (result) {
         this.website = await this._jobsService.websiteAddContentFromFile(this.name, result.path, result.contentType);
@@ -70,7 +71,7 @@ export class WebsiteDetailsComponent implements OnInit {
     const dialogRef = this.dialog.open(AddDirectoryDialogComponent, {
       width: '40%'
     });
-    dialogRef.afterClosed().subscribe(async (result) => {
+    dialogRef.afterClosed().pipe(take(1)).subscribe(async (result) => {
       console.log(result);
       if (result) {
         this.website = await this._jobsService.websiteAddContentFromDirectory(this.name, result.path);
@@ -80,7 +81,7 @@ export class WebsiteDetailsComponent implements OnInit {
 
   deleteWebsite() {
     const dialogRef = this.dialog.open(DeleteWebsiteDialogComponent);
-    dialogRef.afterClosed().subscribe(async (result) => {
+    dialogRef.afterClosed().pipe(take(1)).subscribe(async (result) => {
       console.log(result);
       if (result) {
         await this._jobsService.removeWebsite(this.name);

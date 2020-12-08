@@ -18,6 +18,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { MatTableDataSource } from '@angular/material/table';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { take } from 'rxjs/operators';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 import { FadeInOut } from '@app/shared/animations';
@@ -105,7 +106,7 @@ export class C2TableComponent implements OnInit {
 
   addMtls() {
     const dialogRef = this.dialog.open(AddMTLSDialogComponent);
-    dialogRef.afterClosed().subscribe(async (result: clientpb.ImplantC2|null) => {
+    dialogRef.afterClosed().pipe(take(1)).subscribe(async (result: clientpb.ImplantC2|null) => {
       if (result) {
         this.c2s.push(result);
         this.refreshTable();
@@ -115,7 +116,7 @@ export class C2TableComponent implements OnInit {
 
   addHttp() {
     const dialogRef = this.dialog.open(AddHTTPDialogComponent);
-    dialogRef.afterClosed().subscribe(async (result) => {
+    dialogRef.afterClosed().pipe(take(1)).subscribe(async (result) => {
       if (result) {
         this.c2s.push(result);
         this.refreshTable();
@@ -125,7 +126,7 @@ export class C2TableComponent implements OnInit {
 
   addDns() {
     const dialogRef = this.dialog.open(AddDNSDialogComponent);
-    dialogRef.afterClosed().subscribe(async (result) => {
+    dialogRef.afterClosed().pipe(take(1)).subscribe(async (result) => {
       if (result) {
         this.c2s.push(result);
         this.refreshTable();

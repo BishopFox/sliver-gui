@@ -21,6 +21,7 @@ import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { GeneratingDialogComponent, BuildErrorDialogComponent } from '../generate/generate.component';
 import { FadeInOut } from '@app/shared/animations';
@@ -118,7 +119,7 @@ export class ProfilesTableComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(ProfileGenerateDialogComponent, {
       data: profile,
     });
-    dialogRef.afterClosed().subscribe(async (profile: clientpb.ImplantProfile) => {
+    dialogRef.afterClosed().pipe(take(1)).subscribe(async (profile: clientpb.ImplantProfile) => {
       if (profile) {
         console.log(`Generating from profile: ${profile.getName()}`);
         this.generate(profile.getConfig());
@@ -149,7 +150,7 @@ export class ProfilesTableComponent implements OnInit, OnDestroy {
 
   generatingDialog() {
     this.generatingDialogRef = this.dialog.open(GeneratingDialogComponent);
-    this.generatingDialogRef.afterClosed().subscribe(() => {
+    this.generatingDialogRef.afterClosed().pipe(take(1)).subscribe(() => {
       this._router.navigate(['generate', 'builds']);
     });
   }

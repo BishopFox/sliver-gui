@@ -16,10 +16,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { take } from 'rxjs/operators';
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+
 import { ClientService } from '@app/providers/client.service';
 import { SliverService } from '@app/providers/sliver.service';
 
-import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 @Component({
   selector: 'app-build-details',
@@ -37,7 +39,7 @@ export class BuildDetailsComponent implements OnInit {
               private _sliverService: SliverService) { }
 
   ngOnInit(): void {
-    this._route.params.subscribe(async (params) => {
+    this._route.params.pipe(take(1)).subscribe(async (params) => {
       const [name, config] = await this._sliverService.implantBuildByName(params['name']);
       this.name = name;
       this.implantConfig = config;

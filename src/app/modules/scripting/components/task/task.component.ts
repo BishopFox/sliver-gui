@@ -15,9 +15,11 @@
 
 import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { WorkersService } from '@app/providers/workers.service';
 import { Terminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
+import { take } from 'rxjs/operators';
+
+import { WorkersService } from '@app/providers/workers.service';
 
 
 @Component({
@@ -40,7 +42,7 @@ export class TaskComponent implements OnInit, AfterViewChecked {
               private _workersService: WorkersService) { }
 
   ngOnInit(): void {
-    this._route.params.subscribe((params) => {
+    this._route.params.pipe(take(1)).subscribe((params) => {
       this.execId = params['exec-id'];
       this.fitAddon = new FitAddon();
       this.name = this._workersService.getWorkerName(this.execId);

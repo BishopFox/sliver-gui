@@ -17,6 +17,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { take } from 'rxjs/operators';
 import { JobsService } from '@app/providers/jobs.service';
 
 
@@ -41,7 +42,7 @@ export class MainComponent implements OnInit {
 
   addWebsite() {
     const dialogRef = this.dialog.open(AddWebsiteDialogComponent);
-    dialogRef.afterClosed().subscribe(async (result) => {
+    dialogRef.afterClosed().pipe(take(1)).subscribe(async (result) => {
       if (result) {
         const website = await this._jobsService.addWebsite(result.name);
         this._router.navigate(['jobs', 'websites', website.getName()]);

@@ -16,7 +16,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { take } from 'rxjs/operators';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+
 
 import { FadeInOut } from '@app/shared/animations';
 import { JobsService } from '@app/providers/jobs.service';
@@ -38,7 +40,7 @@ export class JobComponent implements OnInit {
               private _jobsService: JobsService) { }
 
   ngOnInit() {
-    this._route.params.subscribe((params) => {
+    this._route.params.pipe(take(1)).subscribe((params) => {
       const jobId: number = parseInt(params['job-id'], 10);
       console.log(`Job ${jobId}`);
       this._jobsService.jobById(jobId).then((job) => {
@@ -56,7 +58,7 @@ export class JobComponent implements OnInit {
         job: this.job
       },
     });
-    dialogRef.afterClosed().subscribe(async (job) => {
+    dialogRef.afterClosed().pipe(take(1)).subscribe(async (job) => {
       if (job) {
         const killed = await this._jobsService.killJob(job.getId());
         if (killed.getSuccess()) {

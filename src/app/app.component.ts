@@ -205,7 +205,7 @@ export class AppComponent implements OnInit, OnDestroy {
       duration: seconds * 1000,
     });
     if (callback !== null) {
-      snackBarRef.onAction().subscribe(() => {
+      snackBarRef.onAction().pipe(take(1)).subscribe(() => {
         callback();
       });
     }
@@ -227,7 +227,7 @@ export class AppComponent implements OnInit, OnDestroy {
     const snackBarRef = this._snackBar.open(`Session #${session.getId()} opened`, 'Interact', {
       duration: 5000,
     });
-    snackBarRef.onAction().subscribe(() => {
+    snackBarRef.onAction().pipe(take(1)).subscribe(() => {
       this._router.navigate(['sessions', session.getId()]);
     });
 
@@ -259,7 +259,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   sliverServerDownload() {
     const dialogRef = this.dialog.open(DownloadSliverServerDialogComponent);
-    dialogRef.afterClosed().subscribe(async (result) => {
+    dialogRef.afterClosed().pipe(take(1)).subscribe(async (result) => {
       if (!result?.goos) {
         return;
       }
@@ -273,6 +273,7 @@ export class AppComponent implements OnInit, OnDestroy {
           download$: observe,
         }
       });
+      // Wait for a 100% event, then wait 1 sec. and dismiss the snackbar
       observe.pipe(
         filter((download: DownloadEvent) => download.progress?.percent >= 100.0)
       ).pipe(take(1)).subscribe(() => {
@@ -285,7 +286,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   sliverClientDownload() {
     const dialogRef = this.dialog.open(DownloadSliverClientDialogComponent);
-    dialogRef.afterClosed().subscribe(async (result) => {
+    dialogRef.afterClosed().pipe(take(1)).subscribe(async (result) => {
       if (!result?.goos) {
         return;
       }
@@ -299,6 +300,7 @@ export class AppComponent implements OnInit, OnDestroy {
           download$: observe,
         }
       });
+      // Wait for a 100% event, then wait 1 sec. and dismiss the snackbar
       observe.pipe(
         filter((download: DownloadEvent) => download.progress?.percent >= 100.0)
       ).pipe(take(1)).subscribe(() => {

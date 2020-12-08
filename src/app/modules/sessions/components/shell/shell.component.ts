@@ -17,11 +17,12 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+import * as xterm from 'xterm';
 
-import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 import { SliverService } from '@app/providers/sliver.service';
 import { TunnelService, Tunnel } from '@app/providers/tunnel.service';
-import * as xterm from 'xterm';
 
 
 @Component({
@@ -46,7 +47,7 @@ export class ShellComponent implements OnInit, AfterViewInit, OnDestroy {
     private _tunnelService: TunnelService) { }
 
   ngOnInit() {
-    this._route.parent.params.subscribe((params) => {
+    this._route.parent.params.pipe(take(1)).subscribe((params) => {
       const sessionId: number = parseInt(params['session-id'], 10);
       this._sliverService.sessionById(sessionId).then((session) => {
         this.session = session;
@@ -64,7 +65,7 @@ export class ShellComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    /* Termainl setup */
+    /* Terminal setup */
     this.terminal = new xterm.Terminal({
       cursorBlink: true,
       scrollback: this.SCROLLBACK,

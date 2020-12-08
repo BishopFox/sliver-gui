@@ -19,6 +19,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
+import { take } from 'rxjs/operators';
 
 import { WorkersService } from '@app/providers/workers.service'
 
@@ -94,7 +95,7 @@ export class BrowserComponent implements OnInit {
     const dialogRef = this.dialog.open(DeleteScriptDialogComponent, {
       data: script,
     });
-    dialogRef.afterClosed().subscribe(async (result) => {
+    dialogRef.afterClosed().pipe(take(1)).subscribe(async (result) => {
       if (result) {
         await this._workerService.removeScript(script.id);
         this.fetchScripts();

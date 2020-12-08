@@ -15,10 +15,11 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-import { SliverService } from '@app/providers/sliver.service';
+import { take } from 'rxjs/operators';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
 import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb'; // Protobuf
+
+import { SliverService } from '@app/providers/sliver.service';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class InfoComponent implements OnInit {
               private _sliverService: SliverService) { }
 
   ngOnInit() {
-    this._route.parent.params.subscribe((params) => {
+    this._route.parent.params.pipe(take(1)).subscribe((params) => {
       const sessionId: number = parseInt(params['session-id'], 10);
       this._sliverService.sessionById(sessionId).then((session) => {
         this.session = session;

@@ -17,7 +17,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MonacoEditorLoaderService, MonacoEditorComponent } from '@materia-ui/ngx-monaco-editor';
 
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { debounceTime, filter, take } from 'rxjs/operators';
 
 import { WorkersService, Script } from '@app/providers/workers.service';
@@ -36,13 +36,12 @@ export class EditorComponent implements OnInit {
   siaf: boolean = true;
   editor: MonacoEditorComponent;
   editorOptions: any;
-
+  lastSave: Date;
   scriptId: string;
   name: string;
   private _code = '';
-
   private debounceSave: Subject<void> = new Subject();
-  lastSave: Date;
+  private debounceSub: Subscription;
 
   constructor(private _route: ActivatedRoute,
               private _router: Router,
@@ -61,8 +60,7 @@ export class EditorComponent implements OnInit {
 
   ngOnInit() {
     this.initEditorOptions();
-
-    this._route.params.subscribe((params) => {
+    this._route.params.pipe(take(1)).subscribe((params) => {
       this.scriptId = params['script-id'];
       this._workersService.loadScript(this.scriptId).then((script: Script) => {
         this.name = script.name;
@@ -71,10 +69,13 @@ export class EditorComponent implements OnInit {
         console.log(`No session with id ${this.scriptId}`);
       });
     });
-
-    this.debounceSave.pipe(debounceTime(500)).subscribe(() => {
+    this.debounceSub = this.debounceSave.pipe(debounceTime(500)).subscribe(() => {
       this.save();
     });
+  }
+
+  ngOnDestroy(): void {
+    this.debounceSub?.unsubscribe();
   }
 
   get code() {

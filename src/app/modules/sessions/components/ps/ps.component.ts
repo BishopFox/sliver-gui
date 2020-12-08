@@ -17,9 +17,8 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
-
+import { take } from 'rxjs/operators';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
-import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb'; // Protobuf
 import * as commonpb from 'sliver-script/lib/pb/commonpb/common_pb'; // Protobuf
 
 import { FadeInOut } from '@app/shared/animations';
@@ -57,7 +56,7 @@ export class PsComponent implements OnInit, OnDestroy {
               private _sliverService: SliverService) { }
 
   ngOnInit() {
-    this._route.parent.params.subscribe((params) => {
+    this._route.parent.params.pipe(take(1)).subscribe((params) => {
       const sessionId: number = parseInt(params['session-id'], 10);
       this._sliverService.sessionById(sessionId).then((session) => {
         this.session = session;
