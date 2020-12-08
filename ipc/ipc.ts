@@ -767,6 +767,9 @@ export class IPCHandlers {
       "domain": { "type": "string" },
       "website": { "type": "string" },
       "port": { "type": "number" },
+      "acme": { "type": "boolean" },
+      "cert": { "type": "string" },
+      "key": { "type": "string" }
     },
     "required": ["host", "port"],
     "additionalProperties": false,

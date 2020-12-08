@@ -47,9 +47,12 @@
           <ng-template matStepLabel>Mutual TLS</ng-template>
           <p>
             <mat-form-field>
-              <input matInput type="number" [formControl]="mtlsOptionsForm.controls['lport']" placeholder="Listen Port">
-              <mat-error *ngIf="!mtlsOptionsForm.controls['lport'].valid" i18n>
+              <input matInput type="number" [formControl]="mtlsOptionsForm.controls['lport']" i18n-placeholder placeholder="Listen Port">
+              <mat-error *ngIf="mtlsOptionsForm.controls['lport'].hasError('outOfRangeError')" i18n>
                 Invalid port number
+              </mat-error>
+              <mat-error *ngIf="mtlsOptionsForm.controls['lport'].hasError('inUseError')" i18n>
+                Port in use by another job
               </mat-error>
             </mat-form-field>
           </p>
@@ -59,14 +62,30 @@
           <ng-template matStepLabel>HTTP</ng-template>
           <p>
             <mat-form-field>
-              <input matInput [formControl]="httpOptionsForm.controls['domains']" placeholder="Domains">
+              <input matInput [formControl]="httpOptionsForm.controls['domains']" i18n-placeholder placeholder="Domains">
             </mat-form-field>
           </p>
           <p>
             <mat-form-field>
-              <input matInput type="number" [formControl]="httpOptionsForm.controls['lport']" placeholder="Listen Port">
-              <mat-error *ngIf="!httpOptionsForm.controls['lport'].valid" i18n>
+              <mat-label i18n>Website</mat-label>
+              <mat-select [formControl]="httpOptionsForm.controls['website']">
+                <mat-option value="">
+                  None
+                </mat-option>
+                <mat-option *ngFor="let website of websites" [value]="website.getName()">
+                  {{ website.getName() }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field>
+              <input matInput type="number" [formControl]="httpOptionsForm.controls['lport']" i18n-placeholder placeholder="Listen Port">
+              <mat-error *ngIf="httpOptionsForm.controls['lport'].hasError('outOfRangeError')" i18n>
                 Invalid port number
+              </mat-error>
+              <mat-error *ngIf="httpOptionsForm.controls['lport'].hasError('inUseError')" i18n>
+                Port in use by another job
               </mat-error>
             </mat-form-field>
           </p>
@@ -76,7 +95,20 @@
           <ng-template matStepLabel>HTTPS</ng-template>
           <p>
             <mat-form-field>
-              <input matInput [formControl]="httpsOptionsForm.controls['domain']" placeholder="Domain">
+              <input matInput [formControl]="httpsOptionsForm.controls['domain']" i18n-placeholder placeholder="Domain">
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field>
+              <mat-label i18n>Website</mat-label>
+              <mat-select [formControl]="httpsOptionsForm.controls['website']">
+                <mat-option value="">
+                  None
+                </mat-option>
+                <mat-option *ngFor="let website of websites" [value]="website.getName()" i18n-placeholder placeholder="Website">
+                  {{ website.getName() }}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
           </p>
           <p>
@@ -94,12 +126,12 @@
           <ng-template matStepLabel>DNS</ng-template>
           <p>
             <mat-form-field>
-              <input matInput [formControl]="dnsOptionsForm.controls['domains']" placeholder="Domains">
+              <input matInput [formControl]="dnsOptionsForm.controls['domains']" i18n-placeholder placeholder="Domains">
             </mat-form-field>
           </p>
           <p>
             <mat-form-field>
-              <input matInput type="number" [formControl]="dnsOptionsForm.controls['lport']"
+              <input matInput type="number" [formControl]="dnsOptionsForm.controls['lport']" i18n-placeholder
                 placeholder="Listen Port">
                 <mat-error *ngIf="!dnsOptionsForm.controls['lport'].valid" i18n>
                   Invalid port number

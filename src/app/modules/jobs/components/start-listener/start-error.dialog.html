@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>
+  <i class="fas fa-fw fa-exclamation-triangle"></i>
+  <ng-container i18n>
+    Job Error
+  </ng-container>
+</h1>
+<div mat-dialog-content>
+  <br />
+  {{ errorMessage }}
+  <br />
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button color="warn" (click)="onNoClick()">
+    &nbsp;&nbsp;<ng-container i18n>Okay</ng-container>&nbsp;&nbsp;
+  </button>
+</div>

@@ -19,7 +19,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BaseMaterialModule } from '@app/base-material';
 import { JobsTableComponent } from './components/jobs-table/jobs-table.component';
-import { StartListenerComponent, InvalidOptionDialogComponent } from './components/start-listener/start-listener.component';
+import {
+  StartListenerComponent, StartErrorDialogComponent, InvalidOptionDialogComponent
+} from './components/start-listener/start-listener.component';
 import { JobComponent, StopJobDialogComponent } from './components/job/job.component';
 import { MainComponent, AddWebsiteDialogComponent } from './components/main/main.component';
 import { WebsitesTableComponent } from './components/websites-table/websites-table.component';
@@ -34,6 +36,7 @@ import { WebContentsTableComponent } from './components/webcontents-table/webcon
     JobsTableComponent,
     StopJobDialogComponent,
     StartListenerComponent,
+    StartErrorDialogComponent,
     InvalidOptionDialogComponent,
     JobComponent,
     MainComponent,
