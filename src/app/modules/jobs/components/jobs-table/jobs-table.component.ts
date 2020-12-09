@@ -46,7 +46,7 @@ function compare(a: number | string, b: number | string, isAsc: boolean) {
 })
 export class JobsTableComponent implements OnInit, OnDestroy {
 
-  subscription: Subscription;
+  jobsSub: Subscription;
   dataSrc: MatTableDataSource<TableJobData>;
   
   @Input() title = true;
@@ -60,11 +60,11 @@ export class JobsTableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.fetchJobs();
-    this.subscription = this._eventsService.jobs$.subscribe(this.fetchJobs);
+    this.jobsSub = this._eventsService.jobs$.subscribe(this.fetchJobs.bind(this));
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.jobsSub?.unsubscribe();
   }
 
   async fetchJobs() {

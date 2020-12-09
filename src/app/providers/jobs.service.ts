@@ -112,18 +112,18 @@ export class JobsService {
     return clientpb.Job.deserializeBinary(Base64.toUint8Array(job));
   }
 
-  async startHTTPSListener(domain: string, website: string,  acme: boolean, host: string, port: number): Promise<clientpb.Job> {
+  async startHTTPSListener(domain: string, website: string,  acme: boolean, cert: string, key: string, host: string, port: number): Promise<clientpb.Job> {
     if (port < 1 || 65535 <= port) {
       return Promise.reject('Invalid port number');
     }
-    let job = await this._ipc.request('rpc_startHTTPListener', JSON.stringify({
+    let job = await this._ipc.request('rpc_startHTTPSListener', JSON.stringify({
       host: host,
       port: port,
       domain: domain,
       website: website,
       acme: acme,
-      cert: null, // TODO: Implement support for cert/key files
-      key: null,
+      cert: cert,
+      key: key,
     }));
     return clientpb.Job.deserializeBinary(Base64.toUint8Array(job));
   }

@@ -67,6 +67,13 @@ export interface IPCMessage {
   data: string;
 }
 
+export enum TLSSettings {
+  SelfSigned = 'self-signed',
+  LetsEncrypt = 'lets-encrypt',
+  Custom = 'custom'
+}
+
+
 async function makeConfigDir(): Promise<NodeJS.ErrnoException | null> {
   return new Promise((resolve, reject) => {
     const dirOptions = {
@@ -767,9 +774,6 @@ export class IPCHandlers {
       "domain": { "type": "string" },
       "website": { "type": "string" },
       "port": { "type": "number" },
-      "acme": { "type": "boolean" },
-      "cert": { "type": "string" },
-      "key": { "type": "string" }
     },
     "required": ["host", "port"],
     "additionalProperties": false,
@@ -786,8 +790,8 @@ export class IPCHandlers {
       "host": { "type": "string" },
       "domain": { "type": "string" },
       "website": { "type": "string" },
-      "port": { "type": "number" },
       "acme": { "type": "boolean" },
+      "port": { "type": "number" },
       "cert": { "type": "string" },
       "key": { "type": "string" }
     },
@@ -795,7 +799,9 @@ export class IPCHandlers {
     "additionalProperties": false,
   })
   async rpc_startHTTPSListener(self: IPCHandlers, req: any): Promise<string> {
-    const job = await self.client.startHTTPSListener(req.domain, req.host, req.port, req.acme, req.website, req.cert, req.key);
+    const cert = req.cert ? Buffer.from(Base64.toUint8Array(req.cert)) : undefined;
+    const key = req.key ? Buffer.from(Base64.toUint8Array(req.key)) : undefined;
+    const job = await self.client.startHTTPSListener(req.domain, req.host, req.port, req.acme, req.website, cert, key);
     return Base64.fromUint8Array(job.serializeBinary());
   }
 

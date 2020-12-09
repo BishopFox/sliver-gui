@@ -23,7 +23,21 @@ import { FadeInOut } from '@app/shared/animations';
 import { JobsService } from '@app/providers/jobs.service';
 import { EventsService } from '@app/providers/events.service';
 import { Subscription } from 'rxjs';
+import { ClientService } from '@app/providers/client.service';
 
+
+export enum TLSSettings {
+  SelfSigned = 'self-signed',
+  LetsEncrypt = 'lets-encrypt',
+  Custom = 'custom'
+}
+
+enum Protocols {
+  mTLS = 'mtls',
+  HTTP = 'http',
+  HTTPS = 'https',
+  DNS = 'dns'
+}
 
 @Component({
   selector: 'jobs-start-listener',
@@ -32,6 +46,9 @@ import { Subscription } from 'rxjs';
   animations: [FadeInOut]
 })
 export class StartListenerComponent implements OnInit, OnDestroy {
+
+  readonly TLSSettings = TLSSettings;
+  readonly Protocols = Protocols;
 
   selectProtocolForm: FormGroup;
   mtlsOptionsForm: FormGroup;
@@ -49,17 +66,13 @@ export class StartListenerComponent implements OnInit, OnDestroy {
               private _router: Router,
               private _fb: FormBuilder,
               private _eventService: EventsService,
-              private _jobsService: JobsService) { }
+              private _jobsService: JobsService,
+              private _clientService: ClientService) { }
 
   ngOnInit() {
-    this.fetchWebsites();
-    this.websitesSub = this._eventService.websites$.subscribe(this.fetchWebsites.bind(this));
-    this.fetchJobs();
-    this.jobsSub = this._eventService.jobs$.subscribe(this.fetchJobs.bind(this));
-
     // Protocol selector
     this.selectProtocolForm = this._fb.group({
-      protocol: ['mtls', Validators.required]
+      protocol: [Protocols.mTLS, Validators.required]
     });
 
     // Protocol-specific forms
@@ -69,7 +82,7 @@ export class StartListenerComponent implements OnInit, OnDestroy {
       ])],
     });
     this.httpOptionsForm = this._fb.group({
-      domains: ['', Validators.compose([
+      domain: ['', Validators.compose([
         this.validateDomains,
       ])],
       lport: [80, Validators.compose([
@@ -81,9 +94,13 @@ export class StartListenerComponent implements OnInit, OnDestroy {
       domain: ['', Validators.compose([
         this.validateDomain.bind(this)
       ])],
-      acme: [false],
-      cert: [''],
-      key: [''],
+      tlsSetting: [TLSSettings.SelfSigned],
+      cert: ['', Validators.compose([
+        this.validateCertificateFile.bind(this),
+      ])],
+      key: ['', Validators.compose([
+        this.validateKeyFile.bind(this),
+      ])],
       lport: [443, Validators.compose([
         Validators.required, this.validatePort.bind(this),
       ])],
@@ -98,6 +115,11 @@ export class StartListenerComponent implements OnInit, OnDestroy {
         Validators.required, this.validatePort.bind(this),
       ])],
     });
+
+    this.fetchWebsites();
+    this.websitesSub = this._eventService.websites$.subscribe(this.fetchWebsites.bind(this));
+    this.fetchJobs();
+    this.jobsSub = this._eventService.jobs$.subscribe(this.fetchJobs.bind(this));
   }
 
   ngOnDestroy(): void {
@@ -131,7 +153,7 @@ export class StartListenerComponent implements OnInit, OnDestroy {
     try {
       switch (this.protocol) {
 
-        case 'mtls':
+        case Protocols.mTLS:
           if (!this.mtlsOptionsForm.valid) {
             return this.invalidOptionDialog();
           }
@@ -139,7 +161,7 @@ export class StartListenerComponent implements OnInit, OnDestroy {
           job = await this._jobsService.startMTLSListener("", form.lport);
           break;
   
-        case 'http':
+        case Protocols.HTTP:
           if (!this.httpOptionsForm.valid) {
             return this.invalidOptionDialog();
           }
@@ -147,15 +169,15 @@ export class StartListenerComponent implements OnInit, OnDestroy {
           job = await this._jobsService.startHTTPListener(form.domain, form.website, "", form.lport);
           break;
   
-        case 'https':
+        case Protocols.HTTPS:
           if (!this.httpsOptionsForm.valid) {
             return this.invalidOptionDialog();
           }
           form = this.httpsOptionsForm.value;
-          job = await this._jobsService.startHTTPSListener(form.domain, form.website, form.acme, "", form.lport);
+          job = await this._jobsService.startHTTPSListener(form.domain, form.website, form.acme, form.cert, form.key, "", form.lport);
           break;
   
-        case 'dns':
+        case Protocols.DNS:
           if (!this.dnsOptionsForm.valid) {
             return this.invalidOptionDialog();
           }
@@ -221,8 +243,38 @@ export class StartListenerComponent implements OnInit, OnDestroy {
     return null;
   }
 
+  validateCertificateFile(control: AbstractControl): {[key: string]: any} | null {
+    if (this.protocol !== Protocols.HTTPS) {
+      return null;
+    }
+    if (this.httpsOptionsForm.controls['tlsSetting'].value !== this.TLSSettings.Custom) {
+      return null;
+    }
+    return null;
+  }
+
+  validateKeyFile(control: AbstractControl): {[key: string]: any} | null {
+    if (this.protocol !== Protocols.HTTPS) {
+      return null;
+    }
+    if (this.httpsOptionsForm.controls['tlsSetting'].value !== this.TLSSettings.Custom) {
+      return null;
+    }
+    return null;
+  }
+
   invalidOptionDialog() {
     this.dialog.open(InvalidOptionDialogComponent);
+  }
+
+  async selectCertificateFile() {
+    const cert = await this._clientService.readFile('Certificate File', 'Please select your certificate file', false, false);
+    this.httpsOptionsForm.controls['cert'].setValue(cert);
+  }
+
+  async selectKeyFile() {
+    const key = await this._clientService.readFile('Key File', 'Please select your key file', false, false);
+    this.httpsOptionsForm.controls['key'].setValue(key);
   }
 
 }
