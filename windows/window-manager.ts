@@ -15,11 +15,14 @@
 
 import { ipcMain, BrowserWindow, IpcMainEvent, screen } from 'electron';
 import { Subject } from 'rxjs';
+import * as fs from 'fs';
 import * as uuid from 'uuid';
 import * as path from 'path';
 import * as log4js from 'log4js';
 import { autoUpdater } from 'electron-updater';
+import { SliverClientConfig } from 'sliver-script';
 
+import { CONFIG_DIR } from '../ipc/ipc';
 import { WorkerManager } from '../workers/worker-manager';
 import { initMenu, MenuEvent } from './menu';
 import { dispatchIPC, IPCHandlers, IPCMessage } from '../ipc/ipc';
@@ -49,15 +52,20 @@ export interface DownloadEvent {
   error?: string;
 }
 
+export interface ConfigEvent {
+  filename?: string;
+}
+
 export class WindowManager {
 
   public handlers: IPCHandlers;
   public workerManager: WorkerManager;
 
   private mainWindow: BrowserWindow;
-  private sessionWindows = new Map<string, BrowserWindow>();
+  private otherWindows = new Map<string, BrowserWindow>();
   menuEvents = new Subject<MenuEvent>();
   downloadEvents = new Subject<DownloadEvent>();
+  configEvents = new Subject<ConfigEvent>();
 
   constructor() {
     this.workerManager = new WorkerManager();
@@ -73,6 +81,11 @@ export class WindowManager {
   }
 
   initUpdate() {
+
+    fs.watch(CONFIG_DIR, { encoding: 'utf-8' }, (_, filename) => {
+      this.configEvents.next({ filename: filename });
+    });
+
     autoUpdater.on('checking-for-update', () => {
       this.downloadEvents.next({
         event: 'checking-for-update',
@@ -140,21 +153,28 @@ export class WindowManager {
     });
   }
 
-  createMainWindow() {
+  createMainWindow(): BrowserWindow {
     const gutterSize = 100;
     this.mainWindow = this.window(gutterSize, path.join(__dirname, '..', 'preload.js'))
-    this.menuEvents.subscribe(event => {
+    const menuSub = this.menuEvents.subscribe(event => {
       this.mainWindow.webContents.send('menu', JSON.stringify(event));
     });
-    this.downloadEvents.subscribe(event => {
+    const downloadSub = this.downloadEvents.subscribe(event => {
       this.mainWindow.webContents.send('download', JSON.stringify(event));
     });
+    const configSub = this.configEvents.subscribe(event => {
+      this.mainWindow.webContents.send('config', JSON.stringify(event));
+    });
+    
     this.mainWindow.once('ready-to-show', () => {
       this.mainWindow.show();
     });
     this.mainWindow.loadURL(`${AppProtocol.scheme}://sliver/index.html`);
     this.mainWindow.on('closed', () => {
       this.mainWindow = null;
+      menuSub.unsubscribe();
+      downloadSub.unsubscribe();
+      configSub.unsubscribe();
     });
 
     this.startIPCHandlers();
@@ -168,7 +188,7 @@ export class WindowManager {
     return this.mainWindow;
   }
 
-  createSessionWindow(sessionId: number) {
+  createSessionWindow(sessionId: number): BrowserWindow {
     const gutterSize = 250;
     let sessionWindow = this.window(gutterSize, path.join(__dirname, '..', 'preload.js'));
     sessionWindow.once('ready-to-show', () => {
@@ -178,10 +198,28 @@ export class WindowManager {
     sessionWindow.loadURL(`${AppProtocol.scheme}://${windowId}/index.html#/sessions-standalone/${sessionId}/file-browser`);
     sessionWindow.on('closed', () => {
       sessionWindow = null;
-      this.sessionWindows.delete(windowId);
+      this.otherWindows.delete(windowId);
     });
-    this.sessionWindows.set(windowId, sessionWindow);
+    this.otherWindows.set(windowId, sessionWindow);
     return sessionWindow;
+  }
+
+  createConfigManagerWindow(): BrowserWindow {
+    
+    const gutterSize = 250;
+
+    let configManagerWindow = this.window(gutterSize, path.join(__dirname, '..', 'preload.js'));
+    configManagerWindow.once('ready-to-show', () => {
+      configManagerWindow.show();
+    });
+    const windowId = uuid.v4();
+    configManagerWindow.loadURL(`${AppProtocol.scheme}://${windowId}/index.html#/config-manager-standalone`);
+    configManagerWindow.on('closed', () => {
+      configManagerWindow = null;
+      this.otherWindows.delete(windowId);
+    });
+    this.otherWindows.set(windowId, configManagerWindow);
+    return configManagerWindow;
   }
 
   private window(gutterSize: number, preload: string): Electron.BrowserWindow {

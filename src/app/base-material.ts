@@ -38,13 +38,15 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatListModule } from '@angular/material/list';
+
 
 const modules = [
   MatButtonModule, MatCheckboxModule, MatOptionModule, MatSelectModule, MatMenuModule, MatTabsModule,
   MatFormFieldModule, MatTooltipModule, MatToolbarModule, MatIconModule, MatProgressSpinnerModule,
   MatDialogModule, MatGridListModule, MatCardModule, MatTableModule, MatSortModule, MatInputModule,
   MatStepperModule, MatSnackBarModule, MatSlideToggleModule, MatSidenavModule, MatDividerModule,
-  MatProgressBarModule, MatDividerModule, MatButtonToggleModule
+  MatProgressBarModule, MatDividerModule, MatButtonToggleModule, MatListModule
 ];
 
 @NgModule({

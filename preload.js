@@ -23,7 +23,9 @@ const { ipcRenderer } = require('electron');
 
 /** App Listener */
 const APP_PROTOCOL = 'app:';
+const MAIN_ORIGIN = `${APP_PROTOCOL}//sliver`; // Origin for the main window
 const appPrefixes = ['client_', 'config_', 'rpc_', 'script_'];
+
 
 window.addEventListener('message', (event) => {
   const url = new URL(event.origin);
@@ -58,29 +60,39 @@ ipcRenderer.on('ipc', (_, msg, origin) => {
   }
 });
 
-// Push events
+// Push events - Go to all app windows
 ipcRenderer.on('push', (_, data) => {
   window.postMessage(JSON.stringify({
     type: 'push',
     data: data,
-  }), window.location.origin);
+  }), MAIN_ORIGIN);
 });
 
-// Menu events
-ipcRenderer.on('menu', (_, data) => {
+// Config events - Go to all app windows
+ipcRenderer.on('config', (_, data) => {
   window.postMessage(JSON.stringify({
-    type: 'menu',
+    type: 'config',
     data: data,
   }), window.location.origin);
 });
 
-// Download events
-ipcRenderer.on('download', (_, data) => {
-  window.postMessage(JSON.stringify({
-    type: 'download',
-    data: data,
-  }), window.location.origin);
-});
+if (window.location.origin === MAIN_ORIGIN) {
+  // Menu events
+  ipcRenderer.on('menu', (_, data) => {
+    window.postMessage(JSON.stringify({
+      type: 'menu',
+      data: data,
+    }), MAIN_ORIGIN);
+  });
+
+  // Download events
+  ipcRenderer.on('download', (_, data) => {
+    window.postMessage(JSON.stringify({
+      type: 'download',
+      data: data,
+    }), window.location.origin);
+  });
+}
 
 
 /** Worker Listener */
@@ -114,17 +126,14 @@ ipcRenderer.on('ipc', (_, msg, origin) => {
   }
 
   try {
-    
     let url = new URL(origin);
     if (url.protocol !== WORKER_PROTOCOL) {
       return;
     }
-
     if (msg.type === 'response') {
       const iframe = document.getElementById(url.hostname);
       iframe?.contentWindow?.postMessage(JSON.stringify(msg), origin);
     }
-
   } catch (err) {
     console.trace(err);
   }

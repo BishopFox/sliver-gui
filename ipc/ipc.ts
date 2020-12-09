@@ -36,13 +36,12 @@ import { isConnected } from './is-connected';
 import { getLocalesJSON, getClientDir, getCurrentLocale, setLocaleSync } from '../locale';
 import { WindowManager, Progress } from '../windows/window-manager';
 import { WorkerManager } from '../workers/worker-manager';
-import { rejects } from 'assert';
 
 
 const logger = log4js.getLogger(__filename);
-const DEFAULT_SERVER_URL = 'https://api.github.com/repos/BishopFox/sliver/releases/latest';
-const CONFIG_DIR = path.join(getClientDir(), 'configs');
-const SETTINGS_PATH = path.join(getClientDir(), 'gui-settings.json');
+export const DEFAULT_SERVER_URL = 'https://api.github.com/repos/BishopFox/sliver/releases/latest';
+export const CONFIG_DIR = path.join(getClientDir(), 'configs');
+export const SETTINGS_PATH = path.join(getClientDir(), 'gui-settings.json');
 const MINUTE = 60;
 
 export interface SaveFileReq {
@@ -65,6 +64,11 @@ export interface IPCMessage {
   type: string;
   method: string; // Identifies the target method and in the response if the method call was a success/error
   data: string;
+}
+
+export interface SliverConfig {
+  filename: string;
+  clientConfig: SliverClientConfig;
 }
 
 export enum TLSSettings {
@@ -836,12 +840,16 @@ export class IPCHandlers {
         if (!fs.existsSync(CONFIG_DIR) || items === undefined) {
           return resolve(JSON.stringify([]));
         }
-        const configs: SliverClientConfig[] = [];
+        const configs: SliverConfig[] = [];
         for (let index = 0; index < items.length; ++index) {
           const filePath = path.join(CONFIG_DIR, items[index]);
           if (fs.existsSync(filePath) && !fs.lstatSync(filePath).isDirectory()) {
             const fileData = fs.readFileSync(filePath);
-            configs.push(JSON.parse(fileData.toString('utf8')));
+            const clientConfig: SliverClientConfig = JSON.parse(fileData.toString('utf8'));
+            configs.push({
+              filename: path.basename(filePath),
+              clientConfig: clientConfig,
+            });
           }
         }
         resolve(JSON.stringify(configs));
@@ -871,7 +879,7 @@ export class IPCHandlers {
     "required": ["configs"],
     "additionalProperties": false,
   })
-  async config_save(self: IPCHandlers, req: any): Promise<string> {
+  async config_add(self: IPCHandlers, req: any): Promise<string> {
     const configs: SliverClientConfig[] = req.configs;
     if (!fs.existsSync(CONFIG_DIR)) {
       const err = await makeConfigDir();
@@ -879,7 +887,6 @@ export class IPCHandlers {
         return Promise.reject(`Failed to create config dir: ${err}`);
       }
     }
-
     const fileOptions = { mode: 0o600, encoding: 'utf-8' };
     await Promise.all(configs.map((config) => {
       return new Promise((resolve) => {
@@ -893,8 +900,54 @@ export class IPCHandlers {
         });
       });
     }));
-
     return self.config_list(self);
+  }
+
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "filename": { "type": "string", "minLength": 1 },
+      "clientConfig": {
+        "type": "object",
+        "properties": {
+          "operator": { "type": "string", "minLength": 1 },
+          "lhost": { "type": "string", "minLength": 1 },
+          "lport": { "type": "number" },
+          "ca_certificate": { "type": "string", "minLength": 1 },
+          "certificate": { "type": "string", "minLength": 1 },
+          "private_key": { "type": "string", "minLength": 1 },
+        },
+        "required": [
+          "operator", "lhost", "lport", "ca_certificate",
+          "certificate", "private_key"
+        ],
+        "additionalProperties": false,
+      }
+    },
+    "required": ["filename", "clientConfig"],
+    "additionalProperties": false,
+  })
+  async config_save(self: IPCHandlers, config: SliverConfig): Promise<void> {
+    if (!fs.existsSync(CONFIG_DIR)) {
+      const err = await makeConfigDir();
+      if (err) {
+        return Promise.reject(`Failed to create config dir: ${err}`);
+      }
+    }
+    const fileOptions = { mode: 0o600, encoding: 'utf-8' };
+    const fileName = path.basename(config.filename);
+    if (fileName.length < 1) {
+      return Promise.reject(`Empty filename`);
+    }
+    return new Promise((resolve) => {
+      const data = JSON.stringify(config.clientConfig);
+      fs.writeFile(path.join(CONFIG_DIR, fileName), data, fileOptions, (err) => {
+        if (err) {
+          logger.error(err);
+        }
+        resolve();
+      });
+    });
   }
 
   // ----------
@@ -1177,8 +1230,12 @@ export class IPCHandlers {
     "required": ["sessionId"],
     "additionalProperties": false,
   })
-  public client_sessionWindow(self: IPCHandlers, req: any) {
+  public async client_sessionWindow(self: IPCHandlers, req: any): Promise<void> {
     self._windowManager.createSessionWindow(req.sessionId);
+  }
+
+  public async client_configManagerWindow(self: IPCHandlers): Promise<void> {
+    self._windowManager.createConfigManagerWindow();
   }
 
   public client_exit(self: IPCHandlers) {

@@ -1,0 +1,66 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="start center" color="primary" style="-webkit-app-region: drag">
+  <span fxFlex></span>
+  <span>
+    <h3 i18n>Configuration Manager</h3>
+  </span>
+  <span fxFlex></span>
+</mat-toolbar>
+
+<mat-sidenav-container class="config-manager-container" autosize>
+
+  <mat-sidenav #sidenav class="config-manager-sidenav" mode="side" opened="true">
+    <mat-nav-list>
+
+      <mat-list-item (click)="addConfigFile()">
+        <i class="fa fas fa-fw fa-plus"></i>
+        &nbsp;
+        <ng-container i18n>Add Config</ng-container>
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item *ngFor="let config of configs" (click)="onSelectConfig(config)">
+        <span class="monospace">{{ config.clientConfig.lhost }}</span>
+        &nbsp;&nbsp;
+        <span>({{ config.clientConfig.operator }})</span>
+      </mat-list-item>
+      
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content [@fadeInOut] class="grid-wrapper">
+    
+    <div *ngIf="!selectedConfig" class="no-selection">
+      <h3 i18n>Please add or select a configuration.</h3>
+    </div>
+
+    <div *ngIf="selectedConfig" class="selection">
+      <form [formGroup]="selectedConfigForm" style="width: 100%">
+        <ng-template matStepLabel>Connection Options</ng-template>
+        <p>
+          <mat-form-field style="width: 100%">
+            <input matInput [formControl]="selectedConfigForm.controls['lhost']" i18n-placeholder placeholder="Host">
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field style="width: 100%">
+            <input matInput type="number" [formControl]="selectedConfigForm.controls['lport']" i18n-placeholder
+              placeholder="Listen Port">
+            <mat-error *ngIf="selectedConfigForm.controls['lport'].hasError('outOfRangeError')" i18n>
+              Invalid port number
+            </mat-error>
+          </mat-form-field>
+        </p>
+
+        <button mat-raised-button style="width: 100%" color="primary" [disabled]="!selectedConfigForm.valid" (click)="saveSelectedConfig()">
+          <i class="fa fas fa-fw fa-save"></i>
+          &nbsp;
+          <ng-container i18n>Save</ng-container>
+        </button>
+      </form>
+
+    </div>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

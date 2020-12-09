@@ -20,12 +20,14 @@ import { ActiveConfig } from './app-routing-guards.module';
 import { HomeComponent } from './components/home/home.component';
 import { SelectServerComponent } from './components/select-server/select-server.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { StandaloneConfigManagerComponent } from './components/standalone-config-manager/standalone-config-manager.component';
 
 
 const routes: Routes = [
 
     { path: '', component: SelectServerComponent },
     { path: 'settings', component: SettingsComponent },
+    { path: 'config-manager-standalone', component: StandaloneConfigManagerComponent },
 
     // Requires active config
     { path: 'home', component: HomeComponent, canActivate: [ActiveConfig] }

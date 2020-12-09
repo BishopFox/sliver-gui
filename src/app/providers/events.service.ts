@@ -47,6 +47,10 @@ export interface DownloadEvent {
   error?: string;
 }
 
+export interface ConfigEvent {
+  filename?: string;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +67,7 @@ export class EventsService {
   notifications$ = new Subject<Notification>();
   menu$ = new Subject<MenuEvent>();
   download$ = new Subject<DownloadEvent>();
+  config$ = new Subject<ConfigEvent>();
 
   constructor(private _ipc: IPCService) {
 
@@ -71,6 +76,9 @@ export class EventsService {
     });
     this._ipc.downloadEvent$.subscribe(event => {
       this.download$.next(event);
+    });
+    this._ipc.configEvent$.subscribe(event => {
+      this.config$.next(event);
     });
 
     this._ipc.ipcEvent$.subscribe(event => {

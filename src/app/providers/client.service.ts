@@ -60,6 +60,11 @@ export interface ReadFiles {
   files: Array<ReadFile>;
 }
 
+export interface SliverConfig {
+  filename: string;
+  clientConfig: sliver.SliverClientConfig;
+}
+
 export interface Settings {
 
   theme: string;
@@ -92,6 +97,10 @@ export class ClientService {
     await this._ipc.request('client_sessionWindow', JSON.stringify({
       sessionId: sessionId
     }));
+  }
+
+  async openConfigManagerWindow(): Promise<void> {
+    await this._ipc.request('client_configManagerWindow');
   }
 
   async locales(): Promise<Map<string, string>> {
@@ -151,15 +160,18 @@ export class ClientService {
     return this._ipc.request('client_platform');
   }
 
-  async listConfigs(): Promise<sliver.SliverClientConfig[]> {
+  async listConfigs(): Promise<SliverConfig[]> {
     const resp = await this._ipc.request('config_list');
-    console.log(`listConfigs: ${resp}`);
-    const configs: sliver.SliverClientConfig[] = JSON.parse(resp);
+    const configs: SliverConfig[] = JSON.parse(resp);
     return configs;
   }
 
-  async saveConfigs(configs: sliver.SliverClientConfig[]): Promise<string> {
-    return this._ipc.request('config_save', JSON.stringify({ configs: configs })); 
+  async addConfigs(configs: sliver.SliverClientConfig[]): Promise<string> {
+    return this._ipc.request('config_add', JSON.stringify({ configs: configs })); 
+  }
+
+  async saveConfig(config: SliverConfig): Promise<void> {
+    return this._ipc.request('config_save', JSON.stringify(config)); 
   }
 
   async saveFile(title: string, message: string, filename: string, data: Uint8Array): Promise<string> {

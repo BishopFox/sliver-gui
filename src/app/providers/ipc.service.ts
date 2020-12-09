@@ -21,7 +21,7 @@ import { Injectable } from '@angular/core';
 import { Base64 } from 'js-base64';
 import { Subject } from 'rxjs';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
-import { MenuEvent, DownloadEvent } from './events.service';
+import { MenuEvent, DownloadEvent, ConfigEvent } from './events.service';
 
 
 interface IPCMessage {
@@ -40,6 +40,7 @@ export class IPCService {
   ipcEvent$ = new Subject<clientpb.Event>();
   menuEvent$ = new Subject<MenuEvent>();
   downloadEvent$ = new Subject<DownloadEvent>();
+  configEvent$ = new Subject<ConfigEvent>();
 
   constructor() {
     window.addEventListener('message', (event) => {
@@ -58,6 +59,8 @@ export class IPCService {
           this.menuEvent$.next(JSON.parse(msg.data));
         } else if (msg.type === 'download') {
           this.downloadEvent$.next(JSON.parse(msg.data));
+        } else if (msg.type === 'config') {
+          this.configEvent$.next(JSON.parse(msg.data));
         }
       } catch (err) {
         console.error(`[IPCService] ${err}`);

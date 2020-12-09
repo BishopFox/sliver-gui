@@ -13,12 +13,14 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { ClientService, ReadFiles } from '@app/providers/client.service';
+import { ClientService } from '@app/providers/client.service';
+import { EventsService } from '@app/providers/events.service';
 import { FadeInOut } from '@app/shared/animations';
+import { Subscription } from 'rxjs';
 
 import * as sliver from 'sliver-script';
 
@@ -28,7 +30,7 @@ import * as sliver from 'sliver-script';
   styleUrls: ['./select-server.component.scss'],
   animations: [FadeInOut]
 })
-export class SelectServerComponent implements OnInit {
+export class SelectServerComponent implements OnInit, OnDestroy {
 
   configs: sliver.SliverClientConfig[];
   selectedConfig: sliver.SliverClientConfig;
@@ -36,9 +38,11 @@ export class SelectServerComponent implements OnInit {
   connectionError: string;
 
   selectConfigForm: FormGroup;
+  configSub: Subscription;
 
   constructor(private _router: Router,
               private _fb: FormBuilder,
+              private _eventsService: EventsService,
               private _clientService: ClientService) { }
 
   ngOnInit() {
@@ -48,6 +52,11 @@ export class SelectServerComponent implements OnInit {
       ])]
     });
     this.fetchConfigs();
+    this.configSub = this._eventsService.config$.subscribe(this.fetchConfigs.bind(this));
+  }
+
+  ngOnDestroy(): void {
+    this.configSub?.unsubscribe();
   }
 
   onSelectedConfig(config: sliver.SliverClientConfig) {
@@ -66,31 +75,11 @@ export class SelectServerComponent implements OnInit {
   }
 
   async fetchConfigs() {
-    this.configs = await this._clientService.listConfigs();
+    const sliverConfigs = await this._clientService.listConfigs();
+    this.configs = sliverConfigs.map(config => config.clientConfig);
   }
 
-  async addConfigFile() {
-    const title = 'Add Config(s)';
-    const msg = 'Select new configuration file(s)';
-    const rawConfigs: ReadFiles = await this._clientService.readFile(title, msg, false, true);
-    
-    if (!rawConfigs || !rawConfigs.files) {
-      return;  // User hit cancel
-    }
-
-    const configs: sliver.SliverClientConfig[] = [];
-    for (let index = 0; index < rawConfigs.files.length; ++index) {
-      try {
-        const config: sliver.SliverClientConfig = JSON.parse(atob(rawConfigs.files[index].data));
-        configs.push(config);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-    
-    await this._clientService.saveConfigs(configs);
-    this.fetchConfigs();
-
+  async manageConfigs() {
+    this._clientService.openConfigManagerWindow();
   }
-
 }

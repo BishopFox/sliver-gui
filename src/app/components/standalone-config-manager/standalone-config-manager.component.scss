@@ -1,0 +1,31 @@
+.config-manager-container {
+    height: 100%;
+}
+
+.config-manager-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.config-manager-sidenav {
+    user-select: none;
+    background: transparent;
+}
+
+.grid-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    justify-items: center;
+    margin-top: 40px;
+}
+
+.no-selection {
+    grid-column: 2/3;
+}
+
+.selection {
+    grid-column: 2/3;
+}
+  

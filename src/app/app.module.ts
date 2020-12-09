@@ -20,6 +20,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -39,16 +40,14 @@ import { SettingsComponent, RestartDialogComponent } from './components/settings
 import {
   AboutDialogComponent, DownloadSliverServerDialogComponent, DownloadSliverClientDialogComponent, DownloadProgressSnackComponent
 } from './components/dialogs/dialogs.component'; 
+import { StandaloneConfigManagerComponent } from './components/standalone-config-manager/standalone-config-manager.component';
 
 import { GenerateModule } from './modules/generate/generate.module';
 import { GenerateRoutes } from './modules/generate/generate.routes';
-
 import { SessionsModule } from './modules/sessions/sessions.module';
 import { SessionsRoutes } from './modules/sessions/sessions.routes';
-
 import { JobsModule } from './modules/jobs/jobs.module';
 import { JobsRoutes } from './modules/jobs/jobs.routes';
-
 import { ScriptingModule } from './modules/scripting/scripting.module';
 import { ScriptingRoutes } from './modules/scripting/scripting.routes';
 import { SharedModule } from './shared/shared.module';
@@ -67,7 +66,8 @@ import { SharedModule } from './shared/shared.module';
     RestartDialogComponent,
     DownloadSliverServerDialogComponent,
     DownloadSliverClientDialogComponent,
-    DownloadProgressSnackComponent
+    DownloadProgressSnackComponent,
+    StandaloneConfigManagerComponent
     
   ],
   imports: [
@@ -77,6 +77,7 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     BrowserAnimationsModule,
     BaseMaterialModule,
+    FlexLayoutModule,
 
     // Routes
     AppRoutingModule,

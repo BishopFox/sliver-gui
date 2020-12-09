@@ -23,7 +23,7 @@ import { FadeInOut } from '@app/shared/animations';
 import { JobsService } from '@app/providers/jobs.service';
 import { EventsService } from '@app/providers/events.service';
 import { Subscription } from 'rxjs';
-import { ClientService } from '@app/providers/client.service';
+import { ClientService, ReadFiles } from '@app/providers/client.service';
 
 
 export enum TLSSettings {
@@ -268,13 +268,17 @@ export class StartListenerComponent implements OnInit, OnDestroy {
   }
 
   async selectCertificateFile() {
-    const cert = await this._clientService.readFile('Certificate File', 'Please select your certificate file', false, false);
-    this.httpsOptionsForm.controls['cert'].setValue(cert);
+    const cert: ReadFiles = await this._clientService.readFile('Certificate File', 'Please select your certificate file', false, false);
+    if (cert.files.length) {
+      this.httpsOptionsForm.controls['cert'].setValue(cert.files[0].data);
+    }
   }
 
   async selectKeyFile() {
-    const key = await this._clientService.readFile('Key File', 'Please select your key file', false, false);
-    this.httpsOptionsForm.controls['key'].setValue(key);
+    const key: ReadFiles = await this._clientService.readFile('Key File', 'Please select your key file', false, false);
+    if (key.files.length) {
+      this.httpsOptionsForm.controls['key'].setValue(key.files[0].data);
+    }
   }
 
 }
