@@ -60,7 +60,7 @@ ipcRenderer.on('ipc', (_, msg, origin) => {
   }
 });
 
-// Push events - Go to all app windows
+// Push events - Can go to all app windows
 ipcRenderer.on('push', (_, data) => {
   window.postMessage(JSON.stringify({
     type: 'push',
@@ -68,8 +68,9 @@ ipcRenderer.on('push', (_, data) => {
   }), MAIN_ORIGIN);
 });
 
-// Config events - Go to all app windows
+// Config events - Can go to all app windows
 ipcRenderer.on('config', (_, data) => {
+  console.log(`[config] ${window.location.origin}`);
   window.postMessage(JSON.stringify({
     type: 'config',
     data: data,

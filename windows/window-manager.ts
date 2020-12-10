@@ -14,7 +14,7 @@
 */
 
 import { ipcMain, BrowserWindow, IpcMainEvent, screen } from 'electron';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import * as fs from 'fs';
 import * as uuid from 'uuid';
 import * as path from 'path';
@@ -205,20 +205,22 @@ export class WindowManager {
   }
 
   createConfigManagerWindow(): BrowserWindow {
-    
     const gutterSize = 250;
-
     let configManagerWindow = this.window(gutterSize, path.join(__dirname, '..', 'preload.js'));
     configManagerWindow.once('ready-to-show', () => {
       configManagerWindow.show();
     });
     const windowId = uuid.v4();
     configManagerWindow.loadURL(`${AppProtocol.scheme}://${windowId}/index.html#/config-manager-standalone`);
+    const configSub = this.configEvents.subscribe(event => {
+      configManagerWindow.webContents.send('config', JSON.stringify(event));
+    });
+    this.otherWindows.set(windowId, configManagerWindow);
     configManagerWindow.on('closed', () => {
       configManagerWindow = null;
       this.otherWindows.delete(windowId);
+      configSub.unsubscribe();
     });
-    this.otherWindows.set(windowId, configManagerWindow);
     return configManagerWindow;
   }
 
