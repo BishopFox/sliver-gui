@@ -31,6 +31,7 @@ import * as AppProtocol from '../app-protocol';
 
 const logger = log4js.getLogger(__filename);
 
+
 // https://nodejs.org/api/process.html#process_process_platform
 export enum Platforms {
   Windows = 'win32',
@@ -154,8 +155,13 @@ export class WindowManager {
   }
 
   createMainWindow(): BrowserWindow {
+    const screenSize = screen.getPrimaryDisplay().workAreaSize;
     const gutterSize = 100;
-    this.mainWindow = this.window(gutterSize, path.join(__dirname, '..', 'preload.js'))
+    const width = screenSize.width - (gutterSize * 2);
+    const height = screenSize.height - (gutterSize * 2);
+
+    const preload = path.join(__dirname, '..', 'preload.js');
+    this.mainWindow = this.window(preload, width, height, gutterSize, gutterSize);
     const menuSub = this.menuEvents.subscribe(event => {
       this.mainWindow.webContents.send('menu', JSON.stringify(event));
     });
@@ -189,8 +195,13 @@ export class WindowManager {
   }
 
   createSessionWindow(sessionId: number): BrowserWindow {
-    const gutterSize = 250;
-    let sessionWindow = this.window(gutterSize, path.join(__dirname, '..', 'preload.js'));
+    const screenSize = screen.getPrimaryDisplay().workAreaSize;
+    const gutterSize = 150;
+    const width = screenSize.width - (gutterSize * 2);
+    const height = screenSize.height - (gutterSize * 2);
+
+    const preload = path.join(__dirname, '..', 'preload.js');
+    let sessionWindow = this.window(preload, width, height, gutterSize, gutterSize);
     sessionWindow.once('ready-to-show', () => {
       sessionWindow.show();
     });
@@ -205,8 +216,12 @@ export class WindowManager {
   }
 
   createConfigManagerWindow(): BrowserWindow {
-    const gutterSize = 250;
-    let configManagerWindow = this.window(gutterSize, path.join(__dirname, '..', 'preload.js'));
+    const gutterSize = 100;
+    const width = 850;
+    const height = 400;
+
+    const preload = path.join(__dirname, '..', 'preload.js');
+    let configManagerWindow = this.window(preload, width, height, gutterSize, gutterSize);
     configManagerWindow.once('ready-to-show', () => {
       configManagerWindow.show();
     });
@@ -224,39 +239,37 @@ export class WindowManager {
     return configManagerWindow;
   }
 
-  private window(gutterSize: number, preload: string): Electron.BrowserWindow {
+  private window(preload: string, width: number, height: number, x: number, y: number): Electron.BrowserWindow {
     switch (process.platform) {
       case Platforms.MacOS:
-        return this.glassWindow(gutterSize, preload)
+        return this.glassWindow(preload, width, height, x, y)
       default:
-        return this.normalWindow(gutterSize, preload);
+        return this.normalWindow(preload, width, height, x, y);
     }
   }
 
-  private glassWindow(gutterSize: number, preload: string) {
-    const size = screen.getPrimaryDisplay().workAreaSize;
+  private glassWindow(preload: string, width: number, height: number, x: number, y: number) {
     return new BrowserWindow({
       titleBarStyle: 'hidden',
       transparent: true,
       hasShadow: true,
       vibrancy: 'ultra-dark',
-      x: gutterSize,
-      y: gutterSize,
-      width: size.width - (gutterSize * 2),
-      height: size.height - (gutterSize * 2),
+      x: x,
+      y: y,
+      width: width,
+      height: height,
       webPreferences: this.webPreferences(preload),
       show: false,
     });
   }
 
-  private normalWindow(gutterSize: number, preload: string) {
-    const size = screen.getPrimaryDisplay().workAreaSize;
+  private normalWindow(preload: string, width: number, height: number, x: number, y: number) {
     return new BrowserWindow({
       hasShadow: true,
-      x: gutterSize,
-      y: gutterSize,
-      width: size.width - (gutterSize * 2),
-      height: size.height - (gutterSize * 2),
+      x: x,
+      y: y,
+      width: width,
+      height: height,
       webPreferences: this.webPreferences(preload),
       show: false,
     });
