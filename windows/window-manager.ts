@@ -206,7 +206,7 @@ export class WindowManager {
       sessionWindow.show();
     });
     const windowId = uuid.v4();
-    sessionWindow.loadURL(`${AppProtocol.scheme}://${windowId}/index.html#/sessions-standalone/${sessionId}/file-browser`);
+    sessionWindow.loadURL(`${AppProtocol.scheme}://${windowId}/index.html#/sessions-standalone/${sessionId}/info`);
     sessionWindow.on('closed', () => {
       sessionWindow = null;
       this.otherWindows.delete(windowId);

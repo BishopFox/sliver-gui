@@ -1,32 +1,37 @@
 <mat-sidenav-container [@fadeInOut] class="interact-container">
-  <mat-sidenav #sidenav mode="side" opened class="interact-sidenav" [fixedInViewport]="false">
-    <button mat-menu-item (click)="back()">
-      <i class="fas fa-fw fa-arrow-left"></i>&nbsp;
-      <ng-container i18n>Back</ng-container>
-    </button>
-    <button mat-menu-item (click)="openSessionWindow()">
-      <i class="fas fa-external-link-alt"></i>&nbsp;
-      <ng-container i18n>External Window</ng-container>
-    </button>
-    
-    <mat-divider></mat-divider>
+  <mat-sidenav #sidenav mode="side" opened class="interact-sidenav">
 
-    <button mat-menu-item [routerLink]="['info']">
-      <i class="fas fa-fw fa-info"></i>&nbsp;
-      <ng-container i18n>Info</ng-container>
-    </button>
-    <button mat-menu-item [routerLink]="['ps']">
-      <i class="fas fa-fw fa-list"></i>&nbsp;
-      <ng-container i18n>Process List</ng-container>
-    </button>
-    <button mat-menu-item [routerLink]="['file-browser']">
-      <i class="fas fa-fw fa-folder-open"></i>&nbsp;
-      <ng-container i18n>File Browser</ng-container>
-    </button>
-    <button mat-menu-item [routerLink]="['shell']">
-      <i class="fas fa-fw fa-terminal"></i>&nbsp;
-      <ng-container i18n>Shell</ng-container>
-    </button>
+    <mat-nav-list>
+
+      <mat-list-item (click)="back()">
+        <i class="fas fa-fw fa-arrow-left"></i>&nbsp;
+        <ng-container i18n>Back</ng-container>
+      </mat-list-item>
+      <mat-list-item (click)="openSessionWindow()">
+        <i class="fas fa-external-link-alt"></i>&nbsp;
+        <ng-container i18n>External Window</ng-container>
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item [routerLink]="['info']">
+        <i class="fas fa-fw fa-info"></i>&nbsp;
+        <ng-container i18n>Info</ng-container>
+      </mat-list-item>
+      <mat-list-item [routerLink]="['ps']">
+        <i class="fas fa-fw fa-list"></i>&nbsp;
+        <ng-container i18n>Process List</ng-container>
+      </mat-list-item>
+      <mat-list-item [routerLink]="['file-browser']">
+        <i class="fas fa-fw fa-folder-open"></i>&nbsp;
+        <ng-container i18n>File Browser</ng-container>
+      </mat-list-item>
+      <mat-list-item [routerLink]="['shell']">
+        <i class="fas fa-fw fa-terminal"></i>&nbsp;
+        <ng-container i18n>Shell</ng-container>
+      </mat-list-item>
+
+    </mat-nav-list>
   </mat-sidenav>
 
   <mat-sidenav-content>
