@@ -2,11 +2,13 @@
     position: sticky;
     position: -webkit-sticky;
     -webkit-app-region: drag;
+    top: 0; /* Sets the sticky toolbar to be on top */
+    z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
 }
 
 
 .config-manager-container {
-    height: 100%;
+    height: 80vh;
 }
 
 .config-manager-sidenav-content {
