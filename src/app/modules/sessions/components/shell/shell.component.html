@@ -6,11 +6,13 @@
 </div>
 
 <div class="grid-wrapper">
-  <div>
-    <button *ngIf="!active" mat-raised-button color="primary" (click)="openShell()">
-      <i class="fas fa-fw fa-terminal"></i>
-      Open Shell
-    </button>
-  </div>
-  <div class="monospace" #terminal></div>
+  <br />
+  <br />
+  <br />
+  <button mat-button (click)="openShell()">
+    Open
+  </button>
+  <br />
+  <br />
+  <ng-terminal #term></ng-terminal>
 </div>

@@ -50,6 +50,7 @@ import { JobsModule } from './modules/jobs/jobs.module';
 import { JobsRoutes } from './modules/jobs/jobs.routes';
 import { ScriptingModule } from './modules/scripting/scripting.module';
 import { ScriptingRoutes } from './modules/scripting/scripting.routes';
+import { NgTerminalModule } from './modules/terminal/ng-terminal.module';
 import { SharedModule } from './shared/shared.module';
 
 
@@ -92,6 +93,7 @@ import { SharedModule } from './shared/shared.module';
     JobsModule,
     ScriptingModule,
     SharedModule,
+    NgTerminalModule
 
   ],
   providers: [IPCService, ClientService, SliverService, JobsService, EventsService],

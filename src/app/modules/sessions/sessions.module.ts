@@ -32,6 +32,7 @@ import { InfoComponent } from './components/info/info.component';
 import { SharedModule } from '../../shared/shared.module';
 import { MainComponent } from './components/main/main.component';
 import { StandaloneInteractComponent } from './components/standalone-interact/standalone-interact.component';
+import { NgTerminalModule } from '@app/modules/terminal/ng-terminal.module';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { StandaloneInteractComponent } from './components/standalone-interact/st
     BaseMaterialModule,
     FormsModule,
     FlexLayoutModule,
+    NgTerminalModule,
     SharedModule
   ],
   exports: [

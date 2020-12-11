@@ -33,7 +33,7 @@ interface IPCMessage {
 }
 
 export interface TunnelEvent {
-  id: string;
+  tunnelIpcId: string;
   data: Uint8Array;
 }
 
@@ -72,18 +72,19 @@ export class IPCService {
         } else if (msg.type === 'tunnel-incoming') {
           const tunnelEvent = JSON.parse(msg.data);
           this.incomingTunnelEvent$.next({
-            id: tunnelEvent.id,
+            tunnelIpcId: tunnelEvent.tunnelIpcId,
             data: Base64.toUint8Array(tunnelEvent.data),
           });
         }
       } catch (err) {
+        console.error(event);
         console.error(`[IPCService] ${err}`);
       }
     });
 
     this.outgoingTunnelEvent$.subscribe((event: TunnelEvent) => {
       window.postMessage(JSON.stringify({
-        id: event.id,
+        tunnelIpcId: event.tunnelIpcId,
         type: 'tunnel-outgoing',
         data: Base64.fromUint8Array(event.data),
       }), window.location.origin);

@@ -17,10 +17,11 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observer } from 'rxjs';
 import { IPCService } from './ipc.service';
+import * as uuid from 'uuid';
 
 
 export interface Tunnel {
-  id: string;
+  tunnelIpcId: string;
   stdin: Observer<Uint8Array>;
   stdout: Subject<Uint8Array>;
 }
@@ -35,14 +36,50 @@ export class TunnelService {
 
   constructor(private _ipc: IPCService) {
     this._ipc.incomingTunnelEvent$.subscribe(event => {
-      const tunnel = this.tunnels.get(event.id);
+      const tunnel = this.tunnels.get(event.tunnelIpcId);
       tunnel?.stdout.next(event.data);
     });
   }
 
-  async createTunnel(sessionId: number, enablePty?: boolean): Promise<Tunnel> {
+  async outgoing(tunnelIpcId: string, data: string) {
+    this._ipc.outgoingTunnelEvent$
+  }
 
-    return null;
+  async shell(sessionId: number, path: string, enablePty: boolean): Promise<Tunnel> {
+    const tunnelIpcId = uuid.v4();
+
+    const stdin: Observer<Uint8Array> = {
+      next: (raw: Uint8Array) => {
+        this._ipc.outgoingTunnelEvent$.next({
+          tunnelIpcId: tunnelIpcId,
+          data: raw,
+        });
+      },
+      complete: () => {
+        if (this.tunnels.has(tunnelIpcId)) {
+          this.tunnels.delete(tunnelIpcId);
+        }
+      },
+      error: (err) => {
+        console.error(`Tunnel stdin error (${tunnelIpcId}): ${err}`);
+      },
+    };
+
+    const tunnel = {
+      tunnelIpcId: tunnelIpcId,
+      stdout: new Subject<Uint8Array>(),
+      stdin: stdin,
+    };
+
+    this.tunnels.set(tunnelIpcId, tunnel);
+    await this._ipc.request('rpc_shell', JSON.stringify({
+      tunnelIpcId: tunnelIpcId,
+      sessionId: sessionId,
+      path: path,
+      pty: enablePty,
+    }));
+
+    return tunnel;
   }
 
 }

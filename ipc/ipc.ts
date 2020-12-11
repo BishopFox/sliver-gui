@@ -435,38 +435,37 @@ export class IPCHandlers {
   @jsonSchema({
     "type": "object",
     "properties": {
+      "tunnelIpcId": { "type": "string", "minLength": 1 },
       "sessionId": { "type": "number" },
-      "path": { "type": "string" },
+      "path": { "type": "string", "minLength": 1 },
       "pty": { "type": "boolean" }
     },
-    "required": ["sessionId", "path", "pty"],
+    "required": ["tunnelIpcId", "sessionId", "path", "pty"],
     "additionalProperties": false,
   })
-  async rpc_shell(self: IPCHandlers, req: any): Promise<string> {
-    return new Promise(async (resolve) => {
-      const tunnelIpcId = uuid.v4();
-      resolve(tunnelIpcId);
+  async rpc_shell(self: IPCHandlers, req: any): Promise<void> {
+    const interact =  await self.client.interact(req.sessionId);
+    const tunnel = await interact.shell(req.path, req.pty);
+    self._windowManager.tunnels.set(req.tunnelIpcId, tunnel);
 
-      const interact =  await self.client.interact(req.sessionId);
-      const tunnel = await interact.shell(req.path, req.pty);
-      self._windowManager.tunnels.set(tunnelIpcId, tunnel);
-
-      // stdout
-      const tunSub = tunnel.stdout.subscribe(data => {
-        this._windowManager.send('tunnel-incoming', Base64.fromUint8Array(data), true);
-      }, (err) => {
-        // on error
-        logger.error(`Tunnel error (ipc: ${tunnelIpcId}) ${err}`);
-      }, () => {
-        // on complete
-        logger.debug(`Closing tunnel (ipc: ${tunnelIpcId})`);
-        if (self._windowManager.tunnels.has(tunnelIpcId)) {
-          self._windowManager.tunnels.delete(tunnelIpcId);
-        }
-        tunSub?.unsubscribe();
-      });
-
+    // stdout
+    const tunSub = tunnel.stdout.subscribe(data => {
+      self._windowManager.send('tunnel-incoming', JSON.stringify({
+        tunnelIpcId: req.tunnelIpcId,
+        data: Base64.fromUint8Array(data)
+      }), true);
+    }, (err) => {
+      // on error
+      logger.error(`Tunnel error (ipc: ${req.tunnelIpcId}) ${err}`);
+    }, () => {
+      // on complete
+      logger.debug(`Closing tunnel (ipc: ${req.tunnelIpcId})`);
+      if (self._windowManager.tunnels.has(req.tunnelIpcId)) {
+        self._windowManager.tunnels.delete(req.tunnelIpcId);
+      }
+      tunSub?.unsubscribe();
     });
+
 
   }
 
