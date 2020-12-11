@@ -77,7 +77,7 @@ export class WebContentsTableComponent implements OnInit, OnDestroy {
       table.push({
         path: content.getPath(),
         contentType: content.getContenttype(),
-        size: content.getSize()
+        size: parseInt(content.getSize(), 10)
       });
     });
     return table.sort((a, b) => (a.path > b.path) ? 1 : -1);

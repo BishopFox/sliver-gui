@@ -20,10 +20,9 @@ import { IPCService } from './ipc.service';
 
 
 export interface Tunnel {
-  id: number;
-  sliverID: number;
-  send: Observer<Uint8Array>;
-  recv: Subject<Uint8Array>;
+  id: string;
+  stdin: Observer<Uint8Array>;
+  stdout: Subject<Uint8Array>;
 }
 
 
@@ -32,8 +31,13 @@ export interface Tunnel {
 })
 export class TunnelService {
 
-  constructor(private _ipc: IPCService) {
+  private tunnels = new Map<string, Tunnel>();
 
+  constructor(private _ipc: IPCService) {
+    this._ipc.incomingTunnelEvent$.subscribe(event => {
+      const tunnel = this.tunnels.get(event.id);
+      tunnel?.stdout.next(event.data);
+    });
   }
 
   async createTunnel(sessionId: number, enablePty?: boolean): Promise<Tunnel> {

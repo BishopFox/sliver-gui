@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 import { BaseMaterialModule } from '../../base-material';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { SessionsComponent } from './components/sessions-table/sessions-table.component';
 import { InteractComponent } from './components/interact/interact.component';
@@ -48,15 +49,12 @@ import { StandaloneInteractComponent } from './components/standalone-interact/st
     StandaloneInteractComponent
   ],
   imports: [
-
-    // Modules
     CommonModule,
     RouterModule,
     BaseMaterialModule,
     FormsModule,
-
+    FlexLayoutModule,
     SharedModule
-
   ],
   exports: [
     SessionsComponent

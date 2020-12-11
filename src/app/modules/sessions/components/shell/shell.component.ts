@@ -47,12 +47,12 @@ export class ShellComponent implements OnInit, AfterViewInit, OnDestroy {
     private _tunnelService: TunnelService) { }
 
   ngOnInit() {
-    this._route.parent.params.pipe(take(1)).subscribe((params) => {
+    this._route.parent.params.pipe(take(1)).subscribe(params => {
       const sessionId: number = parseInt(params['session-id'], 10);
-      this._sliverService.sessionById(sessionId).then((session) => {
+      this._sliverService.sessionById(sessionId).then(session => {
         this.session = session;
-      }).catch(() => {
-        console.error(`No session with id ${sessionId}`);
+      }).catch(err => {
+        console.error(`No session with id ${sessionId} (${err})`);
       });
     });
   }
@@ -80,14 +80,7 @@ export class ShellComponent implements OnInit, AfterViewInit, OnDestroy {
     this.terminal.write('\r\x1b[1m\x1b[36m[*] \x1b[0m Connecting ...');
     this.tunnel = await this._tunnelService.createTunnel(this.session.getId());
     this.terminal.clear();
-    this.recvSub = this.tunnel.recv.subscribe((data: Uint8Array) => {
-      console.log(`[terminal] recv: ${data}`);
-      this.terminal.writeUtf8(data);
-    });
-    this.terminal.onData((data: string) => {
-      console.log(`[terminal] send: ${data}`);
-      this.tunnel.send.next(this.textEncoder.encode(data));
-    });
+
   }
 
 }

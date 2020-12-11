@@ -40,6 +40,12 @@ window.addEventListener('message', (event) => {
       } else {
         console.error(`Invalid namespace: ${msg.method}`);
       }
+    } else if (msg.type === 'tunnel-outgoing') {
+      if (msg.tunnelIpcId && typeof(msg.tunnelIpcId) === 'string' && typeof(msg.data) === 'string') {
+        ipcRenderer.send('tunnel-outgoing', msg.tunnelIpcId, msg.data);
+      } else {
+        console.error('Invalid outgoing tunnel message format');
+      }
     }
   } catch (err) {
     console.trace(err);
@@ -60,7 +66,7 @@ ipcRenderer.on('ipc', (_, msg, origin) => {
   }
 });
 
-// Push events - Can go to all app windows
+// // Push events - Can go to all app windows
 ipcRenderer.on('push', (_, data) => {
   window.postMessage(JSON.stringify({
     type: 'push',
@@ -68,9 +74,8 @@ ipcRenderer.on('push', (_, data) => {
   }), MAIN_ORIGIN);
 });
 
-// Config events - Can go to all app windows
+// // Config events - Can go to all app windows
 ipcRenderer.on('config', (_, data) => {
-  console.log(`[config] ${window.location.origin}`);
   window.postMessage(JSON.stringify({
     type: 'config',
     data: data,
@@ -91,8 +96,17 @@ if (window.location.origin === MAIN_ORIGIN) {
     window.postMessage(JSON.stringify({
       type: 'download',
       data: data,
-    }), window.location.origin);
+    }), MAIN_ORIGIN);
   });
+
+  // Tunnel events (incoming)
+  ipcRenderer.on('tunnel-incoming', (_, data) => {
+    window.postMessage(JSON.stringify({
+      type: 'tunnel-incoming',
+      data: data,
+    }), MAIN_ORIGIN);
+  });
+
 }
 
 

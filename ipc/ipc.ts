@@ -297,7 +297,7 @@ export class IPCHandlers {
       if (reqPath.startsWith(permission[0]) && permission[1]) {
         return new Promise((resolve, reject) => {
           fs.writeFile(reqPath, data, (err) => {
-            err ? reject(err) : resolve();
+            err ? reject(err) : resolve(undefined);
           });
         });
       }
@@ -431,6 +431,45 @@ export class IPCHandlers {
   }
 
   // Session Interaction
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "sessionId": { "type": "number" },
+      "path": { "type": "string" },
+      "pty": { "type": "boolean" }
+    },
+    "required": ["sessionId", "path", "pty"],
+    "additionalProperties": false,
+  })
+  async rpc_shell(self: IPCHandlers, req: any): Promise<string> {
+    return new Promise(async (resolve) => {
+      const tunnelIpcId = uuid.v4();
+      resolve(tunnelIpcId);
+
+      const interact =  await self.client.interact(req.sessionId);
+      const tunnel = await interact.shell(req.path, req.pty);
+      self._windowManager.tunnels.set(tunnelIpcId, tunnel);
+
+      // stdout
+      const tunSub = tunnel.stdout.subscribe(data => {
+        this._windowManager.send('tunnel-incoming', Base64.fromUint8Array(data), true);
+      }, (err) => {
+        // on error
+        logger.error(`Tunnel error (ipc: ${tunnelIpcId}) ${err}`);
+      }, () => {
+        // on complete
+        logger.debug(`Closing tunnel (ipc: ${tunnelIpcId})`);
+        if (self._windowManager.tunnels.has(tunnelIpcId)) {
+          self._windowManager.tunnels.delete(tunnelIpcId);
+        }
+        tunSub?.unsubscribe();
+      });
+
+    });
+
+  }
+
   @isConnected()
   @jsonSchema({
     "type": "object",
@@ -896,7 +935,7 @@ export class IPCHandlers {
           if (err) {
             logger.error(err);
           }
-          resolve();
+          resolve(undefined);
         });
       });
     }));
@@ -976,7 +1015,7 @@ export class IPCHandlers {
 
     // Pipe realtime events back to renderer process
     self.client.event$.subscribe((event: clientpb.Event) => {
-      ipcMain.emit('push', {}, Base64.fromUint8Array(event.serializeBinary()));
+      self._windowManager.send('push', Base64.fromUint8Array(event.serializeBinary()));
     });
 
     return 'success';
@@ -1108,7 +1147,7 @@ export class IPCHandlers {
             error: err ? err.toString() : null,
             data: data ? Base64.fromUint8Array(data) : null
           });
-          resolve();
+          resolve(undefined);
         });
       });
     }));

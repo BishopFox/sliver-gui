@@ -14,13 +14,14 @@
 */
 
 import { ipcMain, BrowserWindow, IpcMainEvent, screen } from 'electron';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import * as fs from 'fs';
 import * as uuid from 'uuid';
 import * as path from 'path';
 import * as log4js from 'log4js';
+import * as Base64 from 'js-base64';
 import { autoUpdater } from 'electron-updater';
-import { SliverClientConfig } from 'sliver-script';
+import { Tunnel } from 'sliver-script';
 
 import { CONFIG_DIR } from '../ipc/ipc';
 import { WorkerManager } from '../workers/worker-manager';
@@ -67,6 +68,8 @@ export class WindowManager {
   menuEvents = new Subject<MenuEvent>();
   downloadEvents = new Subject<DownloadEvent>();
   configEvents = new Subject<ConfigEvent>();
+  tunnels = new Map<string, Tunnel>();
+
 
   constructor() {
     this.workerManager = new WorkerManager();
@@ -79,13 +82,23 @@ export class WindowManager {
     initMenu(this.menuEvents, () => {
       autoUpdater.checkForUpdatesAndNotify();
     });
-  }
-
-  initUpdate() {
 
     fs.watch(CONFIG_DIR, { encoding: 'utf-8' }, (_, filename) => {
       this.configEvents.next({ filename: filename });
     });
+
+    ipcMain.on('tunnel-outgoing', async (_: IpcMainEvent, tunnelIpcId: string, data: string) => {
+      if (this.tunnels.has(tunnelIpcId)) {
+        const tunnel = this.tunnels.get(tunnelIpcId);
+        tunnel.stdin.next(Buffer.from(Base64.toUint8Array(data)));
+      } else {
+        logger.warn(`Outgoing data for non-existent tunnel (ipc: ${tunnelIpcId})`);
+      }
+    });
+  
+  }
+
+  initUpdate() {
 
     autoUpdater.on('checking-for-update', () => {
       this.downloadEvents.next({
@@ -129,6 +142,16 @@ export class WindowManager {
     });
   }
 
+  // send - Send a message to a window's webContents
+  send(channel: string, message: any, otherWindows = false): void {
+    this.mainWindow.webContents.send(channel, message);
+    if (otherWindows) {
+      this.otherWindows.forEach(window => {
+        window.webContents.send(channel, message);
+      });
+    }
+  }
+
   private startIPCHandlers() {
     ipcMain.on('ipc', async (event: IpcMainEvent, msg: IPCMessage, origin: string) => {
       dispatchIPC(this.handlers, msg.method, msg.data).then((result: any) => {
@@ -160,16 +183,16 @@ export class WindowManager {
     const width = screenSize.width - (gutterSize * 2);
     const height = screenSize.height - (gutterSize * 2);
 
-    const preload = path.join(__dirname, '..', 'preload.js');
+    const preload = path.join(__dirname, 'preload.js');
     this.mainWindow = this.window(preload, width, height, gutterSize, gutterSize);
     const menuSub = this.menuEvents.subscribe(event => {
-      this.mainWindow.webContents.send('menu', JSON.stringify(event));
+      this.send('menu', JSON.stringify(event), true);
     });
     const downloadSub = this.downloadEvents.subscribe(event => {
-      this.mainWindow.webContents.send('download', JSON.stringify(event));
+      this.send('download', JSON.stringify(event));
     });
     const configSub = this.configEvents.subscribe(event => {
-      this.mainWindow.webContents.send('config', JSON.stringify(event));
+      this.send('config', JSON.stringify(event), true);
     });
     
     this.mainWindow.once('ready-to-show', () => {
@@ -184,13 +207,6 @@ export class WindowManager {
     });
 
     this.startIPCHandlers();
-
-    // I know what you're thinking, why do we need a main<->main event emitter here,
-    // can't you just send an IPC event to the renderer? The answer is no, you can't.
-    ipcMain.on('push', async (event: IpcMainEvent, data: string) => {
-      this.mainWindow.webContents.send('push', data);
-    });
-
     return this.mainWindow;
   }
 
@@ -200,7 +216,7 @@ export class WindowManager {
     const width = screenSize.width - (gutterSize * 2);
     const height = screenSize.height - (gutterSize * 2);
 
-    const preload = path.join(__dirname, '..', 'preload.js');
+    const preload = path.join(__dirname, 'preload.js');
     let sessionWindow = this.window(preload, width, height, gutterSize, gutterSize);
     sessionWindow.once('ready-to-show', () => {
       sessionWindow.show();
@@ -217,10 +233,10 @@ export class WindowManager {
 
   createConfigManagerWindow(): BrowserWindow {
     const gutterSize = 100;
-    const width = 850;
+    const width = 875;
     const height = 400;
 
-    const preload = path.join(__dirname, '..', 'preload.js');
+    const preload = path.join(__dirname, 'preload.js');
     let configManagerWindow = this.window(preload, width, height, gutterSize, gutterSize);
     configManagerWindow.once('ready-to-show', () => {
       configManagerWindow.show();

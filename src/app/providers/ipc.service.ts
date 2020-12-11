@@ -21,6 +21,7 @@ import { Injectable } from '@angular/core';
 import { Base64 } from 'js-base64';
 import { Subject } from 'rxjs';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+
 import { MenuEvent, DownloadEvent, ConfigEvent } from './events.service';
 
 
@@ -29,6 +30,11 @@ interface IPCMessage {
   type: string;
   method: string;
   data: string;
+}
+
+export interface TunnelEvent {
+  id: string;
+  data: Uint8Array;
 }
 
 @Injectable({
@@ -41,6 +47,8 @@ export class IPCService {
   menuEvent$ = new Subject<MenuEvent>();
   downloadEvent$ = new Subject<DownloadEvent>();
   configEvent$ = new Subject<ConfigEvent>();
+  incomingTunnelEvent$ = new Subject<TunnelEvent>();
+  outgoingTunnelEvent$ = new Subject<TunnelEvent>();
 
   constructor() {
     window.addEventListener('message', (event) => {
@@ -61,10 +69,24 @@ export class IPCService {
           this.downloadEvent$.next(JSON.parse(msg.data));
         } else if (msg.type === 'config') {
           this.configEvent$.next(JSON.parse(msg.data));
+        } else if (msg.type === 'tunnel-incoming') {
+          const tunnelEvent = JSON.parse(msg.data);
+          this.incomingTunnelEvent$.next({
+            id: tunnelEvent.id,
+            data: Base64.toUint8Array(tunnelEvent.data),
+          });
         }
       } catch (err) {
         console.error(`[IPCService] ${err}`);
       }
+    });
+
+    this.outgoingTunnelEvent$.subscribe((event: TunnelEvent) => {
+      window.postMessage(JSON.stringify({
+        id: event.id,
+        type: 'tunnel-outgoing',
+        data: Base64.fromUint8Array(event.data),
+      }), window.location.origin);
     });
   }
 

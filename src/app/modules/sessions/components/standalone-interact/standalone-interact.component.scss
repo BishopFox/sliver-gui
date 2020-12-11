@@ -3,6 +3,7 @@
   position: -webkit-sticky; /* For macOS/iOS Safari */
   top: 0; /* Sets the sticky toolbar to be on top */
   z-index: 100; /* Ensure that your app's content doesn't overlap the toolbar */
+  -webkit-app-region: drag;
 }
 
 .interact-container {
@@ -27,4 +28,5 @@
   left: 0;
   right: 0;
   z-index: 100;
+  -webkit-app-region: drag;
 }

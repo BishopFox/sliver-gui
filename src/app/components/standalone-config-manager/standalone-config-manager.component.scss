@@ -1,3 +1,10 @@
+.config-manager-toolbar {
+    position: sticky;
+    position: -webkit-sticky;
+    -webkit-app-region: drag;
+}
+
+
 .config-manager-container {
     height: 100%;
 }
