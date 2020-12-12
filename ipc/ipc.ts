@@ -450,6 +450,7 @@ export class IPCHandlers {
 
     // stdout
     const tunSub = tunnel.stdout.subscribe(data => {
+      logger.debug(`Tunnel (${req.tunnelIpcId}) stdout: ${data}`);
       self._windowManager.send('tunnel-incoming', JSON.stringify({
         tunnelIpcId: req.tunnelIpcId,
         data: Base64.fromUint8Array(data)

@@ -16,14 +16,19 @@
 
 import { Injectable } from '@angular/core';
 import { Subject, Observer } from 'rxjs';
+
 import { IPCService } from './ipc.service';
-import * as uuid from 'uuid';
 
 
 export interface Tunnel {
   tunnelIpcId: string;
   stdin: Observer<Uint8Array>;
   stdout: Subject<Uint8Array>;
+}
+
+export interface TunnelEvent {
+  tunnelIpcId: string;
+  data: Uint8Array;
 }
 
 
@@ -36,51 +41,26 @@ export class TunnelService {
 
   constructor(private _ipc: IPCService) {
     this._ipc.incomingTunnelEvent$.subscribe(event => {
+      console.log(`Tunnel event ${event.tunnelIpcId}: ${event.data}`);
       const tunnel = this.tunnels.get(event.tunnelIpcId);
       tunnel?.stdout.next(event.data);
     });
   }
 
-  async outgoing(tunnelIpcId: string, data: string) {
-    this._ipc.outgoingTunnelEvent$
+  async outgoing(event: TunnelEvent) {
+    this._ipc.outgoingTunnelEvent$.next(event);
   }
 
-  async shell(sessionId: number, path: string, enablePty: boolean): Promise<Tunnel> {
-    const tunnelIpcId = uuid.v4();
-
-    const stdin: Observer<Uint8Array> = {
-      next: (raw: Uint8Array) => {
-        console.log(`[tunnel service] stdin (outgoing): ${raw}`);
-        this._ipc.outgoingTunnelEvent$.next({
-          tunnelIpcId: tunnelIpcId,
-          data: raw,
-        });
-      },
-      complete: () => {
-        if (this.tunnels.has(tunnelIpcId)) {
-          this.tunnels.delete(tunnelIpcId);
-        }
-      },
-      error: (err) => {
-        console.error(`Tunnel stdin error (${tunnelIpcId}): ${err}`);
-      },
-    };
-
-    const tunnel = {
-      tunnelIpcId: tunnelIpcId,
-      stdout: new Subject<Uint8Array>(),
-      stdin: stdin,
-    };
-
+  set(tunnelIpcId: string, tunnel: Tunnel): void {
     this.tunnels.set(tunnelIpcId, tunnel);
-    await this._ipc.request('rpc_shell', JSON.stringify({
-      tunnelIpcId: tunnelIpcId,
-      sessionId: sessionId,
-      path: path,
-      pty: enablePty,
-    }));
+  }
 
-    return tunnel;
+  has(tunnelIpcId: string): boolean {
+    return this.tunnels.has(tunnelIpcId);
+  }
+
+  delete(tunnelIpcId: string): void {
+    this.tunnels.delete(tunnelIpcId);
   }
 
 }

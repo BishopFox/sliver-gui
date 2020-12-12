@@ -5,9 +5,13 @@ import { GlobalStyleComponent } from './global-style/global-style.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [NgTerminalComponent, GlobalStyleComponent],
+  declarations: [
+    NgTerminalComponent,
+    GlobalStyleComponent
+  ],
   imports: [
-    ResizableModule, CommonModule
+    ResizableModule,
+    CommonModule
   ],
   exports: [NgTerminalComponent]
 })

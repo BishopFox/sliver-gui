@@ -6,13 +6,34 @@
 </div>
 
 <div class="grid-wrapper">
-  <br />
-  <br />
-  <br />
-  <button mat-button (click)="openShell()">
-    Open
-  </button>
-  <br />
-  <br />
-  <ng-terminal #term></ng-terminal>
+
+  <div>
+    <button mat-icon-button (click)="addTab()">
+      <i class="fa fas fa-fw fa-plus-square"></i>
+      Add Shell
+    </button>
+
+    
+  </div>
+  
+  <div *ngIf="shells.length === 0">
+    No open shells
+  </div>
+
+  <mat-tab-group *ngIf="shells.length" animationDuration="0ms" [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+    <mat-tab *ngFor="let shell of shells; let index = index" [label]="shells.indexOf(shell)">
+      <ng-template mat-tab-label>
+        <div class="col" style="margin-left: 25px;">
+          {{ shell.id }}
+        </div>
+				<button mat-icon-button (click)="removeTab(index)">
+          <i class="fa fas fa-fw fa-times-circle"></i>
+        </button>
+      </ng-template>
+
+      <ng-terminal [terminal]="shell.terminal" (keyEvent)="onKeyEvent($event, shell)">
+      </ng-terminal>
+
+    </mat-tab>
+  </mat-tab-group>
 </div>

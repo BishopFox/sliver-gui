@@ -23,6 +23,7 @@ import { Subject } from 'rxjs';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 import { MenuEvent, DownloadEvent, ConfigEvent } from './events.service';
+import { TunnelEvent } from './tunnel.service';
 
 
 interface IPCMessage {
@@ -30,11 +31,6 @@ interface IPCMessage {
   type: string;
   method: string;
   data: string;
-}
-
-export interface TunnelEvent {
-  tunnelIpcId: string;
-  data: Uint8Array;
 }
 
 @Injectable({
@@ -71,6 +67,7 @@ export class IPCService {
           this.configEvent$.next(JSON.parse(msg.data));
         } else if (msg.type === 'tunnel-incoming') {
           const tunnelEvent = JSON.parse(msg.data);
+          console.log(`tunnel-incoming ${tunnelEvent.tunnelIpcId}: ${tunnelEvent.data}`)
           this.incomingTunnelEvent$.next({
             tunnelIpcId: tunnelEvent.tunnelIpcId,
             data: Base64.toUint8Array(tunnelEvent.data),

@@ -24,6 +24,7 @@ import * as AppProtocol from './app-protocol';
 
 
 // ----------------------------------------- [ Logs ] -----------------------------------------
+const logger = log4js.getLogger(__filename);
 log4js.configure({
   appenders: {
     file: {
@@ -40,26 +41,34 @@ log4js.configure({
     }
   }
 });
-const logger = log4js.getLogger(__filename);
 
 function getLogLevel(): string {
-  const envLogLevel: string = process.env.SLIVER_GUI_LOG_LEVEL;
-  switch(envLogLevel?.toLowerCase()) {
+  let logLevel: string = process.env.SLIVER_GUI_LOG_LEVEL || "info";
+  switch(logLevel?.toLowerCase()) {
     case "all":
-      return "all";
+      logLevel = "all";
+      break;
     case "trace":
-      return "trace";
+      logLevel = "trace";
+      break;
     case "debug":
-      return "debug";
+      logLevel = "debug";
+      break;
     case "info":
-      return "info";
+      logLevel = "info";
+      break;
     case "warn":
-      return "warn";
+      logLevel = "warn";
+      break;
     case "error":
-      return "error";
+      logLevel = "error";
+      break;
     default:
-      return "info";
+      logLevel = "info";
+      break;
   }
+  console.log(`Logger set to: '${logLevel}'`);
+  return logLevel;
 }
 
 // ----------------------------------------- [ Protocols ] -----------------------------------------

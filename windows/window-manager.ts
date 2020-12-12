@@ -145,6 +145,7 @@ export class WindowManager {
 
   // send - Send a message to a window's webContents
   send(channel: string, message: any, otherWindows = false): void {
+    logger.debug(`Send <channel: ${channel}, msg: ${message}, otherWindows: ${otherWindows}>`);
     this.mainWindow.webContents.send(channel, message);
     if (otherWindows) {
       this.otherWindows.forEach(window => {

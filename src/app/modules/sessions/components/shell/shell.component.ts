@@ -14,14 +14,22 @@
 */
 
 
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { 
+  Component, OnInit, ContentChildren, AfterViewInit, OnDestroy, Input, QueryList, Directive
+} from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
-import { NgTerminal } from '@app/modules/terminal/ng-terminal';
 import { SliverService } from '@app/providers/sliver.service';
-import { TunnelService } from '@app/providers/tunnel.service';
+import { ShellService, Shell } from '@app/providers/shell.service';
+
+
+@Directive({selector: 'shell-directive'})
+export class ShellDirective {
+
+}
 
 
 @Component({
@@ -31,15 +39,18 @@ import { TunnelService } from '@app/providers/tunnel.service';
 })
 export class ShellComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  readonly SCROLLBACK = 100000;
   session: clientpb.Session;
-  @ViewChild('term', { static: true }) terminal: NgTerminal;
+  @Input() selectAfterAdding = true;
 
-  textEncode = new TextEncoder();
+  textEncoder = new TextEncoder();
+
+  @ContentChildren(ShellDirective) contentChildren!: QueryList<ShellDirective>;
+
+  selected = new FormControl(0);
 
   constructor(private _route: ActivatedRoute,
               private _sliverService: SliverService,
-              private _tunnelService: TunnelService) { }
+              private _shellService: ShellService) { }
 
   ngOnInit() {
     this._route.parent.params.pipe(take(1)).subscribe(params => {
@@ -52,6 +63,10 @@ export class ShellComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  get shells(): Shell[] {
+    return this._shellService.getOpenShells();
+  }
+
   ngOnDestroy() {
 
   }
@@ -60,16 +75,20 @@ export class ShellComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-  async openShell() {
-    const tunnel = await this._tunnelService.shell(this.session.getId(), '/bin/bash', true);
-    tunnel.stdout.subscribe(data => {
-      this.terminal.write(data);
-    });
-    this.terminal.keyEventInput.subscribe(e => {
-      const data = this.textEncode.encode(e.key);
-      console.log(`[shell component] stdin: ${data}`);
-      tunnel.stdin.next(data);
-    });
+  onKeyEvent(event, shell: Shell) {
+    console.log(`Key event on shell ${shell.id}: ${event.key}`);
+    shell.tunnel.stdin.next(this.textEncoder.encode(event.key));
+  }
+
+  async addTab() {
+    await this._shellService.openShell(this.session.getId(), '/bin/bash', true);
+    if (this.selectAfterAdding) {
+      this.selected.setValue(this.shells.length - 1);
+    }
+  }
+
+  removeTab(index: number) {
+    // this.tabs.splice(index, 1);
   }
 
 }
