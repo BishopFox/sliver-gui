@@ -89,6 +89,7 @@ export class WindowManager {
 
     ipcMain.on('tunnel-outgoing', async (_: IpcMainEvent, tunnelIpcId: string, data: string) => {
       if (this.tunnels.has(tunnelIpcId)) {
+        logger.debug(`[window-manager] tunnel outgoing (ipc: ${tunnelIpcId}) ${data}`);
         const tunnel = this.tunnels.get(tunnelIpcId);
         tunnel.stdin.next(Buffer.from(Base64.toUint8Array(data)));
       } else {

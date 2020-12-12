@@ -50,6 +50,7 @@ export class TunnelService {
 
     const stdin: Observer<Uint8Array> = {
       next: (raw: Uint8Array) => {
+        console.log(`[tunnel service] stdin (outgoing): ${raw}`);
         this._ipc.outgoingTunnelEvent$.next({
           tunnelIpcId: tunnelIpcId,
           data: raw,

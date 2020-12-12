@@ -42,6 +42,7 @@ window.addEventListener('message', (event) => {
       }
     } else if (msg.type === 'tunnel-outgoing') {
       if (msg.tunnelIpcId && typeof(msg.tunnelIpcId) === 'string' && typeof(msg.data) === 'string') {
+        console.log(`[preload] outgoing: ${msg}`);
         ipcRenderer.send('tunnel-outgoing', msg.tunnelIpcId, msg.data);
       } else {
         console.error('Invalid outgoing tunnel message format');

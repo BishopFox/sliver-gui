@@ -67,7 +67,7 @@ export class ShellComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.terminal.keyEventInput.subscribe(e => {
       const data = this.textEncode.encode(e.key);
-      console.log(`stdin: ${data}`);
+      console.log(`[shell component] stdin: ${data}`);
       tunnel.stdin.next(data);
     });
   }
