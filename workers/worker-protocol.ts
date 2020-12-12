@@ -18,13 +18,12 @@ import { ProtocolRequest } from 'electron';
 import * as Handlebars from 'handlebars';
 import * as fs from 'fs';
 import * as path from 'path';
-import * as log4js from 'log4js';
 
 import { WorkerManager } from './worker-manager';
 import { getDistPath } from '../locale';
+import { logger } from '../logs';
 
 
-const logger = log4js.getLogger(__filename);
 type ProtocolCallback = (arg0: { mimeType: string; charset: string; data: Buffer; }) => void;
 const WORKER_PATH = path.join(__dirname);
 const INDEX_FILE = path.join(WORKER_PATH, 'index.html');

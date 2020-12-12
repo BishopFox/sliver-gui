@@ -26,7 +26,6 @@ import { Base64 } from 'js-base64';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as uuid from 'uuid';
-import * as log4js from 'log4js';
 import { SliverClient, SliverClientConfig } from 'sliver-script';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
@@ -36,9 +35,9 @@ import { isConnected } from './is-connected';
 import { getLocalesJSON, getClientDir, getCurrentLocale, setLocaleSync } from '../locale';
 import { WindowManager, Progress } from '../windows/window-manager';
 import { WorkerManager } from '../workers/worker-manager';
+import { logger } from '../logs';
 
 
-const logger = log4js.getLogger(__filename);
 export const DEFAULT_SERVER_URL = 'https://api.github.com/repos/BishopFox/sliver/releases/latest';
 export const CONFIG_DIR = path.join(getClientDir(), 'configs');
 export const SETTINGS_PATH = path.join(getClientDir(), 'gui-settings.json');

@@ -20,13 +20,12 @@ import * as os from 'os';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as uuid from 'uuid';
-import * as log4js from 'log4js';
 
 import { ScriptModels } from './models';
 
 
-const logger = log4js.getLogger(__filename);
-const sqlLogger = log4js.getLogger("SQL");
+import { logger } from '../logs';
+const sqlLogger = logger;
 
 const CLIENT_DIR = path.join(homedir(), '.sliver-client');
 const SCRIPTS_DIR = path.join(CLIENT_DIR, 'scripts');
@@ -94,7 +93,7 @@ export class WorkerManager {
     return new Promise((resolve, reject) => {
       const fileOptions = { mode: 0o600, encoding: 'utf-8' };
       fs.writeFile(path.join(SAVED_DIR, script.getDataValue('id')), code, fileOptions, (err) => {
-        err ? reject(err) : resolve();
+        err ? reject(err) : resolve(undefined);
       });
     });
   }

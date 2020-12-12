@@ -14,62 +14,12 @@
 */
 
 import { app,  protocol } from 'electron';
-import * as log4js from 'log4js';
-import * as path from 'path';
 
-import { getClientDir } from './locale';
+import { logger } from './logs';
 import { WindowManager } from './windows/window-manager';
 import * as WorkerProtocol from './workers/worker-protocol';
 import * as AppProtocol from './app-protocol';
 
-
-// ----------------------------------------- [ Logs ] -----------------------------------------
-const logger = log4js.getLogger(__filename);
-log4js.configure({
-  appenders: {
-    file: {
-      type: "file", filename: path.join(getClientDir(), 'sliver-gui.log')
-    },
-    console: {
-      type: 'stdout',
-    }
-  },
-  categories: {
-    default: {
-      appenders: ["file", "console"],
-      level: getLogLevel()
-    }
-  }
-});
-
-function getLogLevel(): string {
-  let logLevel: string = process.env.SLIVER_GUI_LOG_LEVEL || "info";
-  switch(logLevel?.toLowerCase()) {
-    case "all":
-      logLevel = "all";
-      break;
-    case "trace":
-      logLevel = "trace";
-      break;
-    case "debug":
-      logLevel = "debug";
-      break;
-    case "info":
-      logLevel = "info";
-      break;
-    case "warn":
-      logLevel = "warn";
-      break;
-    case "error":
-      logLevel = "error";
-      break;
-    default:
-      logLevel = "info";
-      break;
-  }
-  console.log(`Logger set to: '${logLevel}'`);
-  return logLevel;
-}
 
 // ----------------------------------------- [ Protocols ] -----------------------------------------
 protocol.registerSchemesAsPrivileged([{

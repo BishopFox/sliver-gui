@@ -93,7 +93,6 @@
     "google-protobuf": "^3.11.4",
     "handlebars": "^4.7.6",
     "js-base64": "^3.6.0",
-    "log4js": "^6.3.0",
     "material-design-icons": "^3.0.1",
     "moment": "^2.24.0",
     "monaco-editor": "^0.18.1",
@@ -103,6 +102,7 @@
     "sliver-script": "^1.0.34",
     "sqlite3": "^5.0.0",
     "uuid": "^8.3.1",
+    "winston": "^3.3.3",
     "xterm": "^4.4.0",
     "xterm-addon-fit": "^0.4.0"
   }

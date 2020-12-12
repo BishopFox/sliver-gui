@@ -10,6 +10,7 @@
 /release
 main.js
 app-protocol.js
+logs.js
 
 rpc/*.js
 rpc/pb/*.js

@@ -18,7 +18,6 @@ import { Subject } from 'rxjs';
 import * as fs from 'fs';
 import * as uuid from 'uuid';
 import * as path from 'path';
-import * as log4js from 'log4js';
 import * as Base64 from 'js-base64';
 import { autoUpdater } from 'electron-updater';
 import { Tunnel } from 'sliver-script';
@@ -29,8 +28,7 @@ import { initMenu, MenuEvent } from './menu';
 import { dispatchIPC, IPCHandlers, IPCMessage } from '../ipc/ipc';
 import * as AppProtocol from '../app-protocol';
 
-
-const logger = log4js.getLogger(__filename);
+import { logger } from '../logs';
 
 
 // https://nodejs.org/api/process.html#process_process_platform

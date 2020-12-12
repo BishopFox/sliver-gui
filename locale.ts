@@ -13,12 +13,12 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import * as log4js from 'log4js';
 import * as path from 'path';
 import * as os from 'os';
 import * as fs from 'fs';
 
-const logger = log4js.getLogger(__filename);
+import { logger } from './logs';
+
 
 const DEFAULT_CLIENT_DIR = path.join(os.homedir(), '.sliver-client');
 export const DEFAULT_LOCALE = "en";

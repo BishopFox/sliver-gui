@@ -3,9 +3,8 @@
 import * as https from 'https';
 import * as fs from 'fs';
 import * as path from 'path';
-import * as log4js from 'log4js';
 
-const logger = log4js.getLogger(__filename);
+import { logger } from '../logs';
 
 
 export async function* walk(dir: string): string|AsyncGenerator<any, any, any> {
