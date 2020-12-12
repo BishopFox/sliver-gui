@@ -18,6 +18,12 @@ import * as path from 'path';
 
 import { getClientDir } from './locale';
 
+
+const LOG_FORMAT = winston.format.printf(({ level, message, label, timestamp }) => {
+  return `[${level}] ${timestamp} - ${message}`;
+});
+
+
 const enum Level { 
   Error = 'error', 
   Warn = 'warn', 
@@ -27,6 +33,9 @@ const enum Level {
   Debug = 'debug', 
   Silly = 'silly'
 }
+
+// Log levels: https://github.com/winstonjs/winston#logging-levels
+// This is used to link the strings to their numeric value by index
 const Levels: string[] = [
   Level.Error,   // 0
   Level.Warn,    // 1
@@ -50,9 +59,9 @@ export const logger = winston.createLogger({
   level: CURRENT_LEVEL,
   format:  winston.format.combine(
     winston.format.simple(),
-    winston.format.timestamp()
+    winston.format.timestamp(),
+    LOG_FORMAT,
   ),
-  defaultMeta: { service: 'user-service' },
   transports: [
     new winston.transports.File({ 
       filename: path.join(getClientDir(), 'sliver-gui.log')
@@ -61,13 +70,14 @@ export const logger = winston.createLogger({
 });
 
 
-if (4 <= Levels.indexOf(logger.level) || process.env.SLIVER_GUI_CONSOLE_LOG) {
+if (Levels.indexOf(Level.Verbose) <= Levels.indexOf(logger.level) || process.env.SLIVER_GUI_CONSOLE_LOG) {
   logger.add(new winston.transports.Console({
     level: CURRENT_LEVEL,
     format: winston.format.combine(
       winston.format.colorize(),
       winston.format.simple(),
-      winston.format.timestamp()
+      winston.format.timestamp(),
+      LOG_FORMAT,
     )
   }));
   logger.info('*** Console output enabled ***');

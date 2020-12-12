@@ -87,7 +87,7 @@ export class WindowManager {
 
     ipcMain.on('tunnel-outgoing', async (_: IpcMainEvent, tunnelIpcId: string, data: string) => {
       if (this.tunnels.has(tunnelIpcId)) {
-        logger.debug(`[window-manager] tunnel outgoing (ipc: ${tunnelIpcId}) ${data}`);
+        logger.silly(`[window-manager] tunnel outgoing (ipc: ${tunnelIpcId}) ${data}`);
         const tunnel = this.tunnels.get(tunnelIpcId);
         tunnel.stdin.next(Buffer.from(Base64.toUint8Array(data)));
       } else {
@@ -143,7 +143,7 @@ export class WindowManager {
 
   // send - Send a message to a window's webContents
   send(channel: string, message: any, otherWindows = false): void {
-    logger.debug(`Send <channel: ${channel}, msg: ${message}, otherWindows: ${otherWindows}>`);
+    logger.silly(`Send <channel: ${channel}, msg: ${message}, otherWindows: ${otherWindows}>`);
     this.mainWindow.webContents.send(channel, message);
     if (otherWindows) {
       this.otherWindows.forEach(window => {
