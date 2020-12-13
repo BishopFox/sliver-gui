@@ -436,7 +436,7 @@ export class IPCHandlers {
     "properties": {
       "tunnelIpcId": { "type": "string", "minLength": 1 },
       "sessionId": { "type": "number" },
-      "path": { "type": "string", "minLength": 1 },
+      "path": { "type": "string" },
       "pty": { "type": "boolean" }
     },
     "required": ["tunnelIpcId", "sessionId", "path", "pty"],

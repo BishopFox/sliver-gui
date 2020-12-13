@@ -41,7 +41,7 @@ export class WebsiteDetailsComponent implements OnInit {
               private _jobsService: JobsService) { }
 
   ngOnInit(): void {
-    this._route.params.pipe(take(1)).subscribe((params) => {
+    this._route.params.pipe(take(1)).subscribe(params => {
       this.name = params['name'];
       this._jobsService.websiteByName(this.name).then(website => {
         this.website = website;

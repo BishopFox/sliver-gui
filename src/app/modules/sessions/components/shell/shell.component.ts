@@ -15,10 +15,11 @@
 
 
 import { 
-  Component, OnInit, ViewChildren, AfterViewInit, OnDestroy, Input, QueryList, // Directive
+  Component, OnInit, ViewChildren, AfterViewInit, OnDestroy, Input, QueryList, Inject
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
@@ -40,7 +41,8 @@ export class ShellComponent implements OnInit, AfterViewInit, OnDestroy {
   selected = new FormControl(0);
   @ViewChildren(NgTerminalComponent) terminalChildren!: QueryList<NgTerminalComponent>;
 
-  constructor(private _route: ActivatedRoute,
+  constructor(public dialog: MatDialog,
+              private _route: ActivatedRoute,
               private _sliverService: SliverService,
               private _shellService: ShellService) { }
 
@@ -67,6 +69,10 @@ export class ShellComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
+  onKeyEvent(event, shell: Shell) {
+    shell.tunnel.stdin.next(this.textEncoder.encode(event.key));
+  }
+
   jumpToTop() {
     const selectedShell = this.shells[this.selected?.value];
     if (selectedShell) {
@@ -90,20 +96,86 @@ export class ShellComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  onKeyEvent(event, shell: Shell) {
-    shell.tunnel.stdin.next(this.textEncoder.encode(event.key));
-  }
-
-  async addTab() {
-    await this._shellService.openShell(this.session.getId(), '/bin/bash', true);
-    if (this.selectAfterAdding) {
-      this.selected.setValue(this.shells.length - 1);
+  renameTab() {
+    const selectedShell = this.shells[this.selected?.value];
+    if (selectedShell) {
+      const dialogRef = this.dialog.open(ShellRenameDialogComponent, {
+        width: '40%',
+        data: selectedShell.name,
+      });
+      dialogRef.afterClosed().pipe(take(1)).subscribe(name => {
+        if (name) {
+          selectedShell.name = name;
+        }
+      });
     }
   }
 
-  removeTab(index: number) {
-    // this.tabs.splice(index, 1);
+  async addTab() {
+    let pty = true;
+    if (this.isShittyOperatingSystem()) {
+      pty = false;
+    }
+    await this._shellService.openShell(this.session.getId(), '', pty);
+    if (this.selectAfterAdding) {
+      this.selected.setValue(this.shells.length - 1);
+      const selectedShell = this.shells[this.selected?.value];
+      selectedShell.name = `${this.session.getUsername()}@${this.session.getRemoteaddress()} (${this.shells.length})`;
+    }
+  }
+
+  removeTab(shell: Shell) {
+    if (shell) {
+      const dialogRef = this.dialog.open(ShellCloseDialogComponent);
+      dialogRef.afterClosed().pipe(take(1)).subscribe(confirm => {
+        if (confirm) {
+          shell.tunnel.stdin.complete();
+        }
+      });
+    }
+  }
+
+  isShittyOperatingSystem() {
+    return this.session.getOs().toLowerCase() === 'windows';
   }
 
 }
 
+
+@Component({
+  selector: 'session-shell-close-dialog',
+  templateUrl: './shell-close.dialog.html',
+})
+export class ShellCloseDialogComponent {
+
+  constructor(public dialogRef: MatDialogRef<ShellCloseDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close(false);
+  }
+
+  complete() {
+    this.dialogRef.close(true);
+  }
+
+}
+
+@Component({
+  selector: 'session-shell-rename-dialog',
+  templateUrl: './shell-rename.dialog.html',
+})
+export class ShellRenameDialogComponent {
+
+  constructor(public dialogRef: MatDialogRef<ShellRenameDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public name: string) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  complete() {
+    this.dialogRef.close(this.name);
+  }
+
+}

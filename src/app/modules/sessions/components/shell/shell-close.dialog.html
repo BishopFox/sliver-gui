@@ -1,0 +1,19 @@
+<h1 mat-dialog-title align="center">
+  <i class="fas fa-fw fa-exclamation-triangle"></i>
+  <ng-container i18n>
+    Close Shell
+  </ng-container>
+</h1>
+<div mat-dialog-content align="center">
+  <ng-container i18n>
+    Are you sure you want to close this shell?
+  </ng-container>
+</div>
+<div mat-dialog-actions align="center">
+  <button mat-raised-button color="warn" (click)="complete()">
+    &nbsp;&nbsp;<ng-container i18n>Close</ng-container>&nbsp;&nbsp;
+  </button>
+  <button mat-button (click)="onNoClick()">
+    &nbsp;&nbsp;<ng-container i18n>Cancel</ng-container>&nbsp;&nbsp;
+  </button>
+</div>

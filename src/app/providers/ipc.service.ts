@@ -79,7 +79,6 @@ export class IPCService {
     });
 
     this.outgoingTunnelEvent$.subscribe((event: TunnelEvent) => {
-      console.log(`[ipc service] outgoing tunnel event: ${event}`);
       window.postMessage(JSON.stringify({
         tunnelIpcId: event.tunnelIpcId,
         type: 'tunnel-outgoing',

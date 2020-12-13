@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>
+  <i class="fas fa-fw fa-pencil-alt"></i>
+  <ng-container i18n>
+    Rename
+  </ng-container>
+</h1>
+<div mat-dialog-content align="center">
+  <p>
+    <mat-form-field appearance="outline" style="width: 80%;">
+      <mat-label>
+        <ng-container i18n>Shell Name</ng-container>
+      </mat-label>
+      <input matInput [(ngModel)]="name" placeholder="Name">
+    </mat-form-field>
+  </p>
+</div>
+<div mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" (click)="complete()">
+    &nbsp;&nbsp;
+    <i class="fa fas fa-fw fa-save"></i>
+    <ng-container i18n>
+      Save
+    </ng-container>
+    &nbsp;&nbsp;
+  </button>
+  <button mat-button (click)="onNoClick()">
+    &nbsp;&nbsp;<ng-container i18n>Cancel</ng-container>&nbsp;&nbsp;
+  </button>
+</div>

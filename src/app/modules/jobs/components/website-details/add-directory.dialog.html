@@ -1,33 +1,33 @@
 <h1 mat-dialog-title>
-    <i class="fas fa-fw fa-folder"></i>
-    <ng-container i18n>
-      Add Directory
-    </ng-container>
-  </h1>
-  <div mat-dialog-content align="center">
-    <form [formGroup]="addDirectoryForm" style="width: 100%;">
-  
-      <p>
-        <mat-form-field appearance="outline" class="monospace" style="width: 80%;">
-          <mat-label>
-            <ng-container i18n>Path Prefix</ng-container>
-          </mat-label>
-          <input matInput [formControl]="addDirectoryForm.controls['path']" placeholder="/">
-        </mat-form-field>
-      </p>
+  <i class="fas fa-fw fa-folder"></i>
+  <ng-container i18n>
+    Add Directory
+  </ng-container>
+</h1>
+<div mat-dialog-content align="center">
+  <form [formGroup]="addDirectoryForm" style="width: 100%;">
 
-    </form>
-  </div>
-  <div mat-dialog-actions align="center">
-    <button mat-raised-button [disabled]="!addDirectoryForm.valid" color="primary" (click)="complete()">
-      &nbsp;&nbsp;
-      <i class="fas fa-fw fa-plus"></i>
-      <ng-container i18n>
-        Select Directory
-      </ng-container>
-      &nbsp;&nbsp;
-    </button>
-    <button mat-button (click)="onNoClick()">
-      &nbsp;&nbsp;<ng-container i18n>Cancel</ng-container>&nbsp;&nbsp;
-    </button>
-  </div>
+    <p>
+      <mat-form-field appearance="outline" class="monospace" style="width: 80%;">
+        <mat-label>
+          <ng-container i18n>Path Prefix</ng-container>
+        </mat-label>
+        <input matInput [formControl]="addDirectoryForm.controls['path']" placeholder="/">
+      </mat-form-field>
+    </p>
+
+  </form>
+</div>
+<div mat-dialog-actions align="center">
+  <button mat-raised-button [disabled]="!addDirectoryForm.valid" color="primary" (click)="complete()">
+    &nbsp;&nbsp;
+    <i class="fas fa-fw fa-plus"></i>
+    <ng-container i18n>
+      Select Directory
+    </ng-container>
+    &nbsp;&nbsp;
+  </button>
+  <button mat-button (click)="onNoClick()">
+    &nbsp;&nbsp;<ng-container i18n>Cancel</ng-container>&nbsp;&nbsp;
+  </button>
+</div>

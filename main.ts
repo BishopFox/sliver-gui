@@ -13,12 +13,20 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { app,  protocol } from 'electron';
+import { app, protocol } from 'electron';
 
 import { logger } from './logs';
 import { WindowManager } from './windows/window-manager';
+import * as contextMenu from 'electron-context-menu';
 import * as WorkerProtocol from './workers/worker-protocol';
 import * as AppProtocol from './app-protocol';
+
+// ----------------------------------------- [ Context Menu ] -----------------------------------------
+contextMenu({
+  prepend: (defaultActions, params, browserWindow) => [
+
+  ],
+});
 
 
 // ----------------------------------------- [ Protocols ] -----------------------------------------
