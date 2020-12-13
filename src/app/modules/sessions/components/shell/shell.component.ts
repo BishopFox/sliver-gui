@@ -27,12 +27,6 @@ import { ShellService, Shell } from '@app/providers/shell.service';
 import { NgTerminalComponent } from '@app/modules/terminal/ng-terminal.component';
 
 
-// @Directive({selector: 'ng-terminal'})
-// export class NgTerminalDirective {
-//   @Input() id!: string;
-// }
-
-
 @Component({
   selector: 'sessions-shell',
   templateUrl: './shell.component.html',
