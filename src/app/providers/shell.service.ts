@@ -55,6 +55,7 @@ export class ShellService {
         });
       },
       complete: () => {
+        this.shells.delete(tunnelIpcId);
         if (this._tunnelService.has(tunnelIpcId)) {
           this._tunnelService.delete(tunnelIpcId);
         }

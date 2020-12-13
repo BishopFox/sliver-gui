@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>
+  <i class="fas fa-fw fa-terminal"></i>
+  <ng-container i18n>
+    Custom Shell
+  </ng-container>
+</h1>
+<div mat-dialog-content align="center">
+
+  <form [formGroup]="customShellForm">
+    <p>
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>
+          <ng-container i18n>Shell Path</ng-container>
+        </mat-label>
+        <div class="monospace">
+          <input matInput [formControl]="customShellForm.controls['path']" i18n-placeholder placeholder="Shell Path">
+        </div>
+      </mat-form-field>
+    </p>
+    <p style="float: left;">
+      <mat-slide-toggle [formControl]="customShellForm.controls['pty']" [disabled]="isWindows()" color="primary">
+        PTY
+      </mat-slide-toggle>
+    </p>
+  </form>
+
+</div>
+<div mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" (click)="complete()">
+    &nbsp;&nbsp;
+    <ng-container i18n>
+      Execute
+    </ng-container>
+    &nbsp;&nbsp;
+  </button>
+  <button mat-button (click)="onNoClick()">
+    &nbsp;&nbsp;<ng-container i18n>Cancel</ng-container>&nbsp;&nbsp;
+  </button>
+</div>

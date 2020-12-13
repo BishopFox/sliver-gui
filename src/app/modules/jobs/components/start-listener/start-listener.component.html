@@ -135,7 +135,7 @@
             </div>
             <div>
               <h3>
-                <i class="fa fas fa-fw fa-lock"></i>
+                <i class="fas fa-fw fa-lock"></i>
                 SSL/TLS Settings
               </h3>
               <p>
@@ -162,13 +162,13 @@
               <p *ngIf="httpsOptionsForm.controls['tlsSetting'].value === TLSSettings.Custom">
 
                 <button mat-raised-button (click)="selectCertificateFile()">
-                  <i class="fa fas fa-fw fa-certificate"></i>&nbsp;
+                  <i class="fas fa-fw fa-certificate"></i>&nbsp;
                   <ng-container i18n>Select Certificate File</ng-container>
                 </button>
                 <br />
                 <br />
                 <button mat-raised-button (click)="selectKeyFile()">
-                  <i class="fa fas fa-fw fa-key"></i>&nbsp;
+                  <i class="fas fa-fw fa-key"></i>&nbsp;
                   <ng-container i18n>Select Key File</ng-container>
                 </button>
 

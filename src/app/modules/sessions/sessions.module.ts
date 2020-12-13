@@ -17,7 +17,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BaseMaterialModule } from '../../base-material';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { SessionsComponent } from './components/sessions-table/sessions-table.component';
@@ -26,7 +26,9 @@ import {
   FileBrowserComponent, MkdirDialogComponent, RmDialogComponent,
   DownloadDialogComponent
 } from './components/file-browser/file-browser.component';
-import { ShellComponent, ShellRenameDialogComponent, ShellCloseDialogComponent } from './components/shell/shell.component';
+import {
+  ShellComponent, ShellRenameDialogComponent, ShellCloseDialogComponent, ShellCustomDialogComponent
+} from './components/shell/shell.component';
 import { PsComponent } from './components/ps/ps.component';
 import { InfoComponent } from './components/info/info.component';
 import { SharedModule } from '../../shared/shared.module';
@@ -46,6 +48,7 @@ import { NgTerminalModule } from '@app/modules/terminal/ng-terminal.module';
     ShellComponent,
     ShellRenameDialogComponent,
     ShellCloseDialogComponent,
+    ShellCustomDialogComponent,
     PsComponent,
     InfoComponent,
     MainComponent,
@@ -56,6 +59,7 @@ import { NgTerminalModule } from '@app/modules/terminal/ng-terminal.module';
     RouterModule,
     BaseMaterialModule,
     FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
     NgTerminalModule,
     SharedModule

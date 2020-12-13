@@ -60,6 +60,7 @@ export class TunnelService {
 
   delete(tunnelIpcId: string): void {
     this.tunnels.delete(tunnelIpcId);
+    // tell client the close connection
   }
 
 }

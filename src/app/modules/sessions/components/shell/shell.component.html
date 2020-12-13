@@ -8,31 +8,31 @@
 <div class="grid-wrapper">
 
   <mat-toolbar-row class="terminal-toolbar"  fxLayout="row" fxLayoutAlign="start center">
-    <button mat-raised-button (click)="addTab()">
-      <i class="fa fas fa-fw fa-plus-square"></i>
+    <button mat-raised-button (click)="addDefaultShell()">
+      <i class="fas fa-fw fa-plus-square"></i>
       New Shell
     </button>
-    <button mat-raised-button (click)="addTab()" style="margin-left: 16px;">
-      <i class="fa fas fa-fw fa-plus-square"></i>
+    <button mat-raised-button (click)="addCustomShell()" style="margin-left: 16px;">
+      <i class="fas fa-fw fa-plus-square"></i>
       Custom Shell
     </button>
     <button mat-stroked-button [disabled]="!this.shells.length" (click)="jumpToTop()" style="margin-left: 16px;">
-      <i class="fa fas fa-fw fa-arrow-up"></i>
+      <i class="fas fa-fw fa-arrow-up"></i>
       Top
     </button>
     <button mat-stroked-button [disabled]="!this.shells.length" (click)="jumpToBottom()" style="margin-left: 16px;">
-      <i class="fa fas fa-fw fa-arrow-down"></i>
+      <i class="fas fa-fw fa-arrow-down"></i>
       Bottom
     </button>
     <button mat-stroked-button [disabled]="!this.shells.length" (click)="copyScrollback()" style="margin-left: 16px;">
-      <i class="fa fas fa-fw fa-copy"></i>
+      <i class="fas fa-fw fa-copy"></i>
       Copy Scrollback
     </button>
 
     <span fxFlex></span>
 
     <button mat-stroked-button [disabled]="!this.shells.length" (click)="renameTab()" style="float: right;">
-      <i class="fa fas fa-fw fa-pencil-alt"></i>
+      <i class="fas fa-fw fa-pencil-alt"></i>
       Rename
     </button>  
   </mat-toolbar-row>
@@ -45,7 +45,7 @@
           {{ shell.name ? shell.name : shell.id }}
         </div>
         <button mat-icon-button (click)="removeTab(shell)">
-          <i class="fa fas fa-fw fa-times-circle"></i>
+          <i class="fas fa-fw fa-times-circle"></i>
         </button>
       </ng-template>
 

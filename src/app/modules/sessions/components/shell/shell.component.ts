@@ -14,10 +14,8 @@
 */
 
 
-import { 
-  Component, OnInit, ViewChildren, AfterViewInit, OnDestroy, Input, QueryList, Inject
-} from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, OnInit, ViewChildren, Input, QueryList, Inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
@@ -33,7 +31,7 @@ import { NgTerminalComponent } from '@app/modules/terminal/ng-terminal.component
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss']
 })
-export class ShellComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ShellComponent implements OnInit {
 
   @Input() selectAfterAdding = true;
   session: clientpb.Session;
@@ -59,14 +57,6 @@ export class ShellComponent implements OnInit, AfterViewInit, OnDestroy {
 
   get shells(): Shell[] {
     return this._shellService.getOpenShells();
-  }
-
-  ngOnDestroy() {
-
-  }
-
-  ngAfterViewInit() {
-
   }
 
   onKeyEvent(event, shell: Shell) {
@@ -111,17 +101,34 @@ export class ShellComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  async addTab() {
-    let pty = true;
-    if (this.isShittyOperatingSystem()) {
-      pty = false;
-    }
+  async addDefaultShell() {
+    const pty = !this.isShittyOperatingSystem();
     await this._shellService.openShell(this.session.getId(), '', pty);
     if (this.selectAfterAdding) {
       this.selected.setValue(this.shells.length - 1);
       const selectedShell = this.shells[this.selected?.value];
       selectedShell.name = `${this.session.getUsername()}@${this.session.getRemoteaddress()} (${this.shells.length})`;
     }
+  }
+
+  addCustomShell() {
+    const dialogRef = this.dialog.open(ShellCustomDialogComponent, {
+      width: '40%',
+      data: {
+        session: this.session,
+      }
+    });
+    dialogRef.afterClosed().pipe(take(1)).subscribe(async (customShell) => {
+      if (!customShell) {
+        return;
+      }
+      await this._shellService.openShell(this.session.getId(), customShell.path, customShell.pty);
+      if (this.selectAfterAdding) {
+        this.selected.setValue(this.shells.length - 1);
+        const selectedShell = this.shells[this.selected?.value];
+        selectedShell.name = `${this.session.getUsername()}@${this.session.getRemoteaddress()} (${this.shells.length})`;
+      }
+    });
   }
 
   removeTab(shell: Shell) {
@@ -161,6 +168,7 @@ export class ShellCloseDialogComponent {
 
 }
 
+
 @Component({
   selector: 'session-shell-rename-dialog',
   templateUrl: './shell-rename.dialog.html',
@@ -176,6 +184,51 @@ export class ShellRenameDialogComponent {
 
   complete() {
     this.dialogRef.close(this.name);
+  }
+
+}
+
+@Component({
+  selector: 'session-shell-custom-dialog',
+  templateUrl: './shell-custom.dialog.html',
+})
+export class ShellCustomDialogComponent implements OnInit {
+
+  customShellForm: FormGroup;
+
+  constructor(public dialogRef: MatDialogRef<ShellCustomDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private _fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    const defaultPty = !this.isWindows();
+    const defaultShellPath = this.defaultShellPath();
+    this.customShellForm = this._fb.group({
+      path: [defaultShellPath, Validators.compose([
+        Validators.required,
+      ])],
+      pty: [defaultPty],
+    });
+  }
+
+  defaultShellPath(): string {
+    if (this.isWindows()) {
+      return 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe';
+    } else {
+      return '/bin/bash';
+    }
+  }
+
+  isWindows(): boolean {
+    return this.data.session.getOs().toLowerCase() === 'windows';
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  complete() {
+    this.dialogRef.close(this.customShellForm.value);
   }
 
 }
