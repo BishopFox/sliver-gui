@@ -67,7 +67,6 @@ export class IPCService {
           this.configEvent$.next(JSON.parse(msg.data));
         } else if (msg.type === 'tunnel-incoming') {
           const tunnelEvent = JSON.parse(msg.data);
-          console.log(`tunnel-incoming ${tunnelEvent.tunnelIpcId}: ${tunnelEvent.data}`)
           this.incomingTunnelEvent$.next({
             tunnelIpcId: tunnelEvent.tunnelIpcId,
             data: Base64.toUint8Array(tunnelEvent.data),

@@ -15,7 +15,7 @@
 
 
 import { 
-  Component, OnInit, ContentChildren, AfterViewInit, OnDestroy, Input, QueryList, Directive
+  Component, OnInit, ViewChildren, AfterViewInit, OnDestroy, Input, QueryList, // Directive
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -24,12 +24,13 @@ import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 import { SliverService } from '@app/providers/sliver.service';
 import { ShellService, Shell } from '@app/providers/shell.service';
+import { NgTerminalComponent } from '@app/modules/terminal/ng-terminal.component';
 
 
-@Directive({selector: 'shell-directive'})
-export class ShellDirective {
-
-}
+// @Directive({selector: 'ng-terminal'})
+// export class NgTerminalDirective {
+//   @Input() id!: string;
+// }
 
 
 @Component({
@@ -39,14 +40,11 @@ export class ShellDirective {
 })
 export class ShellComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  session: clientpb.Session;
   @Input() selectAfterAdding = true;
-
+  session: clientpb.Session;
   textEncoder = new TextEncoder();
-
-  @ContentChildren(ShellDirective) contentChildren!: QueryList<ShellDirective>;
-
   selected = new FormControl(0);
+  @ViewChildren(NgTerminalComponent) terminalChildren!: QueryList<NgTerminalComponent>;
 
   constructor(private _route: ActivatedRoute,
               private _sliverService: SliverService,
@@ -75,8 +73,30 @@ export class ShellComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
+  jumpToTop() {
+    const selectedShell = this.shells[this.selected?.value];
+    if (selectedShell) {
+      selectedShell.terminal.scrollToTop();
+    }
+  }
+
+  jumpToBottom() {
+    const selectedShell = this.shells[this.selected?.value];
+    if (selectedShell) {
+      selectedShell.terminal.scrollToBottom();
+    }
+  }
+
+  copyScrollback() {
+    const selectedShell = this.shells[this.selected?.value];
+    if (selectedShell) {
+      selectedShell.terminal.selectAll();
+      document.execCommand('copy');
+      selectedShell.terminal.clearSelection();
+    }
+  }
+
   onKeyEvent(event, shell: Shell) {
-    console.log(`Key event on shell ${shell.id}: ${event.key}`);
     shell.tunnel.stdin.next(this.textEncoder.encode(event.key));
   }
 

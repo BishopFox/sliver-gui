@@ -41,7 +41,6 @@ export class TunnelService {
 
   constructor(private _ipc: IPCService) {
     this._ipc.incomingTunnelEvent$.subscribe(event => {
-      console.log(`Tunnel event ${event.tunnelIpcId}: ${event.data}`);
       const tunnel = this.tunnels.get(event.tunnelIpcId);
       tunnel?.stdout.next(event.data);
     });

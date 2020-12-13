@@ -94,7 +94,6 @@ export class WindowManager {
         logger.warn(`Outgoing data for non-existent tunnel (ipc: ${tunnelIpcId})`);
       }
     });
-  
   }
 
   initUpdate() {

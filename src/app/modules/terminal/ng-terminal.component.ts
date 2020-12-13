@@ -14,6 +14,7 @@ import { ResizeEvent } from 'angular-resizable-element';
 })
 export class NgTerminalComponent implements OnInit, AfterViewInit, AfterViewChecked, NgTerminal, OnDestroy {
   
+  // @Input() id: string;
   @Input() terminal: Terminal;
   @Input() scrollback: number = Number.MAX_VALUE;
 

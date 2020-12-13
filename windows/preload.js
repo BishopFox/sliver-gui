@@ -67,7 +67,7 @@ ipcRenderer.on('ipc', (_, msg, origin) => {
   }
 });
 
-// // Push events - Can go to all app windows
+// Push events - Can go to all app windows
 ipcRenderer.on('push', (_, data) => {
   window.postMessage(JSON.stringify({
     type: 'push',
@@ -75,13 +75,22 @@ ipcRenderer.on('push', (_, data) => {
   }), MAIN_ORIGIN);
 });
 
-// // Config events - Can go to all app windows
+// Config events - Can go to all app windows
 ipcRenderer.on('config', (_, data) => {
   window.postMessage(JSON.stringify({
     type: 'config',
     data: data,
   }), window.location.origin);
 });
+
+// Tunnel events (incoming)
+ipcRenderer.on('tunnel-incoming', (_, data) => {
+  window.postMessage(JSON.stringify({
+    type: 'tunnel-incoming',
+    data: data,
+  }), window.location.origin);
+});
+
 
 if (window.location.origin === MAIN_ORIGIN) {
   // Menu events
@@ -99,15 +108,6 @@ if (window.location.origin === MAIN_ORIGIN) {
       data: data,
     }), MAIN_ORIGIN);
   });
-
-  // Tunnel events (incoming)
-  ipcRenderer.on('tunnel-incoming', (_, data) => {
-    window.postMessage(JSON.stringify({
-      type: 'tunnel-incoming',
-      data: data,
-    }), MAIN_ORIGIN);
-  });
-
 }
 
 
