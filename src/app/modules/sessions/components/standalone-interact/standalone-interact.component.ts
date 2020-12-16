@@ -55,4 +55,8 @@ export class StandaloneInteractComponent implements OnInit {
     return this.session ? this.session.getActivec2() : null;
   }
 
+  isWindows(): boolean {
+    return this.session.getOs() === 'windows';
+  }
+
 }

@@ -35,6 +35,11 @@ import { SharedModule } from '../../shared/shared.module';
 import { MainComponent } from './components/main/main.component';
 import { StandaloneInteractComponent } from './components/standalone-interact/standalone-interact.component';
 import { NgTerminalModule } from '@app/modules/terminal/ng-terminal.module';
+import { ExecuteCommandComponent } from './components/execute-command/execute-command.component';
+import { SideLoadComponent } from './components/side-load/side-load.component';
+import { ScreenshotsComponent } from './components/screenshots/screenshots.component';
+import { ExecuteAssemblyComponent } from './components/execute-assembly/execute-assembly.component';
+import { ExecuteShellcodeComponent } from './components/execute-shellcode/execute-shellcode.component';
 
 
 @NgModule({
@@ -52,7 +57,12 @@ import { NgTerminalModule } from '@app/modules/terminal/ng-terminal.module';
     PsComponent,
     InfoComponent,
     MainComponent,
-    StandaloneInteractComponent
+    StandaloneInteractComponent,
+    ExecuteCommandComponent,
+    SideLoadComponent,
+    ScreenshotsComponent,
+    ExecuteAssemblyComponent,
+    ExecuteShellcodeComponent
   ],
   imports: [
     CommonModule,

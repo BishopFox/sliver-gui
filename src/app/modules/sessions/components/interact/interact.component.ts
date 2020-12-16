@@ -53,6 +53,10 @@ export class InteractComponent implements OnInit {
     return this.session ? this.session.getActivec2() : null;
   }
 
+  isWindows(): boolean {
+    return this.session.getOs() === 'windows';
+  }
+
   openSessionWindow() {
     this._clientService.openSessionWindow(this.sessionId);
   }
