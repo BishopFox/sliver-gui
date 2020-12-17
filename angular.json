@@ -27,7 +27,7 @@
               "src/favicon.512x512.png",
               {
                 "glob": "**/*",
-                "input": "workers/worker/dist",
+                "input": "main/workers/worker/dist",
                 "output": "worker/",
                 "ignore": []
               },

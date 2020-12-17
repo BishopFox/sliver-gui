@@ -13,7 +13,7 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "build:worker": "cd workers/worker && npm run build",
+    "build:worker": "cd main/workers/worker && npm run build",
     "build": "npm run electron:serve-tsc && ng build",
     "build:dev": "npm run version && npm run build:worker && npm run build -- -c dev",
     "build:prod": "npm run clean && npm run version && npm run build:worker && npm run build -- -c production",

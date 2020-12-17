@@ -16,7 +16,7 @@ rpc/*.js
 rpc/pb/*.js
 rpc/pb/*_pb.d.ts
 
-ipc/*.js
+main/ipc/*.js
 
 src/**/*.js
 !src/karma.conf.js

@@ -16,10 +16,10 @@
 import { app, protocol } from 'electron';
 
 import { logger } from './logs';
-import { WindowManager } from './windows/window-manager';
+import { WindowManager } from './main/windows/window-manager';
 import * as contextMenu from 'electron-context-menu';
-import * as WorkerProtocol from './workers/worker-protocol';
-import * as AppProtocol from './app-protocol';
+import * as WorkerProtocol from './main/workers/worker-protocol';
+import * as AppProtocol from './main/app-protocol';
 
 // ----------------------------------------- [ Context Menu ] -----------------------------------------
 contextMenu({
