@@ -184,7 +184,13 @@ export class AppComponent implements OnInit, OnDestroy {
       window.history.forward();
     });
 
-
+    // Settings menu event
+    this._eventsService.menu$.pipe(
+      filter(event => event.button === 'settings')
+    ).subscribe(() => {
+      this._router.navigate(['settings']);
+    });
+    
     // About menu event
     this._eventsService.menu$.pipe(
       filter(event => event.button === 'about')

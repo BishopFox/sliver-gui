@@ -41,6 +41,14 @@ export async function initMenu(menuEvents: Subject<MenuEvent>, updateCallback: C
         },
         { type: 'separator' },
         {
+          label: 'Preferences',
+          accelerator: 'CmdOrCtrl+,',
+          click: () => {
+            menuEvents.next({ button: 'settings' })
+          }
+        },
+        { type: 'separator' },
+        {
           label: 'Exit',
           click: () => {
             app.quit();
@@ -91,6 +99,23 @@ export async function initMenu(menuEvents: Subject<MenuEvent>, updateCallback: C
       ]
     },
     {
+      label: 'Download',
+      submenu: [
+        {
+          label: 'Sliver Server',
+          click: () => {
+            menuEvents.next({ button: 'sliver-download-server' });
+          }
+        },
+        {
+          label: 'Console Client',
+          click: () => {
+            menuEvents.next({ button: 'sliver-download-client' });
+          }
+        }
+      ]
+    },
+    {
       role: 'help',
       submenu: [
         {
@@ -99,18 +124,13 @@ export async function initMenu(menuEvents: Subject<MenuEvent>, updateCallback: C
             shell.openExternal('https://github.com/BishopFox/sliver/wiki');
           }
         },
+        { type: 'separator' },
         {
-          label: 'Download Sliver Server',
+          label: 'Ask a Question',
           click: () => {
-            menuEvents.next({ button: 'sliver-download-server' });
+            shell.openExternal('https://github.com/BishopFox/sliver/discussions');
           }
         },
-        {
-          label: 'Download Console Client',
-          click: () => {
-            menuEvents.next({ button: 'sliver-download-client' });
-          }
-        }
       ]
     }
   ])
