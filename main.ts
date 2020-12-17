@@ -15,7 +15,7 @@
 
 import { app, protocol } from 'electron';
 
-import { logger } from './logs';
+import { logger } from './main/logs';
 import { WindowManager } from './main/windows/window-manager';
 import * as contextMenu from 'electron-context-menu';
 import * as WorkerProtocol from './main/workers/worker-protocol';
