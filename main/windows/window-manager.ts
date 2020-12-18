@@ -25,7 +25,7 @@ import { Tunnel } from 'sliver-script';
 import { CONFIG_DIR } from '../ipc/ipc';
 import { WorkerManager } from '../workers/worker-manager';
 import { initMenu, MenuEvent } from './menu';
-import { dispatchIPC, IPCHandlers, IPCMessage } from '../ipc/ipc';
+import { IPCHandlers, IPCMessage } from '../ipc/ipc';
 import * as AppProtocol from '../app-protocol';
 
 import { logger } from '../logs';
@@ -58,7 +58,7 @@ export interface ConfigEvent {
 
 export class WindowManager {
 
-  public handlers: IPCHandlers;
+  public ipc: IPCHandlers;
   public workerManager: WorkerManager;
 
   private mainWindow: BrowserWindow;
@@ -71,7 +71,7 @@ export class WindowManager {
 
   constructor() {
     this.workerManager = new WorkerManager();
-    this.handlers = new IPCHandlers(this);
+    this.ipc = new IPCHandlers(this);
   }
 
   async init() {
@@ -153,7 +153,7 @@ export class WindowManager {
 
   private startIPCHandlers() {
     ipcMain.on('ipc', async (event: IpcMainEvent, msg: IPCMessage, origin: string) => {
-      dispatchIPC(this.handlers, msg.method, msg.data).then((result: any) => {
+      this.ipc.dispatch(msg.method, msg.data).then((result: any) => {
         if (msg.id !== 0) {
           event.sender.send('ipc', {
             id: msg.id,

@@ -1,1 +1,57 @@
-<p>execute-command works!</p>
+<div *ngIf="!session" class="grid-spinner-wrapper">
+  <div class="spinner">
+    <mat-progress-spinner mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+</div>
+
+<div class="grid-wrapper">
+
+  <mat-toolbar-row class="terminal-toolbar"  fxLayout="row" fxLayoutAlign="start center">
+    <button mat-raised-button (click)="execute()">
+      Execute
+    </button>
+    <button mat-stroked-button (click)="jumpToTop()" style="margin-left: 16px;">
+      <i class="fas fa-fw fa-arrow-up"></i>
+      Top
+    </button>
+    <button mat-stroked-button (click)="jumpToBottom()" style="margin-left: 16px;">
+      <i class="fas fa-fw fa-arrow-down"></i>
+      Bottom
+    </button>
+    <button mat-stroked-button (click)="copyScrollback()" style="margin-left: 16px;">
+      <i class="fas fa-fw fa-copy"></i>
+      Copy Scrollback
+    </button>
+
+    <span fxFlex></span>
+
+  </mat-toolbar-row>
+
+  <div>
+    <input [(ngModel)]="command" />
+  </div>
+
+  <div class="terminal-container">
+    <mat-tab-group animationDuration="0ms" [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+      <mat-tab *ngFor="let term of terminals; let index = index" [label]="terminals.indexOf(term)">
+  
+        <ng-template mat-tab-label class="terminal-tabs">
+          <div style="margin-left: 25px;">
+           {{ terminals.indexOf(term) }}
+          </div>
+          <button mat-icon-button (click)="removeTab()">
+            <i class="fas fa-fw fa-times-circle"></i>
+          </button>
+        </ng-template>
+  
+        <div class="terminal-container">
+          <ng-terminal [terminal]="term">
+          </ng-terminal>
+        </div>
+  
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+</div>

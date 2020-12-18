@@ -23,9 +23,7 @@ import * as AppProtocol from './main/app-protocol';
 
 // ----------------------------------------- [ Context Menu ] -----------------------------------------
 contextMenu({
-  prepend: (defaultActions, params, browserWindow) => [
-
-  ],
+  prepend: (defaultActions, params, browserWindow) => [],
 });
 
 

@@ -1,0 +1,13 @@
+.grid-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.terminal-toolbar {
+    position: sticky;
+    position: -webkit-sticky; /* For macOS/iOS Safari */
+}
+
+.terminal-container {
+    height: 65vh;
+}

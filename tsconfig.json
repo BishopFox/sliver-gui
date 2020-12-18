@@ -4,8 +4,7 @@
     "baseUrl": ".",
     "module": "es2020",
     "paths": {
-      "@app/*": ["./src/app/*"],
-      "@rpc/*": ["./rpc/*"]
+      "@app/*": ["./src/app/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

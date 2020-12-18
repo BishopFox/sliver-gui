@@ -52,7 +52,7 @@ export async function getCurrentLocale(): Promise<string> {
         resolve(DEFAULT_LOCALE);
       } else {
         const locale = data.toString('utf-8').trim();
-        logger.debug(`Locale data: ${locale}`);
+        logger.silly(`Locale data: ${locale}`);
         resolve(matchLocale(locale));
       }
     });
@@ -75,13 +75,13 @@ export function getClientDir(): string {
 
 function localeFilePath(): string {
   const localePath = path.join(getClientDir(), 'locale');
-  logger.debug(`Locale file path: ${localePath}`);
+  logger.silly(`Locale file path: ${localePath}`);
   return localePath;
 }
 
 export function getDistPath() {
   const distPath = path.join(__dirname, '..', 'dist', getCurrentLocaleSync());
-  logger.debug(`Locale dist path: ${distPath}`);
+  logger.silly(`Locale dist path: ${distPath}`);
   return distPath;
 }
 
