@@ -24,7 +24,7 @@ import { Terminal } from 'xterm';
 
 
 @Component({
-  selector: 'app-execute-command',
+  selector: 'sessions-execute-command',
   templateUrl: './execute-command.component.html',
   styleUrls: ['./execute-command.component.scss']
 })

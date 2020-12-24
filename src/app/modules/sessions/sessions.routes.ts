@@ -17,6 +17,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
 import { ActiveConfig } from '@app/app-routing-guards.module';
+
 import { MainComponent } from './components/main/main.component';
 import { StandaloneInteractComponent } from './components/standalone-interact/standalone-interact.component';
 import { InteractComponent } from './components/interact/interact.component';
@@ -24,30 +25,35 @@ import { InfoComponent } from './components/info/info.component';
 import { PsComponent } from './components/ps/ps.component';
 import { FileBrowserComponent } from './components/file-browser/file-browser.component';
 import { ShellComponent } from './components/shell/shell.component';
+import { ExecuteCommandComponent } from './components/execute-command/execute-command.component';
+import { ExecuteShellcodeComponent } from './components/execute-shellcode/execute-shellcode.component';
+import { ExecuteAssemblyComponent } from './components/execute-assembly/execute-assembly.component';
+import { ScreenshotsComponent } from './components/screenshots/screenshots.component';
+import { SideLoadComponent } from './components/side-load/side-load.component';
 
+
+const childRoutes = [
+  { path: 'execute-assembly', component: ExecuteAssemblyComponent, canActivate: [ActiveConfig] },
+  { path: 'execute-command', component: ExecuteCommandComponent, canActivate: [ActiveConfig] },
+  { path: 'execute-shellcode', component: ExecuteShellcodeComponent, canActivate: [ActiveConfig] },
+  { path: 'file-browser', component: FileBrowserComponent, canActivate: [ActiveConfig] },
+  { path: 'info', component: InfoComponent, canActivate: [ActiveConfig] },
+  { path: 'ps', component: PsComponent, canActivate: [ActiveConfig] },
+  { path: 'screenshots', component: ScreenshotsComponent, canActivate: [ActiveConfig] },
+  { path: 'shell', component: ShellComponent, canActivate: [ActiveConfig] },
+  { path: 'side-load', component: SideLoadComponent, canActivate: [ActiveConfig] },
+];
 
 const routes: Routes = [
 
   { path: 'sessions', component: MainComponent, canActivate: [ActiveConfig] },
-
   {
     path: 'sessions/:session-id', component: InteractComponent, canActivate: [ActiveConfig],
-    children: [
-      { path: 'info', component: InfoComponent, canActivate: [ActiveConfig] },
-      { path: 'ps', component: PsComponent, canActivate: [ActiveConfig] },
-      { path: 'file-browser', component: FileBrowserComponent, canActivate: [ActiveConfig] },
-      { path: 'shell', component: ShellComponent, canActivate: [ActiveConfig] },
-    ]
+    children: childRoutes,
   },
-
   {
     path: 'sessions-standalone/:session-id', component: StandaloneInteractComponent, canActivate: [ActiveConfig],
-    children: [
-      { path: 'info', component: InfoComponent, canActivate: [ActiveConfig] },
-      { path: 'ps', component: PsComponent, canActivate: [ActiveConfig] },
-      { path: 'file-browser', component: FileBrowserComponent, canActivate: [ActiveConfig] },
-      { path: 'shell', component: ShellComponent, canActivate: [ActiveConfig] },
-    ]
+    children: childRoutes,
   },
 
 ];

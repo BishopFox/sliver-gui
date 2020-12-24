@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-execute-shellcode',
+  selector: 'sessions-execute-shellcode',
   templateUrl: './execute-shellcode.component.html',
   styleUrls: ['./execute-shellcode.component.scss']
 })

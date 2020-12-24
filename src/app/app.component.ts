@@ -40,6 +40,9 @@ export class AppComponent implements OnInit, OnDestroy {
   private readonly LIGHT_CSS = 'light-theme';
   private readonly DARK_NO_GLASS_CSS = 'dark-theme-no-glass';
   private readonly CSS_THEMES = [this.LIGHT_CSS, this.DARK_NO_GLASS_CSS];
+
+  // Navigation hot keys are disabled if the active elem is any of:
+  private readonly DISABLE_NAV = ['input', 'textarea'];
   
   mainWindow = window.location.origin == "app://sliver";
   settings: Settings;
@@ -174,14 +177,21 @@ export class AppComponent implements OnInit, OnDestroy {
     this._eventsService.menu$.pipe(
       filter(event => event.button === 'back')
     ).subscribe(() => {
-      window.history.back();
+      const activeElem = document.activeElement.tagName.toLowerCase();
+      console.log(`active elem: ${activeElem}`);
+      if (!this.DISABLE_NAV.some((elem) => elem === activeElem)) {
+        window.history.back();
+      }
     });
 
     // Forward menu event
     this._eventsService.menu$.pipe(
       filter(event => event.button === 'forward')
     ).subscribe(() => {
-      window.history.forward();
+      const activeElem = document.activeElement.tagName.toLowerCase();
+      if (!this.DISABLE_NAV.some((elem) => elem === activeElem)) {
+        window.history.forward();
+      }
     });
 
     // Settings menu event

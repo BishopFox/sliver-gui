@@ -66,12 +66,12 @@ export class Sliver {
   // Public Methods
 
   async sessions(): Promise<clientpb.Session[]> {
-    let sessions: string[] = await this.request('rpc_sessions');
+    const sessions: string[] = await this.request('rpc_sessions');
     return sessions.map(session => clientpb.Session.deserializeBinary(Base64.toUint8Array(session)));
   }
 
   async sessionById(id: number): Promise<clientpb.Session> {
-    let session: string = await this.request('rpc_sessionById', JSON.stringify({ id: id }));
+    const session: string = await this.request('rpc_sessionById', JSON.stringify({ id: id }));
     if (session.length) {
       return clientpb.Session.deserializeBinary(Base64.toUint8Array(session));
     }
@@ -79,7 +79,7 @@ export class Sliver {
   }
 
   async implantBuilds(): Promise<clientpb.ImplantBuilds> {
-    let builds: string = await this.request('rpc_sessions');
+    const builds: string = await this.request('rpc_sessions');
     if (builds.length) {
       return clientpb.ImplantBuilds.deserializeBinary(Base64.toUint8Array(builds));
     }
@@ -87,19 +87,19 @@ export class Sliver {
   }
 
   async canaries(): Promise<clientpb.DNSCanary[]> {
-    let canaries: string[] = await this.request('rpc_canaries');
+    const canaries: string[] = await this.request('rpc_canaries');
     return canaries.map(canary => clientpb.DNSCanary.deserializeBinary(Base64.toUint8Array(canary)));
   }
 
   async generate(config: clientpb.ImplantConfig): Promise<commonpb.File> {
-    let generated: string = await this.request('rpc_generate', JSON.stringify({
+    const generated: string = await this.request('rpc_generate', JSON.stringify({
       config: Base64.fromUint8Array(config.serializeBinary())
     }));
     return commonpb.File.deserializeBinary(Base64.toUint8Array(generated));
   }
 
   async regenerate(name: string): Promise<commonpb.File> {
-    let regenerated: string = await this.request('rpc_regenerate', JSON.stringify({
+    const regenerated: string = await this.request('rpc_regenerate', JSON.stringify({
       name: name
     }));
     return commonpb.File.deserializeBinary(Base64.toUint8Array(regenerated));
@@ -107,12 +107,12 @@ export class Sliver {
 
   // Session Interaction
   async ps(sessionId: number): Promise<commonpb.Process[]> {
-    let ps: string[] = await this.request('rpc_ps', JSON.stringify({ sessionId: sessionId }));
+    const ps: string[] = await this.request('rpc_ps', JSON.stringify({ sessionId: sessionId }));
     return ps.map(p => commonpb.Process.deserializeBinary(Base64.toUint8Array(p)));
   }
 
   async ls(sessionId: number, targetDir: string): Promise<sliverpb.Ls> {
-    let ls: string = await this.request('rpc_ls', JSON.stringify({
+    const ls: string = await this.request('rpc_ls', JSON.stringify({
       sessionId: sessionId,
       targetDir: targetDir,
     }));
@@ -120,7 +120,7 @@ export class Sliver {
   }
 
   async cd(sessionId: number, targetDir: string): Promise<sliverpb.Pwd> {
-    let pwd: string = await this.request('rpc_cd', JSON.stringify({
+    const pwd: string = await this.request('rpc_cd', JSON.stringify({
       sessionId: sessionId,
       targetDir: targetDir,
     }));
@@ -128,7 +128,7 @@ export class Sliver {
   }
 
   async rm(sessionId: number, target: string): Promise<sliverpb.Rm> {
-    let rm: string = await this.request('rpc_rm', JSON.stringify({
+    const rm: string = await this.request('rpc_rm', JSON.stringify({
       sessionId: sessionId,
       target: target,
     }));
@@ -136,7 +136,7 @@ export class Sliver {
   }
 
   async mkdir(sessionId: number, targetDir: string): Promise<sliverpb.Mkdir> {
-    let mkdir: string = await this.request('rpc_mkdir', JSON.stringify({
+    const mkdir: string = await this.request('rpc_mkdir', JSON.stringify({
       sessionId: sessionId,
       targetDir: targetDir,
     }));
@@ -144,7 +144,7 @@ export class Sliver {
   }
 
   async download(sessionId: number, target: string): Promise<Uint8Array> {
-    let data: string = await this.request('rpc_download', JSON.stringify({
+    const data: string = await this.request('rpc_download', JSON.stringify({
       sessionId: sessionId,
       target: target,
     }));
@@ -152,7 +152,7 @@ export class Sliver {
   }
 
   async upload(sessionId: number, data: Uint8Array, path: string): Promise<sliverpb.Upload> {
-    let upload: string = await this.request('rpc_upload', JSON.stringify({
+    const upload: string = await this.request('rpc_upload', JSON.stringify({
       sessionId: sessionId,
       data: Base64.fromUint8Array(data),
       path: path,
@@ -161,7 +161,7 @@ export class Sliver {
   }
 
   async ifconfig(sessionId: number): Promise<sliverpb.Ifconfig> {
-    let ifconfig: string = await this.request('rpc_ifconfig', JSON.stringify({
+    const ifconfig: string = await this.request('rpc_ifconfig', JSON.stringify({
       sessionId: sessionId,
     }));
     return sliverpb.Ifconfig.deserializeBinary(Base64.toUint8Array(ifconfig));

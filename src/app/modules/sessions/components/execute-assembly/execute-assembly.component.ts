@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-execute-assembly',
+  selector: 'sessions-execute-assembly',
   templateUrl: './execute-assembly.component.html',
   styleUrls: ['./execute-assembly.component.scss']
 })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-screenshots',
+  selector: 'sessions-screenshots',
   templateUrl: './screenshots.component.html',
   styleUrls: ['./screenshots.component.scss']
 })

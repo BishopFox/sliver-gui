@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-side-load',
+  selector: 'sessions-side-load',
   templateUrl: './side-load.component.html',
   styleUrls: ['./side-load.component.scss']
 })

@@ -8,22 +8,21 @@
 <div [@fadeInOut] *ngIf="dataSrc" class="grid-wrapper">
   <div>
     <!-- Top -->
-    <mat-toolbar>
+    <mat-toolbar style="background: transparent;">
       <span *ngIf="ls" class="monospace">
         {{ls.getPath()}}
       </span>
     </mat-toolbar>
 
-    <button mat-raised-button class="toolbar-button" (click)="mkdir()">
+    <button mat-flat-button class="toolbar-button" (click)="mkdir()">
       <i class="fas fa-fw fa-folder-plus"></i>
     </button>
 
-    <button mat-raised-button class="toolbar-button" (click)="upload()">
+    <button mat-flat-button class="toolbar-button" (click)="upload()">
         <i class="fas fa-fw fa-upload"></i>
     </button>
   
-    <mat-slide-toggle color="primary" [checked]="showHiddenFiles"
-      (change)="toggleShowHiddenFiles($event.source.checked)">
+    <mat-slide-toggle color="primary" [checked]="showHiddenFiles" (change)="toggleShowHiddenFiles($event.source.checked)">
       <ng-container i18n>Show Hidden Files</ng-container>
     </mat-slide-toggle>
 
