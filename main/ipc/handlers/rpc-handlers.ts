@@ -25,9 +25,10 @@ import { isConnected } from '../../ipc/is-connected';
 import { walk } from '../../ipc/util';
 import { logger } from '../../logs';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb';
+
 
 const MINUTE = 60;
-
 
 export const RPC_NAMESPACE = "rpc";
 export class RPCHandlers {
@@ -303,11 +304,25 @@ export class RPCHandlers {
       "required": ["sessionId"],
       "additionalProperties": false,
     })
-    async rpc_upload(ipc: IPCHandlers, req: any): Promise<string> {
+    async rpc_upload(ipc: IPCHandlers, req: any): Promise<string[]> {
+      const openDialog = await dialog.showOpenDialog({
+        title: "Upload",
+        message: "Upload to remote session",
+        defaultPath: path.join(homedir()),
+        properties: ["openFile", "showHiddenFiles", "dontAddToRecent"],
+      });
+      if (openDialog.canceled || openDialog.filePaths.length < 1) {
+        return Promise.reject('User cancel');
+      }
+      const uploads: sliverpb.Upload[] = [];
       const session = await ipc.client.interact(req.sessionId);
-      const data = Base64.toUint8Array(req.data);
-      const upload = await session.upload(req.path, Buffer.from(data));
-      return Base64.fromUint8Array(upload.serializeBinary());
+      await Promise.all(openDialog.filePaths.map(async (filePath) => {
+        const data: Buffer = await fs.promises.readFile(filePath);
+        const uploadPath = path.join(req.path, path.basename(filePath));
+        const upload = await session.upload(uploadPath, Buffer.from(data));
+        uploads.push(upload);
+      }));
+      return uploads.map(upload => Base64.fromUint8Array(upload.serializeBinary()));
     }
 
     @isConnected()

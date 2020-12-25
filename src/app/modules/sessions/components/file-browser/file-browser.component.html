@@ -8,30 +8,39 @@
 <div [@fadeInOut] *ngIf="dataSrc" class="grid-wrapper">
   <div>
     <!-- Top -->
-    <mat-toolbar style="background: transparent;">
+    <mat-toolbar style="background: transparent;" fxLayout="row" fxLayoutAlign="start center">
+      <button mat-flat-button class="toolbar-button" (click)="this.fetchLs('.')">
+        <i class="fas fa-fw fa-sync"></i>
+      </button>
+
+      <button mat-flat-button class="toolbar-button" (click)="mkdir()">
+        <i class="fas fa-fw fa-folder-plus"></i>
+      </button>
+
+      <button mat-flat-button class="toolbar-button" (click)="upload()">
+        <i class="fas fa-fw fa-upload"></i>
+      </button>
+    
+      <mat-slide-toggle color="primary" [checked]="showHiddenFiles" (change)="toggleShowHiddenFiles($event.source.checked)">
+        <ng-container i18n>Show Hidden Files</ng-container>
+      </mat-slide-toggle>
+
+      <span fxFlex></span>
+      
+      <mat-form-field class="table-filter">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </mat-toolbar>
+
+    <mat-toolbar style="background: transparent;" fxLayout="row" fxLayoutAlign="start center">
       <span *ngIf="ls" class="monospace">
-        {{ls.getPath()}}
+        {{ ls.getPath() }}
       </span>
     </mat-toolbar>
 
-    <button mat-flat-button class="toolbar-button" (click)="mkdir()">
-      <i class="fas fa-fw fa-folder-plus"></i>
-    </button>
-
-    <button mat-flat-button class="toolbar-button" (click)="upload()">
-        <i class="fas fa-fw fa-upload"></i>
-    </button>
-  
-    <mat-slide-toggle color="primary" [checked]="showHiddenFiles" (change)="toggleShowHiddenFiles($event.source.checked)">
-      <ng-container i18n>Show Hidden Files</ng-container>
-    </mat-slide-toggle>
-
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
   </div>
 
-  <div *ngIf="downloading">
+  <div *ngIf="working">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
 
@@ -69,7 +78,7 @@
           <ng-container i18n>Size</ng-container>
         </th>
         <td mat-cell *matCellDef="let entry">
-          <span *ngIf="entry.name !== '..'">{{entry.size | fileSize}}</span>
+          <span *ngIf="entry.name !== '..' && !entry.isDir">{{entry.size | fileSize}}</span>
         </td>
       </ng-container>
 
@@ -83,8 +92,7 @@
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true">
       </tr>
-      <tr mat-row (contextmenu)="onContextMenu($event, row)" (click)="onRowSelection(row)"
-        *matRowDef="let row; columns: displayedColumns;">
+      <tr mat-row (contextmenu)="onContextMenu($event, row)" (click)="onRowSelection(row)" *matRowDef="let row; columns: displayedColumns;">
       </tr>
     </table>
   </div>

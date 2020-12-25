@@ -156,13 +156,12 @@ export class SliverService {
     return Base64.toUint8Array(data);
   }
 
-  async upload(sessionId: number, data: Uint8Array, path: string): Promise<sliverpb.Upload> {
-    const upload: string = await this._ipc.request('rpc_upload', JSON.stringify({
+  async upload(sessionId: number, path: string): Promise<sliverpb.Upload[]> {
+    const uploads: string[] = await this._ipc.request('rpc_upload', JSON.stringify({
       sessionId: sessionId,
-      data: Base64.fromUint8Array(data),
       path: path,
     }));
-    return sliverpb.Upload.deserializeBinary(Base64.toUint8Array(upload));
+    return uploads.map(upload => sliverpb.Upload.deserializeBinary(Base64.toUint8Array(upload)));
   }
 
   async ifconfig(sessionId: number): Promise<sliverpb.Ifconfig> {

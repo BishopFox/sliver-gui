@@ -7,7 +7,7 @@
 
 <div [@fadeInOut] *ngIf="session" class="grid-wrapper">
 
-  <mat-toolbar-row class="terminal-toolbar"  fxLayout="row" fxLayoutAlign="start center">
+  <mat-toolbar-row class="terminal-toolbar" fxLayout="row" fxLayoutAlign="start center">
     <button mat-raised-button (click)="execute()" [disabled]="!commandForm.valid">
       Execute
     </button>

@@ -20,12 +20,12 @@ import { Sort } from '@angular/material/sort';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { take } from 'rxjs/operators';
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb';
 
 import { FadeInOut } from '@app/shared/animations';
 import { SliverService } from '@app/providers/sliver.service';
 import { ClientService } from '@app/providers/client.service';
-import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
-import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb';
 
 
 interface TableFileData {
@@ -54,7 +54,7 @@ export class FileBrowserComponent implements OnInit {
     'isDir', 'name', 'size', 'options'
   ];
   isFetching = false;
-  downloading = false;
+  working = false;
   showHiddenFiles = true;
 
   @ViewChild(MatMenuTrigger) contextMenu: MatMenuTrigger;
@@ -165,7 +165,8 @@ export class FileBrowserComponent implements OnInit {
     });
     dialogRef.afterClosed().pipe(take(1)).subscribe(async (result) => {
       if (result) {
-        console.log(`[rm] ${result.name} (isDir: ${result.isDir})`);
+        await this._sliverService.rm(this.session.getId(), result.name);
+        this.fetchLs('.');
       }
     });
   }
@@ -174,32 +175,40 @@ export class FileBrowserComponent implements OnInit {
     const dialogRef = this.dialog.open(MkdirDialogComponent);
     dialogRef.afterClosed().pipe(take(1)).subscribe(async (result) => {
       if (result) {
-        console.log(`[mkdir] ${result.name}`);
-        this._sliverService.mkdir(this.session.getId(), result.name);
+        await this._sliverService.mkdir(this.session.getId(), result.name);
+        this.fetchLs('.');
       }
     });
   }
 
   async download(target: TableFileData) {
     this.contextMenu.closeMenu();
-    this.downloading = true;
+    this.working = true;
     console.log(`[download] ${target}`);
     const data = await this._sliverService.download(this.session.getId(), target.name);
-    this.downloading = false;
+    this.working = false;
     const msg = `Save downloaded file: ${target.name}`;
     const save = await this._clientService.saveFile('Save File', msg, target.name, data);
-    console.log(save);
   }
 
   async upload() {
-
+    this.working = true;
+    try {
+      await this._sliverService.upload(this.session.getId(), this.ls.getPath());
+      setTimeout(() => {
+        this.working = false;
+        this.fetchLs('.');
+      }, 50); // 50ms margin of error to avoid races with remote file system
+    } catch (err) {
+      this.working = false;
+    }
   }
 
   async openFile(target: TableFileData) {
     this.contextMenu.closeMenu();
-    this.downloading = true;
+    this.working = true;
     const data = await this._sliverService.download(this.session.getId(), target.name);
-    this.downloading = false;
+    this.working = false;
   }
 
   onContextMenu(event: MouseEvent, row: TableFileData) {
@@ -259,7 +268,7 @@ export class RmDialogComponent {
 
 
 @Component({
-  selector: 'app-download-dialog',
+  selector: 'sessions-download-dialog',
   templateUrl: 'download-dialog.html',
 })
 export class DownloadDialogComponent {
