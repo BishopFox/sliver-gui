@@ -7,22 +7,23 @@
 
 <div [@fadeInOut] *ngIf="dataSrc">
 
-  <div class="table-header">
-    <div style="position: relative;">
-      <h2 *ngIf="title" style="position: absolute; height: 10px; bottom: 15px; right: 0; left: 0;">
-        <i class="fas fa-fw fa-project-diagram"></i>
-        <ng-container i18n>
-          Sessions
-        </ng-container>
-      </h2>
-    </div>
+  <mat-toolbar style="background: transparent;" fxLayout="row" fxLayoutAlign="start center">
+   
+    <h2 *ngIf="title">
+      <i class="fas fa-fw fa-project-diagram"></i>
+      <ng-container i18n>
+        Sessions
+      </ng-container>
+    </h2>
 
-    <div class="table-filter">
-      <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-      </mat-form-field>
-    </div>
-  </div>
+    <span fxFlex></span>
+
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+
+  </mat-toolbar>
+
   <mat-card class="slim">
     <table mat-table [dataSource]="dataSrc" matSort (matSortChange)="sortData($event)">
 

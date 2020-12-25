@@ -149,7 +149,6 @@ export class FileBrowserComponent implements OnInit {
 
   toggleShowHiddenFiles(checked: boolean) {
     this.showHiddenFiles = checked;
-    console.log(`Show hidden files: ${this.showHiddenFiles}`);
     this.dataSrc.data = this.tableData();
   }
 
@@ -184,7 +183,6 @@ export class FileBrowserComponent implements OnInit {
   async download(target: TableFileData) {
     this.contextMenu.closeMenu();
     this.working = true;
-    console.log(`[download] ${target}`);
     const data = await this._sliverService.download(this.session.getId(), target.name);
     this.working = false;
     const msg = `Save downloaded file: ${target.name}`;

@@ -85,6 +85,7 @@ export interface Handlers { }
 */
 export class IPCHandlers {
 
+  // Bind namespaces to classes/methods
   namespaces = new Map<string, Handlers>([
     [CLIENT_NAMESPACE, new ClientHandlers()],
     [CONFIG_NAMESPACE, new ConfigHandlers()],
