@@ -5,7 +5,7 @@
   </div>
 </div>
 
-<div class="grid-wrapper">
+<div [@fadeInOut] *ngIf="session" class="grid-wrapper">
 
   <mat-toolbar-row class="terminal-toolbar"  fxLayout="row" fxLayoutAlign="start center">
     <button mat-raised-button (click)="addDefaultShell()">
@@ -44,7 +44,7 @@
         <div style="margin-left: 25px;">
           {{ shell.name ? shell.name : shell.id }}
         </div>
-        <button mat-icon-button (click)="removeTab(shell)">
+        <button mat-icon-button (click)="removeTab(shell)" style="margin-left: 25px;">
           <i class="fas fa-fw fa-times-circle"></i>
         </button>
       </ng-template>

@@ -259,7 +259,7 @@ export class RPCHandlers {
       const rm = await session.rm(req.target);
       return Base64.fromUint8Array(rm.serializeBinary());
     }
-  
+
     @isConnected()
     @jsonSchema({
       "type": "object",
@@ -275,7 +275,7 @@ export class RPCHandlers {
       const mkdir = await session.mkdir(req.targetDir);
       return Base64.fromUint8Array(mkdir.serializeBinary());
     }
-  
+
     @isConnected()
     @jsonSchema({
       "type": "object",
@@ -291,7 +291,7 @@ export class RPCHandlers {
       const data = await session.download(req.target);
       return Base64.fromUint8Array(data);
     }
-  
+
     @isConnected()
     @jsonSchema({
       "type": "object",
@@ -309,7 +309,29 @@ export class RPCHandlers {
       const upload = await session.upload(req.path, Buffer.from(data));
       return Base64.fromUint8Array(upload.serializeBinary());
     }
-  
+
+    @isConnected()
+    @jsonSchema({
+      "type": "object",
+      "properties": {
+        "sessionId": { "type": "number" },
+        "exe": { "type": "string" },
+        "args": {
+          "type": "array",
+          "items": { "type": "string" },
+          "additionalItems": false,
+        },
+        "output": { "type": "boolean" }
+      },
+      "required": ["sessionId", "exe", "args", "output"],
+      "additionalProperties": false,
+    })
+    async rpc_execute(ipc: IPCHandlers, req: any): Promise<string> {
+      const session = await ipc.client.interact(req.sessionId);
+      const executed = await session.execute(req.exe, req.args, req.output);
+      return Base64.fromUint8Array(executed.serializeBinary());
+    }
+
     @isConnected()
     @jsonSchema({
       "type": "object",

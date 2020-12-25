@@ -22,8 +22,8 @@ import { Injectable } from '@angular/core';
 import { IPCService } from './ipc.service';
 import { Base64 } from 'js-base64';
 
-import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb'; // Protobuf
-import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb'; // Protobuf
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb';
 import * as commonpb from 'sliver-script/lib/pb/commonpb/common_pb';
 import { profile } from 'console';
 
@@ -170,6 +170,16 @@ export class SliverService {
       sessionId: sessionId,
     }));
     return sliverpb.Ifconfig.deserializeBinary(Base64.toUint8Array(ifconfig));
+  }
+
+  async execute(sessionId: number, exe: string, args: string[], output: boolean = true): Promise<sliverpb.Execute> {
+    const executed: string = await this._ipc.request('rpc_execute', JSON.stringify({
+      sessionId: sessionId,
+      exe: exe,
+      args: args,
+      output: output,
+    }));
+    return sliverpb.Execute.deserializeBinary(Base64.toUint8Array(executed));
   }
 
 }

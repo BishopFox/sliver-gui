@@ -44,9 +44,9 @@ export class AppComponent implements OnInit, OnDestroy {
   // Navigation hot keys are disabled if the active elem is any of:
   private readonly DISABLE_NAV = ['input', 'textarea'];
   
-  mainWindow = window.location.origin == "app://sliver";
+  mainWindow = window.location.origin === "app://sliver";
   settings: Settings;
-  settingsSub: Subscription;
+  subs: Subscription[] = [];
 
   constructor(private _router: Router,
               private _overlayContainer: OverlayContainer,
@@ -62,14 +62,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchSettings();
-    this.settingsSub = this._clientService.settings$.subscribe((settings: Settings) => {
+    const sub = this._clientService.settings$.subscribe((settings: Settings) => {
       this.settings = settings;
       this.setTheme();
     });
+    this.subs.push(sub);
   }
 
   ngOnDestroy(): void {
-    this.settingsSub?.unsubscribe();
+    this.subs.forEach(sub => sub?.unsubscribe());
   }
 
   async fetchSettings() {
@@ -136,7 +137,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   initAlerts() {
-    this._eventsService.sessions$.subscribe((event: clientpb.Event) => {
+    let sub = this._eventsService.sessions$.subscribe((event: clientpb.Event) => {
       const eventType = event.getEventtype();
       switch (eventType) {
         case Events.SessionConnected:
@@ -147,8 +148,9 @@ export class AppComponent implements OnInit, OnDestroy {
           break;
       }
     });
+    this.subs.push(sub);
 
-    this._eventsService.players$.subscribe((event: clientpb.Event) => {
+    sub = this._eventsService.players$.subscribe((event: clientpb.Event) => {
       const eventType = event.getEventtype();
       switch (eventType) {
         case Events.ClientJoined:
@@ -159,8 +161,9 @@ export class AppComponent implements OnInit, OnDestroy {
           break;
       }
     });
+    this.subs.push(sub);
 
-    this._eventsService.events$.subscribe((event: clientpb.Event) => {
+    sub = this._eventsService.events$.subscribe((event: clientpb.Event) => {
       const eventType = event.getEventtype();
       switch (eventType) {
         case Events.JobStopped:
@@ -168,13 +171,15 @@ export class AppComponent implements OnInit, OnDestroy {
           break;
       }
     });
+    this.subs.push(sub);
 
-    this._eventsService.notifications$.subscribe((notify: Notification) => {
+    sub = this._eventsService.notifications$.subscribe((notify: Notification) => {
       this.notificationAlert(notify.message, notify.buttonLabel, notify.seconds, notify.callback);
     });
+    this.subs.push(sub);
 
     // Back menu event
-    this._eventsService.menu$.pipe(
+    sub = this._eventsService.menu$.pipe(
       filter(event => event.button === 'back')
     ).subscribe(() => {
       const activeElem = document.activeElement.tagName.toLowerCase();
@@ -183,9 +188,10 @@ export class AppComponent implements OnInit, OnDestroy {
         window.history.back();
       }
     });
+    this.subs.push(sub);
 
     // Forward menu event
-    this._eventsService.menu$.pipe(
+    sub = this._eventsService.menu$.pipe(
       filter(event => event.button === 'forward')
     ).subscribe(() => {
       const activeElem = document.activeElement.tagName.toLowerCase();
@@ -193,27 +199,31 @@ export class AppComponent implements OnInit, OnDestroy {
         window.history.forward();
       }
     });
+    this.subs.push(sub);
 
     // Settings menu event
-    this._eventsService.menu$.pipe(
+    sub = this._eventsService.menu$.pipe(
       filter(event => event.button === 'settings')
     ).subscribe(() => {
       this._router.navigate(['settings']);
     });
+    this.subs.push(sub);
     
     // About menu event
-    this._eventsService.menu$.pipe(
+    sub = this._eventsService.menu$.pipe(
       filter(event => event.button === 'about')
     ).subscribe(() => {
       this.aboutDialog();
     });
+    this.subs.push(sub);
 
     // Download event (updates/server/client)
-    this._eventsService.menu$.pipe(
+    sub = this._eventsService.menu$.pipe(
       filter(event => event.button.startsWith('sliver-download'))
     ).subscribe((event) => {
       this.sliverDownload(event);
     });
+    this.subs.push(sub);
   }
 
   notificationAlert(message: string, buttonLabel: string, seconds: number, callback: Function|null = null) {

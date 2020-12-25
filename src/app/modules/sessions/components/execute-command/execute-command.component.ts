@@ -13,29 +13,39 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { take } from 'rxjs/operators';
+import * as shlex from 'shlex';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb';
 
 import { SliverService } from '@app/providers/sliver.service';
-import { Terminal } from 'xterm';
+import { TerminalService, SliverTerminal } from '@app/providers/terminal.service';
+import { FadeInOut } from '@app/shared';
 
 
 @Component({
   selector: 'sessions-execute-command',
   templateUrl: './execute-command.component.html',
-  styleUrls: ['./execute-command.component.scss']
+  styleUrls: ['./execute-command.component.scss'],
+  animations: [FadeInOut]
 })
 export class ExecuteCommandComponent implements OnInit {
 
+  private readonly TERM_NAMESPACE = 'ExecuteCommandComponent';
+
+  @Input() selectAfterAdding = true;
+
   command: string;
   session: clientpb.Session;
-  terminals: Terminal[];
   selected = new FormControl(0);
+  commandForm: FormGroup;
 
   constructor(private _route: ActivatedRoute,
+              private _fb: FormBuilder,
+              private _terminalService: TerminalService,
               private _sliverService: SliverService) { }
 
   ngOnInit() {
@@ -47,38 +57,79 @@ export class ExecuteCommandComponent implements OnInit {
         console.error(`No session with id ${sessionId} (${err})`);
       });
     });
+    this.commandForm = this._fb.group({
+      cmd: ['', Validators.required],
+      output: [true, Validators.required],
+    });
   }
 
-  execute() {
+  get terminals(): SliverTerminal[] {
+    return this._terminalService.getNamespaceTerminals(this.session.getId(), this.namespace);
+  }
 
+  get namespace(): string {
+    return this.TERM_NAMESPACE;
+  }
+
+  async execute() {
+    const output = this.commandForm.controls['output'].value;
+    let args = shlex.split(this.commandForm.controls['cmd'].value);
+    if (1 <= args.length) {
+      const exe = args[0];
+      args = args.splice(1, args.length);
+      console.log(`exe: ${exe} args: ${args}`);
+      const executed = await this._sliverService.execute(this.session.getId(), exe, args);
+      if (output) {
+        this.captureOutput(executed);
+      }
+    } else {
+      this.commandForm.controls['cmd'].setErrors({
+        invalidCommand: "Must specify a subprocess",
+      });
+    }
+  }
+
+  captureOutput(executed: sliverpb.Execute) {
+    const term = this._terminalService.newTerminal(this.session.getId(), this.namespace);
+    console.log(`status: ${executed.getStatus()}`);
+    console.log(`result: ${executed.getResult()}`);
+    if (executed.getStatus() === 0) {
+      term.terminal.write(executed.getResult());
+    } else {
+      term.terminal.write(`Exit code: ${executed.getStatus()}`);
+    }
+    if (this.selectAfterAdding) {
+      this.selected.setValue(this.terminals.length - 1);
+    }
   }
 
   jumpToTop() {
     const term = this.terminals[this.selected?.value];
     if (term) {
-      term.scrollToTop();
+      term.terminal.scrollToTop();
     }
   }
 
   jumpToBottom() {
     const term = this.terminals[this.selected?.value];
     if (term) {
-      term.scrollToBottom();
+      term.terminal.scrollToBottom();
     }
   }
 
   copyScrollback() {
     const term = this.terminals[this.selected?.value];
     if (term) {
-      term.selectAll();
+      term.terminal.selectAll();
       document.execCommand('copy');
-      term.clearSelection();
+      term.terminal.clearSelection();
     }
   }
 
   removeTab() {
     if (this.terminals.length) {
-      this.terminals.slice(this.selected?.value);
+      const term = this.terminals[this.selected?.value];
+      this._terminalService.delete(this.session.getId(), this.namespace, term.id);
     }
   }
 

@@ -24,12 +24,14 @@ import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 import { SliverService } from '@app/providers/sliver.service';
 import { ShellService, Shell } from '@app/providers/shell.service';
 import { NgTerminalComponent } from '@app/modules/terminal/ng-terminal.component';
+import { FadeInOut } from '@app/shared';
 
 
 @Component({
   selector: 'sessions-shell',
   templateUrl: './shell.component.html',
-  styleUrls: ['./shell.component.scss']
+  styleUrls: ['./shell.component.scss'],
+  animations: [FadeInOut]
 })
 export class ShellComponent implements OnInit {
 

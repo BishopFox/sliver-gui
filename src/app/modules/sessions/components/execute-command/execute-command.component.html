@@ -5,10 +5,10 @@
   </div>
 </div>
 
-<div class="grid-wrapper">
+<div [@fadeInOut] *ngIf="session" class="grid-wrapper">
 
   <mat-toolbar-row class="terminal-toolbar"  fxLayout="row" fxLayoutAlign="start center">
-    <button mat-raised-button (click)="execute()">
+    <button mat-raised-button (click)="execute()" [disabled]="!commandForm.valid">
       Execute
     </button>
     <button mat-stroked-button (click)="jumpToTop()" style="margin-left: 16px;">
@@ -28,9 +28,21 @@
 
   </mat-toolbar-row>
 
-  <div>
-    <input matInput [(ngModel)]="command" i18n-placeholder placeholder="Command">
-  </div>
+  <mat-toolbar-row>
+
+    <form [formGroup]="commandForm" style="width: 100%;">
+      <mat-form-field style="width: 33%;">
+        <mat-label>Create Subprocess</mat-label>
+        <div class="monospace">
+          <input type="text" matInput [formControl]="commandForm.controls['cmd']" placeholder="Command">
+        </div>
+        <mat-error *ngIf="commandForm.hasError('required')">
+          Please enter a valid command
+        </mat-error>
+      </mat-form-field>
+    </form>
+
+  </mat-toolbar-row>
 
   <div class="terminal-container">
     <mat-tab-group animationDuration="0ms" [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
@@ -38,15 +50,15 @@
   
         <ng-template mat-tab-label class="terminal-tabs">
           <div style="margin-left: 25px;">
-           {{ terminals.indexOf(term) }}
+           {{ term.name }}
           </div>
-          <button mat-icon-button (click)="removeTab()">
+          <button mat-icon-button (click)="removeTab()" style="margin-left: 25px;">
             <i class="fas fa-fw fa-times-circle"></i>
           </button>
         </ng-template>
   
         <div class="terminal-container">
-          <ng-terminal [terminal]="term">
+          <ng-terminal [terminal]="term.terminal">
           </ng-terminal>
         </div>
   
