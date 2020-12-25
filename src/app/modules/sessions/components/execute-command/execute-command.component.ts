@@ -99,11 +99,10 @@ export class ExecuteCommandComponent implements OnInit {
 
   displayOutput(executed: sliverpb.Execute) {
     const term = this._terminalService.newTerminal(this.session.getId(), this.namespace);
-    if (executed.getStatus() === 0) {
-      term.terminal.write(executed.getResult());
-    } else {
-      term.terminal.write(`Exit code: ${executed.getStatus()}`);
+    if (executed.getStatus() !== 0) {
+      term.terminal.write(`${Colors.WARN}Exit code: ${executed.getStatus()}\n\n`); 
     }
+    term.terminal.write(executed.getResult());
     if (this.selectAfterAdding) {
       this.selected.setValue(this.terminals.length - 1);
     }
