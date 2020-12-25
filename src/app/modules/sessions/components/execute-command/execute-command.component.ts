@@ -15,13 +15,16 @@
 
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { take } from 'rxjs/operators';
 import * as shlex from 'shlex';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb';
 
+import { RenameDialogComponent } from '@app/modules/sessions/components/dialogs/dialogs.component';
 import { SliverService } from '@app/providers/sliver.service';
+import { Colors } from '@app/modules/terminal/colors';
 import { TerminalService, SliverTerminal } from '@app/providers/terminal.service';
 import { FadeInOut } from '@app/shared';
 
@@ -45,6 +48,7 @@ export class ExecuteCommandComponent implements OnInit {
 
   constructor(private _route: ActivatedRoute,
               private _fb: FormBuilder,
+              public dialog: MatDialog,
               private _terminalService: TerminalService,
               private _sliverService: SliverService) { }
 
@@ -78,9 +82,13 @@ export class ExecuteCommandComponent implements OnInit {
       const exe = args[0];
       args = args.splice(1, args.length);
       console.log(`exe: ${exe} args: ${args}`);
-      const executed = await this._sliverService.execute(this.session.getId(), exe, args);
-      if (output) {
-        this.captureOutput(executed);
+      try {
+        const executed = await this._sliverService.execute(this.session.getId(), exe, args);
+        if (output) {
+          this.displayOutput(executed);
+        }
+      } catch (err) {
+        this.displayError(err);
       }
     } else {
       this.commandForm.controls['cmd'].setErrors({
@@ -89,15 +97,21 @@ export class ExecuteCommandComponent implements OnInit {
     }
   }
 
-  captureOutput(executed: sliverpb.Execute) {
+  displayOutput(executed: sliverpb.Execute) {
     const term = this._terminalService.newTerminal(this.session.getId(), this.namespace);
-    console.log(`status: ${executed.getStatus()}`);
-    console.log(`result: ${executed.getResult()}`);
     if (executed.getStatus() === 0) {
       term.terminal.write(executed.getResult());
     } else {
       term.terminal.write(`Exit code: ${executed.getStatus()}`);
     }
+    if (this.selectAfterAdding) {
+      this.selected.setValue(this.terminals.length - 1);
+    }
+  }
+
+  displayError(err) {
+    const term = this._terminalService.newTerminal(this.session.getId(), this.namespace);
+    term.terminal.write(`${Colors.Red}${err}${Colors.Reset}`);
     if (this.selectAfterAdding) {
       this.selected.setValue(this.terminals.length - 1);
     }
@@ -126,9 +140,23 @@ export class ExecuteCommandComponent implements OnInit {
     }
   }
 
-  removeTab() {
+  renameTab() {
+    const selected = this.terminals[this.selected?.value];
+    if (selected) {
+      const dialogRef = this.dialog.open(RenameDialogComponent, {
+        width: '40%',
+        data: selected.name,
+      });
+      dialogRef.afterClosed().pipe(take(1)).subscribe(name => {
+        if (name) {
+          selected.name = name;
+        }
+      });
+    }
+  }
+
+  removeTab(term: SliverTerminal) {
     if (this.terminals.length) {
-      const term = this.terminals[this.selected?.value];
       this._terminalService.delete(this.session.getId(), this.namespace, term.id);
     }
   }

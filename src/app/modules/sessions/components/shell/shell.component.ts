@@ -23,6 +23,7 @@ import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 import { SliverService } from '@app/providers/sliver.service';
 import { ShellService, Shell } from '@app/providers/shell.service';
+import { RenameDialogComponent } from '@app/modules/sessions/components/dialogs/dialogs.component';
 import { NgTerminalComponent } from '@app/modules/terminal/ng-terminal.component';
 import { FadeInOut } from '@app/shared';
 
@@ -91,7 +92,7 @@ export class ShellComponent implements OnInit {
   renameTab() {
     const selectedShell = this.shells[this.selected?.value];
     if (selectedShell) {
-      const dialogRef = this.dialog.open(ShellRenameDialogComponent, {
+      const dialogRef = this.dialog.open(RenameDialogComponent, {
         width: '40%',
         data: selectedShell.name,
       });
@@ -166,26 +167,6 @@ export class ShellCloseDialogComponent {
 
   complete() {
     this.dialogRef.close(true);
-  }
-
-}
-
-
-@Component({
-  selector: 'session-shell-rename-dialog',
-  templateUrl: './shell-rename.dialog.html',
-})
-export class ShellRenameDialogComponent {
-
-  constructor(public dialogRef: MatDialogRef<ShellRenameDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public name: string) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  complete() {
-    this.dialogRef.close(this.name);
   }
 
 }

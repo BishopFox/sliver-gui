@@ -1,11 +1,12 @@
 <h1 mat-dialog-title align="center">
-  Sliver
+  Sliver GUI
 </h1>
 <div mat-dialog-content align="center">
   <h3>Version {{ version.version }}</h3>
   <p>
     <span class="monospace">{{ version.branch }}:{{ version.revision }}</span><br />
     <strong *ngIf="version.dirty">(DIRTY)</strong><br />
+    <br />
     Compiled: {{ version.compiled }} <br />
     <br />
   </p>

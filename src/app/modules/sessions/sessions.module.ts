@@ -27,8 +27,9 @@ import {
   DownloadDialogComponent
 } from './components/file-browser/file-browser.component';
 import {
-  ShellComponent, ShellRenameDialogComponent, ShellCloseDialogComponent, ShellCustomDialogComponent
+  ShellComponent, ShellCloseDialogComponent, ShellCustomDialogComponent
 } from './components/shell/shell.component';
+import { RenameDialogComponent } from './components/dialogs/dialogs.component';
 import { PsComponent } from './components/ps/ps.component';
 import { InfoComponent } from './components/info/info.component';
 import { SharedModule } from '../../shared/shared.module';
@@ -51,7 +52,6 @@ import { ExecuteShellcodeComponent } from './components/execute-shellcode/execut
     RmDialogComponent,
     DownloadDialogComponent,
     ShellComponent,
-    ShellRenameDialogComponent,
     ShellCloseDialogComponent,
     ShellCustomDialogComponent,
     PsComponent,
@@ -62,7 +62,8 @@ import { ExecuteShellcodeComponent } from './components/execute-shellcode/execut
     SideLoadComponent,
     ScreenshotsComponent,
     ExecuteAssemblyComponent,
-    ExecuteShellcodeComponent
+    ExecuteShellcodeComponent,
+    RenameDialogComponent
   ],
   imports: [
     CommonModule,

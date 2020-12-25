@@ -15,6 +15,7 @@
 
 import { sprintf } from 'sprintf-js';
 
+
 export class Colors {
 
     // Basic

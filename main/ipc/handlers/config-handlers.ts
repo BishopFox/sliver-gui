@@ -14,13 +14,10 @@
 */
 
 
-import { SliverClient, SliverClientConfig } from 'sliver-script';
-
+import { SliverClientConfig } from 'sliver-script';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as uuid from 'uuid';
-import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
-
 
 import { jsonSchema } from '../../ipc/json-schema';
 import { logger } from '../../logs';

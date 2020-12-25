@@ -11,27 +11,32 @@
     <button mat-raised-button (click)="execute()" [disabled]="!commandForm.valid">
       Execute
     </button>
-    <button mat-stroked-button (click)="jumpToTop()" style="margin-left: 16px;">
+    <button mat-stroked-button (click)="jumpToTop()" [disabled]="!this.terminals.length" style="margin-left: 16px;">
       <i class="fas fa-fw fa-arrow-up"></i>
       Top
     </button>
-    <button mat-stroked-button (click)="jumpToBottom()" style="margin-left: 16px;">
+    <button mat-stroked-button (click)="jumpToBottom()" [disabled]="!this.terminals.length" style="margin-left: 16px;">
       <i class="fas fa-fw fa-arrow-down"></i>
       Bottom
     </button>
-    <button mat-stroked-button (click)="copyScrollback()" style="margin-left: 16px;">
+    <button mat-stroked-button (click)="copyScrollback()" [disabled]="!this.terminals.length" style="margin-left: 16px;">
       <i class="fas fa-fw fa-copy"></i>
       Copy Scrollback
     </button>
 
     <span fxFlex></span>
 
+    <button mat-stroked-button [disabled]="!this.terminals.length" (click)="renameTab()" style="float: right;">
+      <i class="fas fa-fw fa-pencil-alt"></i>
+      Rename
+    </button>  
+
   </mat-toolbar-row>
 
   <mat-toolbar-row>
 
     <form [formGroup]="commandForm" style="width: 100%;">
-      <mat-form-field style="width: 33%;">
+      <mat-form-field style="width: 50%;">
         <mat-label>Create Subprocess</mat-label>
         <div class="monospace">
           <input type="text" matInput [formControl]="commandForm.controls['cmd']" placeholder="Command">
@@ -52,7 +57,7 @@
           <div style="margin-left: 25px;">
            {{ term.name }}
           </div>
-          <button mat-icon-button (click)="removeTab()" style="margin-left: 25px;">
+          <button mat-icon-button (click)="removeTab(term)" style="margin-left: 25px;">
             <i class="fas fa-fw fa-times-circle"></i>
           </button>
         </ng-template>

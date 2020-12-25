@@ -22,10 +22,10 @@ Because I value my development time more than your RAM.
 
 #### Are Electron Apps Secure?
 
-I tried ¯\\_(ツ)_/¯. Having personally written multiple exploits for Electron apps, I like to think I have a fighting chance. You can [read more about the application architecture here](https://github.com/moloch--/reasonably-secure-electron). In short:
+I tried ¯\\_(ツ)_/¯. Having personally written multiple exploits for Electron apps, I like to think I have a fighting chance, and I really did go thru a lot of effort to make the Sliver GUI as secure as possible. You can [read more about the application architecture here](https://github.com/moloch--/reasonably-secure-electron). In short:
+ * The renderer process is sandboxed, and preload scripts have context isolation enabled. Methods in the main process can only be called via `postMessage()`, and all JSON arguments must pass JSON-Schema checks.
  * No content runs in a `file://` origin, all content is served from internal Electron protocol handlers (i.e. `app://`).
  * A strict content content security policy (CSP) is applied to all origins (`script-src` does not allow `unsafe-inline` or `unsafe-eval`).
- * The renderer process is sandboxed, and preload scripts have context isolation enabled. Methods in the main process can only be called via `postMessage()` / JSON, and all JSON arguments must pass JSON-Schema checks.
  * Nearly the entire interface is implemented via Angular data binding; there are zero calls to `bypassSecurityTrustHtml()`.
 
 If you're concerned about security, I also encourage you to audit the code! See the repo security policy for bounties.
