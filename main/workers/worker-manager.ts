@@ -13,7 +13,7 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { homedir } from 'os';
+
 import { dialog } from 'electron';
 import { Sequelize, Model, ModelCtor } from 'sequelize';
 import * as os from 'os';
@@ -21,16 +21,13 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as uuid from 'uuid';
 
-import { ScriptModels } from './models';
-
-
+import { getClientDir } from '../ipc/util';
 import { logger } from '../logs';
-const sqlLogger = logger;
+import { WorkerModels } from '../models/worker-models';
 
-const CLIENT_DIR = path.join(homedir(), '.sliver-client');
-const SCRIPTS_DIR = path.join(CLIENT_DIR, 'scripts');
+
+const SCRIPTS_DIR = path.join(getClientDir(), 'scripts');
 const SAVED_DIR = path.join(SCRIPTS_DIR, 'saved');
-const SCRIPTS_DB = path.join(SCRIPTS_DIR, 'scripts.db');
 const SCRIPT_FILE = 'code.js';
 
 enum FileSystemPermissions {
@@ -45,8 +42,8 @@ export interface WorkerOptions {
 
 export class WorkerManager {
 
-  private execDir = os.tmpdir();
   private sequelize: Sequelize;
+  private execDir = os.tmpdir();
 
   // ExecId <-> ScriptId
   private scriptExecutions = new Map<string, string>();
@@ -58,18 +55,9 @@ export class WorkerManager {
     fs.mkdirSync(SAVED_DIR, { mode: 0o700, recursive: true });
   }
 
-  async init() {
-    logger.debug(`Init sqlite database ...`);
-    this.sequelize = new Sequelize({
-      dialect: 'sqlite',
-      storage: SCRIPTS_DB,
-      logging: (msg) => {
-        sqlLogger.debug(msg);
-      },
-    });
-    [this.Script, this.ScriptFileSystemAccess] = ScriptModels(this.sequelize);
-    await this.sequelize.sync();
-    logger.debug(`Database initialization completed`);
+  async init(sequelize: Sequelize) {
+    this.sequelize = sequelize;
+    [this.Script, this.ScriptFileSystemAccess] = WorkerModels(this.sequelize);
   }
 
   async newScript(name: string, code: string): Promise<string> {

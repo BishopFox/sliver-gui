@@ -3,9 +3,15 @@
 import * as https from 'https';
 import * as fs from 'fs';
 import * as path from 'path';
+import { homedir } from 'os';
 
 import { logger } from '../logs';
 
+const CLIENT_DIR_NAME = '.sliver-client';
+
+export function getClientDir(): string {
+  return path.join(homedir(), CLIENT_DIR_NAME);
+}
 
 export async function* walk(dir: string): string|AsyncGenerator<any, any, any> {
   for await (const d of await fs.promises.opendir(dir)) {

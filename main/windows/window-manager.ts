@@ -19,16 +19,19 @@ import * as fs from 'fs';
 import * as uuid from 'uuid';
 import * as path from 'path';
 import * as Base64 from 'js-base64';
+import { Sequelize } from 'sequelize';
 import { autoUpdater } from 'electron-updater';
 import { Tunnel } from 'sliver-script';
 
-import { CONFIG_DIR } from '../ipc/ipc';
+import { IPCHandlers, IPCMessage, CONFIG_DIR } from '../ipc/ipc';
+import { getClientDir } from '../ipc/util';
 import { WorkerManager } from '../workers/worker-manager';
 import { initMenu, MenuEvent } from './menu';
-import { IPCHandlers, IPCMessage } from '../ipc/ipc';
+import { WorkerModels } from '../models/worker-models';
+import { LibraryModels } from '../models/library-models';
 import * as AppProtocol from '../app-protocol';
-
 import { logger } from '../logs';
+const sqlLogger = logger;
 
 
 // https://nodejs.org/api/process.html#process_process_platform
@@ -56,6 +59,9 @@ export interface ConfigEvent {
   filename?: string;
 }
 
+const DB_PATH = path.join(getClientDir(), 'gui.db');
+
+
 export class WindowManager {
 
   public ipc: IPCHandlers;
@@ -63,6 +69,7 @@ export class WindowManager {
 
   private mainWindow: BrowserWindow;
   private otherWindows = new Map<string, BrowserWindow>();
+  private sequelize: Sequelize;
   menuEvents = new Subject<MenuEvent>();
   downloadEvents = new Subject<DownloadEvent>();
   configEvents = new Subject<ConfigEvent>();
@@ -75,7 +82,9 @@ export class WindowManager {
   }
 
   async init() {
-    await this.workerManager.init();
+    await this.initDB();
+
+    await this.workerManager.init(this.sequelize);
     this.initUpdate();
     initMenu(this.menuEvents, () => {
       autoUpdater.checkForUpdatesAndNotify();
@@ -94,6 +103,23 @@ export class WindowManager {
         logger.warn(`Outgoing data for non-existent tunnel (ipc: ${tunnelIpcId})`);
       }
     });
+  }
+
+  async initDB() {
+    logger.debug(`Database initializing ...`);
+    this.sequelize = new Sequelize({
+      dialect: 'sqlite',
+      storage: DB_PATH,
+      logging: (msg) => {
+        sqlLogger.debug(msg);
+      },
+    });
+    logger.debug(`Initializing worker models ...`);
+    WorkerModels(this.sequelize);
+    logger.debug(`Initializing library models ...`);
+    LibraryModels(this.sequelize);
+    await this.sequelize.sync();
+    logger.debug(`Database initialization completed`);
   }
 
   initUpdate() {
