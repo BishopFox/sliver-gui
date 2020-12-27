@@ -20,7 +20,7 @@ import { app, dialog, nativeTheme } from 'electron';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as uuid from 'uuid';
-import { NotificationCenter, NotificationMetadata } from 'node-notifier';
+import { NotificationCenter, NotificationMetadata, notify } from 'node-notifier';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 import {
@@ -31,6 +31,13 @@ import { downloadSliverAsset } from '../../ipc/util';
 import { jsonSchema } from '../../ipc/json-schema';
 import { Progress } from '../../windows/window-manager';
 import { logger } from '../../logs';
+
+// https://nodejs.org/api/process.html#process_process_platform
+export enum Platforms {
+  Windows = 'win32',
+  MacOS = 'darwin',
+  Linux = 'linux',
+};
 
 
 async function makeConfigDir(): Promise<NodeJS.ErrnoException | null> {
@@ -54,10 +61,6 @@ const NOTIFY_STR = {
   "maxLength": 64,
   "pattern": "^[a-zA-Z0-9_-\\s#!]*$"
 };
-const notifier = new NotificationCenter({
-  withFallback: false,
-  customPath: undefined
-});
 
 
 export const CLIENT_NAMESPACE = "client";
@@ -372,13 +375,14 @@ export class ClientHandlers implements Handlers {
     "additionalProperties": false,
   })
   public async client_notify(ipc: IPCHandlers, req: any): Promise<string> {
+    const iconPath = path.join(getDistPath(), 'favicon.ico');
     return new Promise(resolve => {
       const notification = {
         title: req.title,
         subtitle: req.subtitle,
         message: req.message,
         sound: req.sound ? true : false,
-        icon: path.join(getDistPath(), 'favicon.png'),
+        icon: iconPath,
         timeout: req.timeout > 0 ? req.timeout : 10,
       };
       if (req.closeLabel?.length) {
@@ -390,7 +394,7 @@ export class ClientHandlers implements Handlers {
       if (req.dropdownLabel?.length) {
         notification['dropdownLabel'] = req.dropdownLabel;
       }
-      notifier.notify(notification, (err: Error, response: string, metadata: NotificationMetadata) => {
+      notify(notification, (err: Error, response: string, metadata: NotificationMetadata) => {
         resolve(JSON.stringify({
           err: err,
           response: response,
@@ -398,6 +402,7 @@ export class ClientHandlers implements Handlers {
         }));
       });
     });
+ 
   }
 
   public client_exit(ipc: IPCHandlers) {

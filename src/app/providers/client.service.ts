@@ -229,6 +229,8 @@ export class ClientService {
     return downloadId;
   }
 
+  // Notify - Trigger a native OS notification
+  // NOTE: Not all features are available on all platforms!
   async notify(title: string, subtitle: string, message: string, sound: boolean = true, timeout: number = 5,
                closeLabel?: string, actions?: string[], dropdownLabel?: string, reply?: boolean): Promise<Notified> {
     const notified = await this._ipc.request('client_notify', JSON.stringify({
