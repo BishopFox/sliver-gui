@@ -20,12 +20,13 @@ import { app, dialog, nativeTheme } from 'electron';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as uuid from 'uuid';
+import { NotificationCenter, NotificationMetadata } from 'node-notifier';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 import {
   IPCHandlers, Handlers, SaveFileReq, ReadFileReq, DEFAULT_SERVER_URL, SETTINGS_PATH, CONFIG_DIR
 } from '../../ipc/ipc';
-import { getLocalesJSON, getCurrentLocale, setLocaleSync } from '../../locale';
+import { getLocalesJSON, getCurrentLocale, setLocaleSync, getDistPath } from '../../locale';
 import { downloadSliverAsset } from '../../ipc/util';
 import { jsonSchema } from '../../ipc/json-schema';
 import { Progress } from '../../windows/window-manager';
@@ -43,6 +44,20 @@ async function makeConfigDir(): Promise<NodeJS.ErrnoException | null> {
     });
   });
 }
+
+// Annoyingly the node-notify package regularly shells out to a subprocess
+// to invoke the notifications, so we need to be extra careful when passing
+// parameters that originate from within the sandbox.
+const NOTIFY_STR = {
+  "type": "string",
+  "minLength": 1,
+  "maxLength": 64,
+  "pattern": "^[a-zA-Z0-9_-\\s#!]*$"
+};
+const notifier = new NotificationCenter({
+  withFallback: false,
+  customPath: undefined
+});
 
 
 export const CLIENT_NAMESPACE = "client";
@@ -334,6 +349,49 @@ export class ClientHandlers implements Handlers {
 
   public async client_configManagerWindow(ipc: IPCHandlers): Promise<void> {
     ipc.windowManager.createConfigManagerWindow();
+  }
+
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "title": NOTIFY_STR,
+      "subtitle": NOTIFY_STR,
+      "message": NOTIFY_STR,
+      "sound": { "type": "boolean" },
+      "timeout": { "type": "number" },
+      "closeLabel": NOTIFY_STR,
+      "actions": {
+        "type": "array",
+        "items": NOTIFY_STR,
+        "additionalItems": false,
+      },
+      "dropdownLabel": NOTIFY_STR,
+      "reply": { "type": "boolean" }
+    },
+    "required": ["title", "message"],
+    "additionalProperties": false,
+  })
+  public async client_notify(ipc: IPCHandlers, req: any): Promise<string> {
+    return new Promise(resolve => {
+      notifier.notify({
+        title: req.title,
+        subtitle: req.subtitle,
+        message: req.message,
+        sound: req.sound ? true : false,
+        icon: path.join(getDistPath(), 'favicon.png'),
+        timeout: req.timeout ? req.timeout : 5,
+        closeLabel: req.closeLabel ? req.closeLabel : undefined,
+        actions: req.actions ? req.actions : undefined,
+        dropdownLabel: req.dropdownLabel ? req.dropdownLabel : undefined,
+        reply: req.reply !== undefined ? req.reply : false,
+      }, (err: Error, response: string, metadata: NotificationMetadata) => {
+        resolve(JSON.stringify({
+          err: err.toString(),
+          response: response,
+          metadata: metadata,
+        }));
+      });
+    });
   }
 
   public client_exit(ipc: IPCHandlers) {

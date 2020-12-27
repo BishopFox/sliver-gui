@@ -256,16 +256,14 @@ export class AppComponent implements OnInit, OnDestroy {
     snackBarRef.onAction().pipe(take(1)).subscribe(() => {
       this._router.navigate(['sessions', session.getId()]);
     });
-
-    const _ = new Notification('Sliver', {
-      body: `Session #${session.getId()} opened`
-    });
+    this._clientService.notify('Sliver', 'New Session', `Session #${session.getId()} opened`);
   }
 
   sessionDisconnectedAlert(session: clientpb.Session) {
     this._snackBar.open(`Lost session #${session.getId()}`, 'Dismiss', {
       duration: 5000,
     });
+    this._clientService.notify('Sliver', 'Lost Session', `Session #${session.getId()} closed`);
   }
 
   aboutDialog() {

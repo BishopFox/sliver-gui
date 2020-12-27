@@ -82,7 +82,7 @@ function localeFilePath(): string {
 export function getDistPath() {
   const distPath = path.join(__dirname, '..', 'dist', getCurrentLocaleSync());
   logger.silly(`Locale dist path: ${distPath}`);
-  return distPath;
+  return path.resolve(distPath);
 }
 
 export function getLocalesJSON(): any {

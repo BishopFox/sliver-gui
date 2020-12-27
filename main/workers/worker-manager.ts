@@ -88,7 +88,7 @@ export class WorkerManager {
   async updateScript(id: string, name: string, code: string) {
     const script = await this.Script.findByPk(id);
     if (script.getDataValue('name') !== name) {
-      await this.Script.update({name: name}, {where: {id: script.getDataValue('id')}});
+      await this.Script.update({ name: name }, { where: { id: script.getDataValue('id') } });
     }
     return new Promise((resolve, reject) => {
       const fileOptions = { mode: 0o600, encoding: 'utf-8' };
@@ -183,7 +183,7 @@ export class WorkerManager {
   async removeScript(id: string): Promise<void> {
     const script = await this.Script.findByPk(id);
     await script.destroy();
-    await this.Script.destroy({where: { id: id }});
+    await this.Script.destroy({ where: { id: id } });
     fs.unlink(path.join(SAVED_DIR, id), (err) => { console.error(err) });
   }
 

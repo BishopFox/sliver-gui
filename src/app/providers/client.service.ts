@@ -66,20 +66,27 @@ export interface SliverConfig {
 }
 
 export interface Settings {
-
   theme: string;
   preferredServer: string;
-
   notifications: {
     sessionOpened: boolean;
     sessionClosed: boolean;
-
     jobStopped: boolean;
-
     playerJoined: boolean;
     playerLeft: boolean;
   };
+}
 
+export interface Notified {
+  err: string;
+  response: string;
+  metadata: {
+    activationType?: string;
+    activationAt?: string;
+    deliveredAt?: string;
+    activationValue?: string;
+    activationValueIndex?: string;
+  };
 }
 
 
@@ -220,6 +227,22 @@ export class ClientService {
       saveToDownloads: saveToDownloads,
     }));
     return downloadId;
+  }
+
+  async notify(title: string, subtitle: string, message: string, sound: boolean = true, timeout: number = 5,
+               closeLabel?: string, actions?: string[], dropdownLabel?: string, reply?: boolean): Promise<Notified> {
+    const notified = await this._ipc.request('client_notify', JSON.stringify({
+      title: title,
+      subtitle: subtitle,
+      message: message,
+      sound: sound,
+      timeout: timeout,
+      closeLabel: closeLabel,
+      actions: actions,
+      dropdownLabel: dropdownLabel,
+      reply: reply,
+    }));
+    return JSON.parse(notified);
   }
 
   exit() {

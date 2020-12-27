@@ -33,7 +33,6 @@ const MINUTE = 60;
 export const RPC_NAMESPACE = "rpc";
 export class RPCHandlers {
 
-  
     // ----------
     // > RPC
     // ----------
