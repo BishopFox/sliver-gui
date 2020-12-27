@@ -249,21 +249,24 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
-  sessionConnectedAlert(session: clientpb.Session) {
+  async sessionConnectedAlert(session: clientpb.Session) {
     const snackBarRef = this._snackBar.open(`Session #${session.getId()} opened`, 'Interact', {
       duration: 5000,
     });
     snackBarRef.onAction().pipe(take(1)).subscribe(() => {
-      this._router.navigate(['sessions', session.getId()]);
+      this._router.navigate(['sessions', session.getId(), 'info']);
     });
-    this._clientService.notify('Sliver', 'New Session', `Session #${session.getId()} opened`);
+    const reply = await this._clientService.notify('Sliver', 'New Session', `Session #${session.getId()} opened`, true, 10, undefined, ['Interact']);
+    if (!reply.err && reply.response === 'activate') {
+      this._router.navigate(['sessions', session.getId(), 'info']);
+    }
   }
 
   sessionDisconnectedAlert(session: clientpb.Session) {
     this._snackBar.open(`Lost session #${session.getId()}`, 'Dismiss', {
       duration: 5000,
     });
-    this._clientService.notify('Sliver', 'Lost Session', `Session #${session.getId()} closed`);
+    this._clientService.notify('Sliver', 'Lost Session', `Session #${session.getId()} closed`, true, 10);
   }
 
   aboutDialog() {

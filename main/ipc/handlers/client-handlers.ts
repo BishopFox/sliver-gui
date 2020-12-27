@@ -373,20 +373,26 @@ export class ClientHandlers implements Handlers {
   })
   public async client_notify(ipc: IPCHandlers, req: any): Promise<string> {
     return new Promise(resolve => {
-      notifier.notify({
+      const notification = {
         title: req.title,
         subtitle: req.subtitle,
         message: req.message,
         sound: req.sound ? true : false,
         icon: path.join(getDistPath(), 'favicon.png'),
-        timeout: req.timeout ? req.timeout : 5,
-        closeLabel: req.closeLabel ? req.closeLabel : undefined,
-        actions: req.actions ? req.actions : undefined,
-        dropdownLabel: req.dropdownLabel ? req.dropdownLabel : undefined,
-        reply: req.reply !== undefined ? req.reply : false,
-      }, (err: Error, response: string, metadata: NotificationMetadata) => {
+        timeout: req.timeout > 0 ? req.timeout : 10,
+      };
+      if (req.closeLabel?.length) {
+        notification['closeLabel'] = req.closeLabel;
+      }
+      if (req.actions?.length) {
+        notification['actions'] = req.actions;
+      }
+      if (req.dropdownLabel?.length) {
+        notification['dropdownLabel'] = req.dropdownLabel;
+      }
+      notifier.notify(notification, (err: Error, response: string, metadata: NotificationMetadata) => {
         resolve(JSON.stringify({
-          err: err.toString(),
+          err: err,
           response: response,
           metadata: metadata,
         }));
