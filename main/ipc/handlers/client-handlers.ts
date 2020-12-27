@@ -20,7 +20,7 @@ import { app, dialog, nativeTheme } from 'electron';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as uuid from 'uuid';
-import { NotificationCenter, NotificationMetadata, notify } from 'node-notifier';
+import { NotificationMetadata, notify } from 'node-notifier';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 import {
@@ -59,7 +59,7 @@ const NOTIFY_STR = {
   "type": "string",
   "minLength": 1,
   "maxLength": 64,
-  "pattern": "^[a-zA-Z0-9_-\\s#!]*$"
+  "pattern": "^[a-zA-Z0-9_#!\\- ]*$"
 };
 
 

@@ -14,8 +14,10 @@
 */
 
 
-
+import * as fs from 'fs';
 import { Sequelize, Model, ModelCtor } from 'sequelize';
+
+import { logger } from '../logs';
 import { LibraryModels } from '../models/library-models';
 
 
@@ -69,7 +71,11 @@ export class LibraryManager {
     const library = await this.libraryByName(libraryName);
     const item = await this.getItem(library.getDataValue('name'), id);
     if (item.getDataValue('name') !== name) {
-      await this.LibraryItem.update({ name: name }, { where: { id: library.getDataValue('id') } });
+      await this.LibraryItem.update({ name: name }, { 
+        where: { 
+          id: library.getDataValue('id')
+        }
+      });
     }
   }
 
@@ -78,6 +84,24 @@ export class LibraryManager {
     if (item) {
       await item.destroy();
     }
+  }
+
+  async readFile(libraryName: string, id: string): Promise<Buffer> {
+    const item = await this.getItem(libraryName, id);
+    if (!item) {
+      return Promise.reject('Library item not found');
+    }
+    const filePath = item.getDataValue('path');
+    try {
+      const lstat = await fs.promises.lstat(filePath);
+      if (lstat.isFile()) {
+        const data = await fs.promises.readFile(filePath);
+        return data;
+      }
+    } catch (err) {
+      logger.error(err);
+    }
+    return Promise.reject('File does not exist');
   }
 
 }

@@ -25,6 +25,7 @@ import * as path from 'path';
 import { getClientDir } from '../locale';
 import { WindowManager } from '../windows/window-manager';
 import { WorkerManager } from '../workers/worker-manager';
+import { LibraryManager } from '../libraries/library-manager';
 import { logger } from '../logs';
 
 import { ClientHandlers, CLIENT_NAMESPACE } from './handlers/client-handlers';
@@ -32,6 +33,7 @@ import { ConfigHandlers, CONFIG_NAMESPACE } from './handlers/config-handlers';
 import { LocalHandlers, LOCAL_NAMESPACE } from './handlers/local-handlers';
 import { RPCHandlers, RPC_NAMESPACE } from './handlers/rpc-handlers';
 import { ScriptHandlers, SCRIPT_NAMESPACE } from './handlers/script-handlers';
+import { LibraryHandlers, LIBRARY_NAMESPACE } from './handlers/library-handlers';
 
 
 export const DEFAULT_SERVER_URL = 'https://api.github.com/repos/BishopFox/sliver/releases/latest';
@@ -92,15 +94,22 @@ export class IPCHandlers {
     [LOCAL_NAMESPACE, new LocalHandlers()],
     [RPC_NAMESPACE, new RPCHandlers()],
     [SCRIPT_NAMESPACE, new ScriptHandlers()],
+    [LIBRARY_NAMESPACE, new LibraryHandlers()]
   ]);
 
   public client: SliverClient;
   public windowManager: WindowManager;
-  public workerManager: WorkerManager;
 
   constructor(windowManager: WindowManager) {
     this.windowManager = windowManager;
-    this.workerManager = windowManager.workerManager;
+  }
+
+  public get workerManager(): WorkerManager {
+    return this.windowManager.workerManager;
+  }
+
+  public get libraryManager(): LibraryManager {
+    return this.windowManager.libraryManager;
   }
 
   // Dispatcher
@@ -109,7 +118,8 @@ export class IPCHandlers {
 
     // IPC handlers must start with "namespace_" this helps ensure we do not inadvertently
     // expose methods that we don't want exposed to the sandboxed code.
-    if (['client_', 'config_', 'rpc_', 'script_'].some(prefix => method.startsWith(prefix))) {
+    const namespaceFilter = ['client_', 'config_', 'rpc_', 'script_', 'library_'];
+    if (namespaceFilter.some(prefix => method.startsWith(prefix))) {
       const handlers = this.getNamespaceHandlers(method);
       if (typeof handlers[method] === 'function') {
         const result: any = await handlers[method](this, data);
@@ -122,7 +132,7 @@ export class IPCHandlers {
     }
   }
 
-  // Local Dispatcher (needs an extra parameter)
+  // Local Dispatcher - Are special as they need an extra parameter (origin)
   async dispatchLocal(origin: string, method: string, data: string): Promise<any> {
     logger.debug(`IPC Local Dispatch: ${method}`);
     if (['local_'].some(prefix => method.startsWith(prefix))) {

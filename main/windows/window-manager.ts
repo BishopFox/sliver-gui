@@ -26,6 +26,7 @@ import { Tunnel } from 'sliver-script';
 import { IPCHandlers, IPCMessage, CONFIG_DIR } from '../ipc/ipc';
 import { getClientDir } from '../ipc/util';
 import { WorkerManager } from '../workers/worker-manager';
+import { LibraryManager } from '../libraries/library-manager';
 import { initMenu, MenuEvent } from './menu';
 import { WorkerModels } from '../models/worker-models';
 import { LibraryModels } from '../models/library-models';
@@ -66,6 +67,7 @@ export class WindowManager {
 
   public ipc: IPCHandlers;
   public workerManager: WorkerManager;
+  public libraryManager: LibraryManager;
 
   private mainWindow: BrowserWindow;
   private otherWindows = new Map<string, BrowserWindow>();
@@ -119,6 +121,8 @@ export class WindowManager {
     logger.debug(`Initializing library models ...`);
     LibraryModels(this.sequelize);
     await this.sequelize.sync();
+    this.libraryManager = new LibraryManager();
+    await this.libraryManager.init(this.sequelize);
     logger.debug(`Database initialization completed`);
   }
 
