@@ -1,0 +1,58 @@
+<div *ngIf="!dataSrc" class="grid-spinner-wrapper">
+  <div class="spinner">
+    <mat-progress-spinner mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+</div>
+
+<div [@fadeInOut] *ngIf="dataSrc">
+
+  <mat-toolbar style="background: transparent;" fxLayout="row" fxLayoutAlign="start center">
+
+    <h2 *ngIf="title">
+      {{ title }}
+    </h2>
+
+    <span *ngIf="showControls" fxFlex></span>
+
+    <button mat-stroked-button *ngIf="showControls" (click)="addItem()">
+      Add File(s)
+    </button>
+
+    <span fxFlex></span>
+
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+
+  </mat-toolbar>
+
+  <mat-card class="slim">
+    <table mat-table [dataSource]="dataSrc" matSort (matSortChange)="sortData($event)">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <ng-container i18n>ID</ng-container>
+        </th>
+        <td mat-cell *matCellDef="let item"> {{item.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <ng-container i18n>Name</ng-container>
+        </th>
+        <td mat-cell *matCellDef="let item"> {{item.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="path">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <ng-container i18n>Path</ng-container>
+        </th>
+        <td mat-cell *matCellDef="let item"> {{item.path}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row (click)="onRowSelection(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card>
+</div>

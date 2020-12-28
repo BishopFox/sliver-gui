@@ -33,7 +33,14 @@ export class LibraryManager {
   }
 
   async libraryByName(libraryName: string): Promise<Model<any, any>> {
-    return this.Library.findOne({ where: { name: libraryName } });
+    const count = await this.Library.count({ where: { name: libraryName } });
+    let library: Model<any, any>;
+    if (count < 1) {
+      library = await this.Library.create({ name: libraryName });
+    } else {
+      library = await this.Library.findOne({ where: { name: libraryName }});
+    }
+    return library;
   }
 
   async getItems(libraryName: string) {
@@ -52,13 +59,7 @@ export class LibraryManager {
   }
 
   async addItem(libraryName: string, filePath: string, name?: string): Promise<Model<any, any>> {
-    const count = await this.Library.count({ where: { name: libraryName } });
-    let library: Model<any, any>;
-    if (count < 1) {
-      library = await this.Library.create({ name: libraryName });
-    } else {
-      library = await this.Library.findOne({ where: { name: libraryName }});
-    }
+    const library = await this.libraryByName(libraryName);
     return this.LibraryItem.create({
       LibraryId: library.getDataValue('id'),
       path: filePath,

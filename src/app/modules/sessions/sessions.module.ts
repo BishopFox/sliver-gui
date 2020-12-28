@@ -41,6 +41,7 @@ import { SideLoadComponent } from './components/side-load/side-load.component';
 import { ScreenshotsComponent } from './components/screenshots/screenshots.component';
 import { ExecuteAssemblyComponent } from './components/execute-assembly/execute-assembly.component';
 import { ExecuteShellcodeComponent } from './components/execute-shellcode/execute-shellcode.component';
+import { LibraryTableComponent } from './components/library-table/library-table.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { ExecuteShellcodeComponent } from './components/execute-shellcode/execut
     ScreenshotsComponent,
     ExecuteAssemblyComponent,
     ExecuteShellcodeComponent,
-    RenameDialogComponent
+    RenameDialogComponent,
+    LibraryTableComponent
   ],
   imports: [
     CommonModule,

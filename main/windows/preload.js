@@ -24,7 +24,7 @@ const { ipcRenderer } = require('electron');
 /** App Listener */
 const APP_PROTOCOL = 'app:';
 const MAIN_ORIGIN = `${APP_PROTOCOL}//sliver`; // Origin for the main window
-const appPrefixes = ['client_', 'config_', 'rpc_', 'script_'];
+const appPrefixes = ['client_', 'config_', 'rpc_', 'script_', 'library_'];
 
 
 window.addEventListener('message', (event) => {
