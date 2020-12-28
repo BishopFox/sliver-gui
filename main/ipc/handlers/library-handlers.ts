@@ -61,7 +61,7 @@ export class LibraryHandlers {
   async library_addItem(ipc: IPCHandlers, req: any): Promise<void> {
     const openDialog = await dialog.showOpenDialog({
       title: `Add file(s) to ${req.libraryName} library`,
-      message: "Add file(s) to library",
+      message: `Add file(s) to ${req.libraryName} library`,
       defaultPath: path.join(homedir()),
       properties: ["openFile", "multiSelections", "showHiddenFiles", "dontAddToRecent"],
     });
