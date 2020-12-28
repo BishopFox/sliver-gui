@@ -7,7 +7,7 @@
 
 <div [@fadeInOut] *ngIf="dataSrc">
 
-  <mat-toolbar style="background: transparent;" fxLayout="row" fxLayoutAlign="start center">
+  <mat-toolbar fxLayout="row" fxLayoutAlign="start center">
 
     <h2 *ngIf="title">
       {{ title }}
@@ -16,7 +16,7 @@
     <span *ngIf="showControls && title" fxFlex></span>
 
     <button mat-stroked-button *ngIf="showControls" (click)="addItem()">
-      Add File(s)
+      <ng-container i18n>Add File(s)</ng-container>
     </button>
 
     <span fxFlex></span>
@@ -27,7 +27,7 @@
 
   </mat-toolbar>
 
-  <mat-card class="slim">
+  <mat-card class="slim" [ngStyle]="getCardStyle()">
     <table mat-table [dataSource]="dataSrc" matSort (matSortChange)="sortData($event)">
 
       <ng-container matColumnDef="id">

@@ -1,1 +1,102 @@
-<p>execute-shellcode works!</p>
+<div *ngIf="!shellcodes || !session" class="grid-spinner-wrapper">
+  <div class="spinner">
+    <mat-progress-spinner mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+</div>
+
+<div [@fadeInOut] *ngIf="shellcodes && session" class="grid-wrapper">
+
+  <mat-toolbar-row class="terminal-toolbar" fxLayout="row" fxLayoutAlign="start center">
+
+    <button mat-raised-button (click)="execute()" [disabled]="!shellcodeForm.valid">
+      <ng-container i18n>Execute</ng-container>
+    </button>
+
+    <button mat-stroked-button (click)="manageShellcode()" style="margin-left: 16px;">
+      <i class="fas fa-microchip"></i>&nbsp;
+      <ng-container i18n>Manage Shellcode</ng-container>
+    </button>
+
+    <button mat-stroked-button (click)="jumpToTop()" [disabled]="!this.terminals.length" style="margin-left: 16px;">
+      <i class="fas fa-fw fa-arrow-up"></i>
+      <ng-container i18n>Top</ng-container>
+    </button>
+    <button mat-stroked-button (click)="jumpToBottom()" [disabled]="!this.terminals.length" style="margin-left: 16px;">
+      <i class="fas fa-fw fa-arrow-down"></i>
+      <ng-container i18n>Bottom</ng-container>
+    </button>
+    <button mat-stroked-button (click)="copyScrollback()" [disabled]="!this.terminals.length" style="margin-left: 16px;">
+      <i class="fas fa-fw fa-copy"></i>
+      <ng-container i18n>Copy Scrollback</ng-container>
+    </button>
+
+    <span fxFlex></span>
+
+    <button mat-stroked-button [disabled]="!this.terminals.length" (click)="renameTab()" style="float: right;">
+      <i class="fas fa-fw fa-pencil-alt"></i>
+      <ng-container i18n>Rename</ng-container>
+    </button>
+
+  </mat-toolbar-row>
+
+  <mat-toolbar-row class="terminal-toolbar" fxLayout="row" fxLayoutAlign="start center" style="margin-bottom: 10px;">
+    <form [formGroup]="shellcodeForm">
+
+      <mat-form-field appearance="fill">
+        <mat-label i18n>Select Shellcode</mat-label>
+        <mat-select [formControl]="shellcodeForm.controls['shellcode']">
+          <mat-option></mat-option>
+          <mat-option *ngFor="let item of shellcodes" [value]="item.id">
+            {{ item.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="shellcodeForm.controls['shellcode'].hasError('required')">
+          <ng-container i18n>You must make a selection</ng-container>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field style="width: 40%; margin-left: 16px;">
+        <mat-label i18n>Process</mat-label>
+        <div class="monospace">
+          <input type="text" matInput [formControl]="shellcodeForm.controls['process']" placeholder="Process">
+        </div>
+        <mat-error *ngIf="shellcodeForm.controls['process'].hasError('required')">
+          <ng-container i18n>Please enter a valid process name</ng-container>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-slide-toggle [formControl]="shellcodeForm.controls['rwx']" color="primary" style="margin-left: 16px;">
+        <ng-container i18n>RWX Pages</ng-container>
+      </mat-slide-toggle>
+
+      <mat-slide-toggle [formControl]="shellcodeForm.controls['interactive']" color="primary" style="margin-left: 16px;">
+        <ng-container i18n>Interactive</ng-container>
+      </mat-slide-toggle>
+
+    </form>
+  </mat-toolbar-row>
+
+  <div class="terminal-container">
+    <mat-tab-group animationDuration="0ms" [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+      <mat-tab *ngFor="let term of terminals; let index = index" [label]="terminals.indexOf(term)">
+
+        <ng-template mat-tab-label class="terminal-tabs">
+          <div style="margin-left: 25px;">
+            {{ term.name }}
+          </div>
+          <button mat-icon-button (click)="removeTab(term)" style="margin-left: 25px;">
+            <i class="fas fa-fw fa-times-circle"></i>
+          </button>
+        </ng-template>
+
+        <div class="terminal-container">
+          <ng-terminal [terminal]="term.terminal">
+          </ng-terminal>
+        </div>
+
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+</div>

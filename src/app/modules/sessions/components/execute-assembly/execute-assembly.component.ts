@@ -39,9 +39,9 @@ import { FadeInOut } from '@app/shared';
 export class ExecuteAssemblyComponent implements OnInit {
 
   private readonly TERM_NAMESPACE = 'ExecuteAssemblyComponent';
-  readonly LIBRARY_NAME = 'dotnet';
+  private readonly LIBRARY_NAME = 'dotnet';
+
   assemblies: LibraryItem[];
-  title = '.NET Assemblies';
 
   @Input() selectAfterAdding = true;
   selected = new FormControl(0);
@@ -92,7 +92,7 @@ export class ExecuteAssemblyComponent implements OnInit {
     const dialogRef = this.dialog.open(LibraryDialogComponent, {
       width: '50%',
       data: {
-        title: this.title,
+        title: '.NET Library',
         libraryName: this.LIBRARY_NAME,
       },
     });

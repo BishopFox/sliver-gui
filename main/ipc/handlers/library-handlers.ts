@@ -63,7 +63,7 @@ export class LibraryHandlers {
       title: `Add file(s) to ${req.libraryName} library`,
       message: "Add file(s) to library",
       defaultPath: path.join(homedir()),
-      properties: ["openFile", "showHiddenFiles", "dontAddToRecent"],
+      properties: ["openFile", "multiSelections", "showHiddenFiles", "dontAddToRecent"],
     });
     if (openDialog.canceled || openDialog.filePaths.length < 1) {
       return Promise.reject('User cancel');

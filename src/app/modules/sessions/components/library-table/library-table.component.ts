@@ -34,6 +34,7 @@ function compare(a: number | string, b: number | string, isAsc: boolean) {
 export class LibraryTableComponent implements OnInit {
 
   @Input() title: string;
+  @Input() card: boolean = true;
   @Input() showControls: boolean = true;
   @Input() libraryName: string;
   @Input() displayedColumns: string[] = [
@@ -92,6 +93,10 @@ export class LibraryTableComponent implements OnInit {
   async removeItem(item: LibraryItem) {
     await this._libraryService.removeItem(this.libraryName, item.id);
     this.fetchLibraryItems();
+  }
+
+  getCardStyle() {
+    return this.card ? {} : {'box-shadow': 'none'};
   }
 
 }

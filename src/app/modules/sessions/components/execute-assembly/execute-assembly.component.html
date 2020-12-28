@@ -10,31 +10,32 @@
   <mat-toolbar-row class="terminal-toolbar" fxLayout="row" fxLayoutAlign="start center">
 
     <button mat-raised-button (click)="execute()" [disabled]="!executeAssemblyForm.valid">
-      Execute
+      <ng-container i18n>Execute</ng-container>
     </button>
 
     <button mat-stroked-button (click)="manageAssemblies()" style="margin-left: 16px;">
-      Manage .NET Assemblies
+      <i class="fab fa-microsoft"></i>&nbsp;
+      <ng-container i18n>Manage .NET Assemblies</ng-container>
     </button>
 
     <button mat-stroked-button (click)="jumpToTop()" [disabled]="!this.terminals.length" style="margin-left: 16px;">
       <i class="fas fa-fw fa-arrow-up"></i>
-      Top
+      <ng-container i18n>Top</ng-container>
     </button>
     <button mat-stroked-button (click)="jumpToBottom()" [disabled]="!this.terminals.length" style="margin-left: 16px;">
       <i class="fas fa-fw fa-arrow-down"></i>
-      Bottom
+      <ng-container i18n>Bottom</ng-container>
     </button>
     <button mat-stroked-button (click)="copyScrollback()" [disabled]="!this.terminals.length" style="margin-left: 16px;">
       <i class="fas fa-fw fa-copy"></i>
-      Copy Scrollback
+      <ng-container i18n>Copy Scrollback</ng-container>
     </button>
 
     <span fxFlex></span>
 
     <button mat-stroked-button [disabled]="!this.terminals.length" (click)="renameTab()" style="float: right;">
       <i class="fas fa-fw fa-pencil-alt"></i>
-      Rename
+      <ng-container i18n>Rename</ng-container>
     </button>
 
   </mat-toolbar-row>
@@ -51,23 +52,23 @@
           </mat-option>
         </mat-select>
         <mat-error *ngIf="executeAssemblyForm.controls['assembly'].hasError('required')">
-          You must make a selection
+          <ng-container i18n>You must make a selection</ng-container>
         </mat-error>
       </mat-form-field>
 
       <mat-form-field style="margin-left: 16px; width: 30%">
-        <mat-label>Args</mat-label>
+        <mat-label i18n>Arguments</mat-label>
         <div class="monospace">
           <input type="text" matInput [formControl]="executeAssemblyForm.controls['args']" placeholder="Arguments">
         </div>
       </mat-form-field>
 
       <mat-slide-toggle [formControl]="executeAssemblyForm.controls['amsi']" color="primary" style="margin-left: 16px;">
-        AMSI Bypass
+        <ng-container i18n>AMSI Bypass</ng-container>
       </mat-slide-toggle>
 
       <mat-slide-toggle [formControl]="executeAssemblyForm.controls['etw']" color="primary" style="margin-left: 16px;">
-        Patch ETW
+        <ng-container i18n>Patch ETW</ng-container>
       </mat-slide-toggle>
 
       <mat-form-field style="margin-left: 16px;">
@@ -76,7 +77,7 @@
           <input type="text" matInput [formControl]="executeAssemblyForm.controls['process']" placeholder="Process">
         </div>
         <mat-error *ngIf="executeAssemblyForm.controls['process'].hasError('required')">
-          Please enter a valid process name
+          <ng-container i18n>Please enter a valid process name</ng-container>
         </mat-error>
       </mat-form-field>
 
