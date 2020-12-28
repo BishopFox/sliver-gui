@@ -181,4 +181,17 @@ export class SliverService {
     return sliverpb.Execute.deserializeBinary(Base64.toUint8Array(executed));
   }
 
+  async executeAssembly(sessionId: number, libraryName: string, libraryId: string, args: string, process: string, amsi: boolean, etw: boolean): Promise<sliverpb.ExecuteAssembly> {
+    const executed: string = await this._ipc.request('rpc_executeAssembly', JSON.stringify({
+      sessionId: sessionId,
+      libraryName: libraryName,
+      libraryId: libraryId,
+      args: args,
+      process: process,
+      amsi: amsi,
+      etw: etw,
+    }));
+    return sliverpb.ExecuteAssembly.deserializeBinary(Base64.toUint8Array(executed));
+  }
+
 }

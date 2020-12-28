@@ -14,17 +14,19 @@
 */
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb';
 
 import { LibraryDialogComponent, RenameDialogComponent } from '@app/modules/sessions/components/dialogs/dialogs.component';
 import { TerminalService, SliverTerminal } from '@app/providers/terminal.service';
 import { LibraryService, LibraryItem } from '@app/providers/library.service';
 import { SliverService } from '@app/providers/sliver.service';
+import { Colors } from '@app/modules/terminal/colors';
 import { FadeInOut } from '@app/shared';
 
 
@@ -41,8 +43,10 @@ export class ExecuteAssemblyComponent implements OnInit {
   assemblies: LibraryItem[];
   title = '.NET Assemblies';
 
-  session: clientpb.Session;
+  @Input() selectAfterAdding = true;
   selected = new FormControl(0);
+
+  session: clientpb.Session;
   executeAssemblyForm: FormGroup;
 
   constructor(private _route: ActivatedRoute,
@@ -68,7 +72,7 @@ export class ExecuteAssemblyComponent implements OnInit {
       process: ['notepad.exe', Validators.required],
       amsi: [false],
       etw: [false],
-      timeout: [60, Validators.required]
+      // timeout: [60, Validators.required]
     });
   }
 
@@ -98,7 +102,29 @@ export class ExecuteAssemblyComponent implements OnInit {
   }
 
   async execute() {
+    const form = this.executeAssemblyForm.value;
+    try {
+      const executed = await this._sliverService.executeAssembly(this.session.getId(), this.LIBRARY_NAME, form.assembly, form.args, form.process, form.amsi, form.etw);
+      this.displayOutput(executed);
+    } catch(err) {
+      this.displayError(err);
+    } 
+  }
 
+  displayOutput(executed: sliverpb.ExecuteAssembly) {
+    const term = this._terminalService.newTerminal(this.session.getId(), this.namespace);
+    term.terminal.write(executed.getOutput());
+    if (this.selectAfterAdding) {
+      this.selected.setValue(this.terminals.length - 1);
+    }
+  }
+
+  displayError(err) {
+    const term = this._terminalService.newTerminal(this.session.getId(), this.namespace);
+    term.terminal.write(`${Colors.Red}${err}${Colors.Reset}`);
+    if (this.selectAfterAdding) {
+      this.selected.setValue(this.terminals.length - 1);
+    }
   }
 
   jumpToTop() {

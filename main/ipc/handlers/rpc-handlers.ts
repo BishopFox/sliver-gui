@@ -351,6 +351,31 @@ export class RPCHandlers {
       "type": "object",
       "properties": {
         "sessionId": { "type": "number" },
+        "libraryName": { "type": "string", "minLength": 1 },
+        "libraryId": { "type": "string" },
+        "args": { "type": "string" },
+        "process": { "type": "string" },
+        "amsi": { "type": "boolean" },
+        "etw": { "type": "boolean" },
+      },
+      "required": ["sessionId", "libraryName", "libraryId", "args", "process", "amsi", "etw"],
+      "additionalProperties": false,
+    })
+    async rpc_executeAssembly(ipc: IPCHandlers, req: any): Promise<string> {
+      const session = await ipc.client.interact(req.sessionId);
+      const assembly = await ipc.libraryManager.readFile(req.libraryName, req.libraryId);
+      if (!assembly) {
+        return Promise.reject('Invalid library file');
+      }
+      const executed = await session.executeAssembly(assembly, req.args, req.process, req.amsi, req.timeout);
+      return Base64.fromUint8Array(executed.serializeBinary());
+    }
+
+    @isConnected()
+    @jsonSchema({
+      "type": "object",
+      "properties": {
+        "sessionId": { "type": "number" },
       },
       "required": ["sessionId"],
       "additionalProperties": false,
