@@ -61,7 +61,7 @@ jobs:
     - name: NPM Install
       run: |
        npm install
-       cd ./workers/worker
+       cd ./main/workers/worker
        npm install
        cd ../..
        npm install -g electron-packager
@@ -101,7 +101,7 @@ jobs:
     - name: NPM Install
       run: |
         npm install
-        cd ./workers/worker
+        cd ./main/workers/worker
         npm install
         cd ../..
         npm install -g electron-packager

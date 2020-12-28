@@ -41,7 +41,7 @@ From this directory, first do a local build:
 
 ```bash
 npm install
-cd workers/worker && npm install && cd ../..
+cd main/workers/worker && npm install && cd ../..
 npm install -g electron-packager
 npm install -g @angular/cli
 npm install -g ngx-i18nsupport
