@@ -82,11 +82,25 @@ export class LibraryHandlers {
       "id": { "type": "string" },
       "name": { "type": "string" }
     },
-    "required": ["libraryName", "id"],
+    "required": ["libraryName", "id", "name"],
     "additionalProperties": false,
   })
   async library_updateItem(ipc: IPCHandlers, req: any): Promise<void> {
     await ipc.libraryManager.updateItem(req.libraryName, req.id, req.name);
+  }
+
+  @isConnected()
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "libraryName": { "type": "string", "minLength": 1 },
+      "id": { "type": "string" },
+    },
+    "required": ["libraryName", "id"],
+    "additionalProperties": false,
+  })
+  async library_removeItem(ipc: IPCHandlers, req: any): Promise<void> {
+    await ipc.libraryManager.removeItem(req.libraryName, req.id);
   }
 
 }

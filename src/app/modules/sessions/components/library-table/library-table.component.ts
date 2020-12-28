@@ -37,7 +37,7 @@ export class LibraryTableComponent implements OnInit {
   @Input() showControls: boolean = true;
   @Input() libraryName: string;
   @Input() displayedColumns: string[] = [
-    'name', 'path',
+    'name', 'path', 'controls'
   ];
   @Output() onLibrarySelection = new EventEmitter<LibraryItem>();
 
@@ -81,6 +81,16 @@ export class LibraryTableComponent implements OnInit {
 
   async addItem() {
     await this._libraryService.addItem(this.libraryName);
+    this.fetchLibraryItems();
+  }
+
+  async renameItem(item: LibraryItem, name: string) {
+    await this._libraryService.updateItem(this.libraryName, item.id, name);
+    this.fetchLibraryItems();
+  }
+
+  async removeItem(item: LibraryItem) {
+    await this._libraryService.removeItem(this.libraryName, item.id);
     this.fetchLibraryItems();
   }
 

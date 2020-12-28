@@ -53,4 +53,11 @@ export class LibraryService {
     }));
   }
 
+  async removeItem(libraryName: string, id: string) {
+    await this._ipc.request('library_removeItem', JSON.stringify({
+      libraryName: libraryName,
+      id: id,
+    }));
+  }
+
 }
