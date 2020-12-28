@@ -35,3 +35,23 @@ export class RenameDialogComponent {
   }
 
 }
+
+
+@Component({
+  selector: 'session-library-dialog',
+  templateUrl: './library.dialog.html',
+})
+export class LibraryDialogComponent {
+
+  constructor(public dialogRef: MatDialogRef<LibraryDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  complete() {
+    this.dialogRef.close();
+  }
+
+}

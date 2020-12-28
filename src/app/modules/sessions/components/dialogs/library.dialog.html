@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>
+  <i class="fas fa-fw fa-book"></i>
+  {{ data.title }}
+</h1>
+<div mat-dialog-content>
+  <br />
+  <sessions-library-table [title]="null" [libraryName]="data.libraryName">
+  </sessions-library-table>
+  <br />
+</div>
+<div mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" (click)="complete()">
+    &nbsp;&nbsp;
+    <ng-container i18n>
+      Done
+    </ng-container>
+    &nbsp;&nbsp;
+  </button>
+</div>

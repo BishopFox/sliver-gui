@@ -13,7 +13,7 @@
       {{ title }}
     </h2>
 
-    <span *ngIf="showControls" fxFlex></span>
+    <span *ngIf="showControls && title" fxFlex></span>
 
     <button mat-stroked-button *ngIf="showControls" (click)="addItem()">
       Add File(s)

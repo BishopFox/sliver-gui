@@ -1,4 +1,109 @@
-<p>execute-assembly works!</p>
+<div *ngIf="!assemblies || !session" class="grid-spinner-wrapper">
+  <div class="spinner">
+    <mat-progress-spinner mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+</div>
 
-<sessions-library-table [title]="tableTitle" [libraryName]="LIBRARY_NAME">
-</sessions-library-table>
+<div [@fadeInOut] *ngIf="assemblies && session" class="grid-wrapper">
+
+  <mat-toolbar-row class="terminal-toolbar" fxLayout="row" fxLayoutAlign="start center">
+
+    <button mat-raised-button (click)="execute()" [disabled]="!executeAssemblyForm.valid">
+      Execute
+    </button>
+
+    <button mat-stroked-button (click)="manageAssemblies()" style="margin-left: 16px;">
+      Manage .NET Assemblies
+    </button>
+
+    <button mat-stroked-button (click)="jumpToTop()" [disabled]="!this.terminals.length" style="margin-left: 16px;">
+      <i class="fas fa-fw fa-arrow-up"></i>
+      Top
+    </button>
+    <button mat-stroked-button (click)="jumpToBottom()" [disabled]="!this.terminals.length" style="margin-left: 16px;">
+      <i class="fas fa-fw fa-arrow-down"></i>
+      Bottom
+    </button>
+    <button mat-stroked-button (click)="copyScrollback()" [disabled]="!this.terminals.length"
+      style="margin-left: 16px;">
+      <i class="fas fa-fw fa-copy"></i>
+      Copy Scrollback
+    </button>
+
+    <span fxFlex></span>
+
+    <button mat-stroked-button [disabled]="!this.terminals.length" (click)="renameTab()" style="float: right;">
+      <i class="fas fa-fw fa-pencil-alt"></i>
+      Rename
+    </button>
+
+  </mat-toolbar-row>
+
+  <mat-toolbar-row class="terminal-toolbar" fxLayout="row" fxLayoutAlign="start center" style="margin-bottom: 10px;">
+    <form [formGroup]="executeAssemblyForm">
+
+      <mat-form-field appearance="fill">
+        <mat-label i18n>Select Assembly</mat-label>
+        <mat-select [formControl]="executeAssemblyForm.controls['assembly']">
+          <mat-option></mat-option>
+          <mat-option *ngFor="let item of assemblies" [value]="item.id">
+            {{ item.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="executeAssemblyForm.controls['assembly'].hasError('required')">
+          You must make a selection
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field style="margin-left: 16px; width: 30%">
+        <mat-label>Args</mat-label>
+        <div class="monospace">
+          <input type="text" matInput [formControl]="executeAssemblyForm.controls['args']" placeholder="Arguments">
+        </div>
+      </mat-form-field>
+
+      <mat-slide-toggle [formControl]="executeAssemblyForm.controls['amsi']" color="primary" style="margin-left: 16px;">
+        AMSI Bypass
+      </mat-slide-toggle>
+
+      <mat-slide-toggle [formControl]="executeAssemblyForm.controls['etw']" color="primary" style="margin-left: 16px;">
+        Patch ETW
+      </mat-slide-toggle>
+
+      <mat-form-field style="margin-left: 16px;">
+        <mat-label>Process</mat-label>
+        <div class="monospace">
+          <input type="text" matInput [formControl]="executeAssemblyForm.controls['process']" placeholder="Process">
+        </div>
+        <mat-error *ngIf="executeAssemblyForm.controls['process'].hasError('required')">
+          Please enter a valid process name
+        </mat-error>
+      </mat-form-field>
+
+    </form>
+  </mat-toolbar-row>
+
+  <div class="terminal-container">
+    <mat-tab-group animationDuration="0ms" [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+      <mat-tab *ngFor="let term of terminals; let index = index" [label]="terminals.indexOf(term)">
+
+        <ng-template mat-tab-label class="terminal-tabs">
+          <div style="margin-left: 25px;">
+            {{ term.name }}
+          </div>
+          <button mat-icon-button (click)="removeTab(term)" style="margin-left: 25px;">
+            <i class="fas fa-fw fa-times-circle"></i>
+          </button>
+        </ng-template>
+
+        <div class="terminal-container">
+          <ng-terminal [terminal]="term.terminal">
+          </ng-terminal>
+        </div>
+
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+</div>

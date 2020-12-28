@@ -15,30 +15,135 @@
 
 
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { take } from 'rxjs/operators';
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+
+import { LibraryDialogComponent, RenameDialogComponent } from '@app/modules/sessions/components/dialogs/dialogs.component';
+import { TerminalService, SliverTerminal } from '@app/providers/terminal.service';
 import { LibraryService, LibraryItem } from '@app/providers/library.service';
 import { SliverService } from '@app/providers/sliver.service';
+import { FadeInOut } from '@app/shared';
+
 
 @Component({
   selector: 'sessions-execute-assembly',
   templateUrl: './execute-assembly.component.html',
-  styleUrls: ['./execute-assembly.component.scss']
+  styleUrls: ['./execute-assembly.component.scss'],
+  animations: [FadeInOut]
 })
 export class ExecuteAssemblyComponent implements OnInit {
 
+  private readonly TERM_NAMESPACE = 'ExecuteAssemblyComponent';
   readonly LIBRARY_NAME = 'dotnet';
-  libraryItems: LibraryItem[];
+  assemblies: LibraryItem[];
+  title = '.NET Assemblies';
 
-  tableTitle = '.NET Assemblies';
+  session: clientpb.Session;
+  selected = new FormControl(0);
+  executeAssemblyForm: FormGroup;
 
-  constructor(private _libraryService: LibraryService,
+  constructor(private _route: ActivatedRoute,
+              public dialog: MatDialog,
+              private _fb: FormBuilder,
+              private _terminalService: TerminalService,
+              private _libraryService: LibraryService,
               private _sliverService: SliverService) { }
 
   ngOnInit(): void {
-    this.fetchDotnetItems();
+    this._route.parent.params.pipe(take(1)).subscribe(params => {
+      const sessionId: number = parseInt(params['session-id'], 10);
+      this._sliverService.sessionById(sessionId).then(session => {
+        this.session = session;
+        this.fetchDotNetItems();
+      }).catch(err => {
+        console.error(`No session with id ${sessionId} (${err})`);
+      });
+    });
+    this.executeAssemblyForm = this._fb.group({
+      assembly: ['', Validators.required],
+      args: [''],
+      process: ['notepad.exe', Validators.required],
+      amsi: [false],
+      etw: [false],
+      timeout: [60, Validators.required]
+    });
   }
 
-  async fetchDotnetItems() {
-    this.libraryItems = await this._libraryService.items(this.LIBRARY_NAME);
+  get terminals(): SliverTerminal[] {
+    return this._terminalService.getNamespaceTerminals(this.session.getId(), this.namespace);
   }
+
+  get namespace(): string {
+    return this.TERM_NAMESPACE;
+  }
+
+  async fetchDotNetItems() {
+    this.assemblies = await this._libraryService.items(this.LIBRARY_NAME);
+  }
+
+  async manageAssemblies() {
+    const dialogRef = this.dialog.open(LibraryDialogComponent, {
+      width: '50%',
+      data: {
+        title: this.title,
+        libraryName: this.LIBRARY_NAME,
+      },
+    });
+    dialogRef.afterClosed().pipe(take(1)).subscribe(() => {
+      this.fetchDotNetItems();
+    });
+  }
+
+  async execute() {
+
+  }
+
+  jumpToTop() {
+    const term = this.terminals[this.selected?.value];
+    if (term) {
+      term.terminal.scrollToTop();
+    }
+  }
+
+  jumpToBottom() {
+    const term = this.terminals[this.selected?.value];
+    if (term) {
+      term.terminal.scrollToBottom();
+    }
+  }
+
+  copyScrollback() {
+    const term = this.terminals[this.selected?.value];
+    if (term) {
+      term.terminal.selectAll();
+      document.execCommand('copy');
+      term.terminal.clearSelection();
+    }
+  }
+
+  renameTab() {
+    const selected = this.terminals[this.selected?.value];
+    if (selected) {
+      const dialogRef = this.dialog.open(RenameDialogComponent, {
+        width: '40%',
+        data: selected.name,
+      });
+      dialogRef.afterClosed().pipe(take(1)).subscribe(name => {
+        if (name) {
+          selected.name = name;
+        }
+      });
+    }
+  }
+
+  removeTab(term: SliverTerminal) {
+    if (this.terminals.length) {
+      this._terminalService.delete(this.session.getId(), this.namespace, term.id);
+    }
+  }
+
 
 }

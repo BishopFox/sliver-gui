@@ -29,7 +29,9 @@ import {
 import {
   ShellComponent, ShellCloseDialogComponent, ShellCustomDialogComponent
 } from './components/shell/shell.component';
-import { RenameDialogComponent } from './components/dialogs/dialogs.component';
+import {
+  LibraryDialogComponent, RenameDialogComponent
+} from './components/dialogs/dialogs.component';
 import { PsComponent } from './components/ps/ps.component';
 import { InfoComponent } from './components/info/info.component';
 import { SharedModule } from '../../shared/shared.module';
@@ -65,6 +67,7 @@ import { LibraryTableComponent } from './components/library-table/library-table.
     ExecuteAssemblyComponent,
     ExecuteShellcodeComponent,
     RenameDialogComponent,
+    LibraryDialogComponent,
     LibraryTableComponent
   ],
   imports: [
