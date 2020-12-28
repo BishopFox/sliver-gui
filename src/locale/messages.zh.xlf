@@ -51,23 +51,23 @@
       </trans-unit><trans-unit id="a2716faa0ccd23f37b308339ee15b7b1f866b5d9" datatype="html">
         <source> Profiles </source><target state="translated">个人资料</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context><context context-type="linenumber">28</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context><context context-type="linenumber">17</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context><context context-type="linenumber">28</context></context-group></trans-unit>
       <trans-unit id="37ab69a6c6ea3e0e4a4bb72c5227f95ea5a1fc32" datatype="html">
         <source> Canaries </source><target state="translated">金丝雀</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context><context context-type="linenumber">34</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context><context context-type="linenumber">16</context></context-group></trans-unit><trans-unit id="d07fb972b3244964e1a24a2902236c1dc8236d12" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context><context context-type="linenumber">34</context></context-group></trans-unit><trans-unit id="d07fb972b3244964e1a24a2902236c1dc8236d12" datatype="html">
         <source> Builds </source><target state="translated">建物</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context><context context-type="linenumber">40</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">16</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context><context context-type="linenumber">40</context></context-group></trans-unit>
       
       <trans-unit id="79709dedbeb98b51516beb4bedb74c24ee01c66b" datatype="html">
         <source> Sessions </source><target state="translated">届会</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context><context context-type="linenumber">48</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context><context context-type="linenumber">48</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context><context context-type="linenumber">15</context></context-group></trans-unit>
       <trans-unit id="9153b3a9ac928c5e352e6266b9a1d7301d1400bf" datatype="html">
         <source> Jobs </source><target state="translated">职位</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context><context context-type="linenumber">55</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context><context context-type="linenumber">55</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/jobs-table/jobs-table.component.html</context><context context-type="linenumber">14</context></context-group></trans-unit>
       <trans-unit id="92c6fa0a20f9aec805ffaff70f97dbf4dcce318d" datatype="html">
         <source> Scripting </source><target state="translated">脚本编写</target>
         
@@ -111,36 +111,33 @@
           <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8c19acfb82292c105887731b727164b5c20303e2" datatype="html">
-        <source> Sessions </source><target state="translated">届会</target>
-        
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context><context context-type="linenumber">15</context></context-group></trans-unit>
+      
       <trans-unit id="45cc8ca94b5a50842a9a8ef804a5ab089a38ae5c" datatype="html">
         <source>ID</source><target state="translated">ID</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context><context context-type="linenumber">31</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context><context context-type="linenumber">32</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/library-table/library-table.component.html</context><context context-type="linenumber">35</context></context-group></trans-unit>
       <trans-unit id="cff1428d10d59d14e45edec3c735a27b5482db59" datatype="html">
         <source>Name</source><target state="translated">名称</target>
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context><context context-type="linenumber">38</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/main/add-website.dialog.html</context><context context-type="linenumber">13</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">59</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/dialogs/rename.dialog.html</context><context context-type="linenumber">11</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context><context context-type="linenumber">39</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/main/add-website.dialog.html</context><context context-type="linenumber">13</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">68</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/library-table/library-table.component.html</context><context context-type="linenumber">42</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/dialogs/rename.dialog.html</context><context context-type="linenumber">11</context></context-group></trans-unit>
       <trans-unit id="af1396bdc49f45ea6c4a1e414769f5e2a382c834" datatype="html">
         <source>Transport</source><target state="translated">运输</target>
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context><context context-type="linenumber">45</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/info/info.component.html</context><context context-type="linenumber">24</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context><context context-type="linenumber">46</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/info/info.component.html</context><context context-type="linenumber">24</context></context-group></trans-unit>
       <trans-unit id="4ea97e94fe65f30b5477c509744f276e100e458e" datatype="html">
         <source>Remote Address</source><target state="translated">远端地址</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context><context context-type="linenumber">52</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context><context context-type="linenumber">53</context></context-group></trans-unit>
       <trans-unit id="08c74dc9762957593b91f6eb5d65efdfc975bf48" datatype="html">
         <source>Username</source><target state="translated">用户名</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context><context context-type="linenumber">59</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context><context context-type="linenumber">60</context></context-group></trans-unit>
       <trans-unit id="5c9636885876c00a7b72416bd841b36a1109b4d9" datatype="html">
         <source>Operating System</source><target state="translated">操作系统</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context><context context-type="linenumber">8</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context><context context-type="linenumber">8</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context><context context-type="linenumber">66</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context><context context-type="linenumber">35</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">34</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">15</context></context-group></trans-unit><trans-unit id="3fd0cd77b59b96bcadaf55606da31177393c6ede" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context><context context-type="linenumber">8</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context><context context-type="linenumber">8</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context><context context-type="linenumber">67</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context><context context-type="linenumber">28</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">28</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">15</context></context-group></trans-unit><trans-unit id="3fd0cd77b59b96bcadaf55606da31177393c6ede" datatype="html">
         <source>Save to Downloads</source><target state="translated">保存到下载</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context>
@@ -155,32 +152,20 @@
         <source>Last Check-in</source><target state="translated">上次签到</target>
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context><context context-type="linenumber">77</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/info/info.component.html</context><context context-type="linenumber">30</context></context-group></trans-unit>
-      <trans-unit id="da9ae5a77bb5879ad064faa05ee6b709a2183b19" datatype="html">
-        <source> Jobs </source><target state="translated">职位</target>
-        
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/jobs-table/jobs-table.component.html</context><context context-type="linenumber">16</context></context-group></trans-unit><trans-unit id="13778a9d7012d26638d3fc85eb6232c096b3d392" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context><context context-type="linenumber">78</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/info/info.component.html</context><context context-type="linenumber">30</context></context-group></trans-unit>
+      <trans-unit id="13778a9d7012d26638d3fc85eb6232c096b3d392" datatype="html">
         <source> Name </source><target state="translated">名称</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/jobs-table/jobs-table.component.html</context><context context-type="linenumber">39</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/websites-table/websites-table.component.html</context><context context-type="linenumber">34</context></context-group></trans-unit><trans-unit id="ec5248d3a6c09ab11c75cdcb1ecc24d02cd59535" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/jobs-table/jobs-table.component.html</context><context context-type="linenumber">34</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/websites-table/websites-table.component.html</context><context context-type="linenumber">34</context></context-group></trans-unit><trans-unit id="ec5248d3a6c09ab11c75cdcb1ecc24d02cd59535" datatype="html">
         <source> Protocol </source><target state="translated">协议</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/jobs-table/jobs-table.component.html</context>
-          <context context-type="linenumber">48,49</context>
-        </context-group>
-      </trans-unit><trans-unit id="f4ef653af2d6581107c957c7d1a64f0593b117cd" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/jobs-table/jobs-table.component.html</context><context context-type="linenumber">43</context></context-group></trans-unit><trans-unit id="f4ef653af2d6581107c957c7d1a64f0593b117cd" datatype="html">
         <source> Port </source><target state="translated">港口</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/jobs-table/jobs-table.component.html</context>
-          <context context-type="linenumber">57,58</context>
-        </context-group>
-      </trans-unit><trans-unit id="51ca888ac08cb4f6151b6b1a1d43012198d56948" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/jobs-table/jobs-table.component.html</context><context context-type="linenumber">52</context></context-group></trans-unit><trans-unit id="51ca888ac08cb4f6151b6b1a1d43012198d56948" datatype="html">
         <source> Description </source><target state="translated">描述</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/jobs-table/jobs-table.component.html</context>
-          <context context-type="linenumber">66,67</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/jobs-table/jobs-table.component.html</context><context context-type="linenumber">61</context></context-group></trans-unit>
       
       
       
@@ -220,7 +205,7 @@
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context><context context-type="linenumber">17</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/website-details/delete-website.dialog.html</context><context context-type="linenumber">14</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">80</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">105</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context><context context-type="linenumber">3</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context><context context-type="linenumber">25</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context><context context-type="linenumber">76</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context><context context-type="linenumber">50</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">87</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context><context context-type="linenumber">17</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/website-details/delete-website.dialog.html</context><context context-type="linenumber">14</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">89</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">113</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context><context context-type="linenumber">3</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context><context context-type="linenumber">25</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context><context context-type="linenumber">69</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context><context context-type="linenumber">50</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">81</context></context-group></trans-unit>
       <trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
         <source>Cancel</source><target state="translated">取消</target>
         
@@ -382,6 +367,136 @@
           <context context-type="sourcefile">src/app/modules/jobs/components/websites-table/websites-table.component.html</context>
           <context context-type="linenumber">43,44</context>
         </context-group>
+      </trans-unit><trans-unit id="699b690d686dbb8e00a1e95b89ba2fffb548da6e" datatype="html">
+        <source>Execute</source><target state="translated">执行</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit><trans-unit id="fd474c6b3fe197125d9ef6b830c37e892e34e76d" datatype="html">
+        <source>Manage .NET Assemblies</source><target state="translated">管理.NET程序集</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit><trans-unit id="6ae1c94f6bad274424f97e9bc8766242c1577447" datatype="html">
+        <source>Top</source><target state="translated">最佳</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit><trans-unit id="6723d5c967329a3ac75524cf0c1af5ced022b9a3" datatype="html">
+        <source>Bottom</source><target state="translated">底部</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit><trans-unit id="9803c3481f4d86afaf25d4926b247004cf0ac436" datatype="html">
+        <source>Copy Scrollback</source><target state="translated">复制回滚</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit><trans-unit id="e26f9cf3666aace4e524b1505c9795d76d87738d" datatype="html">
+        <source>Rename</source><target state="translated">改名</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit><trans-unit id="bfafb46d8b11edf123c5aee83fe4a6833c8d04da" datatype="html">
+        <source>Select Assembly</source><target state="translated">选择组装</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit><trans-unit id="5c12a82c6283b5e933cda0c15e7aa6b07f8c9713" datatype="html">
+        <source>Arguments</source><target state="translated">争论</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit><trans-unit id="09e77c4170b2d5e49c59c1b87e50d91a6818f545" datatype="html">
+        <source>AMSI Bypass</source><target state="translated">AMSI旁路</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit><trans-unit id="e40f138dbb62931478722d2e1bd6313e98f0a80a" datatype="html">
+        <source>Patch ETW</source><target state="translated">补丁ETW</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit><trans-unit id="da1713fc91ac5ac504494d17b84869615f5687b0" datatype="html">
+        <source>You must make a selection</source><target state="translated">您必须进行选择</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit><trans-unit id="c817a89c8dd03d953b5c30752b640a5fedd5cec2" datatype="html">
+        <source>Please enter a valid process name</source><target state="translated">请输入有效的进程名称</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
+          <context context-type="linenumber">80</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+      </trans-unit><trans-unit id="d973e47cf201b8455de2a36efd487c9a76824079" datatype="html">
+        <source>Manage Shellcode</source><target state="translated">管理Shellcode</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit><trans-unit id="2877b80dcf286a12ce03317a87892f59de982f7a" datatype="html">
+        <source>Select Shellcode</source><target state="translated">选择Shellcode</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit><trans-unit id="6b6a341244987842b9a398da39530352bb9dab9f" datatype="html">
+        <source>Process</source><target state="translated">处理</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit><trans-unit id="f0b91f1215b1fe75017cb7d768910e1e925e8e1a" datatype="html">
+        <source>RWX Pages</source><target state="translated">RWX页面</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit><trans-unit id="b4e2a7b4394e9a55bf2d25ece4a788e6b3a58127" datatype="html">
+        <source>Interactive</source><target state="translated">互动</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
       </trans-unit><trans-unit id="1ef18572032f31f40e1720c4a0970e710afa70e7" datatype="html">
         <source> Close Shell </source><target state="translated">封闭壳</target>
         <context-group purpose="location">
@@ -426,34 +541,40 @@
       <trans-unit id="eeae1f653579a72c51eef0809b36555e66e6ddc7" datatype="html">
         <source>Show Hidden Files</source><target state="translated">显示隐藏文件</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">26</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">25</context></context-group></trans-unit>
       <trans-unit id="7faaaa08f56427999f3be41df1093ce4089bbd75" datatype="html">
         <source>Size</source><target state="translated">尺寸</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">69</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">78</context></context-group></trans-unit>
       <trans-unit id="c9039b1b13b3ef165b66b3c5d79f810ab1ebb050" datatype="html">
         <source>Open</source><target state="translated">打开</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">99</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">107</context></context-group></trans-unit>
       <trans-unit id="dc75033a5238fdc4f462212c847a45ba8018a3fd" datatype="html">
         <source>Download</source><target state="translated">下载</target>
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context><context context-type="linenumber">29</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context><context context-type="linenumber">29</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">102</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context><context context-type="linenumber">22</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context><context context-type="linenumber">29</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context><context context-type="linenumber">29</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">110</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context><context context-type="linenumber">22</context></context-group></trans-unit>
       <trans-unit id="8ecc7ad6de089639c6ef0de66a25aa97547f5b30" datatype="html">
         <source>Make Directory</source><target state="translated">制作目录</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/mkdir-dialog.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-      </trans-unit>
-      <trans-unit id="8f84fb83422b8561c59546aa6eae72a9a59a97a0" datatype="html">
-        <source>Mkdir</source><target state="translated">麦克迪尔</target>
+      </trans-unit><trans-unit id="9ef6f57e778c0b9f24356c7dbeb2f48b63708ba9" datatype="html">
+        <source>Create Directory</source><target state="translated">建立目录</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/mkdir-dialog.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit><trans-unit id="70a67e04629f6d412db0a12d51820b480788d795" datatype="html">
+        <source>Create</source><target state="translated">创造</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/mkdir-dialog.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
+      
       <trans-unit id="1ebb07a3797618330ec9de8a3b6b7fd248f8e6b4" datatype="html">
         <source> Please type <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;monospace&quot;>"/><x id="INTERPOLATION" equiv-text="{{data.name}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span> "/> below to confirm: </source><target state="translated">请在下面输入<x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span>"/><x id="INTERPOLATION"/><x id="CLOSE_TAG_SPAN" ctype="x-span"/>进行确认：</target>
         <context-group purpose="location">
@@ -591,7 +712,19 @@
         <source>Session</source><target state="translated">届会</target>
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context><context context-type="linenumber">66</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/standalone-interact/standalone-interact.component.html</context><context context-type="linenumber">4</context></context-group></trans-unit><trans-unit id="17a9d8498aac8df513e73b89b0dd6be92da45f4e" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context><context context-type="linenumber">66</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/standalone-interact/standalone-interact.component.html</context><context context-type="linenumber">4</context></context-group></trans-unit><trans-unit id="469f3665464dd79936832ebcc420a2a620bf216d" datatype="html">
+        <source>Add File(s)</source><target state="translated">添加文件</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/library-table/library-table.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit><trans-unit id="019d4bd6a5690f0cfa0ecf346a4e6bf7f0d8debb" datatype="html">
+        <source>Remove</source><target state="translated">去掉</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/library-table/library-table.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit><trans-unit id="17a9d8498aac8df513e73b89b0dd6be92da45f4e" datatype="html">
         <source> Regenerate </source><target state="translated">再生</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/build-details/build-details.component.html</context>
@@ -600,10 +733,10 @@
       </trans-unit><trans-unit id="c2e07dff722386ae42bdcba42781dc4b0e7a24b0" datatype="html">
         <source>Implant Name</source><target state="translated">植入物名称</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context><context context-type="linenumber">34</context></context-group></trans-unit><trans-unit id="aefb77454378965c4da1a1d66000404ae9b95c3e" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context><context context-type="linenumber">28</context></context-group></trans-unit><trans-unit id="aefb77454378965c4da1a1d66000404ae9b95c3e" datatype="html">
         <source>Domain</source><target state="translated">域</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context><context context-type="linenumber">68</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context><context context-type="linenumber">106</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context><context context-type="linenumber">41</context></context-group></trans-unit><trans-unit id="afb605e735bef0cdd46dbff3c3d2be15960cdc2b" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context><context context-type="linenumber">68</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context><context context-type="linenumber">106</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context><context context-type="linenumber">35</context></context-group></trans-unit><trans-unit id="afb605e735bef0cdd46dbff3c3d2be15960cdc2b" datatype="html">
         <source>Website</source><target state="translated">网站</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
@@ -707,11 +840,8 @@
         </context-group>
       </trans-unit><trans-unit id="766c66ad5cc981c531aaf3fe3a2a7a346ddc8d83" datatype="html">
         <source>Path</source><target state="translated">路径</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-file.dialog.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-      </trans-unit><trans-unit id="443a71dd2737290342cf70e056a96596daa30e22" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-file.dialog.html</context><context context-type="linenumber">13</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/library-table/library-table.component.html</context><context context-type="linenumber">49</context></context-group></trans-unit><trans-unit id="443a71dd2737290342cf70e056a96596daa30e22" datatype="html">
         <source>Content-type</source><target state="translated">内容类型</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-file.dialog.html</context>
@@ -756,19 +886,22 @@
       </trans-unit><trans-unit id="0d9da1af5a90cd9e3fc5afd0d2c2480bf7019754" datatype="html">
         <source>Triggered</source><target state="translated">已触发</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context><context context-type="linenumber">50</context></context-group></trans-unit><trans-unit id="4f57ab68632e75bdd88db6a5141d69ace2f45773" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context><context context-type="linenumber">44</context></context-group></trans-unit><trans-unit id="4f57ab68632e75bdd88db6a5141d69ace2f45773" datatype="html">
         <source>First Triggered</source><target state="translated">首次触发</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context><context context-type="linenumber">60</context></context-group></trans-unit><trans-unit id="c51862ce29c7b1780182dbe401972b763a6dcaf9" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context><context context-type="linenumber">54</context></context-group></trans-unit><trans-unit id="c51862ce29c7b1780182dbe401972b763a6dcaf9" datatype="html">
         <source>Latest Trigger</source><target state="translated">最新触发</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context><context context-type="linenumber">72</context></context-group></trans-unit><trans-unit id="bcdc7f3c28d719db56eba5c4ef19c01c5f70665d" datatype="html">
-        <source> Regenerate </source><target state="translated">再生</target>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context><context context-type="linenumber">66</context></context-group></trans-unit><trans-unit id="cb0926296b01158ebdd3b19e3357e073e37fc340" datatype="html">
+        <source> Builds </source><target state="translated">建物</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context>
-          <context context-type="linenumber">77,78</context>
+          <context context-type="linenumber">14,15</context>
         </context-group>
-      </trans-unit><trans-unit id="4c37ff662409730f928d07f3088b7192705f9cc6" datatype="html">
+      </trans-unit><trans-unit id="bcdc7f3c28d719db56eba5c4ef19c01c5f70665d" datatype="html">
+        <source> Regenerate </source><target state="translated">再生</target>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">71</context></context-group></trans-unit><trans-unit id="4c37ff662409730f928d07f3088b7192705f9cc6" datatype="html">
         <source> New Profile </source><target state="translated">新的配置文件</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles/profiles.component.html</context><context context-type="linenumber">7</context></context-group></trans-unit><trans-unit id="994363f08f9fbfa3b3994ff7b35c6904fdff18d8" datatype="html">
@@ -795,6 +928,12 @@
           <context context-type="sourcefile">src/app/modules/generate/components/generate/build-error.dialog.html</context>
           <context context-type="linenumber">9,10</context>
         </context-group>
+      </trans-unit><trans-unit id="3b201a1281713f7d2cc47a81f7b821fff7b6a2ab" datatype="html">
+        <source> Profiles </source><target state="translated">个人资料</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context>
+          <context context-type="linenumber">14,15</context>
+        </context-group>
       </trans-unit><trans-unit id="ad3ce21e13a4f6fdeea73170384a5aba83e5a85f" datatype="html">
         <source> Rename </source><target state="translated">改名</target>
         <context-group purpose="location">
@@ -807,16 +946,22 @@
           <context context-type="sourcefile">src/app/modules/sessions/components/dialogs/rename.dialog.html</context>
           <context context-type="linenumber">22,23</context>
         </context-group>
+      </trans-unit><trans-unit id="f031826de4d223f5af8f4fcec0c4f2ed1c035e87" datatype="html">
+        <source> Done </source><target state="translated">完成了</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/dialogs/library.dialog.html</context>
+          <context context-type="linenumber">15,16</context>
+        </context-group>
       </trans-unit><trans-unit id="dc9a9853d36d7998ea7fdde3cf4cdee781ac5185" datatype="html">
         <source>Code Name</source><target state="translated">代码名称</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context><context context-type="linenumber">46</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">45</context></context-group></trans-unit><trans-unit id="d2252b2dbce97640eb209224549e3e59c67412c1" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context><context context-type="linenumber">39</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">39</context></context-group></trans-unit><trans-unit id="d2252b2dbce97640eb209224549e3e59c67412c1" datatype="html">
         <source>Architecture</source><target state="translated">建筑</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context><context context-type="linenumber">53</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">52</context></context-group></trans-unit><trans-unit id="dcfc990a822e11feb00eb91d9cf4d6ec0ed37dd0" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context><context context-type="linenumber">46</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">46</context></context-group></trans-unit><trans-unit id="dcfc990a822e11feb00eb91d9cf4d6ec0ed37dd0" datatype="html">
         <source>Debug</source><target state="translated">除错</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context><context context-type="linenumber">60</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context><context context-type="linenumber">28</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">59</context></context-group></trans-unit><trans-unit id="d6cb5bbe00793446c4e29be6156918840ec37c84" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context><context context-type="linenumber">53</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context><context context-type="linenumber">28</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">53</context></context-group></trans-unit><trans-unit id="d6cb5bbe00793446c4e29be6156918840ec37c84" datatype="html">
         <source>Max Connection Errors</source><target state="translated">最大连接错误</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context><context context-type="linenumber">29</context></context-group></trans-unit><trans-unit id="9b619b0c823e8a7afc2cd409bc00402c517df5e3" datatype="html">
@@ -835,7 +980,7 @@
       </trans-unit><trans-unit id="7722a92a1fc887570b4f4d8a7bb916f067f32028" datatype="html">
         <source>Format</source><target state="translated">格式</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context><context context-type="linenumber">67</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context><context context-type="linenumber">24</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">66</context></context-group></trans-unit><trans-unit id="6bc61c1eb9f3aae937d3f3c43a9b11fa6f59936e" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context><context context-type="linenumber">60</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context><context context-type="linenumber">24</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">60</context></context-group></trans-unit><trans-unit id="6bc61c1eb9f3aae937d3f3c43a9b11fa6f59936e" datatype="html">
         <source> Build from Profile </source><target state="translated">从个人资料建立</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profile-generate.dialog.html</context>
@@ -995,6 +1140,12 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-dns.dialog.html</context>
           <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit><trans-unit id="98b11f4ab5bb7fef9502719fcb93181ba7157e6d" datatype="html">
+        <source> Canaries </source><target state="translated">金丝雀</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context>
+          <context context-type="linenumber">14,15</context>
         </context-group>
       </trans-unit><trans-unit id="5dbf1e23add949a498b3c3403b1f223fb4b72fd4" datatype="html">
         <source>CPU Architecture</source><target state="translated">CPU架构</target>
