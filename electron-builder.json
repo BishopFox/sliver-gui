@@ -28,7 +28,7 @@
     ],
     "publish": [{
       "provider": "github",
-      "owner": "moloch--",
+      "owner": "BishopFox",
       "repo": "sliver-gui",
       "private": true
     }]
@@ -47,7 +47,7 @@
     ],
     "publish": [{
       "provider": "github",
-      "owner": "moloch--",
+      "owner": "BishopFox",
       "repo": "sliver-gui",
       "private": true
     }]
@@ -61,7 +61,7 @@
     ],
     "publish": [{
       "provider": "github",
-      "owner": "moloch--",
+      "owner": "BishopFox",
       "repo": "sliver-gui",
       "private": true
     }]
