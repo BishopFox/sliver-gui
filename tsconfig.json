@@ -23,9 +23,6 @@
       "dom"
     ]
   },
-  "angularCompilerOptions": {
-    "strictTemplates": true
-  },
   "include": [
     "main.ts",
     "src/**/*",
