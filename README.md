@@ -1,8 +1,8 @@
 # Sliver GUI
 
-[Sliver](https://github.com/BishopFox/sliver) GUI based on Electron/Angular/TypeScript. The GUI is a Sliver client, you'll need to setup and [connect to a Sliver server](https://github.com/BishopFox/sliver/wiki/Multiplayer-Mode).
+[Sliver](https://github.com/BishopFox/sliver) GUI client.
 
-![Node.js CI](https://github.com/BishopFox/sliver-gui/workflows/Node.js%20CI/badge.svg) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+![Release](https://github.com/BishopFox/sliver-gui/workflows/Release/badge.svg) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ### Usage
 
