@@ -1,6 +1,6 @@
 {
   "name": "sliver-gui",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Cross-platform GUI for the Sliver implant framework",
   "license": "GPLv3",
   "homepage": "https://github.com/moloch--/sliver-gui",
@@ -22,9 +22,11 @@
     "electron:linux": "npm run build:prod && electron-builder build --linux --publish=never",
     "electron:windows": "npm run build:prod && electron-builder build --windows --publish=never",
     "electron:mac": "npm run build:prod && electron-builder build --mac --publish=never",
+
     "publish:mac": "npm run build:prod && electron-builder build --mac --publish=always",
     "publish:windows": "npm run build:prod && electron-builder build --windows --publish=always",
     "publish:linux": "npm run build:prod && electron-builder build --linux --publish=always",
+    
     "clean": "rm -rf ./dist",
     "i18n": "ng extract-i18n --ivy --output-path ./src/locale/ && xliffmerge --profile ./src/locale/xliffmerge.json en fr ja es zh",
     "version": "ts-node -O \"{\\\"module\\\": \\\"commonjs\\\"}\" ./version.ts",
