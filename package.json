@@ -22,11 +22,9 @@
     "electron:linux": "npm run build:prod && electron-builder build --config ./builder/linux.json --linux --publish=never",
     "electron:windows": "npm run build:prod && electron-builder build --config ./builder/windows-exe.json --windows --publish=never",
     "electron:mac": "npm run build:prod && electron-builder build --config ./builder/macos-x64.json --mac --publish=never",
-
     "publish:mac": "npm run build:prod && electron-builder build --config ./builder/macos-x64.json --mac --publish=always && electron-builder build --config ./builder/macos-arm64.json --mac --publish=always",
     "publish:windows": "npm run build:prod && electron-builder build --config ./builder/windows-exe.json --windows --publish=always && electron-builder build --config ./builder/windows-nsis.json --windows --publish=always",
     "publish:linux": "npm run build:prod && electron-builder build --config ./builder/linux.json --linux --publish=always",
-
     "clean": "rm -rf ./dist",
     "i18n": "ng extract-i18n --ivy --output-path ./src/locale/ && xliffmerge --profile ./src/locale/xliffmerge.json en fr ja es zh",
     "version": "ts-node -O \"{\\\"module\\\": \\\"commonjs\\\"}\" ./version.ts",
@@ -68,7 +66,6 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "mocha": "^6.2.2",
     "ngx-i18nsupport": "^0.17.1",
-    "spectron": "9.0.0",
     "ts-node": "8.4.1",
     "ts-protoc-gen": "^0.12.0",
     "tslint": "~6.1.0",
@@ -102,7 +99,7 @@
     "rxjs": "^6.5.3",
     "sequelize": "^6.3.5",
     "shlex": "^2.0.2",
-    "sliver-script": "^1.0.35",
+    "sliver-script": "^1.0.36",
     "sprintf-js": "^1.0.3",
     "sqlite3": "^5.0.0",
     "uuid": "^8.3.1",
