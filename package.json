@@ -19,14 +19,14 @@
     "build:prod": "npm run clean && npm run version && npm run build:worker && npm run build -- -c production",
     "electron:serve-tsc": "tsc -p tsconfig-serve.json",
     "electron:local": "npm run build:dev && electron .",
-    "electron:linux": "npm run build:prod && electron-builder build --linux --publish=never",
-    "electron:windows": "npm run build:prod && electron-builder build --windows --publish=never",
-    "electron:mac": "npm run build:prod && electron-builder build --mac --publish=never",
+    "electron:linux": "npm run build:prod && electron-builder build --config ./builder/linux.json --linux --publish=never",
+    "electron:windows": "npm run build:prod && electron-builder build --config ./builder/windows-exe.json --windows --publish=never",
+    "electron:mac": "npm run build:prod && electron-builder build --config ./builder/macos-x64.json --mac --publish=never",
 
-    "publish:mac": "npm run build:prod && electron-builder build --mac --publish=always",
-    "publish:windows": "npm run build:prod && electron-builder build --windows --publish=always",
-    "publish:linux": "npm run build:prod && electron-builder build --linux --publish=always",
-    
+    "publish:mac": "npm run build:prod && electron-builder build --config ./builder/macos-x64.json --mac --publish=always && electron-builder build --config ./builder/macos-arm64.json --mac --publish=always",
+    "publish:windows": "npm run build:prod && electron-builder build --config ./builder/windows-exe.json --windows --publish=always && electron-builder build --config ./builder/windows-nsis.json --windows --publish=always",
+    "publish:linux": "npm run build:prod && electron-builder build --config ./builder/linux.json --linux --publish=always",
+
     "clean": "rm -rf ./dist",
     "i18n": "ng extract-i18n --ivy --output-path ./src/locale/ && xliffmerge --profile ./src/locale/xliffmerge.json en fr ja es zh",
     "version": "ts-node -O \"{\\\"module\\\": \\\"commonjs\\\"}\" ./version.ts",
