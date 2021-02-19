@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';
 import { EditorComponent } from './components/editor/editor.component';
 import { FormsModule } from '@angular/forms';
 import { BaseMaterialModule } from '@app/base-material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MonacoEditorModule } from '@materia-ui/ngx-monaco-editor';
 import { BrowserComponent, DeleteScriptDialogComponent } from './components/browser/browser.component';
@@ -43,6 +44,7 @@ import { TaskComponent } from './components/task/task.component';
     FormsModule,
     BaseMaterialModule,
     MonacoEditorModule,
+    FlexLayoutModule,
   ]
 })
 export class ScriptingModule { }
