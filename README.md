@@ -32,19 +32,18 @@ If you're concerned about security, I also encourage you to audit the code! See 
 
 #### Why Not a Web Interface?
 
-Sliver clients connect over mutual-TLS (mTLS), which is not available from within a browser. Electron also lets us implement other native app integrations that would otherwise not be possible.
+Sliver clients connect using gRPC over Mutual TLS (mTLS), which is not available from within a browser. Even sandboxed, Electron also lets us implement other native app integrations that would otherwise not be possible.
 
 
 ### Build
 
-From this directory, first do a local build:
+From the root of the git repo, to build your local platform:
 
 ```bash
 npm install
 cd main/workers/worker && npm install && cd ../../..
 npm install -g electron-packager
 npm install -g @angular/cli
-npm install -g ngx-i18nsupport
 npm run electron:local
 ```
 
@@ -54,4 +53,10 @@ If that works, then you should be able to do platform specific builds:
 npm run electron:mac
 npm run electron:windows
 npm run electron:linux
+```
+
+To work on i18n/translations, you'll likely need to install the `ngx-i18nsupport` package:
+
+```
+npm install -g ngx-i18nsupport
 ```

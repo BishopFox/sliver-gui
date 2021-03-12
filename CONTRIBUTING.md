@@ -6,11 +6,12 @@ Contributing to Sliver GUI
 * Contributions to core code must be GPLv3 (but not libraries)
 * If you'd like to work on a feature, please open a ticket and assign it to yourself
 * Changes should be made in a new branch
-* Commits [must be signed](https://docs.github.com/en/github/authenticating-to-github/signing-commits) for any PR to master
+* Please [sign](https://docs.github.com/en/github/authenticating-to-github/signing-commits) commits for any PR to master
 * Please provide meaningful commit messages
 * Ensure code passes existing unit tests, or provide updated test(s)
 * Please use TypeScript types whenever possible.
-* 
+* Try to keep PRs succinct to one feature/change/fix 
+
 
 ## Security
 
@@ -18,7 +19,7 @@ Electron is a [security minefield](https://github.com/moloch--/reasonably-secure
 
 * _Never_ use `eval()`, `.innerHTML`, `BypassSecurityTrustHtml()`, or any other dangerous (e.g. string concatenation / string interpolation) methods when interacting with the DOM.
 * _Never_ enable an `unsafe-` directive for active content source in the Content-Security-Policy (the only exception is `style-src` with has inline enabled, which Angular needs).
-* _Never_ modify the `default-src`
+* _Never_ modify the `default-src`, it should _always_ be set to `none` for any window or web context.
 * _Never_ trust IPC messages originating from the renderer (i.e., sandbox) all messages must be validated using JSON Schema in addition to any parameter specific validation.
 * _Never_ trust the user, applied in a common-sense way.
 * _Never_ enable `NodeIntegration` in _any_ window or web context, you MUST call native code via the IPC interface (including web workers, etc).
