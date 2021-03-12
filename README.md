@@ -22,7 +22,7 @@ Because I value my development time more than your RAM.
 
 #### Are Electron Apps Secure?
 
-I tried ¯\\_(ツ)_/¯. Having personally written multiple exploits for Electron apps, I like to think I have a fighting chance, and I really did go thru a lot of effort to make the Sliver GUI as secure as possible (the UI code doesn't even have access to the file system). You can [read more about the application architecture here](https://github.com/moloch--/reasonably-secure-electron). In short:
+I tried ¯\\_(ツ)_/¯. Having personally written multiple exploits for Electron apps, I like to think I have a fighting chance, and I really did go thru a lot of effort to make the Sliver GUI as secure as possible (the UI code is sandboxed and I even patched all of the `eval`s out of the protobuf code). You can [read more about the application architecture here](https://github.com/moloch--/reasonably-secure-electron). In short:
  * The renderer process is sandboxed, and preload scripts have context isolation enabled. Methods in the main process can only be called via `postMessage()`, and all JSON arguments must pass JSON-Schema checks.
  * No content runs in a `file://` origin, all content is served from internal Electron protocol handlers (i.e. `app://`).
  * A strict content content security policy (CSP) is applied to all origins (`script-src` does not allow `unsafe-inline` or `unsafe-eval`).
@@ -41,7 +41,7 @@ From this directory, first do a local build:
 
 ```bash
 npm install
-cd main/workers/worker && npm install && cd ../..
+cd main/workers/worker && npm install && cd ../../..
 npm install -g electron-packager
 npm install -g @angular/cli
 npm install -g ngx-i18nsupport
