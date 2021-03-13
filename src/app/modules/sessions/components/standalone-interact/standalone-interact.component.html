@@ -27,7 +27,7 @@
         <ng-container i18n>Interactive Shell</ng-container>
       </mat-list-item>
       <mat-list-item [routerLink]="['execute-command']">
-        <i class="fas fa-fw fa-terminal"></i>&nbsp;
+        <i class="fas fa-fw fa-keyboard"></i>&nbsp;
         <ng-container i18n>Command Exec</ng-container>
       </mat-list-item>
       <mat-list-item [routerLink]="['execute-shellcode']">
@@ -38,12 +38,12 @@
         <i class="fas fa-fw fa-file-code"></i>&nbsp;
         <ng-container i18n>Side Loader</ng-container>
       </mat-list-item>
-
-      <!-- Windows -->
-      <mat-list-item *ngIf="isWindows()" [routerLink]="['screenshots']">
+      <mat-list-item *ngIf="isWindows() || isLinux()" [routerLink]="['screenshots']">
         <i class="fas fa-fw fa-desktop"></i>&nbsp;
         <ng-container i18n>Screenshots</ng-container>
       </mat-list-item>
+
+      <!-- Windows -->
       <mat-list-item *ngIf="isWindows()" [routerLink]="['execute-assembly']">
         <i class="fab fa-fw fa-microsoft"></i>&nbsp;
         <ng-container i18n>.NET Loader</ng-container>

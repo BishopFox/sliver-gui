@@ -57,12 +57,12 @@
       </mat-form-field>
 
       <mat-form-field style="width: 40%; margin-left: 16px;">
-        <mat-label i18n>Process</mat-label>
+        <mat-label i18n>PID</mat-label>
         <div class="monospace">
-          <input type="text" matInput [formControl]="shellcodeForm.controls['process']" placeholder="Process">
+          <input type="text" matInput [formControl]="shellcodeForm.controls['pid']" placeholder="PID">
         </div>
-        <mat-error *ngIf="shellcodeForm.controls['process'].hasError('required')">
-          <ng-container i18n>Please enter a valid process name</ng-container>
+        <mat-error *ngIf="shellcodeForm.controls['pid'].hasError('required')">
+          <ng-container i18n>Please enter a valid PID</ng-container>
         </mat-error>
       </mat-form-field>
 

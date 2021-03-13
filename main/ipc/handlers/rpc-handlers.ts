@@ -378,21 +378,20 @@ export class RPCHandlers {
         "sessionId": { "type": "number" },
         "libraryName": { "type": "string", "minLength": 1 },
         "libraryId": { "type": "string" },
-        "process": { "type": "string" },
+        "pid": {"type": "number"},
         "rwx": { "type": "boolean" },
-        "interactive": { "type": "boolean" },
       },
-      "required": ["sessionId", "libraryName", "libraryId", "process", "rwx", "interactive"],
+      "required": ["sessionId", "libraryName", "libraryId", "pid", "rwx"],
       "additionalProperties": false,
     })
     async rpc_executeShellcode(ipc: IPCHandlers, req: any): Promise<string> {
       const session = await ipc.client.interact(req.sessionId);
-      const assembly = await ipc.libraryManager.readFile(req.libraryName, req.libraryId);
-      if (!assembly) {
+      const shellcode = await ipc.libraryManager.readFile(req.libraryName, req.libraryId);
+      if (!shellcode) {
         return Promise.reject('Invalid library file');
       }
-      // const executed = await session.executeShellcode(assembly, req.args, req.process, req.amsi, req.timeout);
-      // return Base64.fromUint8Array(executed.serializeBinary());
+      const executed = await session.executeShellcode(req.pid, shellcode, '', req.rwx, req.timeout);
+      return Base64.fromUint8Array(executed.serializeBinary());
     }
 
     @isConnected()

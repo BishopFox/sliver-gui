@@ -69,7 +69,7 @@ export class ExecuteShellcodeComponent implements OnInit {
 
     this.shellcodeForm = this._fb.group({
       shellcode: ['', Validators.required],
-      process: ['notepad.exe', Validators.required],
+      pid: ['', Validators.required],
       rwx: [false],
       interactive: [false],
     });
@@ -88,7 +88,12 @@ export class ExecuteShellcodeComponent implements OnInit {
   }
 
   async execute() {
-
+    const form = this.shellcodeForm.value;
+    const pid = parseInt(form.pid);
+    const rwx = form.rwx ? true : false;
+    console.log(`pid: ${pid} rwx: ${rwx} libraryId: ${form.shellcode}`);
+    const task = await this._sliverService.executeShellcode(this.session.getId(), pid, this.LIBRARY_NAME, form.shellcode, rwx);
+    console.log(task);
   }
 
   async manageShellcode() {

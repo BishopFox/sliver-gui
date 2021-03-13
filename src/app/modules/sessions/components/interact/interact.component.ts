@@ -57,6 +57,14 @@ export class InteractComponent implements OnInit {
     return this.session?.getOs() === 'windows';
   }
 
+  isLinux(): boolean {
+    return this.session?.getOs() === 'linux';
+  }
+
+  isMacOS(): boolean {
+    return this.session?.getOs() === 'darwin';
+  }
+
   openSessionWindow() {
     this._clientService.openSessionWindow(this.sessionId);
   }

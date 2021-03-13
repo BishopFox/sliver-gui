@@ -194,4 +194,15 @@ export class SliverService {
     return sliverpb.ExecuteAssembly.deserializeBinary(Base64.toUint8Array(executed));
   }
 
+  async executeShellcode(sessionId: number, pid: number, libraryName: string, libraryId: string, rwx: boolean): Promise<sliverpb.Task> {
+    const executed: string = await this._ipc.request('rpc_executeShellcode', JSON.stringify({
+      sessionId: sessionId,
+      libraryName: libraryName,
+      libraryId: libraryId,
+      pid: pid,
+      rwx: rwx,
+    }));
+    return sliverpb.Task.deserializeBinary(Base64.toUint8Array(executed));
+  }
+
 }
