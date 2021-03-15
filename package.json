@@ -29,7 +29,8 @@
     "i18n": "ng extract-i18n --ivy --output-path ./src/locale/ && xliffmerge --profile ./src/locale/xliffmerge.json en fr ja es zh",
     "version": "ts-node -O \"{\\\"module\\\": \\\"commonjs\\\"}\" ./version.ts",
     "test": "ng test",
-    "e2e": "npm run build:prod && mocha --timeout 300000 --require ts-node/register e2e/**/*.spec.ts"
+    "e2e": "npm run build:prod && mocha --timeout 300000 --require ts-node/register e2e/**/*.spec.ts",
+    "postinstall": "ngcc"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1102.4",

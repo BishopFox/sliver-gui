@@ -39,7 +39,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatListModule } from '@angular/material/list';
-import { MatAutocomplete } from '@angular/material/autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 const modules = [
@@ -47,7 +47,7 @@ const modules = [
   MatFormFieldModule, MatTooltipModule, MatToolbarModule, MatIconModule, MatProgressSpinnerModule,
   MatDialogModule, MatGridListModule, MatCardModule, MatTableModule, MatSortModule, MatInputModule,
   MatStepperModule, MatSnackBarModule, MatSlideToggleModule, MatSidenavModule, MatDividerModule,
-  MatProgressBarModule, MatDividerModule, MatButtonToggleModule, MatListModule, MatAutocomplete
+  MatProgressBarModule, MatDividerModule, MatButtonToggleModule, MatListModule, MatAutocompleteModule
 ];
 
 @NgModule({

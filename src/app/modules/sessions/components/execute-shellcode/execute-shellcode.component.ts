@@ -102,7 +102,6 @@ export class ExecuteShellcodeComponent implements OnInit {
   }
 
   private _filter(value: string): commonpb.Process[] {
-    console.log(`Filter on '${value}'`);
     const filterValue = value.toLowerCase();
     return this._processes.filter(proc => this.fmtProcess(proc).toLowerCase().includes(filterValue));
   }

@@ -56,18 +56,11 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-slide-toggle [formControl]="shellcodeForm.controls['interactive']" color="primary" style="margin-left: 16px;" matTooltip="Create a new interactive subprocess and inject the shellcode">
+      <mat-slide-toggle [formControl]="shellcodeForm.controls['interactive']" color="primary" style="margin-left: 16px;" matTooltip="Interact with the subprocess after injecting shellcode">
         <ng-container i18n>Interactive</ng-container>
       </mat-slide-toggle>
 
-       <!-- <mat-form-field *ngIf="!shellcodeForm.controls['interactive'].value" style="width: 40%; margin-left: 16px;">
-       <mat-label i18n>PID</mat-label>
-        <div class="monospace">
-          <input type="text" matInput [formControl]="shellcodeForm.controls['pid']" placeholder="PID" matTooltip="PID to inject shellcode into">
-        </div> -->
-
-
-      <mat-form-field *ngIf="_processes" class="width: 40%; margin-left: 16px;">
+      <mat-form-field *ngIf="_processes && !shellcodeForm.controls['interactive'].value" style="width: 40%; margin-left: 16px;">
         <mat-label i18n>PID</mat-label>
         <input type="text"
                 placeholder="PID"
@@ -76,7 +69,7 @@
                 [matAutocomplete]="auto"
                 matTooltip="PID to inject shellcode into">
         <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let proc of filteredProcesses | async" [value]="proc">
+          <mat-option *ngFor="let proc of filteredProcesses | async" [value]="proc.getPid()">
             {{fmtProcess(proc)}}
           </mat-option>
         </mat-autocomplete>
@@ -86,9 +79,9 @@
       </mat-form-field>
 
       <mat-form-field *ngIf="shellcodeForm.controls['interactive'].value" style="width: 40%; margin-left: 16px;">
-        <mat-label i18n>Host Process</mat-label>
+        <mat-label i18n>Create Process</mat-label>
         <div class="monospace">
-          <input type="text" matInput [formControl]="shellcodeForm.controls['process']" placeholder="Host Process" matTooltip="The subprocess to create and inject shellcode into">
+          <input type="text" matInput [formControl]="shellcodeForm.controls['process']" placeholder="Create Process" matTooltip="The subprocess to create and inject shellcode into">
         </div>
         <mat-error *ngIf="shellcodeForm.controls['process'].hasError('required')">
           <ng-container i18n>Specify a subprocess to create</ng-container>
