@@ -22,9 +22,11 @@ import { Observable } from 'rxjs';
 import { take, map, startWith } from 'rxjs/operators';
 import * as commonpb from 'sliver-script/lib/pb/commonpb/common_pb';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
+import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb';
 
 
 import { LibraryService, LibraryItem } from '@app/providers/library.service';
+import { Colors } from '@app/modules/terminal/colors';
 import { LibraryDialogComponent, RenameDialogComponent } from '@app/modules/sessions/components/dialogs/dialogs.component';
 import { SliverService } from '@app/providers/sliver.service';
 import { TerminalService, SliverTerminal } from '@app/providers/terminal.service';
@@ -48,7 +50,7 @@ export class ExecuteShellcodeComponent implements OnInit {
   selected = new FormControl(0);
   shellcodeForm: FormGroup;
   shellcodes: LibraryItem[];
-  _processes: commonpb.Process[];
+  processes: commonpb.Process[];
   filteredProcesses: Observable<commonpb.Process[]>;
 
   constructor(private _route: ActivatedRoute,
@@ -98,12 +100,15 @@ export class ExecuteShellcodeComponent implements OnInit {
   }
 
   async fetchProcesses() {
-    this._processes = await this._sliverService.ps(this.session.getId());
+    this.processes = await this._sliverService.ps(this.session.getId());
   }
 
   private _filter(value: string): commonpb.Process[] {
     const filterValue = value.toLowerCase();
-    return this._processes.filter(proc => this.fmtProcess(proc).toLowerCase().includes(filterValue));
+    if (!this.processes) {
+      return [];
+    }
+    return this.processes.filter(proc => this.fmtProcess(proc).toLowerCase().includes(filterValue));
   }
 
   fmtProcess(proc: commonpb.Process): string {
@@ -118,8 +123,34 @@ export class ExecuteShellcodeComponent implements OnInit {
     if (form.interactive) {
 
     }
-    const task = await this._sliverService.executeShellcode(this.session.getId(), pid, this.LIBRARY_NAME, form.shellcode, rwx);
-    console.log(task);
+    const taskPromise = this._sliverService.executeShellcode(this.session.getId(), pid, this.LIBRARY_NAME, form.shellcode, rwx);
+    this.displayOutput(pid, taskPromise);
+  }
+
+  async displayOutput(pid: number, taskPromise: Promise<sliverpb.Task>) {
+    const term = this._terminalService.newTerminal(this.session.getId(), this.namespace);
+    term.terminal.write(`${Colors.INFO} Sending shellcode to PID ${pid} ...`);
+    if (this.selectAfterAdding) {
+      this.selected.setValue(this.terminals.length - 1);
+    }
+    try {
+      const task = await taskPromise;
+      console.log(task);
+      console.log(`Err: ${task?.getResponse()?.getErr()}`);
+      term.terminal.write('success!\n');
+    } catch (err) {
+      term.terminal.write('error!\n');
+      console.error(err);
+      this.displayError(err);
+    }
+  }
+
+  displayError(err) {
+    const term = this._terminalService.newTerminal(this.session.getId(), this.namespace);
+    term.terminal.write(`${Colors.Red}${err}${Colors.Reset}`);
+    if (this.selectAfterAdding) {
+      this.selected.setValue(this.terminals.length - 1);
+    }
   }
 
   async manageShellcode() {
