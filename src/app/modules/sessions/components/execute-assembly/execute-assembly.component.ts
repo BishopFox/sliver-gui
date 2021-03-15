@@ -70,9 +70,8 @@ export class ExecuteAssemblyComponent implements OnInit {
       assembly: ['', Validators.required],
       args: [''],
       process: ['notepad.exe', Validators.required],
-      amsi: [false],
+      amsi: [true],
       etw: [false],
-      // timeout: [60, Validators.required]
     });
   }
 
