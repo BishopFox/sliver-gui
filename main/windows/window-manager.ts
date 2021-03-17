@@ -220,7 +220,7 @@ export class WindowManager {
         case 'screenshot':
           this.screenshot().then(saveTo => {
             event['saveTo'] = saveTo;
-            this.send('menu', JSON.stringify(event), true);
+            this.send('menu', JSON.stringify(event), true)
           });
           break;
         default:
@@ -351,26 +351,26 @@ export class WindowManager {
 
   private async screenshot(): Promise<string> {
     if (!fs.existsSync(SCREENSHOT_DIR)) {
-      fs.mkdirSync(SCREENSHOT_DIR, { mode: 0o700 });
+      await fs.promises.mkdir(SCREENSHOT_DIR, { mode: 0o700 });
     }
 
     // Create folder in the format of '2021-03-17 132725'
     const now = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/:/gi, '');
     const saveTo = path.join(SCREENSHOT_DIR, now);
-    fs.mkdirSync(saveTo, { mode: 0o700 });
+    await fs.promises.mkdir(saveTo, { mode: 0o700 });
     logger.debug(`Saving screenshots to ${saveTo}`);
 
     // Main Window
     const image = await this.mainWindow.capturePage();
-    const mainScreenshot = path.join(saveTo, 'main.png');
+    const mainScreenshot = path.join(saveTo, 'main-window.png');
     fs.writeFile(mainScreenshot, image.toPNG(), {encoding: 'binary', mode: 0o600}, () => {
       logger.info(`Saved screenshot ${mainScreenshot}`);
     });
 
     // Other Windows
-    this.otherWindows.forEach(async (window, origin) => {
+    this.otherWindows.forEach(async (window, guid) => {
       const image = await window.capturePage();
-      const windowScreenshot = path.join(saveTo, path.basename(origin));
+      const windowScreenshot = path.join(saveTo, `${path.basename(guid)}.png`);
       fs.writeFile(windowScreenshot, image.toPNG(), {encoding: 'binary', mode: 0o600}, () => {
         logger.info(`Saved screenshot ${windowScreenshot}`);
       });
