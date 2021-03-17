@@ -61,6 +61,7 @@ export interface ConfigEvent {
 }
 
 const DB_PATH = path.join(getClientDir(), 'gui.db');
+const SCREENSHOT_DIR = path.join(getClientDir(), 'screenshots');
 
 
 export class WindowManager {
@@ -215,7 +216,16 @@ export class WindowManager {
     const preload = path.join(__dirname, 'preload.js');
     this.mainWindow = this.window(preload, width, height, gutterSize, gutterSize);
     const menuSub = this.menuEvents.subscribe(event => {
-      this.send('menu', JSON.stringify(event), true);
+      switch (event.button) {
+        case 'screenshot':
+          this.screenshot().then(saveTo => {
+            event['saveTo'] = saveTo;
+            this.send('menu', JSON.stringify(event), true);
+          });
+          break;
+        default:
+          this.send('menu', JSON.stringify(event), true);
+      }
     });
     const downloadSub = this.downloadEvents.subscribe(event => {
       this.send('download', JSON.stringify(event));
@@ -336,6 +346,37 @@ export class WindowManager {
       safeDialogs: true,
       preload: preload,
     };
+  }
+
+
+  private async screenshot(): Promise<string> {
+    if (!fs.existsSync(SCREENSHOT_DIR)) {
+      fs.mkdirSync(SCREENSHOT_DIR, { mode: 0o700 });
+    }
+
+    // Create folder in the format of '2021-03-17 132725'
+    const now = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/:/gi, '');
+    const saveTo = path.join(SCREENSHOT_DIR, now);
+    fs.mkdirSync(saveTo, { mode: 0o700 });
+    logger.debug(`Saving screenshots to ${saveTo}`);
+
+    // Main Window
+    const image = await this.mainWindow.capturePage();
+    const mainScreenshot = path.join(saveTo, 'main.png');
+    fs.writeFile(mainScreenshot, image.toPNG(), {encoding: 'binary', mode: 0o600}, () => {
+      logger.info(`Saved screenshot ${mainScreenshot}`);
+    });
+
+    // Other Windows
+    this.otherWindows.forEach(async (window, origin) => {
+      const image = await window.capturePage();
+      const windowScreenshot = path.join(saveTo, path.basename(origin));
+      fs.writeFile(windowScreenshot, image.toPNG(), {encoding: 'binary', mode: 0o600}, () => {
+        logger.info(`Saved screenshot ${windowScreenshot}`);
+      });
+    });
+
+    return saveTo;
   }
 
 }

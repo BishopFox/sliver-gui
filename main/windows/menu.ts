@@ -70,6 +70,11 @@ export async function initMenu(menuEvents: Subject<MenuEvent>, updateCallback: C
     {
       label: 'View',
       submenu: [
+        {
+          label: 'Screenshot',
+          click: () => { menuEvents.next({ button: 'screenshot' }); }
+        },
+        { type: 'separator' },
         { role: 'toggleDevTools' },
         { type: 'separator' },
         { role: 'resetZoom' },

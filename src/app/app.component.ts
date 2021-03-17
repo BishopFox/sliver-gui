@@ -224,6 +224,16 @@ export class AppComponent implements OnInit, OnDestroy {
       this.sliverDownload(event);
     });
     this.subs.push(sub);
+
+
+    // Back menu event
+    sub = this._eventsService.menu$.pipe(
+      filter(event => event.button === 'screenshot')
+    ).subscribe((event) => {
+      this.notificationAlert(`Saved screenshots to '${event['saveTo']}'`, 'Dismiss', 5);
+    });
+    this.subs.push(sub);
+
   }
 
   notificationAlert(message: string, buttonLabel: string, seconds: number, callback: Function|null = null) {
