@@ -220,7 +220,7 @@ export class WindowManager {
         case 'screenshot':
           this.screenshot().then(saveTo => {
             event['saveTo'] = saveTo;
-            this.send('menu', JSON.stringify(event), true)
+            this.send('menu', JSON.stringify(event), true);
           });
           break;
         default:
@@ -297,7 +297,7 @@ export class WindowManager {
   private window(preload: string, width: number, height: number, x: number, y: number): Electron.BrowserWindow {
     switch (process.platform) {
       case Platforms.MacOS:
-        return this.glassWindow(preload, width, height, x, y)
+        return this.glassWindow(preload, width, height, x, y);
       default:
         return this.normalWindow(preload, width, height, x, y);
     }

@@ -72,7 +72,10 @@ export async function initMenu(menuEvents: Subject<MenuEvent>, updateCallback: C
       submenu: [
         {
           label: 'Screenshot',
-          click: () => { menuEvents.next({ button: 'screenshot' }); }
+          accelerator: 'CmdOrCtrl+s',
+          click: () => { 
+            menuEvents.next({ button: 'screenshot' });
+          }
         },
         { type: 'separator' },
         { role: 'toggleDevTools' },
@@ -138,7 +141,6 @@ export async function initMenu(menuEvents: Subject<MenuEvent>, updateCallback: C
         },
       ]
     }
-  ])
+  ]);
   Menu.setApplicationMenu(menu);
 }
-
