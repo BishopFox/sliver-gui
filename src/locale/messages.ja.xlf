@@ -3,29 +3,29 @@
   <file source-language="en" datatype="plaintext" original="ng2.template" target-language="ja">
     <body>
       <trans-unit id="999daa24fc18fdbf55b522e609ba86911ac22979" datatype="html">
-        <source> Manage Configs </source><target state="translated">構成の管理</target>
+        <source> Manage Configs </source><target state="translated">コンフィグ管理</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/select-server/select-server.component.html</context>
           <context context-type="linenumber">7,8</context>
         </context-group>
       </trans-unit><trans-unit id="32ee264188f98b68bf9c273b687feb95dfec32ca" datatype="html">
-        <source>Select a Server</source><target state="translated">サーバーを選択する</target>
+        <source>Select a Server</source><target state="translated">サーバー選択</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/components/select-server/select-server.component.html</context><context context-type="linenumber">32</context></context-group></trans-unit>
       <trans-unit id="383a25ee6d9b9a3f8efdb7d5ebc952206d1b8336" datatype="html">
-        <source> Connect </source><target state="translated">接続する</target>
+        <source> Connect </source><target state="translated">接続</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/components/select-server/select-server.component.html</context><context context-type="linenumber">41</context></context-group></trans-unit>
       <trans-unit id="1e8787a343691f0024051832ae34371e57ddaf32" datatype="html">
-        <source> You must select a configuration. </source><target state="translated">構成を選択する必要があります。</target>
-        
+        <source> You must select a configuration. </source><target state="translated">コンフィグを選択してください。</target>
+
       <context-group purpose="location"><context context-type="sourcefile">src/app/components/select-server/select-server.component.html</context><context context-type="linenumber">26</context></context-group></trans-unit>
       <trans-unit id="93cda5379c21993be8e215182118fca846149fe3" datatype="html">
         <source> Settings </source><target state="translated">設定</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context><context context-type="linenumber">84</context></context-group></trans-unit>
       <trans-unit id="f65cd8b3e83e39ef08d97d02298eb222a5b04f2f" datatype="html">
-        <source>Exit</source><target state="translated">出口</target>
+        <source>Exit</source><target state="translated">終了</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context><context context-type="linenumber">90</context></context-group></trans-unit>
       <trans-unit id="815cad6a13eee2edfed8a43dc3a64d88b1b2db27" datatype="html">
@@ -36,14 +36,14 @@
         </context-group>
       </trans-unit>
       <trans-unit id="f6e07a2ac281e7bd9dc0cd6b8167417375720af7" datatype="html">
-        <source> Generate </source><target state="translated">生む</target>
+        <source> Generate </source><target state="translated">生成</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">15,16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="67fb940f1ed5951b31fe7507b87f553951b874d3" datatype="html">
-        <source> New Implant </source><target state="translated">新しいインプラント</target>
+        <source> New Implant </source><target state="translated">新規インプラント</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
           <context context-type="linenumber">22,23</context>
@@ -65,7 +65,7 @@
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context><context context-type="linenumber">48</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context><context context-type="linenumber">15</context></context-group></trans-unit>
       <trans-unit id="9153b3a9ac928c5e352e6266b9a1d7301d1400bf" datatype="html">
-        <source> Jobs </source><target state="translated">ジョブズ</target>
+        <source> Jobs </source><target state="translated">ジョブ</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context><context context-type="linenumber">55</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/jobs-table/jobs-table.component.html</context><context context-type="linenumber">14</context></context-group></trans-unit>
       <trans-unit id="92c6fa0a20f9aec805ffaff70f97dbf4dcce318d" datatype="html">
@@ -219,19 +219,19 @@
           <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit><trans-unit id="8677ae2aa4df30d46c8b8f4d08e79364976fef4c" datatype="html">
-        <source>Configuration Manager</source><target state="translated">構成マネージャー</target>
+        <source>Configuration Manager</source><target state="translated">コンフィグマネージャー</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/standalone-config-manager/standalone-config-manager.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit><trans-unit id="c931480102db6fcc419b79bb6c7cc0ba6d8ce379" datatype="html">
-        <source>Add Config</source><target state="translated">構成の追加</target>
+        <source>Add Config</source><target state="translated">コンフィグ追加</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/standalone-config-manager/standalone-config-manager.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit><trans-unit id="bfc24abad272bde84a14132f1fa3ed0277406216" datatype="html">
-        <source>Please add or select a configuration.</source><target state="translated">構成を追加または選択してください。</target>
+        <source>Please add or select a configuration.</source><target state="translated">コンフィグを追加または選択してください。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/standalone-config-manager/standalone-config-manager.component.html</context>
           <context context-type="linenumber">34</context>
@@ -253,7 +253,7 @@
           <context context-type="linenumber">38,39</context>
         </context-group>
       </trans-unit><trans-unit id="aecc5b724b4bc9b0f8adc45f84fc82cf7b49e5db" datatype="html">
-        <source>Start Listener</source><target state="translated">リスナーを開始</target>
+        <source>Start Listener</source><target state="translated">リスナー開始</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
           <context context-type="linenumber">203</context>
@@ -279,7 +279,7 @@
           <context context-type="linenumber">194,195</context>
         </context-group>
       </trans-unit><trans-unit id="d57d878e72969c3c21acff66d174f3000fd01dc8" datatype="html">
-        <source> Port in use by another job </source><target state="translated">別のジョブで使用されているポート</target>
+        <source> Port in use by another job </source><target state="translated">別のジョブでポート使用中</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
           <context context-type="linenumber">57,58</context>
@@ -289,7 +289,7 @@
           <context context-type="linenumber">92,93</context>
         </context-group>
       </trans-unit><trans-unit id="4a881d3302d9cfb1f6849d606bb44d7463ac9aa7" datatype="html">
-        <source> Stop Job? </source><target state="translated">仕事をやめますか？</target>
+        <source> Stop Job? </source><target state="translated">ジョブ停止？</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/job/stop-job.dialog.html</context>
           <context context-type="linenumber">4,5</context>
@@ -308,25 +308,25 @@
         </context-group>
       </trans-unit>
       <trans-unit id="4c27cd467bacebe1d9a182fa8970234b6bcd89bd" datatype="html">
-        <source> Start Listener </source><target state="translated">リスナーを開始</target>
+        <source> Start Listener </source><target state="translated">リスナー開始</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/main/main.component.html</context>
           <context context-type="linenumber">9,10</context>
         </context-group>
       </trans-unit><trans-unit id="9fa9da2d5644b5118672442802d3f698aebd1dcb" datatype="html">
-        <source> Add Website </source><target state="translated">ウェブサイトを追加</target>
+        <source> Add Website </source><target state="translated">ウェブサイト追加</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/main/main.component.html</context>
           <context context-type="linenumber">16,17</context>
         </context-group>
       </trans-unit><trans-unit id="5cb440a9d5419838def4afe33f45b79b061b0645" datatype="html">
-        <source> Add Website </source><target state="translated">ウェブサイトを追加</target>
+        <source> Add Website </source><target state="translated">ウェブサイト追加</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/main/add-website.dialog.html</context>
           <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit><trans-unit id="0a0116953f96b5a4e1890e3e4e625bed4e1848a7" datatype="html">
-        <source> Add Website </source><target state="translated">ウェブサイトを追加</target>
+        <source> Add Website </source><target state="translated">ウェブサイト追加</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/main/add-website.dialog.html</context>
           <context context-type="linenumber">26,27</context>
@@ -338,7 +338,7 @@
           <context context-type="linenumber">15,17</context>
         </context-group>
       </trans-unit><trans-unit id="52536aca7d2236ea7a4870d54f58b687f864b79d" datatype="html">
-        <source> Path </source><target state="translated">道</target>
+        <source> Path </source><target state="translated">パス</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/webcontents-table/webcontents-table.component.html</context>
           <context context-type="linenumber">34,35</context>
@@ -368,7 +368,7 @@
           <context context-type="linenumber">43,44</context>
         </context-group>
       </trans-unit><trans-unit id="699b690d686dbb8e00a1e95b89ba2fffb548da6e" datatype="html">
-        <source>Execute</source><target state="translated">実行する</target>
+        <source>Execute</source><target state="translated">実行</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
           <context context-type="linenumber">13</context>
@@ -378,7 +378,7 @@
           <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit><trans-unit id="fd474c6b3fe197125d9ef6b830c37e892e34e76d" datatype="html">
-        <source>Manage .NET Assemblies</source><target state="translated">.NETアセンブリを管理する</target>
+        <source>Manage .NET Assemblies</source><target state="translated">.NETアセンブリ管理</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
           <context context-type="linenumber">18</context>
@@ -414,7 +414,7 @@
           <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit><trans-unit id="e26f9cf3666aace4e524b1505c9795d76d87738d" datatype="html">
-        <source>Rename</source><target state="translated">名前を変更する</target>
+        <source>Rename</source><target state="translated">名前変更</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
           <context context-type="linenumber">38</context>
@@ -424,7 +424,7 @@
           <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit><trans-unit id="bfafb46d8b11edf123c5aee83fe4a6833c8d04da" datatype="html">
-        <source>Select Assembly</source><target state="translated">アセンブリを選択</target>
+        <source>Select Assembly</source><target state="translated">アセンブリ選択</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
           <context context-type="linenumber">47</context>
@@ -448,7 +448,7 @@
           <context context-type="linenumber">71</context>
         </context-group>
       </trans-unit><trans-unit id="da1713fc91ac5ac504494d17b84869615f5687b0" datatype="html">
-        <source>You must make a selection</source><target state="translated">選択する必要があります</target>
+        <source>You must make a selection</source><target state="translated">どちらかを選択する必要があります</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
           <context context-type="linenumber">55</context>
@@ -468,19 +468,19 @@
           <context context-type="linenumber">65</context>
         </context-group>
       </trans-unit><trans-unit id="d973e47cf201b8455de2a36efd487c9a76824079" datatype="html">
-        <source>Manage Shellcode</source><target state="translated">シェルコードを管理する</target>
+        <source>Manage Shellcode</source><target state="translated">シェルコード管理</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
           <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit><trans-unit id="2877b80dcf286a12ce03317a87892f59de982f7a" datatype="html">
-        <source>Select Shellcode</source><target state="translated">シェルコードを選択</target>
+        <source>Select Shellcode</source><target state="translated">シェルコード選択</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
           <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit><trans-unit id="6b6a341244987842b9a398da39530352bb9dab9f" datatype="html">
-        <source>Process</source><target state="translated">処理する</target>
+        <source>Process</source><target state="translated">処理</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
           <context context-type="linenumber">60</context>
@@ -498,19 +498,19 @@
           <context context-type="linenumber">74</context>
         </context-group>
       </trans-unit><trans-unit id="1ef18572032f31f40e1720c4a0970e710afa70e7" datatype="html">
-        <source> Close Shell </source><target state="translated">シェルを閉じる</target>
+        <source> Close Shell </source><target state="translated">シェル停止</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-close.dialog.html</context>
           <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit><trans-unit id="89bd0567a9bbd937274dfca638821d1d8cb6eb6c" datatype="html">
-        <source> Are you sure you want to close this shell? </source><target state="translated">このシェルを閉じてもよろしいですか？</target>
+        <source> Are you sure you want to close this shell? </source><target state="translated">このシェルを本当に停止してもよろしいですか？</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-close.dialog.html</context>
           <context context-type="linenumber">9,10</context>
         </context-group>
       </trans-unit><trans-unit id="f4e529ae5ffd73001d1ff4bbdeeb0a72e342e5c8" datatype="html">
-        <source>Close</source><target state="translated">閉じる</target>
+        <source>Close</source><target state="translated">停止</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-close.dialog.html</context>
           <context context-type="linenumber">14</context>
@@ -522,7 +522,7 @@
           <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit><trans-unit id="bf5a7faac18de8e9288904164e25367bcad7a461" datatype="html">
-        <source>Shell Path</source><target state="translated">シェルパス</target>
+        <source>Shell Path</source><target state="translated">シェルのパス</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-custom.dialog.html</context>
           <context context-type="linenumber">13</context>
@@ -532,14 +532,14 @@
           <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit><trans-unit id="62e0fa50fee4e457994004d1b0a9528ccc05542d" datatype="html">
-        <source> Execute </source><target state="translated">実行する</target>
+        <source> Execute </source><target state="translated">実行</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-custom.dialog.html</context>
           <context context-type="linenumber">32,33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="eeae1f653579a72c51eef0809b36555e66e6ddc7" datatype="html">
-        <source>Show Hidden Files</source><target state="translated">隠しファイルを表示する</target>
+        <source>Show Hidden Files</source><target state="translated">隠しファイルを表示</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">25</context></context-group></trans-unit>
       <trans-unit id="7faaaa08f56427999f3be41df1093ce4089bbd75" datatype="html">
@@ -547,7 +547,7 @@
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">78</context></context-group></trans-unit>
       <trans-unit id="c9039b1b13b3ef165b66b3c5d79f810ab1ebb050" datatype="html">
-        <source>Open</source><target state="translated">開いた</target>
+        <source>Open</source><target state="translated">開く</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">107</context></context-group></trans-unit>
       <trans-unit id="dc75033a5238fdc4f462212c847a45ba8018a3fd" datatype="html">
@@ -556,7 +556,7 @@
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context><context context-type="linenumber">29</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context><context context-type="linenumber">29</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">110</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context><context context-type="linenumber">22</context></context-group></trans-unit>
       <trans-unit id="8ecc7ad6de089639c6ef0de66a25aa97547f5b30" datatype="html">
-        <source>Make Directory</source><target state="translated">ディレクトリを作成する</target>
+        <source>Make Directory</source><target state="translated">新規ディレクトリ</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/mkdir-dialog.html</context>
           <context context-type="linenumber">3</context>
@@ -568,7 +568,7 @@
           <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit><trans-unit id="70a67e04629f6d412db0a12d51820b480788d795" datatype="html">
-        <source>Create</source><target state="translated">作成する</target>
+        <source>Create</source><target state="translated">作成</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/mkdir-dialog.html</context>
           <context context-type="linenumber">14</context>
@@ -576,7 +576,7 @@
       </trans-unit>
       
       <trans-unit id="1ebb07a3797618330ec9de8a3b6b7fd248f8e6b4" datatype="html">
-        <source> Please type <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;monospace&quot;>"/><x id="INTERPOLATION" equiv-text="{{data.name}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span> "/> below to confirm: </source><target state="translated">確認するには、以下に<x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span>"/><x id="INTERPOLATION"/>と<x id="CLOSE_TAG_SPAN" ctype="x-span"/>入力してください。</target>
+        <source> Please type <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;monospace&quot;>"/><x id="INTERPOLATION" equiv-text="{{data.name}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span> "/> below to confirm: </source><target state="translated">確認するには、<x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span>"/><x id="INTERPOLATION"/>と<x id="CLOSE_TAG_SPAN" ctype="x-span"/>を入力してください。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context>
           <context context-type="linenumber">13,14</context>
@@ -657,7 +657,7 @@
           <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit><trans-unit id="c263f1ec78388d37c3b637196254fcaa5bc94d5b" datatype="html">
-        <source>Command Exec</source><target state="translated">Command Exec</target>
+        <source>Command Exec</source><target state="translated">コマンド実行</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context>
           <context context-type="linenumber">35</context>
@@ -713,19 +713,19 @@
         
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context><context context-type="linenumber">66</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/standalone-interact/standalone-interact.component.html</context><context context-type="linenumber">4</context></context-group></trans-unit><trans-unit id="469f3665464dd79936832ebcc420a2a620bf216d" datatype="html">
-        <source>Add File(s)</source><target state="translated">追加ファイル）</target>
+        <source>Add File(s)</source><target state="translated">ファイル追加</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/library-table/library-table.component.html</context>
           <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit><trans-unit id="019d4bd6a5690f0cfa0ecf346a4e6bf7f0d8debb" datatype="html">
-        <source>Remove</source><target state="translated">削除する</target>
+        <source>Remove</source><target state="translated">削除</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/library-table/library-table.component.html</context>
           <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit><trans-unit id="17a9d8498aac8df513e73b89b0dd6be92da45f4e" datatype="html">
-        <source> Regenerate </source><target state="translated">再生する</target>
+        <source> Regenerate </source><target state="translated">再生成</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/build-details/build-details.component.html</context>
           <context context-type="linenumber">21,22</context>
@@ -761,7 +761,7 @@
           <context context-type="linenumber">128,129</context>
         </context-group>
       </trans-unit><trans-unit id="07c8395d3428045d40752b83179a34cc7415a133" datatype="html">
-        <source> Port in use by another job </source><target state="translated">別のジョブで使用されているポート</target>
+        <source> Port in use by another job </source><target state="translated">別のジョブでポート使用中</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
           <context context-type="linenumber">131,132</context>
@@ -779,7 +779,7 @@
           <context context-type="linenumber">158,161</context>
         </context-group>
       </trans-unit><trans-unit id="cee7d86c00d4c20cab433c275bea9efa956edb46" datatype="html">
-        <source>Select Certificate File</source><target state="translated">証明書ファイルを選択</target>
+        <source>Select Certificate File</source><target state="translated">証明書を選択</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
           <context context-type="linenumber">166</context>
@@ -815,13 +815,13 @@
           <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit><trans-unit id="a6daeb07681e0b5119f65a520755bf4b0d9f1fdd" datatype="html">
-        <source> Add File </source><target state="translated">ファイルの追加</target>
+        <source> Add File </source><target state="translated">ファイル追加</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/website-details/website-details.component.html</context>
           <context context-type="linenumber">16,17</context>
         </context-group>
       </trans-unit><trans-unit id="75094cce419b2eebd08f5925cbf43b6111261aba" datatype="html">
-        <source> Add Directory </source><target state="translated">ディレクトリを追加</target>
+        <source> Add Directory </source><target state="translated">ディレクトリ追加</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/website-details/website-details.component.html</context>
           <context context-type="linenumber">23,24</context>
@@ -833,13 +833,13 @@
           <context context-type="linenumber">33,34</context>
         </context-group>
       </trans-unit><trans-unit id="85656b54578a2c283122fc00c54d94b81ffc6ffe" datatype="html">
-        <source> Add File </source><target state="translated">ファイルの追加</target>
+        <source> Add File </source><target state="translated">ファイル追加</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-file.dialog.html</context>
           <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit><trans-unit id="766c66ad5cc981c531aaf3fe3a2a7a346ddc8d83" datatype="html">
-        <source>Path</source><target state="translated">道</target>
+        <source>Path</source><target state="translated">パス</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-file.dialog.html</context><context context-type="linenumber">13</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/library-table/library-table.component.html</context><context context-type="linenumber">49</context></context-group></trans-unit><trans-unit id="443a71dd2737290342cf70e056a96596daa30e22" datatype="html">
         <source>Content-type</source><target state="translated">コンテンツタイプ</target>
@@ -848,13 +848,13 @@
           <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit><trans-unit id="b0829d8e67ca6e46e23b1e13e1877d8c63c24e0e" datatype="html">
-        <source> Select File </source><target state="translated">ファイルを選ぶ</target>
+        <source> Select File </source><target state="translated">ファイル選択</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-file.dialog.html</context>
           <context context-type="linenumber">35,36</context>
         </context-group>
       </trans-unit><trans-unit id="f1caa5874fc77bdc8604fbf5ef11860f61d10246" datatype="html">
-        <source> Add Directory </source><target state="translated">ディレクトリを追加</target>
+        <source> Add Directory </source><target state="translated">ディレクトリ追加</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-directory.dialog.html</context>
           <context context-type="linenumber">4,5</context>
@@ -866,13 +866,13 @@
           <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit><trans-unit id="7b2f538d4d8e71ec8fc6266470e36c5335928a43" datatype="html">
-        <source> Select Directory </source><target state="translated">ディレクトリを選択</target>
+        <source> Select Directory </source><target state="translated">ディレクトリ選択</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-directory.dialog.html</context>
           <context context-type="linenumber">26,27</context>
         </context-group>
       </trans-unit><trans-unit id="12ecab228c7cb17415da203a6e7b7233ef58d634" datatype="html">
-        <source> Delete Website </source><target state="translated">ウェブサイトを削除する</target>
+        <source> Delete Website </source><target state="translated">ウェブサイト削除</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/website-details/delete-website.dialog.html</context>
           <context context-type="linenumber">4,5</context>
@@ -884,7 +884,7 @@
           <context context-type="linenumber">9,10</context>
         </context-group>
       </trans-unit><trans-unit id="0d9da1af5a90cd9e3fc5afd0d2c2480bf7019754" datatype="html">
-        <source>Triggered</source><target state="translated">引き金になった</target>
+        <source>Triggered</source><target state="translated">トリガー済み</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context><context context-type="linenumber">44</context></context-group></trans-unit><trans-unit id="4f57ab68632e75bdd88db6a5141d69ace2f45773" datatype="html">
         <source>First Triggered</source><target state="translated">最初にトリガーされた</target>
@@ -899,10 +899,10 @@
           <context context-type="linenumber">14,15</context>
         </context-group>
       </trans-unit><trans-unit id="bcdc7f3c28d719db56eba5c4ef19c01c5f70665d" datatype="html">
-        <source> Regenerate </source><target state="translated">再生する</target>
+        <source> Regenerate </source><target state="translated">再生成</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">71</context></context-group></trans-unit><trans-unit id="4c37ff662409730f928d07f3088b7192705f9cc6" datatype="html">
-        <source> New Profile </source><target state="translated">新しいプロファイル</target>
+        <source> New Profile </source><target state="translated">新規プロファイル</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles/profiles.component.html</context><context context-type="linenumber">7</context></context-group></trans-unit><trans-unit id="994363f08f9fbfa3b3994ff7b35c6904fdff18d8" datatype="html">
         <source>Profile</source><target state="translated">プロフィール</target>
@@ -917,7 +917,7 @@
         <source> Your build has started, you will get a notification when the build completes. </source><target state="translated">ビルドが開始されました。ビルドが完了すると通知が届きます。</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/generate/generating.dialog.html</context><context context-type="linenumber">9</context></context-group></trans-unit><trans-unit id="7d5b525e1eb331acb69aa914a221a9bac238f8fe" datatype="html">
-        <source> Build Failure </source><target state="translated">ビルドの失敗</target>
+        <source> Build Failure </source><target state="translated">ビルド失敗</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/generate/build-error.dialog.html</context>
           <context context-type="linenumber">4,5</context>
@@ -935,13 +935,13 @@
           <context context-type="linenumber">14,15</context>
         </context-group>
       </trans-unit><trans-unit id="ad3ce21e13a4f6fdeea73170384a5aba83e5a85f" datatype="html">
-        <source> Rename </source><target state="translated">名前を変更する</target>
+        <source> Rename </source><target state="translated">名前を変更</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/dialogs/rename.dialog.html</context>
           <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit><trans-unit id="2a62a59d9424e9e869061ebf3e8f8b8f95411571" datatype="html">
-        <source> Save </source><target state="translated">保存する</target>
+        <source> Save </source><target state="translated">保存</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/dialogs/rename.dialog.html</context>
           <context context-type="linenumber">22,23</context>
@@ -956,7 +956,7 @@
         <source>Code Name</source><target state="translated">コード名</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context><context context-type="linenumber">39</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">39</context></context-group></trans-unit><trans-unit id="d2252b2dbce97640eb209224549e3e59c67412c1" datatype="html">
-        <source>Architecture</source><target state="translated">建築</target>
+        <source>Architecture</source><target state="translated">構築</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context><context context-type="linenumber">46</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">46</context></context-group></trans-unit><trans-unit id="dcfc990a822e11feb00eb91d9cf4d6ec0ed37dd0" datatype="html">
         <source>Debug</source><target state="translated">デバッグ</target>
@@ -972,7 +972,7 @@
         <source>Evasion</source><target state="translated">回避</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context><context context-type="linenumber">31</context></context-group></trans-unit><trans-unit id="b6a02dd16604c660a9043c9d28c6aadc41fb3e50" datatype="html">
-        <source>Service Executable</source><target state="translated">サービス実行可能</target>
+        <source>Service Executable</source><target state="translated">サービスの実行可能ファイル</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context>
           <context context-type="linenumber">26</context>
@@ -981,7 +981,7 @@
         <source>Format</source><target state="translated">フォーマット</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context><context context-type="linenumber">60</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context><context context-type="linenumber">24</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">60</context></context-group></trans-unit><trans-unit id="6bc61c1eb9f3aae937d3f3c43a9b11fa6f59936e" datatype="html">
-        <source> Build from Profile </source><target state="translated">プロファイルから構築</target>
+        <source> Build from Profile </source><target state="translated">プロファイルからビルド</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profile-generate.dialog.html</context>
           <context context-type="linenumber">4,5</context>
@@ -993,13 +993,13 @@
           <context context-type="linenumber">9,10</context>
         </context-group>
       </trans-unit><trans-unit id="6a463a3d2386d508d6f02a61c1d32ca80f7c9c70" datatype="html">
-        <source>Generate Implant</source><target state="translated">インプラントを生成する</target>
+        <source>Generate Implant</source><target state="translated">インプラントを生成</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit><trans-unit id="7adac05a1c49cd5ae7cffe78b17639540cc45d07" datatype="html">
-        <source>Generate Codename</source><target state="translated">コードネームを生成する</target>
+        <source>Generate Codename</source><target state="translated">コードネームを生成</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context>
           <context context-type="linenumber">13</context>
@@ -1011,7 +1011,7 @@
           <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit><trans-unit id="e5a672e83aae78b7b467cf82b5611809ac7da92e" datatype="html">
-        <source>Start Build</source><target state="translated">ビルドを開始</target>
+        <source>Start Build</source><target state="translated">ビルド開始</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context><context context-type="linenumber">39</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profile-generate.dialog.html</context><context context-type="linenumber">14</context></context-group></trans-unit><trans-unit id="2603d3206a60cbcda1202d4e0d7858087a6a293b" datatype="html">
         <source>Codename</source><target state="translated">コード名</target>
@@ -1037,7 +1037,7 @@
           <context context-type="linenumber">50,51</context>
         </context-group>
       </trans-unit><trans-unit id="ccfe7475ab3ae7ade17ba83c4363e0870f69551d" datatype="html">
-        <source>Implant Configuration</source><target state="translated">インプラント構成</target>
+        <source>Implant Configuration</source><target state="translated">インプラント設定</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context>
           <context context-type="linenumber">13</context>
@@ -1049,19 +1049,19 @@
           <context context-type="linenumber">8,9</context>
         </context-group>
       </trans-unit><trans-unit id="aece02f4870968b09729111a0f96ae0377cf47e7" datatype="html">
-        <source>Add mTLS</source><target state="translated">mTLSを追加する</target>
+        <source>Add mTLS</source><target state="translated">mTLSを追加</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit><trans-unit id="b0f24c29368e2af226107f1d1377ce71504d3165" datatype="html">
-        <source>Add HTTP(S)</source><target state="translated">HTTP（S）を追加します</target>
+        <source>Add HTTP(S)</source><target state="translated">HTTP（S）を追加</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
           <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit><trans-unit id="0bb3587463502303c45cc2ce07ba8b03bfd0461a" datatype="html">
-        <source>Add DNS</source><target state="translated">DNSを追加する</target>
+        <source>Add DNS</source><target state="translated">DNSを追加</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
           <context context-type="linenumber">24</context>
@@ -1181,7 +1181,7 @@
         <source>Confirm</source><target state="translated">確認</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">160</context></context-group></trans-unit><trans-unit id="9e13a9d45e3734f20f1cd780f5d10fdf4ae0a3f9" datatype="html">
-        <source>Executable</source><target state="translated">実行可能</target>
+        <source>Executable</source><target state="translated">実行可能ファイル</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
           <context context-type="linenumber">11</context>
