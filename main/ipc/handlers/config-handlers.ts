@@ -96,7 +96,7 @@ export class ConfigHandlers {
         return Promise.reject(`Failed to create config dir: ${err}`);
       }
     }
-    const fileOptions = { mode: 0o600, encoding: 'utf-8' };
+    const fileOptions: fs.WriteFileOptions = { mode: 0o600, encoding: 'utf-8' };
     await Promise.all(configs.map((config) => {
       return new Promise((resolve) => {
         const fileName: string = uuid.v4();
@@ -143,7 +143,7 @@ export class ConfigHandlers {
         return Promise.reject(`Failed to create config dir: ${err}`);
       }
     }
-    const fileOptions = { mode: 0o600, encoding: 'utf-8' };
+    const fileOptions: fs.WriteFileOptions = { mode: 0o600, encoding: 'utf-8' };
     const fileName = path.basename(config.filename);
     if (fileName.length < 1) {
       return Promise.reject(`Empty filename`);
