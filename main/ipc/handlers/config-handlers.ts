@@ -159,4 +159,44 @@ export class ConfigHandlers {
     });
   }
 
+  @jsonSchema({
+    "type": "object",
+    "properties": {
+      "operator": { "type": "string" },
+      "lhost": { "type": "string", "minLength": 1 },
+      "lport": { "type": "number" },
+      "ca_certificate": { "type": "string" },
+      "certificate": { "type": "string" },
+      "private_key": { "type": "string", "minLength": 1 },
+    },
+    "required": ["lhost", "lport", "private_key"],
+    "additionalProperties": false,
+  })
+  async config_rm(ipc: IPCHandlers, req: any): Promise<string> {
+    try {
+      // Filter anything that isn't a file
+      const configDir = await fs.promises.readdir(CONFIG_DIR);
+      const configFiles = configDir.filter(fileName => {
+        fileName = path.join(CONFIG_DIR, fileName);
+        if (fs.existsSync(fileName) && !fs.lstatSync(fileName).isDirectory()) {
+          return true;
+        }
+        return false;
+      });
+
+      // Parse all files and unlink if we find a match, match is defined as private key/lhost/lport
+      await Promise.all(configFiles.map(async (configFile) => {
+        const configPath = path.join(CONFIG_DIR, configFile);
+        const data = await fs.promises.readFile(configPath);
+        const conf: SliverClientConfig = JSON.parse(data.toString());
+        if (conf.lhost === req.lhost && conf.lport === req.lport && conf.private_key === req.private_key) {
+          fs.unlink(configPath, () => logger.info(`Removed config ${configPath}`));
+        }
+      }));
+    } catch (err) {
+      logger.error(err);
+    }
+    return ipc.dispatch('config_list', null);
+  }
+
 }

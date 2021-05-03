@@ -177,6 +177,10 @@ export class ClientService {
     return this._ipc.request('config_add', JSON.stringify({ configs: configs })); 
   }
 
+  async rmConfig(config: sliver.SliverClientConfig): Promise<string> {
+    return this._ipc.request('config_rm', JSON.stringify(config));
+  }
+
   async saveConfig(config: SliverConfig): Promise<void> {
     return this._ipc.request('config_save', JSON.stringify(config)); 
   }
