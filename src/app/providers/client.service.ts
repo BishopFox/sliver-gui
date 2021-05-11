@@ -1,6 +1,6 @@
 /*
   Sliver Implant Framework
-  Copyright (C) 2019  Bishop Fox
+  Copyright (C) 2021  Bishop Fox
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -175,6 +175,10 @@ export class ClientService {
 
   async addConfigs(configs: sliver.SliverClientConfig[]): Promise<string> {
     return this._ipc.request('config_add', JSON.stringify({ configs: configs })); 
+  }
+
+  async rmConfig(config: sliver.SliverClientConfig): Promise<string> {
+    return this._ipc.request('config_rm', JSON.stringify(config));
   }
 
   async saveConfig(config: SliverConfig): Promise<void> {

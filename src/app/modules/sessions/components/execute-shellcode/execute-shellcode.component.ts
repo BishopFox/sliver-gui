@@ -18,15 +18,17 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { take, map, startWith } from 'rxjs/operators';
+import * as commonpb from 'sliver-script/lib/pb/commonpb/common_pb';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb';
 
 
 import { LibraryService, LibraryItem } from '@app/providers/library.service';
+import { Colors } from '@app/modules/terminal/colors';
 import { LibraryDialogComponent, RenameDialogComponent } from '@app/modules/sessions/components/dialogs/dialogs.component';
 import { SliverService } from '@app/providers/sliver.service';
-import { Colors } from '@app/modules/terminal/colors';
 import { TerminalService, SliverTerminal } from '@app/providers/terminal.service';
 import { FadeInOut } from '@app/shared';
 
@@ -48,6 +50,8 @@ export class ExecuteShellcodeComponent implements OnInit {
   selected = new FormControl(0);
   shellcodeForm: FormGroup;
   shellcodes: LibraryItem[];
+  processes: commonpb.Process[];
+  filteredProcesses: Observable<commonpb.Process[]>;
 
   constructor(private _route: ActivatedRoute,
               private _fb: FormBuilder,
@@ -62,6 +66,7 @@ export class ExecuteShellcodeComponent implements OnInit {
       this._sliverService.sessionById(sessionId).then(session => {
         this.session = session;
         this.fetchShellcode();
+        this.fetchProcesses();
       }).catch(err => {
         console.error(`No session with id ${sessionId} (${err})`);
       });
@@ -69,10 +74,17 @@ export class ExecuteShellcodeComponent implements OnInit {
 
     this.shellcodeForm = this._fb.group({
       shellcode: ['', Validators.required],
-      process: ['notepad.exe', Validators.required],
+      process: [''],
+      pid: [''],
       rwx: [false],
       interactive: [false],
     });
+
+    this.filteredProcesses = this.shellcodeForm.controls['pid'].valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value.toString()))
+    );
+
   }
 
   get terminals(): SliverTerminal[] {
@@ -87,8 +99,58 @@ export class ExecuteShellcodeComponent implements OnInit {
     this.shellcodes = await this._libraryService.items(this.LIBRARY_NAME);
   }
 
-  async execute() {
+  async fetchProcesses() {
+    this.processes = await this._sliverService.ps(this.session.getId());
+  }
 
+  private _filter(value: string): commonpb.Process[] {
+    const filterValue = value.toLowerCase();
+    if (!this.processes) {
+      return [];
+    }
+    return this.processes.filter(proc => this.fmtProcess(proc).toLowerCase().includes(filterValue));
+  }
+
+  fmtProcess(proc: commonpb.Process): string {
+    return `${proc.getExecutable()} (${proc.getPid()})`;
+  }
+
+  async execute() {
+    const form = this.shellcodeForm.value;
+    const rwx = form.rwx ? true : false;
+    let pid = parseInt(form.pid);
+    console.log(`pid: ${pid} rwx: ${rwx} libraryId: ${form.shellcode}`);
+    if (form.interactive) {
+
+    }
+    const taskPromise = this._sliverService.executeShellcode(this.session.getId(), pid, this.LIBRARY_NAME, form.shellcode, rwx);
+    this.displayOutput(pid, taskPromise);
+  }
+
+  async displayOutput(pid: number, taskPromise: Promise<sliverpb.Task>) {
+    const term = this._terminalService.newTerminal(this.session.getId(), this.namespace);
+    term.terminal.write(`${Colors.INFO} Sending shellcode to PID ${pid} ...`);
+    if (this.selectAfterAdding) {
+      this.selected.setValue(this.terminals.length - 1);
+    }
+    try {
+      const task = await taskPromise;
+      console.log(task);
+      console.log(`Err: ${task?.getResponse()?.getErr()}`);
+      term.terminal.write('success!\n');
+    } catch (err) {
+      term.terminal.write('error!\n');
+      console.error(err);
+      this.displayError(err);
+    }
+  }
+
+  displayError(err) {
+    const term = this._terminalService.newTerminal(this.session.getId(), this.namespace);
+    term.terminal.write(`${Colors.Red}${err}${Colors.Reset}`);
+    if (this.selectAfterAdding) {
+      this.selected.setValue(this.terminals.length - 1);
+    }
   }
 
   async manageShellcode() {

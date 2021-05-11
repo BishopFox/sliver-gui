@@ -32,7 +32,7 @@ export const Locales = new Map<string, string>([
 
 export function setLocaleSync(locale: string): void {
   if (Locales.has(locale)) {
-    const fileOptions = { mode: 0o600, encoding: 'utf-8' };
+    const fileOptions: fs.WriteFileOptions = { mode: 0o600, encoding: 'utf-8' };
     fs.writeFileSync(localeFilePath(), locale, fileOptions);
   }
 }

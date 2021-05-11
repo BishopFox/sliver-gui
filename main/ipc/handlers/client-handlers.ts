@@ -254,7 +254,7 @@ export class ClientHandlers implements Handlers {
       if (save.canceled) {
         return resolve('');  // Must return to stop execution
       }
-      const fileOptions = {
+      const fileOptions: fs.WriteFileOptions = {
         mode: 0o644,
         encoding: 'binary',
       };
@@ -300,7 +300,7 @@ export class ClientHandlers implements Handlers {
         }
       }
 
-      const fileOptions = { mode: 0o600, encoding: 'utf-8' };
+      const fileOptions: fs.WriteFileOptions = { mode: 0o600, encoding: 'utf-8' };
       try {
         JSON.parse(settings); // Just ensure it's valid JSON
         fs.writeFile(SETTINGS_PATH, settings, fileOptions, async (err) => {

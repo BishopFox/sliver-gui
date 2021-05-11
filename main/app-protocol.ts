@@ -1,6 +1,6 @@
 /*
   Sliver Implant Framework
-  Copyright (C) 2019  Bishop Fox
+  Copyright (C) 2021  Bishop Fox
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -21,8 +21,8 @@ Implementing a custom protocol achieves two goals:
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { getDistPath } from './locale';
 
+import { getDistPath } from './locale';
 import { logger } from './logs';
 
 

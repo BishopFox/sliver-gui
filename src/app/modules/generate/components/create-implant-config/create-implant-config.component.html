@@ -41,13 +41,13 @@
           <div>
             <mat-form-field>
               <mat-select [formControl]="targetForm.controls['format']" placeholder="File Format">
-                <mat-option value="exe">
+                <mat-option i18n value="exe">
                   Executable
                 </mat-option>
-                <mat-option [disabled]="targetForm.controls['os'].value !== 'windows'" value="shared">
+                <mat-option i18n [disabled]="targetForm.controls['os'].value !== 'windows'" value="shared">
                   Shared Library
                 </mat-option>
-                <mat-option [disabled]="targetForm.controls['os'].value !== 'windows'" value="shellcode">
+                <mat-option i18n [disabled]="targetForm.controls['os'].value !== 'windows'" value="shellcode">
                   Shellcode
                 </mat-option>
               </mat-select>
@@ -66,7 +66,7 @@
 
     <!-- Step 2: Command & Control -->
     <mat-step [stepControl]="isValidC2Config()" [completed]="false">
-      <ng-template matStepLabel>
+      <ng-template i18n matStepLabel>
         Command and Control
       </ng-template>
 
@@ -92,8 +92,9 @@
       </div>
     </mat-step>
 
+    <!-- Step 3: Compile Time Options -->
     <mat-step [stepControl]="compileTimeForm" [completed]="false">
-      <ng-template matStepLabel>
+      <ng-template i18n matStepLabel>
         Compile Time Options
       </ng-template>
 

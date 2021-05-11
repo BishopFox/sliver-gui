@@ -1,11 +1,11 @@
-<div *ngIf="!shellcodes || !session" class="grid-spinner-wrapper">
+<div *ngIf="!shellcodes || !session || !processes" class="grid-spinner-wrapper">
   <div class="spinner">
     <mat-progress-spinner mode="indeterminate">
     </mat-progress-spinner>
   </div>
 </div>
 
-<div [@fadeInOut] *ngIf="shellcodes && session" class="grid-wrapper">
+<div [@fadeInOut] *ngIf="shellcodes && session && processes" class="grid-wrapper">
 
   <mat-toolbar-row class="terminal-toolbar" fxLayout="row" fxLayoutAlign="start center">
 
@@ -56,22 +56,47 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field style="width: 40%; margin-left: 16px;">
-        <mat-label i18n>Process</mat-label>
+      <mat-slide-toggle [formControl]="shellcodeForm.controls['interactive']" color="primary" style="margin-left: 16px;"
+          i18n-matTooltip 
+          matTooltip="Interact with the subprocess after injecting shellcode">
+        <ng-container i18n>Interactive</ng-container>
+      </mat-slide-toggle>
+
+      <mat-form-field *ngIf="!shellcodeForm.controls['interactive'].value" style="width: 40%; margin-left: 16px;">
+        <mat-label i18n>PID</mat-label>
+        <input type="text"
+          placeholder="PID"
+          matInput
+          [formControl]="shellcodeForm.controls['pid']"
+          [matAutocomplete]="auto"
+          i18n-matTooltip
+          matTooltip="PID to inject shellcode into">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let proc of filteredProcesses | async" [value]="proc.getPid()">
+            {{fmtProcess(proc)}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="shellcodeForm.controls['pid'].hasError('required')">
+          <ng-container i18n>Please enter a valid PID</ng-container>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="shellcodeForm.controls['interactive'].value" style="width: 40%; margin-left: 16px;">
+        <mat-label i18n>Create Process</mat-label>
         <div class="monospace">
-          <input type="text" matInput [formControl]="shellcodeForm.controls['process']" placeholder="Process">
+          <input type="text" matInput [formControl]="shellcodeForm.controls['process']"
+            i18n-placeholder 
+            placeholder="Create Process"
+            i18n-matTooltip
+            matTooltip="The subprocess to create and inject shellcode into">
         </div>
         <mat-error *ngIf="shellcodeForm.controls['process'].hasError('required')">
-          <ng-container i18n>Please enter a valid process name</ng-container>
+          <ng-container i18n>Specify a subprocess to create</ng-container>
         </mat-error>
       </mat-form-field>
 
       <mat-slide-toggle [formControl]="shellcodeForm.controls['rwx']" color="primary" style="margin-left: 16px;">
         <ng-container i18n>RWX Pages</ng-container>
-      </mat-slide-toggle>
-
-      <mat-slide-toggle [formControl]="shellcodeForm.controls['interactive']" color="primary" style="margin-left: 16px;">
-        <ng-container i18n>Interactive</ng-container>
       </mat-slide-toggle>
 
     </form>

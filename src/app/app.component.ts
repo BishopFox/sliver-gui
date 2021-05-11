@@ -1,6 +1,6 @@
 /*
   Sliver Implant Framework
-  Copyright (C) 2019  Bishop Fox
+  Copyright (C) 2021  Bishop Fox
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -224,6 +224,16 @@ export class AppComponent implements OnInit, OnDestroy {
       this.sliverDownload(event);
     });
     this.subs.push(sub);
+
+
+    // Back menu event
+    sub = this._eventsService.menu$.pipe(
+      filter(event => event.button === 'screenshot')
+    ).subscribe((event) => {
+      this.notificationAlert(`Saved screenshots to '${event['saveTo']}'`, 'Dismiss', 5);
+    });
+    this.subs.push(sub);
+
   }
 
   notificationAlert(message: string, buttonLabel: string, seconds: number, callback: Function|null = null) {

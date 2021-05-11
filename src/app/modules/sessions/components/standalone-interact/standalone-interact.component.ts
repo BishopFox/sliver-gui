@@ -59,4 +59,12 @@ export class StandaloneInteractComponent implements OnInit {
     return this.session?.getOs() === 'windows';
   }
 
+  isLinux(): boolean {
+    return this.session?.getOs() === 'linux';
+  }
+
+  isMacOS(): boolean {
+    return this.session?.getOs() === 'darwin';
+  }
+
 }

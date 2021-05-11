@@ -1,6 +1,6 @@
 /*
   Sliver Implant Framework
-  Copyright (C) 2019  Bishop Fox
+  Copyright (C) 2021  Bishop Fox
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -55,6 +55,14 @@ export class InteractComponent implements OnInit {
 
   isWindows(): boolean {
     return this.session?.getOs() === 'windows';
+  }
+
+  isLinux(): boolean {
+    return this.session?.getOs() === 'linux';
+  }
+
+  isMacOS(): boolean {
+    return this.session?.getOs() === 'darwin';
   }
 
   openSessionWindow() {

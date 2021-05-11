@@ -1,6 +1,6 @@
 /*
   Sliver Implant Framework
-  Copyright (C) 2019  Bishop Fox
+  Copyright (C) 2021  Bishop Fox
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -39,6 +39,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatListModule } from '@angular/material/list';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 const modules = [
@@ -46,7 +47,7 @@ const modules = [
   MatFormFieldModule, MatTooltipModule, MatToolbarModule, MatIconModule, MatProgressSpinnerModule,
   MatDialogModule, MatGridListModule, MatCardModule, MatTableModule, MatSortModule, MatInputModule,
   MatStepperModule, MatSnackBarModule, MatSlideToggleModule, MatSidenavModule, MatDividerModule,
-  MatProgressBarModule, MatDividerModule, MatButtonToggleModule, MatListModule
+  MatProgressBarModule, MatDividerModule, MatButtonToggleModule, MatListModule, MatAutocompleteModule
 ];
 
 @NgModule({

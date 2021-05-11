@@ -70,9 +70,8 @@ export class ExecuteAssemblyComponent implements OnInit {
       assembly: ['', Validators.required],
       args: [''],
       process: ['notepad.exe', Validators.required],
-      amsi: [false],
+      amsi: [true],
       etw: [false],
-      // timeout: [60, Validators.required]
     });
   }
 
@@ -170,6 +169,5 @@ export class ExecuteAssemblyComponent implements OnInit {
       this._terminalService.delete(this.session.getId(), this.namespace, term.id);
     }
   }
-
 
 }

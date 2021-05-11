@@ -1,6 +1,6 @@
 /*
   Sliver Implant Framework
-  Copyright (C) 2019  Bishop Fox
+  Copyright (C) 2021  Bishop Fox
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -192,6 +192,17 @@ export class SliverService {
       etw: etw,
     }));
     return sliverpb.ExecuteAssembly.deserializeBinary(Base64.toUint8Array(executed));
+  }
+
+  async executeShellcode(sessionId: number, pid: number, libraryName: string, libraryId: string, rwx: boolean): Promise<sliverpb.Task> {
+    const executed: string = await this._ipc.request('rpc_executeShellcode', JSON.stringify({
+      sessionId: sessionId,
+      libraryName: libraryName,
+      libraryId: libraryId,
+      pid: pid,
+      rwx: rwx,
+    }));
+    return sliverpb.Task.deserializeBinary(Base64.toUint8Array(executed));
   }
 
 }

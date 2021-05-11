@@ -63,7 +63,7 @@ export class WorkerManager {
   async newScript(name: string, code: string): Promise<string> {
     const script: any = await this.Script.create({name: name});
     return new Promise(async (resolve, reject) => {
-      const fileOptions = { mode: 0o600, encoding: 'utf-8' };
+      const fileOptions: fs.WriteFileOptions = { mode: 0o600, encoding: 'utf-8' };
       fs.writeFile(path.join(SAVED_DIR, script.id), code, fileOptions, async (err) => {
         if (err) {
           return reject(err);
@@ -79,7 +79,7 @@ export class WorkerManager {
       await this.Script.update({ name: name }, { where: { id: script.getDataValue('id') } });
     }
     return new Promise((resolve, reject) => {
-      const fileOptions = { mode: 0o600, encoding: 'utf-8' };
+      const fileOptions: fs.WriteFileOptions = { mode: 0o600, encoding: 'utf-8' };
       fs.writeFile(path.join(SAVED_DIR, script.getDataValue('id')), code, fileOptions, (err) => {
         err ? reject(err) : resolve(undefined);
       });
@@ -185,7 +185,7 @@ export class WorkerManager {
 
     fs.mkdirSync(scriptExecDir, { mode: 0o700 });
     return new Promise((resolve, reject) => {
-      const fileOptions = { mode: 0o600, encoding: 'utf-8' };
+      const fileOptions: fs.WriteFileOptions = { mode: 0o600, encoding: 'utf-8' };
       fs.writeFile(path.join(scriptExecDir, SCRIPT_FILE), code, fileOptions, (err) => {
         if (!err) {
           this.scriptExecutions.set(execId, script.id);
