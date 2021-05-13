@@ -2,11 +2,191 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="a7868521fbf6d9fb7b97f910c3f060bbd995a118" datatype="html">
+        <source>Okay</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/dialogs/about.dialog.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/settings/restart.dialog.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/generate/build-error.dialog.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/generate/generating.dialog.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/invalid-option.dialog.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-error.dialog.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d36521ae8ac408c68d855e8820e76a3708a9b34d" datatype="html">
+        <source>Download Console Client</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5c9636885876c00a7b72416bd841b36a1109b4d9" datatype="html">
+        <source>Operating System</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3fd0cd77b59b96bcadaf55606da31177393c6ede" datatype="html">
+        <source>Save to Downloads</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dc75033a5238fdc4f462212c847a45ba8018a3fd" datatype="html">
+        <source>Download</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context>
+          <context context-type="linenumber">110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-dns.dialog.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profile-generate.dialog.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/components/job/stop-job.dialog.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/components/main/add-website.dialog.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-directory.dialog.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-file.dialog.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/delete-website.dialog.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/dialogs/rename.dialog.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/mkdir-dialog.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-close.dialog.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-custom.dialog.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3242fd884bdb0836db02a5c9000f7eb6e3707f3d" datatype="html">
+        <source>Download Server</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="999daa24fc18fdbf55b522e609ba86911ac22979" datatype="html">
         <source> Manage Configs </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/select-server/select-server.component.html</context>
           <context context-type="linenumber">7,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1e8787a343691f0024051832ae34371e57ddaf32" datatype="html">
+        <source> You must select a configuration. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/select-server/select-server.component.html</context>
+          <context context-type="linenumber">26,27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="32ee264188f98b68bf9c273b687feb95dfec32ca" datatype="html">
@@ -23,25 +203,132 @@
           <context context-type="linenumber">41,42</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1e8787a343691f0024051832ae34371e57ddaf32" datatype="html">
-        <source> You must select a configuration. </source>
+      <trans-unit id="fae2a21959315be80f69be06da6fd3a0fb3c272c" datatype="html">
+        <source> Restart Required </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/select-server/select-server.component.html</context>
-          <context context-type="linenumber">26,27</context>
+          <context context-type="sourcefile">src/app/components/settings/restart.dialog.html</context>
+          <context context-type="linenumber">5,6</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="93cda5379c21993be8e215182118fca846149fe3" datatype="html">
-        <source> Settings </source>
+      <trans-unit id="c78dfd1e7b580800ae1ab9832fc08e018c2d64e2" datatype="html">
+        <source> You must restart the application for these changes to take affect. </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
-          <context context-type="linenumber">84,85</context>
+          <context context-type="sourcefile">src/app/components/settings/restart.dialog.html</context>
+          <context context-type="linenumber">10,11</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="f65cd8b3e83e39ef08d97d02298eb222a5b04f2f" datatype="html">
-        <source>Exit</source>
+      <trans-unit id="45493a221c09f4d2550f928e73f2e8ea49ceef55" datatype="html">
+        <source> Back </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="sourcefile">src/app/components/settings/settings.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/website-details.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fe46ccaae902ce974e2441abe752399288298619" datatype="html">
+        <source>Language</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/settings/settings.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="27a56aad79d8b61269ed303f11664cc78bcc2522" datatype="html">
+        <source>Theme</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/settings/settings.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8677ae2aa4df30d46c8b8f4d08e79364976fef4c" datatype="html">
+        <source>Configuration Manager</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/standalone-config-manager/standalone-config-manager.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c931480102db6fcc419b79bb6c7cc0ba6d8ce379" datatype="html">
+        <source>Add Config</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/standalone-config-manager/standalone-config-manager.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bfc24abad272bde84a14132f1fa3ed0277406216" datatype="html">
+        <source>Please add or select a configuration.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/standalone-config-manager/standalone-config-manager.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fe22ca53e651df951dac25b67c17894b0980f767" datatype="html">
+        <source>Host</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/standalone-config-manager/standalone-config-manager.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-dns.dialog.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-dns.dialog.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="33b7d4faadd7bf87bfcfebb3ca3ed9f0bffb0d69" datatype="html">
+        <source>Listen Port</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/standalone-config-manager/standalone-config-manager.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
+          <context context-type="linenumber">192</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1de35ae8af3af4b4035ff2103fe57acb2711052f" datatype="html">
+        <source> Invalid port number </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/standalone-config-manager/standalone-config-manager.component.html</context>
+          <context context-type="linenumber">50,51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="52c9a103b812f258bcddc3d90a6e3f46871d25fe" datatype="html">
+        <source>Save</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/standalone-config-manager/standalone-config-manager.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-profile/create-profile.component.html</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="815cad6a13eee2edfed8a43dc3a64d88b1b2db27" datatype="html">
@@ -115,305 +402,602 @@
           <context context-type="linenumber">62,63</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="45493a221c09f4d2550f928e73f2e8ea49ceef55" datatype="html">
+      <trans-unit id="93cda5379c21993be8e215182118fca846149fe3" datatype="html">
+        <source> Settings </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
+          <context context-type="linenumber">84,85</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f65cd8b3e83e39ef08d97d02298eb222a5b04f2f" datatype="html">
+        <source>Exit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/top-menu/top-menu.component.html</context>
+          <context context-type="linenumber">90</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="eef3d003a6862d8a8358220843fa187a2ee0e09c" datatype="html">
         <source> Back </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/settings/settings.component.html</context>
-          <context context-type="linenumber">9,10</context>
+          <context context-type="sourcefile">src/app/modules/generate/components/build-details/build-details.component.html</context>
+          <context context-type="linenumber">8,9</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/website-details.component.html</context>
-          <context context-type="linenumber">9,10</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="fe46ccaae902ce974e2441abe752399288298619" datatype="html">
-        <source>Language</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/settings/settings.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
+          <context context-type="linenumber">7,8</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="27a56aad79d8b61269ed303f11664cc78bcc2522" datatype="html">
-        <source>Theme</source>
+      <trans-unit id="17a9d8498aac8df513e73b89b0dd6be92da45f4e" datatype="html">
+        <source> Regenerate </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/settings/settings.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="sourcefile">src/app/modules/generate/components/build-details/build-details.component.html</context>
+          <context context-type="linenumber">21,22</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="fae2a21959315be80f69be06da6fd3a0fb3c272c" datatype="html">
-        <source> Restart Required </source>
+      <trans-unit id="cb0926296b01158ebdd3b19e3357e073e37fc340" datatype="html">
+        <source> Builds </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/settings/restart.dialog.html</context>
-          <context context-type="linenumber">5,6</context>
+          <context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context>
+          <context context-type="linenumber">14,15</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="c78dfd1e7b580800ae1ab9832fc08e018c2d64e2" datatype="html">
-        <source> You must restart the application for these changes to take affect. </source>
+      <trans-unit id="dc9a9853d36d7998ea7fdde3cf4cdee781ac5185" datatype="html">
+        <source>Code Name</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/settings/restart.dialog.html</context>
-          <context context-type="linenumber">10,11</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="a7868521fbf6d9fb7b97f910c3f060bbd995a118" datatype="html">
-        <source>Okay</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/settings/restart.dialog.html</context>
-          <context context-type="linenumber">15</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/dialogs/about.dialog.html</context>
-          <context context-type="linenumber">23</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/invalid-option.dialog.html</context>
-          <context context-type="linenumber">15</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-error.dialog.html</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/generate/generating.dialog.html</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/generate/build-error.dialog.html</context>
-          <context context-type="linenumber">18</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3242fd884bdb0836db02a5c9000f7eb6e3707f3d" datatype="html">
-        <source>Download Server</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context>
-          <context context-type="linenumber">3</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5c9636885876c00a7b72416bd841b36a1109b4d9" datatype="html">
-        <source>Operating System</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context>
-          <context context-type="linenumber">8</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context>
-          <context context-type="linenumber">8</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context>
+          <context context-type="linenumber">39</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">39</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="d2252b2dbce97640eb209224549e3e59c67412c1" datatype="html">
+        <source>Architecture</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dcfc990a822e11feb00eb91d9cf4d6ec0ed37dd0" datatype="html">
+        <source>Debug</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context>
           <context context-type="linenumber">28</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3fd0cd77b59b96bcadaf55606da31177393c6ede" datatype="html">
-        <source>Save to Downloads</source>
+      <trans-unit id="7722a92a1fc887570b4f4d8a7bb916f067f32028" datatype="html">
+        <source>Format</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context>
-          <context context-type="linenumber">23</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="dc75033a5238fdc4f462212c847a45ba8018a3fd" datatype="html">
-        <source>Download</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context>
+          <context context-type="linenumber">24</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context>
-          <context context-type="linenumber">29</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context>
-          <context context-type="linenumber">110</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context>
+          <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
-        <source>Cancel</source>
+      <trans-unit id="bcdc7f3c28d719db56eba5c4ef19c01c5f70665d" datatype="html">
+        <source> Regenerate </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context>
+          <context context-type="linenumber">71,72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="826b25211922a1b46436589233cb6f1a163d89b7" datatype="html">
+        <source>Delete</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context>
+          <context context-type="linenumber">81</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
+          <context context-type="linenumber">50</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-file.dialog.html</context>
-          <context context-type="linenumber">40</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-directory.dialog.html</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context>
+          <context context-type="linenumber">69</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/website-details/delete-website.dialog.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/job/stop-job.dialog.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context>
+          <context context-type="linenumber">89</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/main/add-website.dialog.html</context>
-          <context context-type="linenumber">31</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-close.dialog.html</context>
-          <context context-type="linenumber">17</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-custom.dialog.html</context>
-          <context context-type="linenumber">37</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/mkdir-dialog.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context>
+          <context context-type="linenumber">113</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context>
-          <context context-type="linenumber">28</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context>
-          <context context-type="linenumber">25</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/dialogs/rename.dialog.html</context>
-          <context context-type="linenumber">27</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profile-generate.dialog.html</context>
-          <context context-type="linenumber">17</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-dns.dialog.html</context>
-          <context context-type="linenumber">32</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="d36521ae8ac408c68d855e8820e76a3708a9b34d" datatype="html">
-        <source>Download Console Client</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-      </trans-unit>
-      <trans-unit id="8677ae2aa4df30d46c8b8f4d08e79364976fef4c" datatype="html">
-        <source>Configuration Manager</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/standalone-config-manager/standalone-config-manager.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context>
+          <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="c931480102db6fcc419b79bb6c7cc0ba6d8ce379" datatype="html">
-        <source>Add Config</source>
+      <trans-unit id="52b7019add8497eff983e85aa8ef315224e2e741" datatype="html">
+        <source> DNS C2 Endpoint </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/standalone-config-manager/standalone-config-manager.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-dns.dialog.html</context>
+          <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="bfc24abad272bde84a14132f1fa3ed0277406216" datatype="html">
-        <source>Please add or select a configuration.</source>
+      <trans-unit id="4ce6e4af12827a94e05b9ff0b0fc8818b0e2a2e2" datatype="html">
+        <source> Add </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/standalone-config-manager/standalone-config-manager.component.html</context>
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-dns.dialog.html</context>
+          <context context-type="linenumber">27,28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1f4234e868ab505ac68e6675902ab75db9f7dc25" datatype="html">
+        <source> HTTP(S) C2 Endpoint </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="eb7096be937ec74616991ccb4e156f395afbf1cd" datatype="html">
+        <source>Port Number</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4f8b427aaa2aa317429d0cf79edeac2110635686" datatype="html">
+        <source> Add </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c02d1d65725438cb4bfc394363322e88e01e3ee1" datatype="html">
+        <source> mTLS C2 Endpoint </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fde62d191d1cd9815ebe84f408e220b8984522f6" datatype="html">
+        <source> C2 Endpoints </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aece02f4870968b09729111a0f96ae0377cf47e7" datatype="html">
+        <source>Add mTLS</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b0f24c29368e2af226107f1d1377ce71504d3165" datatype="html">
+        <source>Add HTTP(S)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0bb3587463502303c45cc2ce07ba8b03bfd0461a" datatype="html">
+        <source>Add DNS</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b74af38005e8a8914e45af2ec412e11ceafef8b6" datatype="html">
+        <source>Priority</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
           <context context-type="linenumber">34</context>
         </context-group>
-      </trans-unit>
-      <trans-unit id="fe22ca53e651df951dac25b67c17894b0980f767" datatype="html">
-        <source>Host</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/standalone-config-manager/standalone-config-manager.component.html</context>
-          <context context-type="linenumber">42</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context>
-          <context context-type="linenumber">15</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context>
-          <context context-type="linenumber">15</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-dns.dialog.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-dns.dialog.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
+          <context context-type="linenumber">64</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="33b7d4faadd7bf87bfcfebb3ca3ed9f0bffb0d69" datatype="html">
-        <source>Listen Port</source>
+      <trans-unit id="801b98c6f02fe3b32f6afa3ee854c99ed83474e6" datatype="html">
+        <source>URL</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/standalone-config-manager/standalone-config-manager.component.html</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="98b11f4ab5bb7fef9502719fcb93181ba7157e6d" datatype="html">
+        <source> Canaries </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context>
+          <context context-type="linenumber">14,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c2e07dff722386ae42bdcba42781dc4b0e7a24b0" datatype="html">
+        <source>Implant Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aefb77454378965c4da1a1d66000404ae9b95c3e" datatype="html">
+        <source>Domain</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">68</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
+          <context context-type="linenumber">106</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0d9da1af5a90cd9e3fc5afd0d2c2480bf7019754" datatype="html">
+        <source>Triggered</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4f57ab68632e75bdd88db6a5141d69ace2f45773" datatype="html">
+        <source>First Triggered</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c51862ce29c7b1780182dbe401972b763a6dcaf9" datatype="html">
+        <source>Latest Trigger</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9e13a9d45e3734f20f1cd780f5d10fdf4ae0a3f9" datatype="html">
+        <source>Executable</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5dbf1e23add949a498b3c3403b1f223fb4b72fd4" datatype="html">
+        <source>CPU Architecture</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b2fba57315a791200c890354b57fb753378a13ea" datatype="html">
+        <source> Executable </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">45,46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="001d1f67893522f27ea47a32d5aec6b804409fe9" datatype="html">
+        <source> Shared Library </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">48,49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2d0d25efcb9d89e63362e0f6f343d20d46adb025" datatype="html">
+        <source> Shellcode </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">51,52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f732c304c7433e5a83ffcd862c3dce709a0f4982" datatype="html">
+        <source>Next</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
           <context context-type="linenumber">87</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
-          <context context-type="linenumber">192</context>
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">133</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="52c9a103b812f258bcddc3d90a6e3f46871d25fe" datatype="html">
-        <source>Save</source>
+      <trans-unit id="fe07f0e17657849cd0a181fbbaa34b2974f63f98" datatype="html">
+        <source> Command and Control </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/standalone-config-manager/standalone-config-manager.component.html</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">70,71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cda31dbd724cf5f4fa7a4274d9120651490c8a8c" datatype="html">
+        <source>Back</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">129</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">154</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="897d387451172f7db3646374b6a2016dfec020b5" datatype="html">
+        <source> Compile Time Options </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">98,99</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a4e954c980eda25bf2a28a6411710aee8757ef17" datatype="html">
+        <source>Reconnect</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">107</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2c6935b5d167688c822375470c91311fbca19fc9" datatype="html">
+        <source>Max Errors</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">113</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9b619b0c823e8a7afc2cd409bc00402c517df5e3" datatype="html">
+        <source>Symbol Obfuscation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">118</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3c1f75e94b0d959bfa53596dd71eef3f452ff904" datatype="html">
+        <source>Debug Mode</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">123</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a8233de047500bf0f0d9f9f1712ddb071501a283" datatype="html">
+        <source>Summary</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">145</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="68e710782ccb5398b3acb8844caf0b199da2c3da" datatype="html">
+        <source>Confirm</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
+          <context context-type="linenumber">161</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="994363f08f9fbfa3b3994ff7b35c6904fdff18d8" datatype="html">
+        <source>Profile</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-profile/create-profile.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="75d09a27672deb573b2c0cb6ccaddf7e45b36a17" datatype="html">
+        <source>Profile Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/create-profile/create-profile.component.html</context>
+          <context context-type="linenumber">14</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/create-profile/create-profile.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7d5b525e1eb331acb69aa914a221a9bac238f8fe" datatype="html">
+        <source> Build Failure </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/generate/build-error.dialog.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="62fcab5214fbb48a5c3fe22173bb6e3691df774a" datatype="html">
+        <source> The build encountered an error: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/generate/build-error.dialog.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6a463a3d2386d508d6f02a61c1d32ca80f7c9c70" datatype="html">
+        <source>Generate Implant</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7adac05a1c49cd5ae7cffe78b17639540cc45d07" datatype="html">
+        <source>Generate Codename</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2603d3206a60cbcda1202d4e0d7858087a6a293b" datatype="html">
+        <source>Codename</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context>
           <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1de35ae8af3af4b4035ff2103fe57acb2711052f" datatype="html">
-        <source> Invalid port number </source>
+      <trans-unit id="c1965caecebc528a7278042a9894c4bf7b00f312" datatype="html">
+        <source>Save as Profile</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/standalone-config-manager/standalone-config-manager.component.html</context>
-          <context context-type="linenumber">50,51</context>
+          <context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e5a672e83aae78b7b467cf82b5611809ac7da92e" datatype="html">
+        <source>Start Build</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profile-generate.dialog.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7f1b907062583746e3b9631fa99f548c994845a7" datatype="html">
+        <source> Generating </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/generate/generating.dialog.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="93fe2e739e36b8b89561b4c74eb377e6a306aad7" datatype="html">
+        <source> Your build has started, you will get a notification when the build completes. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/generate/generating.dialog.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ccfe7475ab3ae7ade17ba83c4363e0870f69551d" datatype="html">
+        <source>Implant Configuration</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b6a02dd16604c660a9043c9d28c6aadc41fb3e50" datatype="html">
+        <source>Service Executable</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d6cb5bbe00793446c4e29be6156918840ec37c84" datatype="html">
+        <source>Max Connection Errors</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a12a85c3d8a6f29a12d03a599597a35e9f20b2e2" datatype="html">
+        <source>Evasion</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6bc61c1eb9f3aae937d3f3c43a9b11fa6f59936e" datatype="html">
+        <source> Build from Profile </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profile-generate.dialog.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b0ed9270b60b5b5ea1d53d7190c21ddd70a1fb01" datatype="html">
+        <source> Would you like to build an implant based on the <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ profile.getName() }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> profile? </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profile-generate.dialog.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3b201a1281713f7d2cc47a81f7b821fff7b6a2ab" datatype="html">
+        <source> Profiles </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context>
+          <context context-type="linenumber">14,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4c37ff662409730f928d07f3088b7192705f9cc6" datatype="html">
+        <source> New Profile </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/generate/components/profiles/profiles.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4a881d3302d9cfb1f6849d606bb44d7463ac9aa7" datatype="html">
+        <source> Stop Job? </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/components/job/stop-job.dialog.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d8139e6b8483ffa1cb234040237fd3b0debd939e" datatype="html">
+        <source> Are you sure you want to stop job #<x id="INTERPOLATION" equiv-text="{{data.job.getId()}}"/>? </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/components/job/stop-job.dialog.html</context>
+          <context context-type="linenumber">8,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1d0d5c9a36e72bd9643ff1ede69736ae063d652b" datatype="html">
+        <source>Stop</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/components/job/stop-job.dialog.html</context>
+          <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="13778a9d7012d26638d3fc85eb6232c096b3d392" datatype="html">
@@ -424,7 +1008,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/websites-table/websites-table.component.html</context>
-          <context context-type="linenumber">34,35</context>
+          <context context-type="linenumber">32,33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ec5248d3a6c09ab11c75cdcb1ecc24d02cd59535" datatype="html">
@@ -448,26 +1032,22 @@
           <context context-type="linenumber">61,62</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="45cc8ca94b5a50842a9a8ef804a5ab089a38ae5c" datatype="html">
-        <source>ID</source>
+      <trans-unit id="5cb440a9d5419838def4afe33f45b79b061b0645" datatype="html">
+        <source> Add Website </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context>
-          <context context-type="linenumber">32</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/library-table/library-table.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="sourcefile">src/app/modules/jobs/components/main/add-website.dialog.html</context>
+          <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cff1428d10d59d14e45edec3c735a27b5482db59" datatype="html">
         <source>Name</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-        <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/main/add-website.dialog.html</context>
           <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/dialogs/rename.dialog.html</context>
+          <context context-type="linenumber">11</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context>
@@ -478,136 +1058,50 @@
           <context context-type="linenumber">42</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/dialogs/rename.dialog.html</context>
-          <context context-type="linenumber">11</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="af1396bdc49f45ea6c4a1e414769f5e2a382c834" datatype="html">
-        <source>Transport</source>
-        <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context>
-          <context context-type="linenumber">46</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/info/info.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4ea97e94fe65f30b5477c509744f276e100e458e" datatype="html">
-        <source>Remote Address</source>
+      <trans-unit id="0a0116953f96b5a4e1890e3e4e625bed4e1848a7" datatype="html">
+        <source> Add Website </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="sourcefile">src/app/modules/jobs/components/main/add-website.dialog.html</context>
+          <context context-type="linenumber">26,27</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="08c74dc9762957593b91f6eb5d65efdfc975bf48" datatype="html">
-        <source>Username</source>
+      <trans-unit id="4c27cd467bacebe1d9a182fa8970234b6bcd89bd" datatype="html">
+        <source> Start Listener </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="sourcefile">src/app/modules/jobs/components/main/main.component.html</context>
+          <context context-type="linenumber">9,10</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="a0ad8e29ff6de0aef19586738980a6fba9a8113c" datatype="html">
-        <source>Last Check-in</source>
+      <trans-unit id="9fa9da2d5644b5118672442802d3f698aebd1dcb" datatype="html">
+        <source> Add Website </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context>
-          <context context-type="linenumber">78</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/info/info.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="sourcefile">src/app/modules/jobs/components/main/main.component.html</context>
+          <context context-type="linenumber">16,17</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="c5aaa7cb8e2bca91ffe63c9e189e66f3efb88126" datatype="html">
-        <source> Scripts </source>
+      <trans-unit id="db4325ceb23092f2df3bd1df1c67ec582534a398" datatype="html">
+        <source> Invalid Listener Option </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/scripting/components/browser/browser.component.html</context>
-          <context context-type="linenumber">8,9</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7aafd81526e4dbfbfe16413c3e1350f66939ec96" datatype="html">
-        <source> Delete </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/scripting/components/browser/browser.component.html</context>
-          <context context-type="linenumber">36,37</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="c6229de296573e1153e3fb23e5ef780a07514fb5" datatype="html">
-        <source> Delete Script? </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context>
+          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/invalid-option.dialog.html</context>
           <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="0d678cdeec31bf13e982397161e64abd782b69fc" datatype="html">
-        <source> Are you sure you want to delete the <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{data.name}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt; "/> script? </source>
+      <trans-unit id="99ae1ab023f1f4b5e1193743889be919a17839d0" datatype="html">
+        <source> One or more options are invalid, cannot start listener. </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context>
-          <context context-type="linenumber">10,11</context>
+          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/invalid-option.dialog.html</context>
+          <context context-type="linenumber">9,10</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="826b25211922a1b46436589233cb6f1a163d89b7" datatype="html">
-        <source>Delete</source>
+      <trans-unit id="b6296e32ed99148062f32a4eb5ac3038cf61082a" datatype="html">
+        <source> Job Error </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context>
-          <context context-type="linenumber">17</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/delete-website.dialog.html</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context>
-          <context context-type="linenumber">89</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context>
-          <context context-type="linenumber">113</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context>
-          <context context-type="linenumber">3</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context>
-          <context context-type="linenumber">25</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context>
-          <context context-type="linenumber">69</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
-          <context context-type="linenumber">50</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context>
-          <context context-type="linenumber">81</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="eef3d003a6862d8a8358220843fa187a2ee0e09c" datatype="html">
-        <source> Back </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
-          <context context-type="linenumber">7,8</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/build-details/build-details.component.html</context>
-          <context context-type="linenumber">8,9</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="fbe8ed04887bb2f2687d8e3153aef4711474660f" datatype="html">
-        <source> Next </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
-          <context context-type="linenumber">38,39</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="aecc5b724b4bc9b0f8adc45f84fc82cf7b49e5db" datatype="html">
-        <source>Start Listener</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
-          <context context-type="linenumber">203</context>
+          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-error.dialog.html</context>
+          <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="acc04ca445d64958d843622f9ce95c0378198c24" datatype="html">
@@ -615,6 +1109,13 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
           <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fbe8ed04887bb2f2687d8e3153aef4711474660f" datatype="html">
+        <source> Next </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
+          <context context-type="linenumber">38,39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1a52ed3a73fdd5a33276be93ef78e3d25060d1d9" datatype="html">
@@ -643,21 +1144,6 @@
           <context context-type="linenumber">92,93</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="aefb77454378965c4da1a1d66000404ae9b95c3e" datatype="html">
-        <source>Domain</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
-          <context context-type="linenumber">68</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
-          <context context-type="linenumber">106</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context>
-          <context context-type="linenumber">35</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="afb605e735bef0cdd46dbff3c3d2be15960cdc2b" datatype="html">
         <source>Website</source>
         <context-group purpose="location">
@@ -667,10 +1153,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
           <context context-type="linenumber">111</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
-          <context context-type="linenumber">117</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
@@ -726,46 +1208,60 @@
           <context context-type="linenumber">186</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="db4325ceb23092f2df3bd1df1c67ec582534a398" datatype="html">
-        <source> Invalid Listener Option </source>
+      <trans-unit id="aecc5b724b4bc9b0f8adc45f84fc82cf7b49e5db" datatype="html">
+        <source>Start Listener</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/invalid-option.dialog.html</context>
-          <context context-type="linenumber">4,5</context>
+          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
+          <context context-type="linenumber">203</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="99ae1ab023f1f4b5e1193743889be919a17839d0" datatype="html">
-        <source> One or more options are invalid, cannot start listener. </source>
+      <trans-unit id="fd210291591c716cdef7ad35c4e461d0ef0452b6" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ this.website.getName() }}"/> </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/invalid-option.dialog.html</context>
-          <context context-type="linenumber">9,10</context>
+          <context context-type="sourcefile">src/app/modules/jobs/components/webcontents-table/webcontents-table.component.html</context>
+          <context context-type="linenumber">13,15</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="b6296e32ed99148062f32a4eb5ac3038cf61082a" datatype="html">
-        <source> Job Error </source>
+      <trans-unit id="52536aca7d2236ea7a4870d54f58b687f864b79d" datatype="html">
+        <source> Path </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-error.dialog.html</context>
-          <context context-type="linenumber">4,5</context>
+          <context context-type="sourcefile">src/app/modules/jobs/components/webcontents-table/webcontents-table.component.html</context>
+          <context context-type="linenumber">33,34</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="a6daeb07681e0b5119f65a520755bf4b0d9f1fdd" datatype="html">
-        <source> Add File </source>
+      <trans-unit id="f47372ffb791f2eb93ed12c3d19f34c0ec643239" datatype="html">
+        <source> Content-type </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/website-details.component.html</context>
-          <context context-type="linenumber">16,17</context>
+          <context context-type="sourcefile">src/app/modules/jobs/components/webcontents-table/webcontents-table.component.html</context>
+          <context context-type="linenumber">42,43</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="75094cce419b2eebd08f5925cbf43b6111261aba" datatype="html">
+      <trans-unit id="2bd384c99e4f57ed28c9d8c7ff358c4eac01ca14" datatype="html">
+        <source> Size </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/components/webcontents-table/webcontents-table.component.html</context>
+          <context context-type="linenumber">51,52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f1caa5874fc77bdc8604fbf5ef11860f61d10246" datatype="html">
         <source> Add Directory </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/website-details.component.html</context>
-          <context context-type="linenumber">23,24</context>
+          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-directory.dialog.html</context>
+          <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="d7acc4c320f2cec1d3d4e86dfa25ac5f5e6783b9" datatype="html">
-        <source> Delete </source>
+      <trans-unit id="6c2b5c591461cac8414f908aad746ca72511bc29" datatype="html">
+        <source>Path Prefix</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/website-details.component.html</context>
-          <context context-type="linenumber">33,34</context>
+          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-directory.dialog.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7b2f538d4d8e71ec8fc6266470e36c5335928a43" datatype="html">
+        <source> Select Directory </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-directory.dialog.html</context>
+          <context context-type="linenumber">26,27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="85656b54578a2c283122fc00c54d94b81ffc6ffe" datatype="html">
@@ -800,27 +1296,6 @@
           <context context-type="linenumber">35,36</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="f1caa5874fc77bdc8604fbf5ef11860f61d10246" datatype="html">
-        <source> Add Directory </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-directory.dialog.html</context>
-          <context context-type="linenumber">4,5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6c2b5c591461cac8414f908aad746ca72511bc29" datatype="html">
-        <source>Path Prefix</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-directory.dialog.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7b2f538d4d8e71ec8fc6266470e36c5335928a43" datatype="html">
-        <source> Select Directory </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-directory.dialog.html</context>
-          <context context-type="linenumber">26,27</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="12ecab228c7cb17415da203a6e7b7233ef58d634" datatype="html">
         <source> Delete Website </source>
         <context-group purpose="location">
@@ -835,95 +1310,88 @@
           <context context-type="linenumber">9,10</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4a881d3302d9cfb1f6849d606bb44d7463ac9aa7" datatype="html">
-        <source> Stop Job? </source>
+      <trans-unit id="a6daeb07681e0b5119f65a520755bf4b0d9f1fdd" datatype="html">
+        <source> Add File </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/job/stop-job.dialog.html</context>
-          <context context-type="linenumber">4,5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="d8139e6b8483ffa1cb234040237fd3b0debd939e" datatype="html">
-        <source> Are you sure you want to stop job #<x id="INTERPOLATION" equiv-text="ob #{{data.job.getId"/>? </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/job/stop-job.dialog.html</context>
-          <context context-type="linenumber">8,10</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1d0d5c9a36e72bd9643ff1ede69736ae063d652b" datatype="html">
-        <source>Stop</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/job/stop-job.dialog.html</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4c27cd467bacebe1d9a182fa8970234b6bcd89bd" datatype="html">
-        <source> Start Listener </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/main/main.component.html</context>
-          <context context-type="linenumber">9,10</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="9fa9da2d5644b5118672442802d3f698aebd1dcb" datatype="html">
-        <source> Add Website </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/main/main.component.html</context>
+          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/website-details.component.html</context>
           <context context-type="linenumber">16,17</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5cb440a9d5419838def4afe33f45b79b061b0645" datatype="html">
-        <source> Add Website </source>
+      <trans-unit id="75094cce419b2eebd08f5925cbf43b6111261aba" datatype="html">
+        <source> Add Directory </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/main/add-website.dialog.html</context>
-          <context context-type="linenumber">4,5</context>
+          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/website-details.component.html</context>
+          <context context-type="linenumber">23,24</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="0a0116953f96b5a4e1890e3e4e625bed4e1848a7" datatype="html">
-        <source> Add Website </source>
+      <trans-unit id="d7acc4c320f2cec1d3d4e86dfa25ac5f5e6783b9" datatype="html">
+        <source> Delete </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/main/add-website.dialog.html</context>
-          <context context-type="linenumber">26,27</context>
+          <context context-type="sourcefile">src/app/modules/jobs/components/website-details/website-details.component.html</context>
+          <context context-type="linenumber">33,34</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3229f9f059be23b9c0adacbfa407ae4be4fac20b" datatype="html">
-        <source> <x id="INTERPOLATION" equiv-text="          {{ this.website.ge"/> </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/webcontents-table/webcontents-table.component.html</context>
-          <context context-type="linenumber">15,17</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="52536aca7d2236ea7a4870d54f58b687f864b79d" datatype="html">
-        <source> Path </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/webcontents-table/webcontents-table.component.html</context>
-          <context context-type="linenumber">34,35</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="f47372ffb791f2eb93ed12c3d19f34c0ec643239" datatype="html">
-        <source> Content-type </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/webcontents-table/webcontents-table.component.html</context>
-          <context context-type="linenumber">43,44</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2bd384c99e4f57ed28c9d8c7ff358c4eac01ca14" datatype="html">
-        <source> Size </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/webcontents-table/webcontents-table.component.html</context>
-          <context context-type="linenumber">52,53</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="90becbde18e565fc681f9abba4fe16008d0f6b19" datatype="html">
+      <trans-unit id="f5ff13bfc077bdad38b5ed87132fb443b01190f0" datatype="html">
         <source> Websites </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/websites-table/websites-table.component.html</context>
-          <context context-type="linenumber">16,17</context>
+          <context context-type="linenumber">14,15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b04ec8cbb9c63372934e6b9d42f374d442130daa" datatype="html">
         <source> Pages </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/websites-table/websites-table.component.html</context>
-          <context context-type="linenumber">43,44</context>
+          <context context-type="linenumber">41,42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1e33945fbd1dc1d461344cfdc2698a23ef28352b" datatype="html">
+        <source> Scripts </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/scripting/components/browser/browser.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a3cf13c419f9f37a2b338ed0617d72137051b910" datatype="html">
+        <source> Delete </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/scripting/components/browser/browser.component.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c6229de296573e1153e3fb23e5ef780a07514fb5" datatype="html">
+        <source> Delete Script? </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0d678cdeec31bf13e982397161e64abd782b69fc" datatype="html">
+        <source> Are you sure you want to delete the <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{data.name}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> script? </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f031826de4d223f5af8f4fcec0c4f2ed1c035e87" datatype="html">
+        <source> Done </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/dialogs/library.dialog.html</context>
+          <context context-type="linenumber">15,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ad3ce21e13a4f6fdeea73170384a5aba83e5a85f" datatype="html">
+        <source> Rename </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/dialogs/rename.dialog.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2a62a59d9424e9e869061ebf3e8f8b8f95411571" datatype="html">
+        <source> Save </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/dialogs/rename.dialog.html</context>
+          <context context-type="linenumber">22,23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="699b690d686dbb8e00a1e95b89ba2fffb548da6e" datatype="html">
@@ -995,6 +1463,17 @@
           <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="da1713fc91ac5ac504494d17b84869615f5687b0" datatype="html">
+        <source>You must make a selection</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="5c12a82c6283b5e933cda0c15e7aa6b07f8c9713" datatype="html">
         <source>Arguments</source>
         <context-group purpose="location">
@@ -1016,26 +1495,11 @@
           <context context-type="linenumber">71</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="da1713fc91ac5ac504494d17b84869615f5687b0" datatype="html">
-        <source>You must make a selection</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
-          <context context-type="linenumber">55</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
-          <context context-type="linenumber">55</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="c817a89c8dd03d953b5c30752b640a5fedd5cec2" datatype="html">
         <source>Please enter a valid process name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
           <context context-type="linenumber">80</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
-          <context context-type="linenumber">65</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d973e47cf201b8455de2a36efd487c9a76824079" datatype="html">
@@ -1052,71 +1516,92 @@
           <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6b6a341244987842b9a398da39530352bb9dab9f" datatype="html">
-        <source>Process</source>
+      <trans-unit id="b117b51dac56ea324afd9a0300a4a2a23b04b3b3" datatype="html">
+        <source>Interact with the subprocess after injecting shellcode</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
-          <context context-type="linenumber">60</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="f0b91f1215b1fe75017cb7d768910e1e925e8e1a" datatype="html">
-        <source>RWX Pages</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b4e2a7b4394e9a55bf2d25ece4a788e6b3a58127" datatype="html">
         <source>Interactive</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
-          <context context-type="linenumber">74</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1ef18572032f31f40e1720c4a0970e710afa70e7" datatype="html">
-        <source> Close Shell </source>
+      <trans-unit id="34f57e038da7bdc87730fd7b894c84b0031f7251" datatype="html">
+        <source>PID</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-close.dialog.html</context>
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9b661f6bdfaf16ac78c2cccee8683bde0e3a027f" datatype="html">
+        <source>PID to inject shellcode into</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="854363b7948804fdc9a308d70c8b3dc21be2f128" datatype="html">
+        <source>Please enter a valid PID</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">80</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cd73e7bd47133619c0220e0d2bd440460fd5cd5b" datatype="html">
+        <source>Create Process</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="217d93639a62c0220971c22d0c7d4cbe9a8232f4" datatype="html">
+        <source>The subprocess to create and inject shellcode into</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">91</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f0db54c7ab3b8fff3979010df8ed85b1ec7e33fb" datatype="html">
+        <source>Specify a subprocess to create</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f0b91f1215b1fe75017cb7d768910e1e925e8e1a" datatype="html">
+        <source>RWX Pages</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/execute-shellcode/execute-shellcode.component.html</context>
+          <context context-type="linenumber">99</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a9440bc19049d4223f2a0a264cfd18f12ee220e0" datatype="html">
+        <source> Download File </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context>
           <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="89bd0567a9bbd937274dfca638821d1d8cb6eb6c" datatype="html">
-        <source> Are you sure you want to close this shell? </source>
+      <trans-unit id="38b21a77c169dc1d573d1959b82ee0d1bc2382a4" datatype="html">
+        <source>File Name:</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-close.dialog.html</context>
-          <context context-type="linenumber">9,10</context>
+          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context>
+          <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="f4e529ae5ffd73001d1ff4bbdeeb0a72e342e5c8" datatype="html">
-        <source>Close</source>
+      <trans-unit id="bbcd87921d19dc8354eaae57c3e28619b244fa11" datatype="html">
+        <source>File Size:</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-close.dialog.html</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="57de2be6a0318718177b96c23be448d48bec9181" datatype="html">
-        <source> Custom Shell </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-custom.dialog.html</context>
-          <context context-type="linenumber">4,5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="bf5a7faac18de8e9288904164e25367bcad7a461" datatype="html">
-        <source>Shell Path</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-custom.dialog.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-custom.dialog.html</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="62e0fa50fee4e457994004d1b0a9528ccc05542d" datatype="html">
-        <source> Execute </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-custom.dialog.html</context>
-          <context context-type="linenumber">32,33</context>
+          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="eeae1f653579a72c51eef0809b36555e66e6ddc7" datatype="html">
@@ -1161,13 +1646,6 @@
           <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1ebb07a3797618330ec9de8a3b6b7fd248f8e6b4" datatype="html">
-        <source> Please type <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;monospace&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{data.name}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt; "/> below to confirm: </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context>
-          <context context-type="linenumber">13,14</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="03d84645f6e019c5a43909bbf2ea1696ee88332c" datatype="html">
         <source>Directory</source>
         <context-group purpose="location">
@@ -1182,25 +1660,33 @@
           <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="a9440bc19049d4223f2a0a264cfd18f12ee220e0" datatype="html">
-        <source> Download File </source>
+      <trans-unit id="1ebb07a3797618330ec9de8a3b6b7fd248f8e6b4" datatype="html">
+        <source> Please type <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;monospace&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{data.name}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/> below to confirm: </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context>
-          <context context-type="linenumber">4,5</context>
+          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context>
+          <context context-type="linenumber">13,14</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="38b21a77c169dc1d573d1959b82ee0d1bc2382a4" datatype="html">
-        <source>File Name:</source>
+      <trans-unit id="af1396bdc49f45ea6c4a1e414769f5e2a382c834" datatype="html">
+        <source>Transport</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="sourcefile">src/app/modules/sessions/components/info/info.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context>
+          <context context-type="linenumber">46</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="bbcd87921d19dc8354eaae57c3e28619b244fa11" datatype="html">
-        <source>File Size:</source>
+      <trans-unit id="a0ad8e29ff6de0aef19586738980a6fba9a8113c" datatype="html">
+        <source>Last Check-in</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="sourcefile">src/app/modules/sessions/components/info/info.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context>
+          <context context-type="linenumber">78</context>
         </context-group>
       </trans-unit>
       <trans-unit id="56b5044b468ec079b4881a470e9b00b35a24db54" datatype="html">
@@ -1208,25 +1694,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/info/info.component.html</context>
           <context context-type="linenumber">37</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="cda31dbd724cf5f4fa7a4274d9120651490c8a8c" datatype="html">
-        <source>Back</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context>
-          <context context-type="linenumber">8</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">83</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">128</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">153</context>
         </context-group>
       </trans-unit>
       <trans-unit id="197c6a6173dd4a413f617965f2d9308bc263abfe" datatype="html">
@@ -1317,11 +1784,11 @@
         <source>Screenshots</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">47</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/standalone-interact/standalone-interact.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="64ad6f819dd87bb7b5d9e9474c456a765a336553" datatype="html">
@@ -1353,6 +1820,17 @@
           <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="45cc8ca94b5a50842a9a8ef804a5ab089a38ae5c" datatype="html">
+        <source>ID</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/library-table/library-table.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="019d4bd6a5690f0cfa0ecf346a4e6bf7f0d8debb" datatype="html">
         <source>Remove</source>
         <context-group purpose="location">
@@ -1360,469 +1838,64 @@
           <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ad3ce21e13a4f6fdeea73170384a5aba83e5a85f" datatype="html">
-        <source> Rename </source>
+      <trans-unit id="4ea97e94fe65f30b5477c509744f276e100e458e" datatype="html">
+        <source>Remote Address</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/dialogs/rename.dialog.html</context>
+          <context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="08c74dc9762957593b91f6eb5d65efdfc975bf48" datatype="html">
+        <source>Username</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1ef18572032f31f40e1720c4a0970e710afa70e7" datatype="html">
+        <source> Close Shell </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-close.dialog.html</context>
           <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2a62a59d9424e9e869061ebf3e8f8b8f95411571" datatype="html">
-        <source> Save </source>
+      <trans-unit id="89bd0567a9bbd937274dfca638821d1d8cb6eb6c" datatype="html">
+        <source> Are you sure you want to close this shell? </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/dialogs/rename.dialog.html</context>
-          <context context-type="linenumber">22,23</context>
+          <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-close.dialog.html</context>
+          <context context-type="linenumber">9,10</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="f031826de4d223f5af8f4fcec0c4f2ed1c035e87" datatype="html">
-        <source> Done </source>
+      <trans-unit id="f4e529ae5ffd73001d1ff4bbdeeb0a72e342e5c8" datatype="html">
+        <source>Close</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/dialogs/library.dialog.html</context>
-          <context context-type="linenumber">15,16</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="17a9d8498aac8df513e73b89b0dd6be92da45f4e" datatype="html">
-        <source> Regenerate </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/build-details/build-details.component.html</context>
-          <context context-type="linenumber">21,22</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="994363f08f9fbfa3b3994ff7b35c6904fdff18d8" datatype="html">
-        <source>Profile</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-profile/create-profile.component.html</context>
-          <context context-type="linenumber">9</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="75d09a27672deb573b2c0cb6ccaddf7e45b36a17" datatype="html">
-        <source>Profile Name</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-profile/create-profile.component.html</context>
+          <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-close.dialog.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="57de2be6a0318718177b96c23be448d48bec9181" datatype="html">
+        <source> Custom Shell </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-profile/create-profile.component.html</context>
+          <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-custom.dialog.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bf5a7faac18de8e9288904164e25367bcad7a461" datatype="html">
+        <source>Shell Path</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-custom.dialog.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-custom.dialog.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context>
-          <context context-type="linenumber">32</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context>
-          <context context-type="linenumber">34</context>
-        </context-group>
       </trans-unit>
-      <trans-unit id="4c37ff662409730f928d07f3088b7192705f9cc6" datatype="html">
-        <source> New Profile </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/profiles/profiles.component.html</context>
-          <context context-type="linenumber">7,8</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6a463a3d2386d508d6f02a61c1d32ca80f7c9c70" datatype="html">
-        <source>Generate Implant</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context>
-          <context context-type="linenumber">9</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7adac05a1c49cd5ae7cffe78b17639540cc45d07" datatype="html">
-        <source>Generate Codename</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="c1965caecebc528a7278042a9894c4bf7b00f312" datatype="html">
-        <source>Save as Profile</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context>
-          <context context-type="linenumber">26</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="e5a672e83aae78b7b467cf82b5611809ac7da92e" datatype="html">
-        <source>Start Build</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profile-generate.dialog.html</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2603d3206a60cbcda1202d4e0d7858087a6a293b" datatype="html">
-        <source>Codename</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context>
-          <context context-type="linenumber">19</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/generate/generate.component.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7f1b907062583746e3b9631fa99f548c994845a7" datatype="html">
-        <source> Generating </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/generate/generating.dialog.html</context>
-          <context context-type="linenumber">4,5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="93fe2e739e36b8b89561b4c74eb377e6a306aad7" datatype="html">
-        <source> Your build has started, you will get a notification when the build completes. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/generate/generating.dialog.html</context>
-          <context context-type="linenumber">9,10</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7d5b525e1eb331acb69aa914a221a9bac238f8fe" datatype="html">
-        <source> Build Failure </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/generate/build-error.dialog.html</context>
-          <context context-type="linenumber">4,5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="62fcab5214fbb48a5c3fe22173bb6e3691df774a" datatype="html">
-        <source> The build encountered an error: </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/generate/build-error.dialog.html</context>
-          <context context-type="linenumber">9,10</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3b201a1281713f7d2cc47a81f7b821fff7b6a2ab" datatype="html">
-        <source> Profiles </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context>
-          <context context-type="linenumber">14,15</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="dc9a9853d36d7998ea7fdde3cf4cdee781ac5185" datatype="html">
-        <source>Code Name</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="d2252b2dbce97640eb209224549e3e59c67412c1" datatype="html">
-        <source>Architecture</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context>
-          <context context-type="linenumber">46</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context>
-          <context context-type="linenumber">46</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="dcfc990a822e11feb00eb91d9cf4d6ec0ed37dd0" datatype="html">
-        <source>Debug</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context>
-          <context context-type="linenumber">53</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context>
-          <context context-type="linenumber">28</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context>
-          <context context-type="linenumber">53</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7722a92a1fc887570b4f4d8a7bb916f067f32028" datatype="html">
-        <source>Format</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context>
-          <context context-type="linenumber">60</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context>
-          <context context-type="linenumber">24</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context>
-          <context context-type="linenumber">60</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6bc61c1eb9f3aae937d3f3c43a9b11fa6f59936e" datatype="html">
-        <source> Build from Profile </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profile-generate.dialog.html</context>
-          <context context-type="linenumber">4,5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="b0ed9270b60b5b5ea1d53d7190c21ddd70a1fb01" datatype="html">
-        <source> Would you like to build an implant based on the <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ profile.getName() }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt; "/> profile? </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profile-generate.dialog.html</context>
-          <context context-type="linenumber">9,10</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ccfe7475ab3ae7ade17ba83c4363e0870f69551d" datatype="html">
-        <source>Implant Configuration</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="d6cb5bbe00793446c4e29be6156918840ec37c84" datatype="html">
-        <source>Max Connection Errors</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context>
-          <context context-type="linenumber">29</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="9b619b0c823e8a7afc2cd409bc00402c517df5e3" datatype="html">
-        <source>Symbol Obfuscation</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context>
-          <context context-type="linenumber">30</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">117</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="a12a85c3d8a6f29a12d03a599597a35e9f20b2e2" datatype="html">
-        <source>Evasion</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context>
-          <context context-type="linenumber">31</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="b6a02dd16604c660a9043c9d28c6aadc41fb3e50" datatype="html">
-        <source>Service Executable</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/implant-config/implant-config.component.html</context>
-          <context context-type="linenumber">26</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="fde62d191d1cd9815ebe84f408e220b8984522f6" datatype="html">
-        <source> C2 Endpoints </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
-          <context context-type="linenumber">8,9</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="aece02f4870968b09729111a0f96ae0377cf47e7" datatype="html">
-        <source>Add mTLS</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="b0f24c29368e2af226107f1d1377ce71504d3165" datatype="html">
-        <source>Add HTTP(S)</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
-          <context context-type="linenumber">19</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="0bb3587463502303c45cc2ce07ba8b03bfd0461a" datatype="html">
-        <source>Add DNS</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
-          <context context-type="linenumber">24</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="b74af38005e8a8914e45af2ec412e11ceafef8b6" datatype="html">
-        <source>Priority</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
-          <context context-type="linenumber">34</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
-          <context context-type="linenumber">64</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="801b98c6f02fe3b32f6afa3ee854c99ed83474e6" datatype="html">
-        <source>URL</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
-          <context context-type="linenumber">41</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/c2-table.component.html</context>
-          <context context-type="linenumber">71</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="c02d1d65725438cb4bfc394363322e88e01e3ee1" datatype="html">
-        <source> mTLS C2 Endpoint </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context>
-          <context context-type="linenumber">4,5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="eb7096be937ec74616991ccb4e156f395afbf1cd" datatype="html">
-        <source>Port Number</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context>
-          <context context-type="linenumber">23</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context>
-          <context context-type="linenumber">23</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4ce6e4af12827a94e05b9ff0b0fc8818b0e2a2e2" datatype="html">
-        <source> Add </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context>
-          <context context-type="linenumber">34,35</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-dns.dialog.html</context>
-          <context context-type="linenumber">27,28</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1f4234e868ab505ac68e6675902ab75db9f7dc25" datatype="html">
-        <source> HTTP(S) C2 Endpoint </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context>
-          <context context-type="linenumber">4,5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4f8b427aaa2aa317429d0cf79edeac2110635686" datatype="html">
-        <source> Add </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context>
-          <context context-type="linenumber">34,35</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="52b7019add8497eff983e85aa8ef315224e2e741" datatype="html">
-        <source> DNS C2 Endpoint </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-dns.dialog.html</context>
-          <context context-type="linenumber">4,5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="98b11f4ab5bb7fef9502719fcb93181ba7157e6d" datatype="html">
-        <source> Canaries </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context>
-          <context context-type="linenumber">14,15</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="c2e07dff722386ae42bdcba42781dc4b0e7a24b0" datatype="html">
-        <source>Implant Name</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context>
-          <context context-type="linenumber">28</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="0d9da1af5a90cd9e3fc5afd0d2c2480bf7019754" datatype="html">
-        <source>Triggered</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context>
-          <context context-type="linenumber">44</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4f57ab68632e75bdd88db6a5141d69ace2f45773" datatype="html">
-        <source>First Triggered</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context>
-          <context context-type="linenumber">54</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="c51862ce29c7b1780182dbe401972b763a6dcaf9" datatype="html">
-        <source>Latest Trigger</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context>
-          <context context-type="linenumber">66</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="cb0926296b01158ebdd3b19e3357e073e37fc340" datatype="html">
-        <source> Builds </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context>
-          <context context-type="linenumber">14,15</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="bcdc7f3c28d719db56eba5c4ef19c01c5f70665d" datatype="html">
-        <source> Regenerate </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context>
-          <context context-type="linenumber">71,72</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5dbf1e23add949a498b3c3403b1f223fb4b72fd4" datatype="html">
-        <source>CPU Architecture</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">30</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="f732c304c7433e5a83ffcd862c3dce709a0f4982" datatype="html">
-        <source>Next</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">59</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">87</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">132</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="a4e954c980eda25bf2a28a6411710aee8757ef17" datatype="html">
-        <source>Reconnect</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">106</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2c6935b5d167688c822375470c91311fbca19fc9" datatype="html">
-        <source>Max Errors</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">112</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3c1f75e94b0d959bfa53596dd71eef3f452ff904" datatype="html">
-        <source>Debug Mode</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">122</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="68e710782ccb5398b3acb8844caf0b199da2c3da" datatype="html">
-        <source>Confirm</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">160</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="9e13a9d45e3734f20f1cd780f5d10fdf4ae0a3f9" datatype="html">
-        <source>Executable</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">11</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="a8233de047500bf0f0d9f9f1712ddb071501a283" datatype="html">
-        <source>Summary</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">144</context>
+      <trans-unit id="62e0fa50fee4e457994004d1b0a9528ccc05542d" datatype="html">
+        <source> Execute </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-custom.dialog.html</context>
+          <context context-type="linenumber">32,33</context>
         </context-group>
       </trans-unit>
     </body>
