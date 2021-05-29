@@ -64,9 +64,6 @@ async function main() {
       }
     });
 
-    // Prevent navigation in any window
-    // WARNING: This actually doesn't work because Electron hates security
-    // https://github.com/electron/electron/issues/8841
     app.on('web-contents-created', (_, contents) => {
       contents.on('will-navigate', (event, url) => {
         logger.warn(`[will-navigate] ${url}`);

@@ -56,7 +56,6 @@ export class StandaloneConfigManagerComponent implements OnInit, OnDestroy {
 
   onSelectConfig(config: SliverConfig) {
     this.selectedConfig = config;
-    console.log(config);
     this.selectedConfigForm = this._fb.group({
       lhost: ['', Validators.compose([
         Validators.required, this.validateLHost.bind(this),
@@ -112,6 +111,14 @@ export class StandaloneConfigManagerComponent implements OnInit, OnDestroy {
   validateLHost(control: AbstractControl): {[key: string]: any} | null {
 
     return null;
+  }
+
+  async rmSelectedConfig() {
+    let deleted = await this._clientService.rmConfig(this.selectedConfig.clientConfig);
+    if (deleted) {
+      this.selectedConfig = null;
+      this.fetchConfigs();
+    }
   }
 
 }
