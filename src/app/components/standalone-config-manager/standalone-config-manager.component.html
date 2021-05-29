@@ -35,28 +35,44 @@
     </div>
 
     <div *ngIf="selectedConfig" class="selection">
-      <form [formGroup]="selectedConfigForm" style="width: 100%">
-        <ng-template matStepLabel>Connection Options</ng-template>
-        <p>
-          <mat-form-field style="width: 100%">
-            <input matInput [formControl]="selectedConfigForm.controls['lhost']" i18n-placeholder placeholder="Host">
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field style="width: 100%">
-            <input matInput type="number" [formControl]="selectedConfigForm.controls['lport']" i18n-placeholder
-              placeholder="Listen Port">
-            <mat-error *ngIf="selectedConfigForm.controls['lport'].hasError('outOfRangeError')" i18n>
-              Invalid port number
-            </mat-error>
-          </mat-form-field>
-        </p>
 
-        <button mat-raised-button style="width: 100%" color="primary" [disabled]="!selectedConfigForm.valid" (click)="saveSelectedConfig()">
-          <i class="fas fa-fw fa-save"></i>
-          <ng-container i18n>Save</ng-container>
-        </button>
-      </form>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title class="monospace">
+            <i class="fas fa-fw fa-user-alt"></i>
+            {{ this.selectedConfig.clientConfig.operator }}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form [formGroup]="selectedConfigForm">    
+            <p>
+              <mat-form-field>
+                <input matInput [formControl]="selectedConfigForm.controls['lhost']" i18n-placeholder placeholder="Host">
+              </mat-form-field>
+            </p>
+            <p>
+              <mat-form-field>
+                <input matInput type="number" [formControl]="selectedConfigForm.controls['lport']" i18n-placeholder
+                  placeholder="Listen Port">
+                <mat-error *ngIf="selectedConfigForm.controls['lport'].hasError('outOfRangeError')" i18n>
+                  Invalid port number
+                </mat-error>
+              </mat-form-field>
+            </p>
+          </form>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" [disabled]="!selectedConfigForm.valid" (click)="saveSelectedConfig()">
+            <i class="fas fa-fw fa-save"></i>
+            <ng-container i18n>Save</ng-container>
+          </button>
+  
+          <button style="float: right;" mat-raised-button color="warn" (click)="rmSelectedConfig()">
+            <i class="fas fa-fw fa-book-dead"></i>
+            <ng-container i18n>Delete</ng-container>
+          </button>
+        </mat-card-actions>
+      </mat-card>
 
     </div>
 

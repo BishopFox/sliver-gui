@@ -15,6 +15,7 @@
 
 
 import { SliverClientConfig } from 'sliver-script';
+import { dialog } from 'electron';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as uuid from 'uuid';
@@ -173,6 +174,7 @@ export class ConfigHandlers {
     "additionalProperties": false,
   })
   async config_rm(ipc: IPCHandlers, req: any): Promise<string> {
+    let deleted = false;
     try {
       // Filter anything that isn't a file
       const configDir = await fs.promises.readdir(CONFIG_DIR);
@@ -190,13 +192,22 @@ export class ConfigHandlers {
         const data = await fs.promises.readFile(configPath);
         const conf: SliverClientConfig = JSON.parse(data.toString());
         if (conf.lhost === req.lhost && conf.lport === req.lport && conf.private_key === req.private_key) {
-          fs.unlink(configPath, () => logger.info(`Removed config ${configPath}`));
+          const confirm = await dialog.showMessageBox({
+            buttons: ["Delete", "Cancel"],
+            message: `Delete config for ${conf.operator}@${conf.lhost}:${conf.lport}?`
+          });
+          if (confirm.response === 0) {
+            fs.unlink(configPath, () => logger.info(`Removed config ${configPath}`));
+            deleted = true; // Deleted at least one config
+          } else {
+            logger.info('User canceled config delete operation');
+          }
         }
       }));
     } catch (err) {
       logger.error(err);
     }
-    return ipc.dispatch('config_list', null);
+    return JSON.stringify({success: deleted});
   }
 
 }

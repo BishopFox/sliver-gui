@@ -177,8 +177,9 @@ export class ClientService {
     return this._ipc.request('config_add', JSON.stringify({ configs: configs })); 
   }
 
-  async rmConfig(config: sliver.SliverClientConfig): Promise<string> {
-    return this._ipc.request('config_rm', JSON.stringify(config));
+  async rmConfig(config: sliver.SliverClientConfig): Promise<boolean> {
+    let deleted = await this._ipc.request('config_rm', JSON.stringify(config));
+    return JSON.parse(deleted)?.success ? true : false;
   }
 
   async saveConfig(config: SliverConfig): Promise<void> {
