@@ -37,13 +37,13 @@ export class ImplantConfigComponent implements OnInit {
 
   getFormat(): string {
     switch (this.implantConfig.getFormat()) {
-      case clientpb.ImplantConfig.OutputFormat.EXECUTABLE:
+      case clientpb.OutputFormat.EXECUTABLE:
         return "Executable";
-      case clientpb.ImplantConfig.OutputFormat.SERVICE:
+      case clientpb.OutputFormat.SERVICE:
         return "Service";
-      case clientpb.ImplantConfig.OutputFormat.SHARED_LIB:
+      case clientpb.OutputFormat.SHARED_LIB:
         return "Shared Library";
-      case clientpb.ImplantConfig.OutputFormat.SHELLCODE:
+      case clientpb.OutputFormat.SHELLCODE:
         return "Shellcode";
       default:
         return "Unknown";

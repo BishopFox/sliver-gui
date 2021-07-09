@@ -71,7 +71,7 @@ export async function initMenu(menuEvents: Subject<MenuEvent>, updateCallback: C
       label: 'View',
       submenu: [
         {
-          label: 'Screenshot',
+          label: 'Screenshot GUI',
           accelerator: 'CmdOrCtrl+s',
           click: () => { 
             menuEvents.next({ button: 'screenshot' });
@@ -126,6 +126,12 @@ export async function initMenu(menuEvents: Subject<MenuEvent>, updateCallback: C
     {
       role: 'help',
       submenu: [
+        {
+          label: 'Sliver Server Setup',
+          click: () => {
+            shell.openExternal('https://github.com/BishopFox/sliver/wiki');
+          }
+        },
         {
           label: 'Sliver Wiki',
           click: () => {

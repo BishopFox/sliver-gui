@@ -367,7 +367,7 @@ export class RPCHandlers {
       if (!assembly) {
         return Promise.reject('Invalid library file');
       }
-      const executed = await session.executeAssembly(assembly, req.args, req.process, req.amsi, req.timeout);
+      const executed = await session.executeAssembly(assembly, req.args, req.process, req.timeout);
       return Base64.fromUint8Array(executed.serializeBinary());
     }
 
