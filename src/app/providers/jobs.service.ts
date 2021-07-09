@@ -87,20 +87,21 @@ export class JobsService {
     }));
   }
 
-  async startMTLSListener(host: string, port: number): Promise<clientpb.Job> {
+  async startMTLSListener(host: string, port: number, persistent = false): Promise<clientpb.Job> {
     console.log(`Starting mTLS listener on port ${port}`);
-    if (port < 1 || 65535 <= port) {
+    if (this.isValidPort(port)) {
       return Promise.reject('Invalid port number');
     }
     let job: string = await this._ipc.request('rpc_startMTLSListener', JSON.stringify({
       host: host,
-      port: port
+      port: port,
+      persistent: persistent,
     }));
     return clientpb.Job.deserializeBinary(Base64.toUint8Array(job));
   }
 
-  async startHTTPListener(domain: string, website: string, host: string, port: number): Promise<clientpb.Job> {
-    if (port < 1 || 65535 <= port) {
+  async startHTTPListener(domain: string, website: string, host: string, port: number, persistent = false): Promise<clientpb.Job> {
+    if (this.isValidPort(port)) {
       return Promise.reject('Invalid port number');
     }
     let job = await this._ipc.request('rpc_startHTTPListener', JSON.stringify({
@@ -108,12 +109,15 @@ export class JobsService {
       port: port,
       domain: domain,
       website: website,
+      persistent: persistent,
     }));
     return clientpb.Job.deserializeBinary(Base64.toUint8Array(job));
   }
 
-  async startHTTPSListener(domain: string, website: string,  acme: boolean, cert: string, key: string, host: string, port: number): Promise<clientpb.Job> {
-    if (port < 1 || 65535 <= port) {
+  async startHTTPSListener(domain: string, website: string,  acme: boolean, cert: string, key: string, 
+                            host: string, port: number, persistent = false): Promise<clientpb.Job>
+  {
+    if (this.isValidPort(port)) {
       return Promise.reject('Invalid port number');
     }
     let job = await this._ipc.request('rpc_startHTTPSListener', JSON.stringify({
@@ -124,12 +128,13 @@ export class JobsService {
       acme: acme,
       cert: cert,
       key: key,
+      persistent: persistent,
     }));
     return clientpb.Job.deserializeBinary(Base64.toUint8Array(job));
   }
 
-  async startDNSListener(domains: string[], enableCanaries: boolean, host: string, port: number): Promise<clientpb.Job> {
-    if (port < 1 || 65535 <= port) {
+  async startDNSListener(domains: string[], enableCanaries: boolean, host: string, port: number, persistent = false): Promise<clientpb.Job> {
+    if (!this.isValidPort(port)) {
       return Promise.reject('Invalid port number');
     }
     let job = await this._ipc.request('rpc_startDNSListener', JSON.stringify({
@@ -137,8 +142,35 @@ export class JobsService {
       port: port,
       domains: domains,
       canaries: enableCanaries,
+      persistent: persistent,
     }));
     return clientpb.Job.deserializeBinary(Base64.toUint8Array(job));
+  }
+
+  async startWGListener(port: number, nport: number, keyPort: number, persistent = false): Promise<clientpb.Job> {
+    if (!this.isValidPort(port)) {
+      return Promise.reject('Invalid port number');
+    }
+    if (!this.isValidPort(nport)) {
+      return Promise.reject('Invalid nport number');
+    }
+    if (!this.isValidPort(keyPort)) {
+      return Promise.reject('Invalid key port number');
+    }
+    let job = await this._ipc.request('rpc_startWGListener', JSON.stringify({
+      port: port,
+      nport: nport,
+      key_port: keyPort,
+      persistent: persistent,
+    }));
+    return clientpb.Job.deserializeBinary(Base64.toUint8Array(job));
+  }
+
+  private isValidPort(port: number): boolean {
+    if (port < 1 || 65535 <= port) {
+      return false;
+    }
+    return true;
   }
 
 }

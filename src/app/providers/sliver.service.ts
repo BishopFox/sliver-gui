@@ -110,7 +110,110 @@ export class SliverService {
     return commonpb.File.deserializeBinary(Base64.toUint8Array(regenerated));
   }
 
-  // Session Interaction
+  async compilerInfo(): Promise<clientpb.Compiler> {
+    const compiler: string = await this._ipc.request('rpc_compilerInfo');
+    return clientpb.Compiler.deserializeBinary(Base64.toUint8Array(compiler));
+  }
+
+  // --- Loot ---
+  async lootAddTextFile(name: string, fileName: string, data: string, isCredential = false): Promise<clientpb.Loot> {
+    let lootType: number = clientpb.LootType.LOOT_FILE;
+    const file = new commonpb.File();
+    file.setName(fileName);
+    file.setData(data);
+    let credential = null;
+    let credentialType = null;
+    if (isCredential) {
+      lootType = clientpb.LootType.LOOT_CREDENTIAL;
+      credentialType = clientpb.CredentialType.FILE;
+    }
+    return this.lootAdd(lootType, name, file, clientpb.FileType.TEXT, credential, credentialType);
+  }
+
+  async lootAddBinaryFile(name: string, fileName: string, data: Uint8Array, isCredential = false): Promise<clientpb.Loot> {
+    let lootType: number = clientpb.LootType.LOOT_FILE;
+    const file = new commonpb.File();
+    file.setName(fileName);
+    file.setData(data);
+    let credential = null;
+    let credentialType = null;
+    if (isCredential) {
+      lootType = clientpb.LootType.LOOT_CREDENTIAL;
+      credentialType = clientpb.CredentialType.FILE;
+    }
+    return this.lootAdd(lootType, name, file, clientpb.FileType.BINARY, credential, credentialType);
+  }
+
+  async lootAddUserPasswordCredential(name: string, user: string, password: string): Promise<clientpb.Loot> {
+    const lootType: number = clientpb.LootType.LOOT_CREDENTIAL;
+    const credential = new clientpb.Credential();
+    credential.setUser(user);
+    credential.setPassword(password);
+    const credentialType = clientpb.CredentialType.USER_PASSWORD;
+    return this.lootAdd(lootType, name, null, null, credential, credentialType);
+  }
+
+  async lootAddAPIKeyCredential(name: string, apiKey: string): Promise<clientpb.Loot> {
+    const lootType: number = clientpb.LootType.LOOT_CREDENTIAL;
+    const credential = new clientpb.Credential();
+    credential.setApikey(apiKey);
+    const credentialType = clientpb.CredentialType.API_KEY;
+    return this.lootAdd(lootType, name, null, null, credential, credentialType);
+  }
+
+  // lootAdd - This is the low level API, you may want to call the APIs above instead
+  async lootAdd(lootType: number, name: string, 
+                file: commonpb.File|null, fileType: number|null,
+                credential: clientpb.Credential|null, credentialType: number|null): Promise<clientpb.Loot> 
+  {
+    const loot = await this._ipc.request('rpc_lootAdd', JSON.stringify({
+      loot_type: lootType,
+      name: name,
+      file: file ? Base64.fromUint8Array(file.serializeBinary()) : null,
+      file_type: fileType,
+      credential: credential ? Base64.fromUint8Array(credential.serializeBinary()) : null,
+      credential_type: credentialType,
+    }));
+    return clientpb.Loot.deserializeBinary(Base64.toUint8Array(loot));
+  }
+
+  async lootRemove(lootID: string): Promise<void> {
+    const loot = await this._ipc.request('rpc_lootRm', JSON.stringify({
+      loot_id: lootID,
+    }));
+  }
+
+  async lootGetContent(): Promise<clientpb.Loot> {
+    const loot = await this._ipc.request('rpc_lootGetContent');
+    return clientpb.Loot.deserializeBinary(Base64.toUint8Array(loot));
+  }
+
+  async lootAll(): Promise<clientpb.Loot[]> {
+    const allLoot = await this._ipc.request('rpc_lootAll');
+    return allLoot.map(loot => clientpb.Loot.deserializeBinary(Base64.toUint8Array(loot)));
+  }
+
+  async lootAllOf(lootType: string): Promise<clientpb.Loot[]> {
+    let pbLootType = this.strToLootType(lootType);
+    const allLoot = await this._ipc.request('rpc_lootAllOf', JSON.stringify({'loot_type': pbLootType}));
+    return allLoot.map(loot => clientpb.Loot.deserializeBinary(Base64.toUint8Array(loot)));
+  }
+
+  private strToLootType(lootType: string) {
+    switch (lootType.toLowerCase()) {
+      case 'file':
+      case 'files':
+        return clientpb.LootType.LOOT_FILE;
+      case 'credential':
+      case 'credentials':
+        return clientpb.LootType.LOOT_CREDENTIAL;
+      default:
+        throw new Error(`Unknown loot type ${lootType}`)
+    }
+  }
+
+  // --- Session Interaction ---
+
   async ps(sessionId: number): Promise<commonpb.Process[]> {
     const ps: string[] = await this._ipc.request('rpc_ps', JSON.stringify({ sessionId: sessionId }));
     return ps.map(p => commonpb.Process.deserializeBinary(Base64.toUint8Array(p)));
