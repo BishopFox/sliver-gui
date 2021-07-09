@@ -3,7 +3,7 @@
   <mat-toolbar style="background: transparent;" fxLayout="row" fxLayoutAlign="start center">
 
     <h2 *ngIf="title">
-      <i class="fas fa-fw fa-project-diagram"></i>
+      <i class="fas fa-fw fa-folder"></i>
       <ng-container i18n>
         Files
       </ng-container>
@@ -25,6 +25,20 @@
           <ng-container i18n>Name</ng-container>
         </th>
         <td mat-cell *matCellDef="let loot"> {{loot.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="fileName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <ng-container i18n>File Name</ng-container>
+        </th>
+        <td mat-cell *matCellDef="let loot"> {{loot.fileName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="uuid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <ng-container i18n>UUID</ng-container>
+        </th>
+        <td mat-cell *matCellDef="let loot"> {{loot.uuid}} </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

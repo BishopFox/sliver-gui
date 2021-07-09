@@ -3,10 +3,17 @@
   <div>
     <mat-toolbar>
 
-      <button mat-raised-button class="toolbar-button" (click)="startListener()">
+      <button mat-raised-button class="toolbar-button" (click)="startC2Listener()">
         <i class="fas fa-fw fa-plus-square"></i>
         <ng-container i18n>
-          Start Listener
+          Start C2 Listener
+        </ng-container>
+      </button>
+
+      <button mat-raised-button class="toolbar-button">
+        <i class="fas fa-fw fa-plus-square"></i>
+        <ng-container i18n>
+          Start Stage Listener
         </ng-container>
       </button>
 

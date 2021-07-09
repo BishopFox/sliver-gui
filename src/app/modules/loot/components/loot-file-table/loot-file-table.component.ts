@@ -24,6 +24,8 @@ import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 interface TableLootData {
   name: string;
+  fileName: string;
+  uuid: string;
 }
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {
@@ -37,10 +39,11 @@ function compare(a: number | string, b: number | string, isAsc: boolean) {
 })
 export class LootFileTableComponent implements OnInit {
 
-  @Input() loot: clientpb.Loot[];  
   @Input() title = true;
   @Input() displayedColumns: string[] = [
-    'name'
+    'name',
+    'fileName',
+    'uuid'
   ];
   
   subscription: Subscription;
@@ -71,6 +74,8 @@ export class LootFileTableComponent implements OnInit {
     for (let index = 0; index < loot.length; index++) {
       table.push({
         name: loot[index].getName(),
+        fileName: loot[index].getFile()?.getName(),
+        uuid: loot[index].getLootid(),
       });
     }
     return table.sort((a, b) => (a.name > b.name) ? 1 : -1);
@@ -81,7 +86,7 @@ export class LootFileTableComponent implements OnInit {
   }
 
   onRowSelection(row: any) {
-    this._router.navigate(['loot']);
+    this._router.navigate(['loot', row.uuid]);
   }
 
   // Because MatTableDataSource is absolute piece of shit
@@ -90,6 +95,8 @@ export class LootFileTableComponent implements OnInit {
       const isAsc = event.direction === 'asc';
       switch (event.active) {
         case 'name': return compare(a.name, b.name, isAsc);
+        case 'fileName': return compare(a.fileName, b.fileName, isAsc);
+        case 'uuid': return compare(a.uuid, b.uuid, isAsc);
         default: return 0;
       }
     });

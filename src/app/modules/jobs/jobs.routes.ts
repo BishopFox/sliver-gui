@@ -26,7 +26,7 @@ import { StartListenerComponent } from './components/start-listener/start-listen
 const routes: Routes = [
 
   { path: 'jobs', component: MainComponent, canActivate: [ActiveConfig] },
-  { path: 'jobs/new', component: StartListenerComponent, canActivate: [ActiveConfig] },
+  { path: 'jobs/start-c2-listener', component: StartListenerComponent, canActivate: [ActiveConfig] },
   { path: 'jobs/:job-id', component: JobComponent, canActivate: [ActiveConfig] },
   { path: 'jobs/websites/:name', component: WebsiteDetailsComponent, canActivate: [ActiveConfig] },
 
