@@ -93,7 +93,7 @@
     "rxjs": "^6.6.6",
     "sequelize": "^6.3.5",
     "shlex": "^2.0.2",
-    "sliver-script": "^1.0.38",
+    "sliver-script": "^1.0.39",
     "sprintf-js": "^1.0.3",
     "sqlite3": "^5.0.2",
     "uuid": "^8.3.1",

@@ -24,6 +24,11 @@ import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 interface TableLootData {
   name: string;
+  credentialType: number;
+  user: string;
+  password: string;
+  apiKey: string;
+  uuid: string;
 }
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {
@@ -37,10 +42,9 @@ function compare(a: number | string, b: number | string, isAsc: boolean) {
 })
 export class LootCredentialTableComponent implements OnInit {
 
-  @Input() loot: clientpb.Loot[];  
   @Input() title = true;
   @Input() displayedColumns: string[] = [
-    'name'
+    'name', 'credentialType', 'user', 'password', 'apiKey', 'uuid'
   ];
   
   subscription: Subscription;
@@ -51,9 +55,9 @@ export class LootCredentialTableComponent implements OnInit {
               private _sliverService: SliverService) { }
 
   ngOnInit(): void {
-    this.fetchFileLoot();
+    this.fetchCredentialLoot();
     this.subscription = this._eventsService.loot$.subscribe(() => {
-      this.fetchFileLoot();
+      this.fetchCredentialLoot();
     });
   }
 
@@ -61,7 +65,7 @@ export class LootCredentialTableComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
-  async fetchFileLoot(): Promise<void> {
+  async fetchCredentialLoot(): Promise<void> {
     const loot = await this._sliverService.lootAllOf('credentials');
     this.dataSrc = new MatTableDataSource(this.tableData(loot));
   }
@@ -71,9 +75,23 @@ export class LootCredentialTableComponent implements OnInit {
     for (let index = 0; index < loot.length; index++) {
       table.push({
         name: loot[index].getName(),
+        credentialType: loot[index].getCredentialtype(),
+        user: loot[index].getCredential()?.getUser(),
+        password: loot[index].getCredential()?.getPassword(),
+        apiKey: loot[index].getCredential()?.getApikey(),
+        uuid: loot[index].getLootid(),
       });
     }
     return table.sort((a, b) => (a.name > b.name) ? 1 : -1);
+  }
+
+  credentialTypeToStr(credentialType: number): string {
+    switch (credentialType) {
+      case clientpb.CredentialType.USER_PASSWORD:
+        return 'User/Password';
+      case clientpb.CredentialType.API_KEY:
+        return 'API Key';
+    }
   }
 
   applyFilter(filterValue: string) {
@@ -81,7 +99,7 @@ export class LootCredentialTableComponent implements OnInit {
   }
 
   onRowSelection(row: any) {
-    this._router.navigate(['loot']);
+    this._router.navigate(['loot', row.uuid]);
   }
 
   // Because MatTableDataSource is absolute piece of shit
@@ -90,6 +108,10 @@ export class LootCredentialTableComponent implements OnInit {
       const isAsc = event.direction === 'asc';
       switch (event.active) {
         case 'name': return compare(a.name, b.name, isAsc);
+        case 'user': return compare(a.user, b.user, isAsc);
+        case 'password': return compare(a.password, b.password, isAsc);
+        case 'apiKey': return compare(a.apiKey, b.apiKey, isAsc);
+        case 'uuid': return compare(a.uuid, b.uuid, isAsc);
         default: return 0;
       }
     });

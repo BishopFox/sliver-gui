@@ -36,8 +36,8 @@ export class MainComponent implements OnInit {
 
   }
 
-  startListener() {
-    this._router.navigate(['jobs', 'new']);
+  startC2Listener() {
+    this._router.navigate(['jobs', 'start-c2-listener']);
   }
 
   addWebsite() {
