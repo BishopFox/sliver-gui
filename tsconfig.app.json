@@ -1,0 +1,32 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "@app/*": ["./src/app/*"]
+      },
+      "outDir": "./dist/out-tsc",
+      "sourceMap": true,
+      "declaration": false,
+      "moduleResolution": "node",
+      "experimentalDecorators": true,
+      "target": "es2015",
+      "module": "es2015",
+      "typeRoots": [
+        "node_modules/@types"
+      ],
+      "lib": [
+        "es2017",
+        "es2016",
+        "es2015",
+        "dom"
+      ]
+    },
+    "include": [
+      "src/**/*",
+    ],
+    "exclude": [
+      "node_modules"
+    ]
+  }
+  

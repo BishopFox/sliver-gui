@@ -125,6 +125,12 @@ export class RPCHandlers {
     }
   
     @isConnected()
+    async rpc_compilerInfo(ipc: IPCHandlers, _: any): Promise<string> {
+      const compilerInfo = await ipc.client.compilerInfo();
+      return Base64.fromUint8Array(compilerInfo.serializeBinary());
+    }
+
+    @isConnected()
     @jsonSchema({
       "type": "object",
       "properties": {
@@ -611,6 +617,7 @@ export class RPCHandlers {
       "properties": {
         "host": { "type": "string" },
         "port": { "type": "number" },
+        "persistent": { "type": "boolean" },
       },
       "required": ["host", "port"],
       "additionalProperties": false,
@@ -628,6 +635,7 @@ export class RPCHandlers {
         "domain": { "type": "string" },
         "website": { "type": "string" },
         "port": { "type": "number" },
+        "persistent": { "type": "boolean" },
       },
       "required": ["host", "port"],
       "additionalProperties": false,
@@ -647,7 +655,8 @@ export class RPCHandlers {
         "acme": { "type": "boolean" },
         "port": { "type": "number" },
         "cert": { "type": "string" },
-        "key": { "type": "string" }
+        "key": { "type": "string" },
+        "persistent": { "type": "boolean" },
       },
       "required": ["host", "port"],
       "additionalProperties": false,
@@ -671,6 +680,7 @@ export class RPCHandlers {
         "canaries": { "type": "boolean" },
         "host": { "type": "string" },
         "port": { "type": "number" },
+        "persistent": { "type": "boolean" },
       },
       "required": ["host", "port"],
       "additionalProperties": false,
@@ -680,5 +690,29 @@ export class RPCHandlers {
       return Base64.fromUint8Array(job.serializeBinary());
     }
 
+    @isConnected()
+    @jsonSchema({
+      "type": "object",
+      "properties": {
+        "port": { "type": "number" },
+        "nport": { "type": "number" },
+        "key_port": { "type": "number" },
+        "persistent": { "type": "boolean" },
+      },
+      "required": ["port", "nport", "key_port"],
+      "additionalProperties": false,
+    })
+    async rpc_startWGListener(ipc: IPCHandlers, req: any): Promise<string> {
+      const job = await ipc.client.startWGListener(req.port, req.nport, req.key_port, req.persistent ? true:false);
+      return Base64.fromUint8Array(job.serializeBinary());
+    }
+
+    // --- Loot ---
+
+    @isConnected()
+    async rpc_lootAll(ipc: IPCHandlers, _: any): Promise<string[]> {
+      const allLoot = await ipc.client.lootAll();
+      return allLoot.map(loot => Base64.fromUint8Array(loot.serializeBinary()));
+    }
 
 }
