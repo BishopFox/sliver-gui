@@ -52,6 +52,8 @@ import { ScriptingModule } from './modules/scripting/scripting.module';
 import { ScriptingRoutes } from './modules/scripting/scripting.routes';
 import { NgTerminalModule } from './modules/terminal/ng-terminal.module';
 import { SharedModule } from './shared/shared.module';
+import { LootRoutes } from './modules/loot/loot.routes';
+import { LootModule } from './modules/loot/loot.module';
 
 
 @NgModule({
@@ -86,12 +88,14 @@ import { SharedModule } from './shared/shared.module';
     SessionsRoutes,
     JobsRoutes,
     ScriptingRoutes,
+    LootRoutes,
 
     // Modules
     GenerateModule,
     SessionsModule,
     JobsModule,
     ScriptingModule,
+    LootModule,
     SharedModule,
     NgTerminalModule
 

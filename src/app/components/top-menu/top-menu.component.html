@@ -42,6 +42,13 @@
       </button>
     </mat-menu>
 
+    <button style="-webkit-app-region: no-drag" mat-button [routerLink]="['/jobs']">
+      <i class="fas fa-fw fa-flask"></i>
+      <ng-container i18n>
+        Jobs
+      </ng-container>
+    </button>
+
     <button style="-webkit-app-region: no-drag" mat-button [routerLink]="['/sessions']">
       <i class="fas fa-fw fa-project-diagram"></i>
       <ng-container i18n>
@@ -49,10 +56,10 @@
       </ng-container>
     </button>
 
-    <button style="-webkit-app-region: no-drag" mat-button [routerLink]="['/jobs']">
-      <i class="fas fa-fw fa-flask"></i>
+    <button style="-webkit-app-region: no-drag" mat-button [routerLink]="['/loot']">
+      <i class="fas fa-fw fa-dollar-sign"></i>
       <ng-container i18n>
-        Jobs
+        Loot
       </ng-container>
     </button>
 

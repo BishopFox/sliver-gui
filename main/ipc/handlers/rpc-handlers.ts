@@ -715,4 +715,18 @@ export class RPCHandlers {
       return allLoot.map(loot => Base64.fromUint8Array(loot.serializeBinary()));
     }
 
+    @isConnected()
+    @jsonSchema({
+      "type": "object",
+      "properties": {
+        "loot_type": { "type": "string" },
+      },
+      "required": ["loot_type"],
+      "additionalProperties": false,
+    })
+    async rpc_lootAllOf(ipc: IPCHandlers, req: any): Promise<string[]> {
+      const allLoot = await ipc.client.lootAllOf(req.loot_type);
+      return allLoot.map(loot => Base64.fromUint8Array(loot.serializeBinary()));
+    }
+
 }
