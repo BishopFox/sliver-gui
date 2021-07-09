@@ -25,7 +25,6 @@ import { Base64 } from 'js-base64';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb';
 import * as commonpb from 'sliver-script/lib/pb/commonpb/common_pb';
-import { profile } from 'console';
 
 
 @Injectable({
@@ -178,7 +177,7 @@ export class SliverService {
   }
 
   async lootRemove(lootID: string): Promise<void> {
-    const loot = await this._ipc.request('rpc_lootRm', JSON.stringify({
+    await this._ipc.request('rpc_lootRm', JSON.stringify({
       loot_id: lootID,
     }));
   }
@@ -194,22 +193,8 @@ export class SliverService {
   }
 
   async lootAllOf(lootType: string): Promise<clientpb.Loot[]> {
-    let pbLootType = this.strToLootType(lootType);
-    const allLoot = await this._ipc.request('rpc_lootAllOf', JSON.stringify({'loot_type': pbLootType}));
+    const allLoot = await this._ipc.request('rpc_lootAllOf', JSON.stringify({'loot_type': lootType}));
     return allLoot.map(loot => clientpb.Loot.deserializeBinary(Base64.toUint8Array(loot)));
-  }
-
-  private strToLootType(lootType: string) {
-    switch (lootType.toLowerCase()) {
-      case 'file':
-      case 'files':
-        return clientpb.LootType.LOOT_FILE;
-      case 'credential':
-      case 'credentials':
-        return clientpb.LootType.LOOT_CREDENTIAL;
-      default:
-        throw new Error(`Unknown loot type ${lootType}`)
-    }
   }
 
   // --- Session Interaction ---

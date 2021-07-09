@@ -1,0 +1,14 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 7fr 1fr 7fr 1fr;
+    grid-template-rows: minmax(50px, auto);
+    margin-top: 10px;
+}
+
+.files {
+    grid-column: 2 / 3;
+}
+
+.credentials {
+    grid-column: 4 / 5;
+}

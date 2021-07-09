@@ -64,6 +64,7 @@ export class EventsService {
   builds$ = new Subject<clientpb.Event>();
   profiles$ = new Subject<clientpb.Event>();
   websites$ = new Subject<clientpb.Event>();
+  loot$ = new Subject<clientpb.Event>();
   notifications$ = new Subject<Notification>();
   menu$ = new Subject<MenuEvent>();
   download$ = new Subject<DownloadEvent>();
@@ -120,6 +121,12 @@ export class EventsService {
           // Websites
           case Events.Website:
             this.websites$.next(event);
+            break;
+          
+          // Loot
+          case Events.LootRemovedEvent:
+          case Events.LootAddedEvent:
+            this.loot$.next(event);
             break;
 
           default:
