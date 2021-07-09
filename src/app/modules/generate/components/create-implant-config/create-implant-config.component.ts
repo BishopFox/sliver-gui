@@ -95,13 +95,13 @@ export class CreateImplantConfigComponent implements OnInit, OnDestroy {
   getFormat(): any {
     switch (String(this.targetForm.controls['format'].value).toLowerCase()) {
       case 'exe':
-        return clientpb.ImplantConfig.OutputFormat.EXECUTABLE;
+        return clientpb.OutputFormat.EXECUTABLE;
       case 'shared':
-        return clientpb.ImplantConfig.OutputFormat.SHARED_LIB;
+        return clientpb.OutputFormat.SHARED_LIB;
       case 'shellcode':
-        return clientpb.ImplantConfig.OutputFormat.SHELLCODE;
+        return clientpb.OutputFormat.SHELLCODE;
       default:
-        return clientpb.ImplantConfig.OutputFormat.EXECUTABLE;
+        return clientpb.OutputFormat.EXECUTABLE;
     }
   }
 
