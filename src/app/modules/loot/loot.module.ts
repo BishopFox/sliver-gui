@@ -15,12 +15,14 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainComponent } from './components/main/main.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BaseMaterialModule } from '@app/base-material';
 import { SharedModule } from '@app/shared/shared.module';
+import { 
+  MainComponent, LootAddCredentialDialogComponent, LootAddFileDialogComponent,
+} from './components/main/main.component';
 import { LootFileTableComponent } from './components/loot-file-table/loot-file-table.component';
 import { LootCredentialTableComponent } from './components/loot-credential-table/loot-credential-table.component';
 
@@ -29,6 +31,8 @@ import { LootCredentialTableComponent } from './components/loot-credential-table
   declarations: [
     MainComponent,
     LootFileTableComponent,
+    LootAddCredentialDialogComponent,
+    LootAddFileDialogComponent,
     LootCredentialTableComponent
   ],
   imports: [

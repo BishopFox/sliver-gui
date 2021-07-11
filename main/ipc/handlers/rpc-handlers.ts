@@ -725,9 +725,7 @@ export class RPCHandlers {
       "additionalProperties": false,
     })
     async rpc_lootAllOf(ipc: IPCHandlers, req: any): Promise<string[]> {
-      console.log(`all of ${req.loot_type}`);
       const allLoot = await ipc.client.lootAllOf(req.loot_type);
-      console.log(allLoot);
       return allLoot.map(loot => Base64.fromUint8Array(loot.serializeBinary()));
     }
 
