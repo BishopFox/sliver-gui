@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>
+    <i class="fas fa-fw fa-folder"></i>
+    <ng-container i18n>
+      Add File
+    </ng-container>
+  </h1>
+  <div mat-dialog-content align="center">
+    <form [formGroup]="addFile" style="width: 100%;">
+      <p>
+        <mat-form-field appearance="outline" style="width: 80%;">
+          <mat-label>
+            <ng-container i18n>Name</ng-container>
+          </mat-label>
+          <input matInput [formControl]="addFile.controls['name']" placeholder="">
+        </mat-form-field>
+      </p>
+    </form>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-raised-button [disabled]="!addFile.valid" color="primary" (click)="complete()">
+      &nbsp;&nbsp;
+      <i class="fas fa-fw fa-plus"></i>
+      <ng-container i18n>
+        Add File
+      </ng-container>
+      &nbsp;&nbsp;
+    </button>
+    <button mat-button (click)="onNoClick()">
+      &nbsp;&nbsp;
+      <ng-container i18n>Cancel</ng-container>
+      &nbsp;&nbsp;
+    </button>
+  </div>

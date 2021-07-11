@@ -32,12 +32,14 @@ export class MainComponent implements OnInit {
               private _router: Router,
               private _jobsService: JobsService) { }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   startC2Listener() {
     this._router.navigate(['jobs', 'start-c2-listener']);
+  }
+
+  startStageListener() {
+    this._router.navigate([]);
   }
 
   addWebsite() {

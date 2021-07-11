@@ -1,11 +1,29 @@
-<div [@fadeInOut] class="grid-container">
-
-  <div class="files">
-    <loot-file-table [title]="true" [displayedColumns]="['name', 'fileName']"></loot-file-table>
+<div [@fadeInOut]>
+  <div>
+    <mat-toolbar>
+      <button mat-raised-button class="toolbar-button" (click)="addFile()">
+        <i class="fas fa-fw fa-plus-square"></i>
+        <ng-container i18n>
+          Add File
+        </ng-container>
+      </button>
+      <button mat-raised-button class="toolbar-button" (click)="addCredential()" style="margin-left: 16px;">
+        <i class="fas fa-fw fa-plus-square"></i>
+        <ng-container i18n>
+          Add Credential
+        </ng-container>
+      </button>
+    </mat-toolbar>
   </div>
 
-  <div class="credentials">
-    <loot-credential-table [title]="true" [displayedColumns]="['name', 'user', 'password', 'apiKey']"></loot-credential-table>
+  <div class="grid-container">
+    <div class="files">
+      <loot-file-table [title]="true" [displayedColumns]="['name', 'fileName']"></loot-file-table>
+    </div>
+    <div class="credentials">
+      <loot-credential-table [title]="true" [displayedColumns]="['name', 'user', 'password', 'apiKey']">
+      </loot-credential-table>
+    </div>
   </div>
 
 </div>
