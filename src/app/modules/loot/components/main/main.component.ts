@@ -14,13 +14,12 @@
 */
 
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ClientService, ReadFiles } from '@app/providers/client.service';
 import { SliverService } from '@app/providers/sliver.service';
 import { FadeInOut } from '@app/shared/animations';
 import { take } from 'rxjs/operators';
-import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 
 @Component({
@@ -42,7 +41,11 @@ export class MainComponent implements OnInit {
   async addFile() {
     const dialogRef = this.dialog.open(LootAddFileDialogComponent);
     dialogRef.afterClosed().pipe(take(1)).subscribe(async result => {
+      if (!result) {
+        return;
+      }
       console.log(result);
+
     });
   }
 
@@ -52,7 +55,6 @@ export class MainComponent implements OnInit {
       if (!result) {
         return;
       }
-      console.log(result);
       switch(result.credentialType) {
         case this.USER_PASSWORD:
           this._sliverService.lootAddUserPasswordCredential(result.name, result.user, result.password);

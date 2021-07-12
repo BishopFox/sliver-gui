@@ -41,6 +41,17 @@
         <td mat-cell *matCellDef="let loot"> {{loot.uuid}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="options">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let loot">
+          <button style="float: right;" mat-button color="warn" (click)="removeLoot($event, loot)">
+            <ng-container i18n>
+              Delete
+            </ng-container>
+          </button>
+        </td>
+      </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row (click)="onRowSelection(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>

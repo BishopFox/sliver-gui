@@ -768,9 +768,11 @@ export class RPCHandlers {
         switch (req.file_type) {
           case "text":
             loot.setFiletype(clientpb.FileType.TEXT);
+            break;
           case "bin":
           case "binary":
             loot.setFiletype(clientpb.FileType.BINARY);
+            break;
         }
       }
 
@@ -780,8 +782,13 @@ export class RPCHandlers {
         switch (req.credential_type) {
           case "user-password":
             loot.setCredentialtype(clientpb.CredentialType.USER_PASSWORD);
+            break;
           case "api-key":
             loot.setCredentialtype(clientpb.CredentialType.API_KEY);
+            break;
+          case "file":
+            loot.setCredentialtype(clientpb.CredentialType.FILE);
+            break;
         }
       }
 

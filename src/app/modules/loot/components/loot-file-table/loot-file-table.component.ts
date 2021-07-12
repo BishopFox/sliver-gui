@@ -41,11 +41,9 @@ export class LootFileTableComponent implements OnInit {
 
   @Input() title = true;
   @Input() displayedColumns: string[] = [
-    'name',
-    'fileName',
-    'uuid'
+    'name', 'fileName', 'uuid', 'options'
   ];
-  
+
   subscription: Subscription;
   dataSrc: MatTableDataSource<TableLootData>;
   
@@ -101,4 +99,9 @@ export class LootFileTableComponent implements OnInit {
       }
     });
   }
+
+  removeLoot(event, loot) {
+    event.stopPropagation();
+  }
+
 }
