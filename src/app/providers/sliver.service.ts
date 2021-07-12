@@ -32,6 +32,15 @@ import * as commonpb from 'sliver-script/lib/pb/commonpb/common_pb';
 })
 export class SliverService {
 
+  // This is kinda gross but we keep JSON/human friendly values
+  // until the native process calls into gRPC.
+  readonly CREDENTIAL = 'credential';
+  readonly FILE = 'file';
+  readonly BIN = 'binary';
+  readonly TEXT = 'text';
+  readonly USER_PASSWORD = 'user-password';
+  readonly API_KEY = 'api-key';
+
   constructor(private _ipc: IPCService) { }
 
   async sessions(): Promise<clientpb.Session[]> {
@@ -116,54 +125,54 @@ export class SliverService {
 
   // --- Loot ---
   async lootAddTextFile(name: string, fileName: string, data: string, isCredential = false): Promise<clientpb.Loot> {
-    let lootType: number = clientpb.LootType.LOOT_FILE;
+    let lootType = this.FILE;
     const file = new commonpb.File();
     file.setName(fileName);
     file.setData(data);
     let credential = null;
     let credentialType = null;
     if (isCredential) {
-      lootType = clientpb.LootType.LOOT_CREDENTIAL;
+      lootType = this.CREDENTIAL;
       credentialType = clientpb.CredentialType.FILE;
     }
-    return this.lootAdd(lootType, name, file, clientpb.FileType.TEXT, credential, credentialType);
+    return this.lootAdd(lootType, name, file, this.TEXT, credential, credentialType);
   }
 
   async lootAddBinaryFile(name: string, fileName: string, data: Uint8Array, isCredential = false): Promise<clientpb.Loot> {
-    let lootType: number = clientpb.LootType.LOOT_FILE;
+    let lootType = this.FILE;
     const file = new commonpb.File();
     file.setName(fileName);
     file.setData(data);
     let credential = null;
     let credentialType = null;
     if (isCredential) {
-      lootType = clientpb.LootType.LOOT_CREDENTIAL;
+      lootType = this.CREDENTIAL;
       credentialType = clientpb.CredentialType.FILE;
     }
-    return this.lootAdd(lootType, name, file, clientpb.FileType.BINARY, credential, credentialType);
+    return this.lootAdd(lootType, name, file, this.BIN, credential, credentialType);
   }
 
   async lootAddUserPasswordCredential(name: string, user: string, password: string): Promise<clientpb.Loot> {
-    const lootType: number = clientpb.LootType.LOOT_CREDENTIAL;
+    const lootType = this.CREDENTIAL;
     const credential = new clientpb.Credential();
     credential.setUser(user);
     credential.setPassword(password);
-    const credentialType = clientpb.CredentialType.USER_PASSWORD;
+    const credentialType = this.USER_PASSWORD;
     return this.lootAdd(lootType, name, null, null, credential, credentialType);
   }
 
   async lootAddAPIKeyCredential(name: string, apiKey: string): Promise<clientpb.Loot> {
-    const lootType: number = clientpb.LootType.LOOT_CREDENTIAL;
+    const lootType = this.CREDENTIAL;
     const credential = new clientpb.Credential();
     credential.setApikey(apiKey);
-    const credentialType = clientpb.CredentialType.API_KEY;
+    const credentialType = this.API_KEY;
     return this.lootAdd(lootType, name, null, null, credential, credentialType);
   }
 
   // lootAdd - This is the low level API, you may want to call the APIs above instead
-  async lootAdd(lootType: number, name: string, 
-                file: commonpb.File|null, fileType: number|null,
-                credential: clientpb.Credential|null, credentialType: number|null): Promise<clientpb.Loot> 
+  async lootAdd(lootType: string, name: string, 
+                file: commonpb.File|null, fileType: string|null,
+                credential: clientpb.Credential|null, credentialType: string|null): Promise<clientpb.Loot> 
   {
     const loot = await this._ipc.request('rpc_lootAdd', JSON.stringify({
       loot_type: lootType,
