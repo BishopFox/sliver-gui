@@ -26,6 +26,7 @@ import { walk } from '../../ipc/util';
 import { logger } from '../../logs';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 import * as sliverpb from 'sliver-script/lib/pb/sliverpb/sliver_pb';
+import * as commonpb from 'sliver-script/lib/pb/commonpb/common_pb';
 
 
 const MINUTE = 60;
@@ -727,6 +728,65 @@ export class RPCHandlers {
     async rpc_lootAllOf(ipc: IPCHandlers, req: any): Promise<string[]> {
       const allLoot = await ipc.client.lootAllOf(req.loot_type);
       return allLoot.map(loot => Base64.fromUint8Array(loot.serializeBinary()));
+    }
+
+    @isConnected()
+    @jsonSchema({
+      "type": "object",
+      "properties": {
+        "loot_type": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "file": { "type": ["string", "null"] },
+        "file_type": { "type": ["string", "null"] },
+        "credential": { "type": ["string", "null"] },
+        "credential_type": { "type": ["string", "null"] }
+      },
+      "required": ["loot_type", "name"],
+      "additionalProperties": false,
+    })
+    async rpc_lootAdd(ipc: IPCHandlers, req: any): Promise<string> {
+      let loot = new clientpb.Loot();
+      loot.setName(req.name);
+
+      switch (req.loot_type) {
+        case "file":
+        case "files":
+          loot.setType(clientpb.LootType.LOOT_FILE);
+          break;
+        case "cred":
+        case "credential":
+        case "credentials":
+          loot.setType(clientpb.LootType.LOOT_CREDENTIAL);
+          break;
+        default:
+          throw new Error(`Unknown loot type: ${req.loot_type}`);
+      }
+
+      if (req.file) {
+        const file = commonpb.File.deserializeBinary(req.file);
+        loot.setFile(file);
+        switch (req.file_type) {
+          case "text":
+            loot.setFiletype(clientpb.FileType.TEXT);
+          case "bin":
+          case "binary":
+            loot.setFiletype(clientpb.FileType.BINARY);
+        }
+      }
+
+      if (req.credential) {
+        const cred = clientpb.Credential.deserializeBinary(req.credential);
+        loot.setCredential(cred);
+        switch (req.credential_type) {
+          case "user-password":
+            loot.setCredentialtype(clientpb.CredentialType.USER_PASSWORD);
+          case "api-key":
+            loot.setCredentialtype(clientpb.CredentialType.API_KEY);
+        }
+      }
+
+      loot = await ipc.client.lootAdd(loot);
+      return Base64.fromUint8Array(loot.serializeBinary());
     }
 
 }

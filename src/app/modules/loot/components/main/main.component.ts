@@ -20,6 +20,7 @@ import { ClientService, ReadFiles } from '@app/providers/client.service';
 import { SliverService } from '@app/providers/sliver.service';
 import { FadeInOut } from '@app/shared/animations';
 import { take } from 'rxjs/operators';
+import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
 
 @Component({
@@ -30,9 +31,11 @@ import { take } from 'rxjs/operators';
 })
 export class MainComponent implements OnInit {
 
+  readonly USER_PASSWORD = 'user-password';
+  readonly API_KEY = 'api-key';
+
   constructor(public dialog: MatDialog,
-              private _sliverService: SliverService,
-              private _clientService: ClientService) { }
+              private _sliverService: SliverService) { }
 
   ngOnInit(): void { }
 
@@ -46,7 +49,16 @@ export class MainComponent implements OnInit {
   async addCredential() {
     const dialogRef = this.dialog.open(LootAddCredentialDialogComponent);
     dialogRef.afterClosed().pipe(take(1)).subscribe(async result => {
+      if (!result) {
+        return;
+      }
       console.log(result);
+      switch(result.credentialType) {
+        case this.USER_PASSWORD:
+          this._sliverService.lootAddUserPasswordCredential(result.name, result.user, result.password);
+        case this.API_KEY:
+          this._sliverService.lootAddAPIKeyCredential(result.name, result.apiKey);
+      } 
     });
   }
 
@@ -107,10 +119,6 @@ export class LootAddCredentialDialogComponent implements OnInit {
   
   addCredential: FormGroup;
   credentialType: string = this.USER_PASSWORD;
-  user: string = '';
-  password: string = '';
-  apiKey: string = '';
-
   constructor(public dialogRef: MatDialogRef<LootAddCredentialDialogComponent>,
               private _fb: FormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -119,7 +127,10 @@ export class LootAddCredentialDialogComponent implements OnInit {
     this.addCredential = this._fb.group({
       name: ['', Validators.compose([
         Validators.required,
-      ])]
+      ])],
+      user: [],
+      password: [],
+      apiKey: [],
     });
   }
 
@@ -128,7 +139,13 @@ export class LootAddCredentialDialogComponent implements OnInit {
   }
 
   complete() {
-    this.dialogRef.close(this.addCredential.value);
+    this.dialogRef.close({
+      credentialType: this.credentialType,
+      name: this.addCredential.value.name,
+      user: this.addCredential.value.user,
+      password: this.addCredential.value.password,
+      apiKey: this.addCredential.value.apiKey,
+    });
   }
 
 }
