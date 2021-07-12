@@ -44,7 +44,7 @@ export class LootCredentialTableComponent implements OnInit {
 
   @Input() title = true;
   @Input() displayedColumns: string[] = [
-    'name', 'credentialType', 'user', 'password', 'apiKey', 'uuid'
+    'name', 'credentialType', 'user', 'password', 'apiKey', 'uuid', 'options'
   ];
   
   subscription: Subscription;
@@ -116,4 +116,9 @@ export class LootCredentialTableComponent implements OnInit {
       }
     });
   }
+
+  removeLoot(event, loot) {
+    event.stopPropagation();
+  }
+
 }

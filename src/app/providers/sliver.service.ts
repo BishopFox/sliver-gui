@@ -124,16 +124,17 @@ export class SliverService {
   }
 
   // --- Loot ---
+
   async lootAddTextFile(name: string, fileName: string, data: string, isCredential = false): Promise<clientpb.Loot> {
     let lootType = this.FILE;
     const file = new commonpb.File();
     file.setName(fileName);
     file.setData(data);
     let credential = null;
-    let credentialType = null;
+    let credentialType: string = null;
     if (isCredential) {
       lootType = this.CREDENTIAL;
-      credentialType = clientpb.CredentialType.FILE;
+      credentialType = this.FILE;
     }
     return this.lootAdd(lootType, name, file, this.TEXT, credential, credentialType);
   }
@@ -144,10 +145,10 @@ export class SliverService {
     file.setName(fileName);
     file.setData(data);
     let credential = null;
-    let credentialType = null;
+    let credentialType: string = null;
     if (isCredential) {
       lootType = this.CREDENTIAL;
-      credentialType = clientpb.CredentialType.FILE;
+      credentialType = this.FILE;
     }
     return this.lootAdd(lootType, name, file, this.BIN, credential, credentialType);
   }
