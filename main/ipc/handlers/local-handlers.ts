@@ -16,7 +16,7 @@
 import { Base64 } from 'js-base64';
 import * as path from 'path';
 import * as fs from 'fs';
-
+import { URL } from 'url';
 import { jsonSchema } from '../../ipc/json-schema';
 import { isConnected } from '../../ipc/is-connected';
 import { IPCHandlers } from '../../ipc/ipc';

@@ -14,12 +14,12 @@
 */
 
 import { app, protocol } from 'electron';
-
 import { logger } from './main/logs';
 import { WindowManager } from './main/windows/window-manager';
-import * as contextMenu from 'electron-context-menu';
 import * as WorkerProtocol from './main/workers/worker-protocol';
 import * as AppProtocol from './main/app-protocol';
+import * as contextMenu from 'electron-context-menu';
+
 
 // ----------------------------------------- [ Context Menu ] -----------------------------------------
 contextMenu({
