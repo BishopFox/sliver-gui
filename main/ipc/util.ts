@@ -4,8 +4,9 @@ import * as https from 'https';
 import * as fs from 'fs';
 import * as path from 'path';
 import { homedir } from 'os';
-
+import { URL } from 'url';
 import { logger } from '../logs';
+
 
 const CLIENT_DIR_NAME = '.sliver-client';
 

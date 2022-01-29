@@ -21,7 +21,7 @@ Implementing a custom protocol achieves two goals:
 
 import * as fs from 'fs';
 import * as path from 'path';
-
+import { URL } from 'url';
 import { getDistPath } from './locale';
 import { logger } from './logs';
 
