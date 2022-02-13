@@ -66,6 +66,7 @@ jobs:
        npm install -g electron-packager
        npm install -g @angular/cli
        npm install -g ngx-i18nsupport
+       npm install -g ts-node
 
     - name: Build Linux
       run: npm run electron:linux
@@ -106,6 +107,7 @@ jobs:
         npm install -g electron-packager
         npm install -g @angular/cli
         npm install -g ngx-i18nsupport
+        npm install -g ts-node
 
     - run: npm run electron:windows
 
