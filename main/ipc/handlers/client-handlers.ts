@@ -79,9 +79,10 @@ export class ClientHandlers implements Handlers {
       "ca_certificate": { "type": "string", "minLength": 1 },
       "certificate": { "type": "string", "minLength": 1 },
       "private_key": { "type": "string", "minLength": 1 },
+      "token": { "type": "string", "minLength": 1 },
     },
     "required": [
-      "operator", "lhost", "lport", "ca_certificate", "certificate", "private_key"
+      "operator", "lhost", "lport", "ca_certificate", "certificate", "private_key", "token"
     ],
     "additionalProperties": false,
   })
