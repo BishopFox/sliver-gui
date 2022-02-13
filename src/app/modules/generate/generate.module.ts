@@ -36,38 +36,37 @@ import { CanariesComponent } from './components/canaries/canaries.component';
 
 
 @NgModule({
-  declarations: [
-    CreateImplantConfigComponent,
-    BuildsComponent,
-    GeneratingDialogComponent,
-    BuildErrorDialogComponent,
-    BuildsTableComponent,
-    RegenerateDialogComponent,
-    CanariesTableComponent,
-    GenerateComponent,
-    C2TableComponent,
-    AddMTLSDialogComponent,
-    AddHTTPDialogComponent,
-    AddDNSDialogComponent,
-    ImplantConfigComponent,
-    BuildDetailsComponent,
-    CreateProfileComponent,
-    ProfilesComponent,
-    ProfileGenerateDialogComponent,
-    ProfilesTableComponent,
-    CanariesComponent,
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BaseMaterialModule,
-    DragDropModule,
-    FlexLayoutModule,
-  ],
-  exports: [
-    ImplantConfigComponent,
-  ],
-  entryComponents: [RegenerateDialogComponent]
+    declarations: [
+        CreateImplantConfigComponent,
+        BuildsComponent,
+        GeneratingDialogComponent,
+        BuildErrorDialogComponent,
+        BuildsTableComponent,
+        RegenerateDialogComponent,
+        CanariesTableComponent,
+        GenerateComponent,
+        C2TableComponent,
+        AddMTLSDialogComponent,
+        AddHTTPDialogComponent,
+        AddDNSDialogComponent,
+        ImplantConfigComponent,
+        BuildDetailsComponent,
+        CreateProfileComponent,
+        ProfilesComponent,
+        ProfileGenerateDialogComponent,
+        ProfilesTableComponent,
+        CanariesComponent,
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BaseMaterialModule,
+        DragDropModule,
+        FlexLayoutModule,
+    ],
+    exports: [
+        ImplantConfigComponent,
+    ]
 })
 export class GenerateModule { }

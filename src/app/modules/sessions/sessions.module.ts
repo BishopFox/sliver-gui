@@ -47,42 +47,41 @@ import { LibraryTableComponent } from './components/library-table/library-table.
 
 
 @NgModule({
-  declarations: [
-    SessionsComponent,
-    InteractComponent,
-    FileBrowserComponent,
-    MkdirDialogComponent,
-    RmDialogComponent,
-    DownloadDialogComponent,
-    ShellComponent,
-    ShellCloseDialogComponent,
-    ShellCustomDialogComponent,
-    PsComponent,
-    InfoComponent,
-    MainComponent,
-    StandaloneInteractComponent,
-    ExecuteCommandComponent,
-    SideLoadComponent,
-    ScreenshotsComponent,
-    ExecuteAssemblyComponent,
-    ExecuteShellcodeComponent,
-    RenameDialogComponent,
-    LibraryDialogComponent,
-    LibraryTableComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    BaseMaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FlexLayoutModule,
-    NgTerminalModule,
-    SharedModule
-  ],
-  exports: [
-    SessionsComponent
-  ],
-  entryComponents: [MkdirDialogComponent, RmDialogComponent, DownloadDialogComponent]
+    declarations: [
+        SessionsComponent,
+        InteractComponent,
+        FileBrowserComponent,
+        MkdirDialogComponent,
+        RmDialogComponent,
+        DownloadDialogComponent,
+        ShellComponent,
+        ShellCloseDialogComponent,
+        ShellCustomDialogComponent,
+        PsComponent,
+        InfoComponent,
+        MainComponent,
+        StandaloneInteractComponent,
+        ExecuteCommandComponent,
+        SideLoadComponent,
+        ScreenshotsComponent,
+        ExecuteAssemblyComponent,
+        ExecuteShellcodeComponent,
+        RenameDialogComponent,
+        LibraryDialogComponent,
+        LibraryTableComponent
+    ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        BaseMaterialModule,
+        FormsModule,
+        ReactiveFormsModule,
+        FlexLayoutModule,
+        NgTerminalModule,
+        SharedModule
+    ],
+    exports: [
+        SessionsComponent
+    ]
 })
 export class SessionsModule { }

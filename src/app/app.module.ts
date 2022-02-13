@@ -57,51 +57,45 @@ import { LootModule } from './modules/loot/loot.module';
 
 
 @NgModule({
-  declarations: [
-
-    // Components
-    AppComponent,
-    AboutDialogComponent,
-    HomeComponent,
-    SelectServerComponent,
-    TopMenuComponent,
-    SettingsComponent,
-    RestartDialogComponent,
-    DownloadSliverServerDialogComponent,
-    DownloadSliverClientDialogComponent,
-    DownloadProgressSnackComponent,
-    StandaloneConfigManagerComponent
-    
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    BaseMaterialModule,
-    FlexLayoutModule,
-
-    // Routes
-    AppRoutingModule,
-    GenerateRoutes,
-    SessionsRoutes,
-    JobsRoutes,
-    ScriptingRoutes,
-    LootRoutes,
-
-    // Modules
-    GenerateModule,
-    SessionsModule,
-    JobsModule,
-    ScriptingModule,
-    LootModule,
-    SharedModule,
-    NgTerminalModule
-
-  ],
-  providers: [IPCService, ClientService, SliverService, JobsService, EventsService],
-  bootstrap: [AppComponent],
-  entryComponents: [SelectServerComponent]
+    declarations: [
+        // Components
+        AppComponent,
+        AboutDialogComponent,
+        HomeComponent,
+        SelectServerComponent,
+        TopMenuComponent,
+        SettingsComponent,
+        RestartDialogComponent,
+        DownloadSliverServerDialogComponent,
+        DownloadSliverClientDialogComponent,
+        DownloadProgressSnackComponent,
+        StandaloneConfigManagerComponent
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        BaseMaterialModule,
+        FlexLayoutModule,
+        // Routes
+        AppRoutingModule,
+        GenerateRoutes,
+        SessionsRoutes,
+        JobsRoutes,
+        ScriptingRoutes,
+        LootRoutes,
+        // Modules
+        GenerateModule,
+        SessionsModule,
+        JobsModule,
+        ScriptingModule,
+        LootModule,
+        SharedModule,
+        NgTerminalModule
+    ],
+    providers: [IPCService, ClientService, SliverService, JobsService, EventsService],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
