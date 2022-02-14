@@ -67,7 +67,7 @@ export class FileBrowserComponent implements OnInit {
 
   ngOnInit() {
     this._route.parent.params.pipe(take(1)).subscribe((params) => {
-      const sessionId: number = parseInt(params['session-id'], 10);
+      const sessionId: string = params['session-id'];
       this._sliverService.sessionById(sessionId).then((session) => {
         this.session = session;
         this.fetchLs('.');

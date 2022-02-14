@@ -100,7 +100,7 @@ export class ClientService {
 
   constructor(private _ipc: IPCService) { }
 
-  async openSessionWindow(sessionId: number): Promise<void> {
+  async openSessionWindow(sessionId: string): Promise<void> {
     await this._ipc.request('client_sessionWindow', JSON.stringify({
       sessionId: sessionId
     }));

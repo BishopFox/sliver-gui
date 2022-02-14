@@ -31,7 +31,7 @@ import { ClientService } from '@app/providers/client.service';
 })
 export class InteractComponent implements OnInit {
 
-  sessionId: number;
+  sessionId: string;
   session: clientpb.Session;
 
   constructor(private _route: ActivatedRoute,
@@ -40,7 +40,7 @@ export class InteractComponent implements OnInit {
 
   ngOnInit() {
     this._route.params.pipe(take(1)).subscribe((params) => {
-      this.sessionId = parseInt(params['session-id'], 10);
+      this.sessionId = params['session-id'];
       this._sliverService.sessionById(this.sessionId).then((session) => {
         this.session = session;
       }).catch(() => {

@@ -48,7 +48,7 @@ export class SliverService {
     return sessions.map(session => clientpb.Session.deserializeBinary(Base64.toUint8Array(session)));
   }
 
-  async sessionById(id: number): Promise<clientpb.Session> {
+  async sessionById(id: string): Promise<clientpb.Session> {
     let session: string = await this._ipc.request('rpc_sessionById', JSON.stringify({ id: id }));
     if (session.length) {
       return clientpb.Session.deserializeBinary(Base64.toUint8Array(session));

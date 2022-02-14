@@ -342,7 +342,7 @@ export class ClientHandlers implements Handlers {
   @jsonSchema({
     "type": "object",
     "properties": {
-      "sessionId": { "type": "number" },
+      "sessionId": { "type": "string" },
     },
     "required": ["sessionId"],
     "additionalProperties": false,

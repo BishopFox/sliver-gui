@@ -32,7 +32,6 @@ import { ClientService } from '@app/providers/client.service';
 })
 export class StandaloneInteractComponent implements OnInit {
 
-  sessionId: number;
   session: clientpb.Session;
 
   constructor(public dialog: MatDialog,
@@ -42,11 +41,11 @@ export class StandaloneInteractComponent implements OnInit {
 
   ngOnInit() {
     this._route.params.pipe(take(1)).subscribe((params) => {
-      this.sessionId = parseInt(params['session-id'], 10);
-      this._sliverService.sessionById(this.sessionId).then((session) => {
+      const sessionId: string = params['session-id'];
+      this._sliverService.sessionById(sessionId).then((session) => {
         this.session = session;
       }).catch(() => {
-        console.log(`No session with id ${this.sessionId}`);
+        console.log(`No session with id ${sessionId}`);
       });
     });
   }

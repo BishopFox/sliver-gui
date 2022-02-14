@@ -51,18 +51,13 @@ export class RPCHandlers {
     @jsonSchema({
       "type": "object",
       "properties": {
-        "id": { "type": "number" },
+        "id": { "type": "string" },
       },
       "required": ["id"],
       "additionalProperties": false,
     })
     async rpc_sessionById(ipc: IPCHandlers, req: any): Promise<string> {
       const sessionId = req.id;
-      // Remember JS is *terrible* and any direct compares to NaN will
-      // return false, for example `sessionId == NaN` is always false
-      if (isNaN(sessionId) || sessionId <= 0) {
-        return '';
-      }
       const sessions = await ipc.client.sessions();
       for (let index = 0; index < sessions.length; ++index) {
         if (sessions[index].ID === sessionId) {
@@ -172,7 +167,7 @@ export class RPCHandlers {
       "type": "object",
       "properties": {
         "tunnelIpcId": { "type": "string", "minLength": 1 },
-        "sessionId": { "type": "number" },
+        "sessionId": { "type": "string" },
         "path": { "type": "string" },
         "pty": { "type": "boolean" }
       },
@@ -209,7 +204,7 @@ export class RPCHandlers {
     @jsonSchema({
       "type": "object",
       "properties": {
-        "sessionId": { "type": "number" }
+        "sessionId": { "type": "string" }
       },
       "required": ["sessionId"],
       "additionalProperties": false,
@@ -224,7 +219,7 @@ export class RPCHandlers {
     @jsonSchema({
       "type": "object",
       "properties": {
-        "sessionId": { "type": "number" },
+        "sessionId": { "type": "string" },
         "targetDir": { "type": "string" },
       },
       "required": ["sessionId"],
@@ -240,7 +235,7 @@ export class RPCHandlers {
     @jsonSchema({
       "type": "object",
       "properties": {
-        "sessionId": { "type": "number" },
+        "sessionId": { "type": "string" },
         "targetDir": { "type": "string" },
       },
       "required": ["sessionId"],
@@ -256,7 +251,7 @@ export class RPCHandlers {
     @jsonSchema({
       "type": "object",
       "properties": {
-        "sessionId": { "type": "number" },
+        "sessionId": { "type": "string" },
         "target": { "type": "string" },
       },
       "required": ["sessionId"],
@@ -272,7 +267,7 @@ export class RPCHandlers {
     @jsonSchema({
       "type": "object",
       "properties": {
-        "sessionId": { "type": "number" },
+        "sessionId": { "type": "string" },
         "targetDir": { "type": "string" },
       },
       "required": ["sessionId"],
@@ -288,7 +283,7 @@ export class RPCHandlers {
     @jsonSchema({
       "type": "object",
       "properties": {
-        "sessionId": { "type": "number" },
+        "sessionId": { "type": "string" },
         "target": { "type": "string" },
       },
       "required": ["sessionId"],
@@ -304,7 +299,7 @@ export class RPCHandlers {
     @jsonSchema({
       "type": "object",
       "properties": {
-        "sessionId": { "type": "number" },
+        "sessionId": { "type": "string" },
         "data": { "type": "string" },
         "path": { "type": "string" },
       },
@@ -336,7 +331,7 @@ export class RPCHandlers {
     @jsonSchema({
       "type": "object",
       "properties": {
-        "sessionId": { "type": "number" },
+        "sessionId": { "type": "string" },
         "exe": { "type": "string" },
         "args": {
           "type": "array",
@@ -358,7 +353,7 @@ export class RPCHandlers {
     @jsonSchema({
       "type": "object",
       "properties": {
-        "sessionId": { "type": "number" },
+        "sessionId": { "type": "string" },
         "libraryName": { "type": "string", "minLength": 1 },
         "libraryId": { "type": "string" },
         "args": { "type": "string" },
@@ -383,7 +378,7 @@ export class RPCHandlers {
     @jsonSchema({
       "type": "object",
       "properties": {
-        "sessionId": { "type": "number" },
+        "sessionId": { "type": "string" },
         "libraryName": { "type": "string", "minLength": 1 },
         "libraryId": { "type": "string" },
         "pid": {"type": "number"},
@@ -406,7 +401,7 @@ export class RPCHandlers {
     @jsonSchema({
       "type": "object",
       "properties": {
-        "sessionId": { "type": "number" },
+        "sessionId": { "type": "string" },
       },
       "required": ["sessionId"],
       "additionalProperties": false,
