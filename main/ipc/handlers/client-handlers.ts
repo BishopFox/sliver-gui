@@ -107,9 +107,10 @@ export class ClientHandlers implements Handlers {
     'type': 'object',
     'properties': {
       'goos': { 'type': 'string', 'minLength': 1 },
+      'goarch': { 'type': 'string', 'minLength': 1 },
       'saveToDownloads': { 'type': 'boolean' }
     },
-    'required': ['goos', 'saveToDownloads'],
+    'required': ['goos', 'goarch', 'saveToDownloads'],
     'additionalProperties': false,
   })
   public async client_downloadSliverServer(ipc: IPCHandlers, req: any): Promise<string> {
@@ -133,7 +134,7 @@ export class ClientHandlers implements Handlers {
     const downloadId = uuid.v4().toString();
     return new Promise(resolve => {
       resolve(downloadId);
-      downloadSliverAsset(DEFAULT_SERVER_URL, 'server', req.goos, saveTo, (progress: Progress) => {
+      downloadSliverAsset(DEFAULT_SERVER_URL, 'server', req.goos, req.goarch, saveTo, (progress: Progress) => {
         ipc.windowManager.downloadEvents.next({
           event: downloadId,
           progress: progress,
@@ -146,9 +147,10 @@ export class ClientHandlers implements Handlers {
     'type': 'object',
     'properties': {
       'goos': { 'type': 'string', 'minLength': 1 },
+      'goarch': { 'type': 'string', 'minLength': 1 },
       'saveToDownloads': { 'type': 'boolean' }
     },
-    'required': ['goos', 'saveToDownloads'],
+    'required': ['goos', 'goarch', 'saveToDownloads'],
     'additionalProperties': false,
   })
   public async client_downloadSliverClient(ipc: IPCHandlers, req: any): Promise<string> {
@@ -173,7 +175,7 @@ export class ClientHandlers implements Handlers {
     return new Promise(resolve => {
       resolve(downloadId);
       const saveTo = path.join(homedir(), 'Downloads');
-      downloadSliverAsset(DEFAULT_SERVER_URL, 'client', req.goos, saveTo, (progress: Progress) => {
+      downloadSliverAsset(DEFAULT_SERVER_URL, 'client', req.goos, req.goarch, saveTo, (progress: Progress) => {
         ipc.windowManager.downloadEvents.next({
           event: downloadId,
           progress: progress,

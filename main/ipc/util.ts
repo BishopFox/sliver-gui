@@ -25,13 +25,21 @@ export async function* walk(dir: string): string|AsyncGenerator<any, any, any> {
   }
 }
 
-export async function downloadSliverAsset(url: string, assetName: string, goos: string, saveTo: string, progressCallback: CallableFunction) {
+export async function downloadSliverAsset(url: string, assetName: string, goos: string, goarch: string, saveTo: string, progressCallback: CallableFunction) {
   const latest = await githubAPIRequest(url);
+  // Filter looking for a name like "sliver-server_linux"
+  let suffix = `_${goos}`;
+  if (goarch !== 'amd64') {
+    suffix += `-${goarch}`;
+  }
+  if (goos === 'windows') {
+    suffix += '.exe';
+  }
+  logger.debug(`Asset name: sliver-${assetName}${suffix}`);
   const asset = latest.assets.filter(asset => {
     const downloadUrl = new URL(asset.browser_download_url);
     const fileName = path.basename(downloadUrl.pathname);
-    // Filter looking for a name like "sliver-server_linux.zip"
-    return fileName.startsWith(`sliver-${assetName}`) && fileName.endsWith(`_${goos}.zip`);
+    return fileName.startsWith(`sliver-${assetName}`) && fileName.endsWith(suffix);
   })[0];
   if (asset === undefined) {
     throw new Error(`Asset '${assetName}' not found`);
@@ -44,8 +52,8 @@ export async function downloadSliverAsset(url: string, assetName: string, goos: 
   let savePath = path.join(saveTo, fileName);
   let count = 0;
   while (fs.existsSync(savePath)) {
-    const name = path.basename(fileName, ".zip");
-    savePath = path.join(saveTo, `${name} (${++count}).zip`);
+    const name = path.basename(fileName);
+    savePath = path.join(saveTo, `(${++count}) ${name}`);
   }
   const file = fs.createWriteStream(savePath, {encoding: 'binary'});
   const progress = {

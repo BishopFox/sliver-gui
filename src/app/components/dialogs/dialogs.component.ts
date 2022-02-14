@@ -45,7 +45,7 @@ export class AboutDialogComponent {
 })
 export class DownloadSliverServerDialogComponent {
 
-  goos: string;
+  target: string;
   saveToDownloads: boolean = true;
 
   constructor(public dialogRef: MatDialogRef<DownloadSliverServerDialogComponent>,
@@ -56,7 +56,13 @@ export class DownloadSliverServerDialogComponent {
   }
 
   complete() {
-    this.dialogRef.close({ goos: this.goos, saveToDownloads: this.saveToDownloads });
+    const goos = this.target.split('-')[0];
+    const goarch = this.target.split('-')[1];
+    this.dialogRef.close({ 
+      goos: goos,
+      goarch: goarch,
+      saveToDownloads: this.saveToDownloads
+    });
   }
 
 }
@@ -67,7 +73,7 @@ export class DownloadSliverServerDialogComponent {
 })
 export class DownloadSliverClientDialogComponent {
 
-  goos: string;
+  target: string;
   saveToDownloads: boolean = true;
 
   constructor(public dialogRef: MatDialogRef<DownloadSliverClientDialogComponent>,
@@ -78,7 +84,13 @@ export class DownloadSliverClientDialogComponent {
   }
 
   complete() {
-    this.dialogRef.close({ goos: this.goos, saveToDownloads: this.saveToDownloads });
+    const goos = this.target.split('-')[0];
+    const goarch = this.target.split('-')[1];
+    this.dialogRef.close({ 
+      goos: goos,
+      goarch: goarch,
+      saveToDownloads: this.saveToDownloads
+    });
   }
 
 }

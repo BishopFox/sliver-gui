@@ -218,17 +218,19 @@ export class ClientService {
     return resp ? JSON.parse(resp) : null;
   }
 
-  async downloadSliverServer(goos: string, saveToDownloads: boolean): Promise<string> {
+  async downloadSliverServer(goos: string, goarch: string, saveToDownloads: boolean): Promise<string> {
     const downloadId = await this._ipc.request('client_downloadSliverServer', JSON.stringify({
       goos: goos,
+      goarch: goarch,
       saveToDownloads: saveToDownloads,
     }));
     return downloadId;
   }
 
-  async downloadSliverClient(goos: string, saveToDownloads: boolean): Promise<string> {
+  async downloadSliverClient(goos: string, goarch: string, saveToDownloads: boolean): Promise<string> {
     const downloadId = await this._ipc.request('client_downloadSliverClient', JSON.stringify({
       goos: goos,
+      goarch: goarch,
       saveToDownloads: saveToDownloads,
     }));
     return downloadId;

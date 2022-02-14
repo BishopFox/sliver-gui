@@ -300,7 +300,7 @@ export class AppComponent implements OnInit, OnDestroy {
       if (!result?.goos) {
         return;
       }
-      const downloadId = await this._clientService.downloadSliverServer(result.goos, result.saveToDownloads);
+      const downloadId = await this._clientService.downloadSliverServer(result.goos, result.goarch, result.saveToDownloads);
       const observe = this._eventsService.download$.pipe(
         filter((download: DownloadEvent) => download.event === downloadId)
       );
@@ -327,7 +327,7 @@ export class AppComponent implements OnInit, OnDestroy {
       if (!result?.goos) {
         return;
       }
-      const downloadId = await this._clientService.downloadSliverClient(result.goos, result.saveToDownloads);
+      const downloadId = await this._clientService.downloadSliverClient(result.goos, result.goarch, result.saveToDownloads);
       const observe = this._eventsService.download$.pipe(
         filter((download: DownloadEvent) => download.event === downloadId)
       );

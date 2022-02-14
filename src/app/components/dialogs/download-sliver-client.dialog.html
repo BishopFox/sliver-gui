@@ -5,14 +5,17 @@
 <div mat-dialog-content align="center">
   <p>
     <mat-form-field>
-      <mat-select [(ngModel)]="goos" i18n-placeholder placeholder="Operating System">
-        <mat-option value="windows">
+      <mat-select [(ngModel)]="target" i18n-placeholder placeholder="Operating System">
+        <mat-option value="windows-amd64">
           Windows
         </mat-option>
-        <mat-option value="macos">
+        <mat-option value="macos-amd64">
           MacOS
         </mat-option>
-        <mat-option value="linux">
+        <mat-option value="macos-arm64">
+          MacOS (arm64)
+        </mat-option>
+        <mat-option value="linux-amd64">
           Linux
         </mat-option>
       </mat-select>
@@ -25,7 +28,7 @@
   </p>
 </div>
 <div mat-dialog-actions align="center">
-  <button mat-raised-button color="primary" [disabled]="!goos" (click)="complete()">
+  <button mat-raised-button color="primary" [disabled]="!target" (click)="complete()">
     &nbsp;&nbsp;<ng-container i18n>Download</ng-container>&nbsp;&nbsp;
   </button>
   <button mat-button (click)="onNoClick()">
