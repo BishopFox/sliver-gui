@@ -1,6 +1,7 @@
 /*
   Sliver Implant Framework
-  Copyright (C) 2020  Bishop Fox
+  Copyright (C) 2022  Bishop Fox
+
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -64,7 +65,7 @@ export class RPCHandlers {
       }
       const sessions = await ipc.client.sessions();
       for (let index = 0; index < sessions.length; ++index) {
-        if (sessions[index].getId() === sessionId) {
+        if (sessions[index].ID === sessionId) {
           return Base64.fromUint8Array(sessions[index].serializeBinary());
         }
       }
@@ -179,7 +180,7 @@ export class RPCHandlers {
       "additionalProperties": false,
     })
     async rpc_shell(ipc: IPCHandlers, req: any): Promise<void> {
-      const interact =  await ipc.client.interact(req.sessionId);
+      const interact =  await ipc.client.interactSession(req.sessionId);
       const tunnel = await interact.shell(req.path, req.pty);
       ipc.windowManager.tunnels.set(req.tunnelIpcId, tunnel);
   
@@ -214,7 +215,7 @@ export class RPCHandlers {
       "additionalProperties": false,
     })
     async rpc_ps(ipc: IPCHandlers, req: any): Promise<string[]> {
-      const session = await ipc.client.interact(req.sessionId);
+      const session = await ipc.client.interactSession(req.sessionId);
       const ps = await session.ps();
       return ps.map(p => Base64.fromUint8Array(p.serializeBinary()));
     }
@@ -230,7 +231,7 @@ export class RPCHandlers {
       "additionalProperties": false,
     })
     async rpc_ls(ipc: IPCHandlers, req: any): Promise<string> {
-      const session = await ipc.client.interact(req.sessionId);
+      const session = await ipc.client.interactSession(req.sessionId);
       const ls = await session.ls(req.targetDir);
       return Base64.fromUint8Array(ls.serializeBinary());
     }
@@ -246,7 +247,7 @@ export class RPCHandlers {
       "additionalProperties": false,
     })
     async rpc_cd(ipc: IPCHandlers, req: any): Promise<string> {
-      const session = await ipc.client.interact(req.sessionId);
+      const session = await ipc.client.interactSession(req.sessionId);
       const cd = await session.cd(req.targetDir);
       return Base64.fromUint8Array(cd.serializeBinary());
     }
@@ -262,7 +263,7 @@ export class RPCHandlers {
       "additionalProperties": false,
     })
     async rpc_rm(ipc: IPCHandlers, req: any): Promise<string> {
-      const session = await ipc.client.interact(req.sessionId);
+      const session = await ipc.client.interactSession(req.sessionId);
       const rm = await session.rm(req.target);
       return Base64.fromUint8Array(rm.serializeBinary());
     }
@@ -278,7 +279,7 @@ export class RPCHandlers {
       "additionalProperties": false,
     })
     async rpc_mkdir(ipc: IPCHandlers, req: any): Promise<string> {
-      const session = await ipc.client.interact(req.sessionId);
+      const session = await ipc.client.interactSession(req.sessionId);
       const mkdir = await session.mkdir(req.targetDir);
       return Base64.fromUint8Array(mkdir.serializeBinary());
     }
@@ -294,7 +295,7 @@ export class RPCHandlers {
       "additionalProperties": false,
     })
     async rpc_download(ipc: IPCHandlers, req: any): Promise<string> {
-      const session = await ipc.client.interact(req.sessionId);
+      const session = await ipc.client.interactSession(req.sessionId);
       const data = await session.download(req.target);
       return Base64.fromUint8Array(data);
     }
@@ -321,7 +322,7 @@ export class RPCHandlers {
         return Promise.reject('User cancel');
       }
       const uploads: sliverpb.Upload[] = [];
-      const session = await ipc.client.interact(req.sessionId);
+      const session = await ipc.client.interactSession(req.sessionId);
       await Promise.all(openDialog.filePaths.map(async (filePath) => {
         const data: Buffer = await fs.promises.readFile(filePath);
         const uploadPath = path.join(req.path, path.basename(filePath));
@@ -348,7 +349,7 @@ export class RPCHandlers {
       "additionalProperties": false,
     })
     async rpc_execute(ipc: IPCHandlers, req: any): Promise<string> {
-      const session = await ipc.client.interact(req.sessionId);
+      const session = await ipc.client.interactSession(req.sessionId);
       const executed = await session.execute(req.exe, req.args, req.output);
       return Base64.fromUint8Array(executed.serializeBinary());
     }
@@ -369,7 +370,7 @@ export class RPCHandlers {
       "additionalProperties": false,
     })
     async rpc_executeAssembly(ipc: IPCHandlers, req: any): Promise<string> {
-      const session = await ipc.client.interact(req.sessionId);
+      const session = await ipc.client.interactSession(req.sessionId);
       const assembly = await ipc.libraryManager.readFile(req.libraryName, req.libraryId);
       if (!assembly) {
         return Promise.reject('Invalid library file');
@@ -392,7 +393,7 @@ export class RPCHandlers {
       "additionalProperties": false,
     })
     async rpc_executeShellcode(ipc: IPCHandlers, req: any): Promise<string> {
-      const session = await ipc.client.interact(req.sessionId);
+      const session = await ipc.client.interactSession(req.sessionId);
       const shellcode = await ipc.libraryManager.readFile(req.libraryName, req.libraryId);
       if (!shellcode) {
         return Promise.reject('Invalid library file');
@@ -411,7 +412,7 @@ export class RPCHandlers {
       "additionalProperties": false,
     })
     async rpc_ifconfig(ipc: IPCHandlers, req: any): Promise<string> {
-      const session = await ipc.client.interact(req.sessionId);
+      const session = await ipc.client.interactSession(req.sessionId);
       const ifconfig = await session.ifconfig();
       return Base64.fromUint8Array(ifconfig.serializeBinary());
     }
@@ -587,7 +588,7 @@ export class RPCHandlers {
       }
       const jobs = await ipc.client.jobs();
       for (let index = 0; index < jobs.length; ++index) {
-        if (jobs[index].getId() === jobId) {
+        if (jobs[index].ID === jobId) {
           return Base64.fromUint8Array(jobs[index].serializeBinary());
         }
       }
