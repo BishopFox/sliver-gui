@@ -86,7 +86,7 @@
     "handlebars": "^4.7.6",
     "js-base64": "^3.6.0",
     "material-design-icons": "^3.0.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "monaco-editor": "^0.18.1",
     "node-gyp": "^8.4.1",
     "node-notifier": "^9.0.0",
