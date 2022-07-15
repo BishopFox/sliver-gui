@@ -2,6 +2,11 @@
 
 [Sliver](https://github.com/BishopFox/sliver) GUI client.
 
+⚠️ THIS PROJECT IS PRE-ALPHA AND FOR DEVELOPERS ONLY ⚠️
+
+The GUI client is NOT feature complete, expect bugs and missing features. Please do not file bug reports for missing functionality.
+
+
 ![Release](https://github.com/BishopFox/sliver-gui/workflows/Release/badge.svg) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ### Usage
