@@ -169,6 +169,7 @@ export class ConfigHandlers {
       "ca_certificate": { "type": "string" },
       "certificate": { "type": "string" },
       "private_key": { "type": "string", "minLength": 1 },
+      "token": { "type": "string", "minLength": 1 },
     },
     "required": ["lhost", "lport", "private_key"],
     "additionalProperties": false,
@@ -207,7 +208,7 @@ export class ConfigHandlers {
     } catch (err) {
       logger.error(err);
     }
-    return JSON.stringify({success: deleted});
+    return JSON.stringify({ success: deleted });
   }
 
 }

@@ -233,7 +233,7 @@ export class WindowManager {
     const configSub = this.configEvents.subscribe(event => {
       this.send('config', JSON.stringify(event), true);
     });
-    
+
     this.mainWindow.once('ready-to-show', () => {
       this.mainWindow.show();
     });
@@ -363,7 +363,7 @@ export class WindowManager {
     // Main Window
     const image = await this.mainWindow.capturePage();
     const mainScreenshot = path.join(saveTo, 'main-window.png');
-    fs.writeFile(mainScreenshot, image.toPNG(), {encoding: 'binary', mode: 0o600}, () => {
+    fs.writeFile(mainScreenshot, image.toPNG(), { encoding: 'binary', mode: 0o600 }, () => {
       logger.info(`Saved screenshot ${mainScreenshot}`);
     });
 
@@ -371,7 +371,7 @@ export class WindowManager {
     this.otherWindows.forEach(async (window, guid) => {
       const image = await window.capturePage();
       const windowScreenshot = path.join(saveTo, `${path.basename(guid)}.png`);
-      fs.writeFile(windowScreenshot, image.toPNG(), {encoding: 'binary', mode: 0o600}, () => {
+      fs.writeFile(windowScreenshot, image.toPNG(), { encoding: 'binary', mode: 0o600 }, () => {
         logger.info(`Saved screenshot ${windowScreenshot}`);
       });
     });
