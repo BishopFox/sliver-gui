@@ -37,9 +37,10 @@ jobs:
         npm install -g ngx-i18nsupport
         npm install -g ts-node
 
-    - run: |
-      npm run publish:macos-amd64
-      ls -lah ./release
+    - name: Build MacOS AMD64
+      run: |
+        npm run publish:macos-amd64
+        ls -lah ./release
 
     - name: MacOS Artifacts AMD64
       uses: actions/upload-artifact@v2
@@ -52,9 +53,10 @@ jobs:
 
     - run: rm -rf ./release  
 
-    - run: |
-      npm run publish:macos-arm64
-      ls -lah ./release
+    - name: Build MacOS ARM64
+      run: |
+        npm run publish:macos-arm64
+        ls -lah ./release
 
     - name: MacOS Artifacts ARM64
       uses: actions/upload-artifact@v2
@@ -93,9 +95,10 @@ jobs:
         npm install -g ngx-i18nsupport
         npm install -g ts-node
 
-    - run: |
-      npm run publish:linux
-      ls -lah ./release
+    - name: Build Linux AMD64
+      run: |
+        npm run publish:linux
+        ls -lah ./release
 
     - name: Linux Artifacts AMD64
       uses: actions/upload-artifact@v2
@@ -137,9 +140,10 @@ jobs:
         npm install -g ngx-i18nsupport
         npm install -g ts-node
         
-    - run: |
-      npm run publish:windows
-      ls -lah ./release
+    - name: Build Windows AMD64
+      run: |
+        npm run publish:windows
+        ls -lah ./release
 
     - name: Windows Artifacts AMD64
       uses: actions/upload-artifact@v2
