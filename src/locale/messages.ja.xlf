@@ -148,15 +148,9 @@
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context><context context-type="linenumber">8</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context><context context-type="linenumber">8</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/sessions-table/sessions-table.component.html</context><context context-type="linenumber">67</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context><context context-type="linenumber">28</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">28</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">15</context></context-group></trans-unit><trans-unit id="3fd0cd77b59b96bcadaf55606da31177393c6ede" datatype="html">
         <source>Save to Downloads</source><target state="translated">ダウンロードに保存</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context>
-          <context context-type="linenumber">23</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context>
-          <context context-type="linenumber">23</context>
-        </context-group>
-      </trans-unit>
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context><context context-type="linenumber">26</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context><context context-type="linenumber">26</context></context-group></trans-unit>
       <trans-unit id="a0ad8e29ff6de0aef19586738980a6fba9a8113c" datatype="html">
         <source>Last Check-in</source><target state="translated">ラストチェックイン</target>
         
@@ -189,13 +183,15 @@
         </context-group>
       </trans-unit>
       <trans-unit id="0d678cdeec31bf13e982397161e64abd782b69fc" datatype="html">
-        <source> Are you sure you want to delete the <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>"/><x id="INTERPOLATION" equiv-text="{{data.name}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong>"/> script? </source><target state="translated"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>"/><x id="INTERPOLATION"/><x id="CLOSE_TAG_STRONG" ctype="x-strong"/>スクリプトを削除してもよろしいですか？</target>
+        <source> Are you sure you want to delete the <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>"/><x id="INTERPOLATION" equiv-text="&lt;/strong"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="script?"/> script? </source><target state="translated"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>"/><x id="INTERPOLATION"/><x id="CLOSE_TAG_STRONG" ctype="x-strong"/>スクリプトを削除してもよろしいですか？</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context>
           <context context-type="linenumber">10,11</context>
         </context-group>
       </trans-unit><trans-unit id="077bc1ad7d4c8107da8191616fe373b0f998e652" datatype="html">
-        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i class=&quot;fas fa-fw fa-folder-plus&quot;>"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i>"/> Execute </source><target state="translated"><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i>"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i"/>実行する</target>
+        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i>
+        Execute
+      &lt;/button>"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="Execute"/> Execute </source><target state="translated"><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i>"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i"/>実行する</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/scripting/components/editor/editor.component.html</context>
           <context context-type="linenumber">8,10</context>
@@ -215,7 +211,7 @@
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context><context context-type="linenumber">32</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context><context context-type="linenumber">32</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-dns.dialog.html</context><context context-type="linenumber">32</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context><context context-type="linenumber">39</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context><context context-type="linenumber">39</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profile-generate.dialog.html</context><context context-type="linenumber">17</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/job/stop-job.dialog.html</context><context context-type="linenumber">17</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/main/add-website.dialog.html</context><context context-type="linenumber">29</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-directory.dialog.html</context><context context-type="linenumber">31</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-file.dialog.html</context><context context-type="linenumber">40</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/website-details/delete-website.dialog.html</context><context context-type="linenumber">17</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/loot/components/main/add-credential.dialog.html</context><context context-type="linenumber">64</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/loot/components/main/add-file.dialog.html</context><context context-type="linenumber">30</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context><context context-type="linenumber">21</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/dialogs/rename.dialog.html</context><context context-type="linenumber">27</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context><context context-type="linenumber">25</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/mkdir-dialog.html</context><context context-type="linenumber">17</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context><context context-type="linenumber">28</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-close.dialog.html</context><context context-type="linenumber">17</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-custom.dialog.html</context><context context-type="linenumber">37</context></context-group></trans-unit><trans-unit id="d36521ae8ac408c68d855e8820e76a3708a9b34d" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context><context context-type="linenumber">35</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context><context context-type="linenumber">35</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-dns.dialog.html</context><context context-type="linenumber">32</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context><context context-type="linenumber">39</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context><context context-type="linenumber">39</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profile-generate.dialog.html</context><context context-type="linenumber">17</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/job/stop-job.dialog.html</context><context context-type="linenumber">17</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/main/add-website.dialog.html</context><context context-type="linenumber">29</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-directory.dialog.html</context><context context-type="linenumber">31</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/website-details/add-file.dialog.html</context><context context-type="linenumber">40</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/website-details/delete-website.dialog.html</context><context context-type="linenumber">17</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/loot/components/main/add-credential.dialog.html</context><context context-type="linenumber">64</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/loot/components/main/add-file.dialog.html</context><context context-type="linenumber">30</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/scripting/components/browser/delete-script.dialog.html</context><context context-type="linenumber">21</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/dialogs/rename.dialog.html</context><context context-type="linenumber">27</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context><context context-type="linenumber">25</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/mkdir-dialog.html</context><context context-type="linenumber">17</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context><context context-type="linenumber">28</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-close.dialog.html</context><context context-type="linenumber">17</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/shell/shell-custom.dialog.html</context><context context-type="linenumber">37</context></context-group></trans-unit><trans-unit id="d36521ae8ac408c68d855e8820e76a3708a9b34d" datatype="html">
         <source>Download Console Client</source><target state="translated">コンソールクライアントのダウンロード</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context>
@@ -263,11 +259,8 @@
         </context-group>
       </trans-unit><trans-unit id="fd210291591c716cdef7ad35c4e461d0ef0452b6" datatype="html">
         <source> <x id="INTERPOLATION" equiv-text="{{ this.website.getName() }}"/> </source><target state="translated"><x id="INTERPOLATION"/></target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/webcontents-table/webcontents-table.component.html</context>
-          <context context-type="linenumber">13,15</context>
-        </context-group>
-      </trans-unit><trans-unit id="acc04ca445d64958d843622f9ce95c0378198c24" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/webcontents-table/webcontents-table.component.html</context><context context-type="linenumber">14</context></context-group></trans-unit><trans-unit id="acc04ca445d64958d843622f9ce95c0378198c24" datatype="html">
         <source>Protocol</source><target state="translated">プロトコル</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
@@ -305,11 +298,8 @@
         </context-group>
       </trans-unit><trans-unit id="d8139e6b8483ffa1cb234040237fd3b0debd939e" datatype="html">
         <source> Are you sure you want to stop job #<x id="INTERPOLATION" equiv-text="{{data.job.getId()}}"/>? </source><target state="translated">ジョブ＃<x id="INTERPOLATION"/>を停止してもよろしいですか？</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/jobs/components/job/stop-job.dialog.html</context>
-          <context context-type="linenumber">8,10</context>
-        </context-group>
-      </trans-unit><trans-unit id="1d0d5c9a36e72bd9643ff1ede69736ae063d652b" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/job/stop-job.dialog.html</context><context context-type="linenumber">9</context></context-group></trans-unit><trans-unit id="1d0d5c9a36e72bd9643ff1ede69736ae063d652b" datatype="html">
         <source>Stop</source><target state="translated">やめる</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/job/stop-job.dialog.html</context>
@@ -454,11 +444,8 @@
         </context-group>
       </trans-unit><trans-unit id="a3cf13c419f9f37a2b338ed0617d72137051b910" datatype="html">
         <source> Delete </source><target state="translated">削除</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/scripting/components/browser/browser.component.html</context>
-          <context context-type="linenumber">38,39</context>
-        </context-group>
-      </trans-unit><trans-unit id="699b690d686dbb8e00a1e95b89ba2fffb548da6e" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/loot/components/loot-credential-table/loot-credential-table.component.html</context><context context-type="linenumber">70</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/loot/components/loot-file-table/loot-file-table.component.html</context><context context-type="linenumber">49</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/scripting/components/browser/browser.component.html</context><context context-type="linenumber">38</context></context-group></trans-unit><trans-unit id="699b690d686dbb8e00a1e95b89ba2fffb548da6e" datatype="html">
         <source>Execute</source><target state="translated">実行する</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/execute-assembly/execute-assembly.component.html</context>
@@ -673,7 +660,7 @@
         <source>Download</source><target state="translated">ダウンロード</target>
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context><context context-type="linenumber">29</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context><context context-type="linenumber">29</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">110</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context><context context-type="linenumber">22</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-client.dialog.html</context><context context-type="linenumber">32</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/components/dialogs/download-sliver-server.dialog.html</context><context context-type="linenumber">32</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/download-dialog.html</context><context context-type="linenumber">22</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/file-browser/file-browser.component.html</context><context context-type="linenumber">110</context></context-group></trans-unit>
       <trans-unit id="8ecc7ad6de089639c6ef0de66a25aa97547f5b30" datatype="html">
         <source>Make Directory</source><target state="translated">ディレクトリを作成する</target>
         <context-group purpose="location">
@@ -695,7 +682,7 @@
       </trans-unit>
       
       <trans-unit id="1ebb07a3797618330ec9de8a3b6b7fd248f8e6b4" datatype="html">
-        <source> Please type <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;monospace&quot;>"/><x id="INTERPOLATION" equiv-text="{{data.name}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span>"/> below to confirm: </source><target state="translated">確認するには、以下に<x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span>"/><x id="INTERPOLATION"/>と<x id="CLOSE_TAG_SPAN" ctype="x-span"/>入力してください。</target>
+        <source> Please type <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;monospace&quot;>"/><x id="INTERPOLATION" equiv-text="&lt;/span"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="below to c"/> below to confirm: </source><target state="translated">確認するには、以下に<x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span>"/><x id="INTERPOLATION"/>と<x id="CLOSE_TAG_SPAN" ctype="x-span"/>入力してください。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/sessions/components/file-browser/rm-dialog.html</context>
           <context context-type="linenumber">13,14</context>
@@ -748,11 +735,8 @@
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">83</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">129</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">154</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/interact/interact.component.html</context><context context-type="linenumber">8</context></context-group></trans-unit><trans-unit id="897d387451172f7db3646374b6a2016dfec020b5" datatype="html">
         <source> Compile Time Options </source><target state="translated">コンパイル時オプション</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">98,99</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">97</context></context-group></trans-unit>
       <trans-unit id="197c6a6173dd4a413f617965f2d9308bc263abfe" datatype="html">
         <source>External Window</source><target state="translated">外部ウィンドウ</target>
         
@@ -855,7 +839,7 @@
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context><context context-type="linenumber">28</context></context-group></trans-unit><trans-unit id="aefb77454378965c4da1a1d66000404ae9b95c3e" datatype="html">
         <source>Domain</source><target state="translated">ドメイン</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context><context context-type="linenumber">68</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context><context context-type="linenumber">106</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context><context context-type="linenumber">35</context></context-group></trans-unit><trans-unit id="afb605e735bef0cdd46dbff3c3d2be15960cdc2b" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/canaries-table/canaries-table.component.html</context><context context-type="linenumber">35</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context><context context-type="linenumber">69</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context><context context-type="linenumber">107</context></context-group></trans-unit><trans-unit id="afb605e735bef0cdd46dbff3c3d2be15960cdc2b" datatype="html">
         <source>Website</source><target state="translated">ウェブサイト</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/jobs/components/start-listener/start-listener.component.html</context>
@@ -1026,7 +1010,7 @@
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">71</context></context-group></trans-unit><trans-unit id="4c37ff662409730f928d07f3088b7192705f9cc6" datatype="html">
         <source> New Profile </source><target state="translated">新しいプロファイル</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles/profiles.component.html</context><context context-type="linenumber">7</context></context-group></trans-unit><trans-unit id="994363f08f9fbfa3b3994ff7b35c6904fdff18d8" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles/profiles.component.html</context><context context-type="linenumber">6</context></context-group></trans-unit><trans-unit id="994363f08f9fbfa3b3994ff7b35c6904fdff18d8" datatype="html">
         <source>Profile</source><target state="translated">プロフィール</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/create-profile/create-profile.component.html</context>
@@ -1058,23 +1042,14 @@
         </context-group>
       </trans-unit><trans-unit id="ad3ce21e13a4f6fdeea73170384a5aba83e5a85f" datatype="html">
         <source> Rename </source><target state="translated">名前を変更する</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/dialogs/rename.dialog.html</context>
-          <context context-type="linenumber">4,5</context>
-        </context-group>
-      </trans-unit><trans-unit id="2a62a59d9424e9e869061ebf3e8f8b8f95411571" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/dialogs/rename.dialog.html</context><context context-type="linenumber">3</context></context-group></trans-unit><trans-unit id="2a62a59d9424e9e869061ebf3e8f8b8f95411571" datatype="html">
         <source> Save </source><target state="translated">保存する</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/dialogs/rename.dialog.html</context>
-          <context context-type="linenumber">22,23</context>
-        </context-group>
-      </trans-unit><trans-unit id="f031826de4d223f5af8f4fcec0c4f2ed1c035e87" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/dialogs/rename.dialog.html</context><context context-type="linenumber">21</context></context-group></trans-unit><trans-unit id="f031826de4d223f5af8f4fcec0c4f2ed1c035e87" datatype="html">
         <source> Done </source><target state="translated">完了</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/sessions/components/dialogs/library.dialog.html</context>
-          <context context-type="linenumber">15,16</context>
-        </context-group>
-      </trans-unit><trans-unit id="dc9a9853d36d7998ea7fdde3cf4cdee781ac5185" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/sessions/components/dialogs/library.dialog.html</context><context context-type="linenumber">14</context></context-group></trans-unit><trans-unit id="dc9a9853d36d7998ea7fdde3cf4cdee781ac5185" datatype="html">
         <source>Code Name</source><target state="translated">コード名</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profiles-table.component.html</context><context context-type="linenumber">39</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/builds-table/builds-table.component.html</context><context context-type="linenumber">39</context></context-group></trans-unit><trans-unit id="d2252b2dbce97640eb209224549e3e59c67412c1" datatype="html">
@@ -1109,7 +1084,7 @@
           <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit><trans-unit id="b0ed9270b60b5b5ea1d53d7190c21ddd70a1fb01" datatype="html">
-        <source> Would you like to build an implant based on the <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>"/><x id="INTERPOLATION" equiv-text="{{ profile.getName() }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong>"/> profile? </source><target state="translated"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>"/><x id="INTERPOLATION"/><x id="CLOSE_TAG_STRONG" ctype="x-strong"/>プロファイルに基づいてインプラントを作成しますか？</target>
+        <source> Would you like to build an implant based on the <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>"/><x id="INTERPOLATION" equiv-text="}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="profile?"/> profile? </source><target state="translated"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>"/><x id="INTERPOLATION"/><x id="CLOSE_TAG_STRONG" ctype="x-strong"/>プロファイルに基づいてインプラントを作成しますか？</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/generate/components/profiles-table/profile-generate.dialog.html</context>
           <context context-type="linenumber">9,10</context>
@@ -1202,7 +1177,7 @@
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/components/standalone-config-manager/standalone-config-manager.component.html</context><context context-type="linenumber">50</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-dns.dialog.html</context><context context-type="linenumber">13</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-dns.dialog.html</context><context context-type="linenumber">15</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context><context context-type="linenumber">13</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context><context context-type="linenumber">15</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context><context context-type="linenumber">13</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context><context context-type="linenumber">15</context></context-group></trans-unit><trans-unit id="33b7d4faadd7bf87bfcfebb3ca3ed9f0bffb0d69" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/components/standalone-config-manager/standalone-config-manager.component.html</context><context context-type="linenumber">51</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-dns.dialog.html</context><context context-type="linenumber">13</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-dns.dialog.html</context><context context-type="linenumber">16</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context><context context-type="linenumber">13</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-http.dialog.html</context><context context-type="linenumber">16</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context><context context-type="linenumber">13</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/c2-table/add-mtls.dialog.html</context><context context-type="linenumber">16</context></context-group></trans-unit><trans-unit id="33b7d4faadd7bf87bfcfebb3ca3ed9f0bffb0d69" datatype="html">
         <source>Listen Port</source><target state="translated">リッスンポート</target>
         
         
@@ -1265,23 +1240,14 @@
         </context-group>
       </trans-unit><trans-unit id="b2fba57315a791200c890354b57fb753378a13ea" datatype="html">
         <source> Executable </source><target state="translated">実行可能</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">45,46</context>
-        </context-group>
-      </trans-unit><trans-unit id="001d1f67893522f27ea47a32d5aec6b804409fe9" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">44</context></context-group></trans-unit><trans-unit id="001d1f67893522f27ea47a32d5aec6b804409fe9" datatype="html">
         <source> Shared Library </source><target state="translated">共有ライブラリ</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">48,49</context>
-        </context-group>
-      </trans-unit><trans-unit id="2d0d25efcb9d89e63362e0f6f343d20d46adb025" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">47</context></context-group></trans-unit><trans-unit id="2d0d25efcb9d89e63362e0f6f343d20d46adb025" datatype="html">
         <source> Shellcode </source><target state="translated">シェルコード</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">51,52</context>
-        </context-group>
-      </trans-unit><trans-unit id="f732c304c7433e5a83ffcd862c3dce709a0f4982" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">50</context></context-group></trans-unit><trans-unit id="f732c304c7433e5a83ffcd862c3dce709a0f4982" datatype="html">
         <source>Next</source><target state="translated">次</target>
         
         
@@ -1289,11 +1255,8 @@
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">59</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">87</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">133</context></context-group></trans-unit><trans-unit id="fe07f0e17657849cd0a181fbbaa34b2974f63f98" datatype="html">
         <source> Command and Control </source><target state="translated">コマンドと制御</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context>
-          <context context-type="linenumber">70,71</context>
-        </context-group>
-      </trans-unit><trans-unit id="a4e954c980eda25bf2a28a6411710aee8757ef17" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">69</context></context-group></trans-unit><trans-unit id="a4e954c980eda25bf2a28a6411710aee8757ef17" datatype="html">
         <source>Reconnect</source><target state="translated">再接続</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/modules/generate/components/create-implant-config/create-implant-config.component.html</context><context context-type="linenumber">107</context></context-group></trans-unit><trans-unit id="2c6935b5d167688c822375470c91311fbca19fc9" datatype="html">
