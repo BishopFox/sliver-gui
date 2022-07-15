@@ -55,7 +55,8 @@ npm run electron:local
 If that works, then you should be able to do platform specific builds:
 
 ```
-npm run electron:mac
+npm run electron:macos-amd64
+npm run electron:macos-arm64
 npm run electron:windows
 npm run electron:linux
 ```

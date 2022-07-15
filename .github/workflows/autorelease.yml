@@ -37,7 +37,7 @@ jobs:
         npm install -g ngx-i18nsupport
         npm install -g ts-node
 
-    - run: npm run publish:mac
+    - run: npm run publish:macos
 
 
   linux-build:
