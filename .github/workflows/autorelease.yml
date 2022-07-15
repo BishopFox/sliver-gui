@@ -142,7 +142,8 @@ jobs:
         
     - name: Build Windows AMD64
       run: |
-        npm run publish:windows
+        npm run publish:windows_exe
+        npm run publish:windows_nsis
         dir ./release
 
     - name: Windows Artifacts AMD64
