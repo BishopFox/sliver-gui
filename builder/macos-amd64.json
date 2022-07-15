@@ -1,6 +1,6 @@
 {
   "productName": "Sliver",
-  "artifactName": "${productName}_${version}_${os}.${ext}",
+  "artifactName": "${productName}_${version}_${os}-amd64.${ext}",
   "directories": {
     "output": "release/"
   },
@@ -20,11 +20,11 @@
     "!tsconfig.json",
     "!tslint.json"
   ],
-  "win": {
+  "mac": {
     "icon": "icon.png",
     "target": [
       {
-        "target": "nsis",
+        "target": "dmg",
         "arch": "x64"
       }
     ],

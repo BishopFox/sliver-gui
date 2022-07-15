@@ -1,39 +1,40 @@
 {
-    "productName": "Sliver",
-    "artifactName": "${productName}_${version}_${os}-portable.${ext}",
-    "directories": {
-      "output": "release/"
-    },
-    "files": [
-        "**/*",
-        "!**/*.ts",
-        "!*.code-workspace",
-        "!LICENSE.md",
-        "!package.json",
-        "!package-lock.json",
-        "!src/",
-        "!e2e/",
-        "!hooks/",
-        "!angular.json",
-        "!_config.yml",
-        "!karma.conf.js",
-        "!tsconfig.json",
-        "!tslint.json"
+  "productName": "Sliver",
+  "artifactName": "${productName}_${version}_${os}-portable.${ext}",
+  "directories": {
+    "output": "release/"
+  },
+  "files": [
+    "**/*",
+    "!**/*.ts",
+    "!*.code-workspace",
+    "!LICENSE.md",
+    "!package.json",
+    "!package-lock.json",
+    "!src/",
+    "!e2e/",
+    "!hooks/",
+    "!angular.json",
+    "!_config.yml",
+    "!karma.conf.js",
+    "!tsconfig.json",
+    "!tslint.json"
+  ],
+  "win": {
+    "icon": "icon.png",
+    "target": [
+      {
+        "target": "portable",
+        "arch": "x64"
+      }
     ],
-    "win": {
-      "icon": "dist/en",
-      "target": [
-        {
-          "target": "portable",
-          "arch": "x64"
-        }
-      ],
-      "publish": [{
+    "publish": [
+      {
         "provider": "github",
         "owner": "BishopFox",
         "repo": "sliver-gui",
         "private": true
-      }]
-    }
+      }
+    ]
   }
-  
+}

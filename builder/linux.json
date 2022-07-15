@@ -1,38 +1,39 @@
 {
-    "productName": "Sliver",
-    "artifactName": "${productName}_${version}_${os}.${ext}",
-    "directories": {
-      "output": "release/"
-    },
-    "files": [
-        "**/*",
-        "!**/*.ts",
-        "!*.code-workspace",
-        "!LICENSE.md",
-        "!package.json",
-        "!package-lock.json",
-        "!src/",
-        "!e2e/",
-        "!hooks/",
-        "!angular.json",
-        "!_config.yml",
-        "!karma.conf.js",
-        "!tsconfig.json",
-        "!tslint.json"
+  "productName": "Sliver",
+  "artifactName": "${productName}_${version}_${os}.${ext}",
+  "directories": {
+    "output": "release/"
+  },
+  "files": [
+    "**/*",
+    "!**/*.ts",
+    "!*.code-workspace",
+    "!LICENSE.md",
+    "!package.json",
+    "!package-lock.json",
+    "!src/",
+    "!e2e/",
+    "!hooks/",
+    "!angular.json",
+    "!_config.yml",
+    "!karma.conf.js",
+    "!tsconfig.json",
+    "!tslint.json"
+  ],
+  "linux": {
+    "icon": "icon.png",
+    "target": [
+      "deb",
+      "rpm",
+      "AppImage"
     ],
-    "linux": {
-      "icon": "dist/en",
-      "target": [
-        "deb",
-        "rpm",
-        "AppImage"
-      ],
-      "publish": [{
+    "publish": [
+      {
         "provider": "github",
         "owner": "BishopFox",
         "repo": "sliver-gui",
         "private": true
-      }]
-    }
+      }
+    ]
   }
-  
+}

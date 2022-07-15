@@ -9,10 +9,10 @@ jobs:
 
   macos-build:
     runs-on: macos-latest
+    timeout-minutes: 90
     if: startsWith( github.ref, 'refs/tags/v')
 
     env:
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}
       CSC_IDENTITY_AUTO_DISCOVERY: false
 
     strategy:
@@ -37,15 +37,39 @@ jobs:
         npm install -g ngx-i18nsupport
         npm install -g ts-node
 
-    - run: npm run publish:macos
+    - run: |
+      npm run publish:macos-amd64
+      ls -lah ./release
 
+    - name: MacOS Artifacts AMD64
+      uses: actions/upload-artifact@v2
+      with:
+        name: macos-amd64
+        path: |
+          ./release/*.dmg
+          ./release/*.blockmap
+          ./release/latest-mac.yml
+
+    - run: rm -rf ./release  
+
+    - run: |
+      npm run publish:macos-arm64
+      ls -lah ./release
+
+    - name: MacOS Artifacts ARM64
+      uses: actions/upload-artifact@v2
+      with:
+        name: macos-arm64
+        path: |
+          ./release/*.dmg
+          ./release/*.blockmap
+          ./release/latest-mac.yml
 
   linux-build:
 
     runs-on: ubuntu-latest
+    timeout-minutes: 90
     if: startsWith( github.ref, 'refs/tags/v')
-    env:
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
     strategy:
       matrix:
@@ -69,14 +93,27 @@ jobs:
         npm install -g ngx-i18nsupport
         npm install -g ts-node
 
-    - run: npm run publish:linux
+    - run: |
+      npm run publish:linux
+      ls -lah ./release
+
+    - name: Linux Artifacts AMD64
+      uses: actions/upload-artifact@v2
+      with:
+        name: linux-amd64
+        path: |
+          ./release/*.AppImage
+          ./release/*.deb
+          ./release/*.rpm
+          ./release/*.blockmap
+          ./release/latest-linux.yml
+
 
   windows-build:
 
     runs-on: windows-latest
+    timeout-minutes: 90
     if: startsWith( github.ref, 'refs/tags/v')
-    env:
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
     strategy:
       matrix:
@@ -100,4 +137,41 @@ jobs:
         npm install -g ngx-i18nsupport
         npm install -g ts-node
         
-    - run: npm run publish:windows
+    - run: |
+      npm run publish:windows
+      ls -lah ./release
+
+    - name: Windows Artifacts AMD64
+      uses: actions/upload-artifact@v2
+      with:
+        name: windows-amd64
+        path: |
+          ./release/*.exe
+          ./release/*.blockmap
+          ./release/latest.yml
+
+  tagged-release:
+
+    needs: [windows-build, linux-build, macos-build]
+
+    name: "Tagged Release"
+    if: startsWith( github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+  
+    - run: mkdir -p ./release
+    - uses: actions/download-artifact@v2
+      with:
+        path: ./release
+    
+    - run: ls -lah ./release
+
+    - name: "Publish Release"
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        prerelease: false
+        files: |
+          ./release/**
