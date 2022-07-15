@@ -143,7 +143,7 @@ jobs:
     - name: Build Windows AMD64
       run: |
         npm run publish:windows
-        ls -lah ./release
+        dir ./release
 
     - name: Windows Artifacts AMD64
       uses: actions/upload-artifact@v2
@@ -152,7 +152,7 @@ jobs:
         path: |
           ./release/*.exe
           ./release/*.blockmap
-          ./release/latest.yml
+          ./release/*.yml
 
   tagged-release:
 
