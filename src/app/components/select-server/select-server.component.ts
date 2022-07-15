@@ -14,7 +14,7 @@
 */
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ClientService } from '@app/providers/client.service';
@@ -37,11 +37,11 @@ export class SelectServerComponent implements OnInit, OnDestroy {
   connecting = false;
   connectionError: string;
 
-  selectConfigForm: FormGroup;
+  selectConfigForm: UntypedFormGroup;
   configSub: Subscription;
 
   constructor(private _router: Router,
-              private _fb: FormBuilder,
+              private _fb: UntypedFormBuilder,
               private _eventsService: EventsService,
               private _clientService: ClientService) { }
 

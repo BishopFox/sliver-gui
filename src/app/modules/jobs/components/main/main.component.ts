@@ -15,7 +15,7 @@
 
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
 import { JobsService } from '@app/providers/jobs.service';
@@ -61,10 +61,10 @@ export class MainComponent implements OnInit {
 })
 export class AddWebsiteDialogComponent implements OnInit {
 
-  addWebsiteForm: FormGroup;
+  addWebsiteForm: UntypedFormGroup;
 
   constructor(public dialogRef: MatDialogRef<AddWebsiteDialogComponent>,
-              private _fb: FormBuilder,
+              private _fb: UntypedFormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {

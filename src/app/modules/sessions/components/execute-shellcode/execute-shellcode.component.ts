@@ -17,7 +17,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { take, map, startWith } from 'rxjs/operators';
 import * as commonpb from 'sliver-script/lib/pb/commonpb/common_pb';
@@ -47,14 +47,14 @@ export class ExecuteShellcodeComponent implements OnInit {
   @Input() selectAfterAdding = true;
 
   session: clientpb.Session;
-  selected = new FormControl(0);
-  shellcodeForm: FormGroup;
+  selected = new UntypedFormControl(0);
+  shellcodeForm: UntypedFormGroup;
   shellcodes: LibraryItem[];
   processes: commonpb.Process[];
   filteredProcesses: Observable<commonpb.Process[]>;
 
   constructor(private _route: ActivatedRoute,
-              private _fb: FormBuilder,
+              private _fb: UntypedFormBuilder,
               public dialog: MatDialog,
               private _libraryService: LibraryService,
               private _terminalService: TerminalService,

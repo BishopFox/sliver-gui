@@ -16,7 +16,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { take } from 'rxjs/operators';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 
@@ -98,10 +98,10 @@ export class WebsiteDetailsComponent implements OnInit {
 })
 export class AddFileDialogComponent {
 
-  addFileForm: FormGroup;
+  addFileForm: UntypedFormGroup;
 
   constructor(public dialogRef: MatDialogRef<AddFileDialogComponent>,
-              private _fb: FormBuilder,
+              private _fb: UntypedFormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
 
@@ -132,10 +132,10 @@ export class AddFileDialogComponent {
 })
 export class AddDirectoryDialogComponent implements OnInit {
 
-  addDirectoryForm: FormGroup;
+  addDirectoryForm: UntypedFormGroup;
 
   constructor(public dialogRef: MatDialogRef<AddDirectoryDialogComponent>,
-              private _fb: FormBuilder,
+              private _fb: UntypedFormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {

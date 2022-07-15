@@ -14,7 +14,7 @@
 */
 
 import { Component, OnInit, OnDestroy, Output, EventEmitter, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { FadeInOut } from '@app/shared/animations';
 import { Subscription } from 'rxjs';
@@ -35,13 +35,13 @@ export class CreateImplantConfigComponent implements OnInit, OnDestroy {
   @ViewChild('stepper') stepper: MatStepper;
   selectedIndex: number;
 
-  targetForm: FormGroup;
+  targetForm: UntypedFormGroup;
   targetFormSub: Subscription;
-  compileTimeForm: FormGroup;
+  compileTimeForm: UntypedFormGroup;
 
   c2s: clientpb.ImplantC2[] = [];
 
-  constructor(private _fb: FormBuilder) { }
+  constructor(private _fb: UntypedFormBuilder) { }
 
   ngOnInit() {
     this.targetForm = this._fb.group({

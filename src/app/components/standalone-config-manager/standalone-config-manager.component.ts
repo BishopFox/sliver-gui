@@ -14,7 +14,7 @@
 */
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, AbstractControl, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, AbstractControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import * as sliver from 'sliver-script';
 
@@ -35,11 +35,11 @@ export class StandaloneConfigManagerComponent implements OnInit, OnDestroy {
   configs: SliverConfig[];
 
   selectedConfig: SliverConfig;
-  selectedConfigForm: FormGroup;
+  selectedConfigForm: UntypedFormGroup;
 
   constructor(private _clientService: ClientService,
               private _eventsService: EventsService,
-              private _fb: FormBuilder) { }
+              private _fb: UntypedFormBuilder) { }
 
   ngOnInit(): void {
     this.fetchConfigs();

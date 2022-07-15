@@ -16,7 +16,7 @@
 
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
@@ -44,14 +44,14 @@ export class ExecuteAssemblyComponent implements OnInit {
   assemblies: LibraryItem[];
 
   @Input() selectAfterAdding = true;
-  selected = new FormControl(0);
+  selected = new UntypedFormControl(0);
 
   session: clientpb.Session;
-  executeAssemblyForm: FormGroup;
+  executeAssemblyForm: UntypedFormGroup;
 
   constructor(private _route: ActivatedRoute,
               public dialog: MatDialog,
-              private _fb: FormBuilder,
+              private _fb: UntypedFormBuilder,
               private _terminalService: TerminalService,
               private _libraryService: LibraryService,
               private _sliverService: SliverService) { }

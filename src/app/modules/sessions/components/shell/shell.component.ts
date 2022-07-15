@@ -15,7 +15,7 @@
 
 
 import { Component, OnInit, ViewChildren, Input, QueryList, Inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
@@ -39,7 +39,7 @@ export class ShellComponent implements OnInit {
   @Input() selectAfterAdding = true;
   session: clientpb.Session;
   textEncoder = new TextEncoder();
-  selected = new FormControl(0);
+  selected = new UntypedFormControl(0);
   @ViewChildren(NgTerminalComponent) terminalChildren!: QueryList<NgTerminalComponent>;
 
   constructor(public dialog: MatDialog,
@@ -177,11 +177,11 @@ export class ShellCloseDialogComponent {
 })
 export class ShellCustomDialogComponent implements OnInit {
 
-  customShellForm: FormGroup;
+  customShellForm: UntypedFormGroup;
 
   constructor(public dialogRef: MatDialogRef<ShellCustomDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private _fb: FormBuilder) { }
+              private _fb: UntypedFormBuilder) { }
 
   ngOnInit(): void {
     const defaultPty = !this.isWindows();

@@ -14,7 +14,7 @@
 */
 
 import { Component, EventEmitter, Input, OnInit, Output, Inject } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -164,10 +164,10 @@ class BaseC2Validators {
 })
 export class AddMTLSDialogComponent extends BaseC2Validators implements OnInit {
 
-  mtlsForm: FormGroup;
+  mtlsForm: UntypedFormGroup;
 
   constructor(public dialogRef: MatDialogRef<AddMTLSDialogComponent>,
-              private _fb: FormBuilder,
+              private _fb: UntypedFormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any)
   { 
     super();
@@ -215,10 +215,10 @@ export class AddMTLSDialogComponent extends BaseC2Validators implements OnInit {
 })
 export class AddHTTPDialogComponent extends BaseC2Validators implements OnInit {
 
-  httpForm: FormGroup;
+  httpForm: UntypedFormGroup;
 
   constructor(public dialogRef: MatDialogRef<AddHTTPDialogComponent>,
-              private _fb: FormBuilder,
+              private _fb: UntypedFormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any)
   {
     super();
@@ -266,10 +266,10 @@ export class AddHTTPDialogComponent extends BaseC2Validators implements OnInit {
 })
 export class AddDNSDialogComponent extends BaseC2Validators implements OnInit {
 
-  dnsForm: FormGroup;
+  dnsForm: UntypedFormGroup;
 
   constructor(public dialogRef: MatDialogRef<AddDNSDialogComponent>,
-              private _fb: FormBuilder,
+              private _fb: UntypedFormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any)
   {
     super();

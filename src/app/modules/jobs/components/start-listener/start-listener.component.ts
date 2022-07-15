@@ -14,7 +14,7 @@
 */
 
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
@@ -50,11 +50,11 @@ export class StartListenerComponent implements OnInit, OnDestroy {
   readonly TLSSettings = TLSSettings;
   readonly Protocols = Protocols;
 
-  selectProtocolForm: FormGroup;
-  mtlsOptionsForm: FormGroup;
-  httpOptionsForm: FormGroup;
-  httpsOptionsForm: FormGroup;
-  dnsOptionsForm: FormGroup;
+  selectProtocolForm: UntypedFormGroup;
+  mtlsOptionsForm: UntypedFormGroup;
+  httpOptionsForm: UntypedFormGroup;
+  httpsOptionsForm: UntypedFormGroup;
+  dnsOptionsForm: UntypedFormGroup;
 
   websites: clientpb.Website[];
   websitesSub: Subscription;
@@ -64,7 +64,7 @@ export class StartListenerComponent implements OnInit, OnDestroy {
 
   constructor(public dialog: MatDialog,
               private _router: Router,
-              private _fb: FormBuilder,
+              private _fb: UntypedFormBuilder,
               private _eventService: EventsService,
               private _jobsService: JobsService,
               private _clientService: ClientService) { }

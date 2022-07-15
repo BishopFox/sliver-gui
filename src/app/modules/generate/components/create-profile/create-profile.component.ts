@@ -14,7 +14,7 @@
 */
 
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
 import { SliverService } from '@app/providers/sliver.service';
@@ -30,10 +30,10 @@ import { FadeInOut } from '@app/shared/animations';
 export class CreateProfileComponent implements OnInit {
 
   implantConfig: clientpb.ImplantConfig;
-  profileForm: FormGroup;
+  profileForm: UntypedFormGroup;
 
   constructor(private _router: Router,
-              private _fb: FormBuilder,
+              private _fb: UntypedFormBuilder,
               private _sliverService: SliverService) { }
 
   ngOnInit(): void {

@@ -14,7 +14,7 @@
 */
 
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormBuilder, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
@@ -36,7 +36,7 @@ import { EventsService } from '@app/providers/events.service';
 export class GenerateComponent implements OnInit {
 
   implantConfig: clientpb.ImplantConfig;
-  generateForm: FormGroup;
+  generateForm: UntypedFormGroup;
   generateNameFormSub: Subscription;
   namePattern = RegExp('^[a-zA-Z0-9]*$');
   generatingDialogRef: MatDialogRef<GeneratingDialogComponent, any>;
@@ -46,7 +46,7 @@ export class GenerateComponent implements OnInit {
               private _sliverService: SliverService,
               private _clientService: ClientService,
               private _eventsService: EventsService,
-              private _fb: FormBuilder) { }
+              private _fb: UntypedFormBuilder) { }
 
   ngOnInit(): void {
     this.generateForm = this._fb.group({

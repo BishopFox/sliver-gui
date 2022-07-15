@@ -14,7 +14,7 @@
 */
 
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ClientService, ReadFiles } from '@app/providers/client.service';
 import { SliverService } from '@app/providers/sliver.service';
@@ -73,11 +73,11 @@ export class MainComponent implements OnInit {
 })
 export class LootAddFileDialogComponent implements OnInit {
 
-  addFile: FormGroup;
+  addFile: UntypedFormGroup;
   readFiles: ReadFiles = null;
 
   constructor(public dialogRef: MatDialogRef<LootAddFileDialogComponent>,
-              private _fb: FormBuilder,
+              private _fb: UntypedFormBuilder,
               private _clientService: ClientService,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
@@ -119,10 +119,10 @@ export class LootAddCredentialDialogComponent implements OnInit {
   readonly USER_PASSWORD = 'user-password';
   readonly API_KEY = 'api-key';
   
-  addCredential: FormGroup;
+  addCredential: UntypedFormGroup;
   credentialType: string = this.USER_PASSWORD;
   constructor(public dialogRef: MatDialogRef<LootAddCredentialDialogComponent>,
-              private _fb: FormBuilder,
+              private _fb: UntypedFormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {

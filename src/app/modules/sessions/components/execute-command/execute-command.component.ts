@@ -16,7 +16,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { take } from 'rxjs/operators';
 import * as shlex from 'shlex';
 import * as clientpb from 'sliver-script/lib/pb/clientpb/client_pb';
@@ -43,11 +43,11 @@ export class ExecuteCommandComponent implements OnInit {
 
   command: string;
   session: clientpb.Session;
-  selected = new FormControl(0);
-  commandForm: FormGroup;
+  selected = new UntypedFormControl(0);
+  commandForm: UntypedFormGroup;
 
   constructor(private _route: ActivatedRoute,
-              private _fb: FormBuilder,
+              private _fb: UntypedFormBuilder,
               public dialog: MatDialog,
               private _terminalService: TerminalService,
               private _sliverService: SliverService) { }
