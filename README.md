@@ -4,7 +4,9 @@
 
 ⚠️ THIS PROJECT IS PRE-ALPHA AND FOR DEVELOPERS ONLY ⚠️
 
-The GUI client is NOT feature complete, expect bugs and missing features. Please do not file bug reports for missing functionality.
+* The GUI client is NOT feature complete, expect bugs and missing features.
+* Please do not open any issues/bug reports on this repo unless it's related to a pull request.
+* There's no documentation or tutorials aside from this readme.
 
 
 [![Tagged Release](https://github.com/BishopFox/sliver-gui/actions/workflows/autorelease.yml/badge.svg)](https://github.com/BishopFox/sliver-gui/actions/workflows/autorelease.yml) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
@@ -55,10 +57,10 @@ npm run electron:local
 If that works, then you should be able to do platform specific builds:
 
 ```
-npm run electron:macos-amd64
-npm run electron:macos-arm64
-npm run electron:windows
-npm run electron:linux
+npm run publish:macos-amd64
+npm run publish:macos-arm64
+npm run publish:windows_exe
+npm run publish:linux
 ```
 
 To work on i18n/translations, you'll likely need to install the `ngx-i18nsupport` package:
