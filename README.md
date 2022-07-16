@@ -11,9 +11,9 @@
 
 [![Tagged Release](https://github.com/BishopFox/sliver-gui/actions/workflows/autorelease.yml/badge.svg)](https://github.com/BishopFox/sliver-gui/actions/workflows/autorelease.yml) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-### Usage
+### Install
 
-Download the [latest release](https://github.com/BishopFox/sliver-gui/releases) and connect to a Sliver server using a standard operator profile. See the [wiki](https://github.com/BishopFox/sliver-gui/wiki) for more details.
+Download the [latest release](https://github.com/BishopFox/sliver-gui/releases) and connect to a Sliver server using a standard operator profile. See the [wiki](https://github.com/BishopFox/sliver-gui/wiki) for more details. On MacOS you'll need to manually remove the quarantine flag on the app: `xattr -r -d com.apple.quarantine Sliver.app` before the application will run.
 
 ### Features
 
