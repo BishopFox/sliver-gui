@@ -1,6 +1,6 @@
 {
   "name": "sliver-gui",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Cross-platform GUI for the Sliver implant framework",
   "license": "GPLv3",
   "homepage": "https://github.com/BishopFox/sliver-gui",
