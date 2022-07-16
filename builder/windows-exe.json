@@ -1,6 +1,6 @@
 {
   "productName": "Sliver",
-  "artifactName": "${productName}_${version}_${os}-portable.${ext}",
+  "artifactName": "${productName}_${version}_${os}-${arch}-portable.${ext}",
   "directories": {
     "output": "release/"
   },

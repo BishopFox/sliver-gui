@@ -1,6 +1,6 @@
 {
   "productName": "Sliver",
-  "artifactName": "${productName}_${version}_${os}.${ext}",
+  "artifactName": "${productName}_${version}_${os}-${arch}.${ext}",
   "directories": {
     "output": "release/"
   },
