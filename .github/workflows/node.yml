@@ -23,18 +23,18 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-  - name: NPM Install
-    run: |
-     npm install
-     cd ./workers/worker
-     npm install
-     cd ../..
-     npm install -g electron-packager
-     npm install -g @angular/cli
-     npm install -g ngx-i18nsupport
+    - name: NPM Install
+      run: |
+      npm install
+      cd ./workers/worker
+      npm install
+      cd ../..
+      npm install -g electron-packager
+      npm install -g @angular/cli
+      npm install -g ngx-i18nsupport
 
-  - name: Build MacOS
-    run: npm run electron:macos
+    - name: Build MacOS
+      run: npm run electron:macos
 
   linux-build:
     runs-on: ubuntu-latest
