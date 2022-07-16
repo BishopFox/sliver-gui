@@ -1,0 +1,45 @@
+{
+    "productName": "Sliver",
+    "artifactName": "${productName}_${version}_${os}-${arch}.${ext}",
+    "directories": {
+        "output": "release/"
+    },
+    "files": [
+        "**/*",
+        "!**/*.ts",
+        "!*.code-workspace",
+        "!LICENSE.md",
+        "!package.json",
+        "!package-lock.json",
+        "!src/",
+        "!e2e/",
+        "!hooks/",
+        "!angular.json",
+        "!_config.yml",
+        "!karma.conf.js",
+        "!tsconfig.json",
+        "!tslint.json"
+    ],
+    "mac": {
+        "icon": "icon.png",
+        "hardenedRuntime": true,
+        "gatekeeperAssess": false,
+        "target": [
+            {
+                "target": "dmg",
+                "arch": [
+                    "x64",
+                    "arm64"
+                ]
+            }
+        ],
+        "publish": [
+            {
+                "provider": "github",
+                "owner": "BishopFox",
+                "repo": "sliver-gui",
+                "private": false
+            }
+        ]
+    }
+}
