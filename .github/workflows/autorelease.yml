@@ -63,6 +63,8 @@ jobs:
         npm install -g ts-node
 
     - name: Build MacOS
+      env:
+        CSC_KEYCHAIN_PATH: $RUNNER_TEMP/app-signing.keychain-db
       run: |
         npm run publish:macos
         ls -lah ./release
