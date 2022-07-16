@@ -54,14 +54,15 @@ npm install -g @angular/cli
 npm run electron:local
 ```
 
-If that works, then you should be able to do platform specific builds:
+If that works, then you should be able to do platform specific builds (`publish:macos` will build both x64 and arm64):
 
 ```
-npm run publish:macos-amd64
-npm run publish:macos-arm64
-npm run publish:windows_exe
+npm run publish:macos
+npm run publish:windows
 npm run publish:linux
 ```
+
+You can also use `publish:windows_exe` to build a portable (i.e., no installer) Windows executable.
 
 To work on i18n/translations, you'll likely need to install the `ngx-i18nsupport` package:
 
