@@ -11,7 +11,6 @@ jobs:
     timeout-minutes: 90
     env:
       CSC_IDENTITY_AUTO_DISCOVERY: false
-
     strategy:
       matrix:
         node-version: [16.x]
@@ -26,20 +25,22 @@ jobs:
     - name: NPM Install
       run: |
         npm install
-        cd ./workers/worker
+        cd ./main/workers/worker
         npm install
         cd ../..
         npm install -g electron-packager
         npm install -g @angular/cli
         npm install -g ngx-i18nsupport
+        npm install -g ts-node
 
     - name: Build MacOS
-      run: npm run electron:macos
+      run: |
+        npm run publish:macos
+        ls -lah ./release
 
   linux-build:
     runs-on: ubuntu-latest
     timeout-minutes: 90
-
     strategy:
       matrix:
         node-version: [16.x]
@@ -50,7 +51,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    
+
     - name: NPM Install
       run: |
         npm install
@@ -62,14 +63,14 @@ jobs:
         npm install -g ngx-i18nsupport
         npm install -g ts-node
 
-    - name: Build Linux
-      run: npm run electron:linux
+    - name: Build Linux AMD64
+      run: |
+        npm run publish:linux
+        ls -lah ./release
 
   windows-build:
-
     runs-on: windows-latest
     timeout-minutes: 90
-    
     strategy:
       matrix:
         node-version: [16.x]
@@ -91,7 +92,8 @@ jobs:
         npm install -g @angular/cli
         npm install -g ngx-i18nsupport
         npm install -g ts-node
-
-    - name: Build Windows
-      run: npm run electron:windows
-
+        
+    - name: Build Windows AMD64
+      run: |
+        npm run publish:windows
+        dir ./release
