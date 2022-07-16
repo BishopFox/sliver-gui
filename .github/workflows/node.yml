@@ -25,13 +25,13 @@ jobs:
 
     - name: NPM Install
       run: |
-      npm install
-      cd ./workers/worker
-      npm install
-      cd ../..
-      npm install -g electron-packager
-      npm install -g @angular/cli
-      npm install -g ngx-i18nsupport
+        npm install
+        cd ./workers/worker
+        npm install
+        cd ../..
+        npm install -g electron-packager
+        npm install -g @angular/cli
+        npm install -g ngx-i18nsupport
 
     - name: Build MacOS
       run: npm run electron:macos
@@ -53,14 +53,14 @@ jobs:
     
     - name: NPM Install
       run: |
-       npm install
-       cd ./main/workers/worker
-       npm install
-       cd ../..
-       npm install -g electron-packager
-       npm install -g @angular/cli
-       npm install -g ngx-i18nsupport
-       npm install -g ts-node
+        npm install
+        cd ./main/workers/worker
+        npm install
+        cd ../..
+        npm install -g electron-packager
+        npm install -g @angular/cli
+        npm install -g ngx-i18nsupport
+        npm install -g ts-node
 
     - name: Build Linux
       run: npm run electron:linux
