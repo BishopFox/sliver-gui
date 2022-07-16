@@ -1,7 +1,6 @@
-name: Node.js CI
+name: Build Check
 
 on:
-
   pull_request:
     branches: [ master ]
 
@@ -9,6 +8,7 @@ jobs:
 
   macos-build:
     runs-on: macos-latest
+    timeout-minutes: 90
     env:
       CSC_IDENTITY_AUTO_DISCOVERY: false
 
@@ -33,11 +33,12 @@ jobs:
      npm install -g @angular/cli
      npm install -g ngx-i18nsupport
 
-    - run: npm run electron:macos
+  - name: Build MacOS
+    run: npm run electron:macos
 
   linux-build:
-
     runs-on: ubuntu-latest
+    timeout-minutes: 90
 
     strategy:
       matrix:
@@ -65,8 +66,8 @@ jobs:
       run: npm run electron:linux
 
   windows-build:
-
     runs-on: windows-latest
+    timeout-minutes: 90
 
     strategy:
       matrix:
@@ -90,5 +91,6 @@ jobs:
         npm install -g ngx-i18nsupport
         npm install -g ts-node
 
-    - run: npm run electron:windows
+    - name: Build Windows
+      run: npm run electron:windows
 
