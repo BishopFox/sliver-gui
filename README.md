@@ -6,7 +6,7 @@
 
 * The GUI client is NOT feature complete, expect bugs and missing features.
 * Not accepting any issues/bug reports at this time, however feel free to submit PRs.
-* There's no documentation or tutorials aside from this readme.
+* There's no documentation or tutorials aside from this readme (and the repo wiki).
 
 
 [![Tagged Release](https://github.com/BishopFox/sliver-gui/actions/workflows/autorelease.yml/badge.svg)](https://github.com/BishopFox/sliver-gui/actions/workflows/autorelease.yml) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
