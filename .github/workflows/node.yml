@@ -2,7 +2,7 @@ name: Build Check
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: master
 
 jobs:
 
@@ -66,9 +66,10 @@ jobs:
       run: npm run electron:linux
 
   windows-build:
+
     runs-on: windows-latest
     timeout-minutes: 90
-
+    
     strategy:
       matrix:
         node-version: [16.x]
