@@ -127,8 +127,6 @@ export class WindowManager {
   }
 
   initAutoUpdate() {
-    logger.info(`AutoUpdater feed URL: ${autoUpdater.getFeedURL()}`);
-
     autoUpdater.logger = logger;
     autoUpdater.on('checking-for-update', () => {
       this.downloadEvents.next({
