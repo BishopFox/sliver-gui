@@ -48,7 +48,7 @@ jobs:
         name: macos
         path: |
           ./release/*.zip
-          ./release/*.blockmap
+          ./release/*.zip.blockmap
           ./release/latest-mac.yml
 
   linux-build:
