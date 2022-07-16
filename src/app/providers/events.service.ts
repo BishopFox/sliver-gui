@@ -25,7 +25,7 @@ export interface Notification {
   message: string;
   buttonLabel: string;
   seconds: number;
-  callback: Function|null;
+  callback: Function | null;
 }
 
 export interface MenuEvent {
@@ -43,6 +43,7 @@ export interface Progress {
 
 export interface DownloadEvent {
   event: string;
+  info?: any;
   progress?: Progress;
   error?: string;
 }
@@ -122,7 +123,7 @@ export class EventsService {
           case Events.Website:
             this.websites$.next(event);
             break;
-          
+
           // Loot
           case Events.LootRemovedEvent:
           case Events.LootAddedEvent:
@@ -139,7 +140,7 @@ export class EventsService {
     });
   }
 
-  notify(message: string, buttonLabel: string, seconds: number = 10, callback: Function|null = null) {
+  notify(message: string, buttonLabel: string, seconds: number = 10, callback: Function | null = null) {
     this.notifications$.next({
       message: message,
       buttonLabel: buttonLabel,

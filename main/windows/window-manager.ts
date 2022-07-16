@@ -52,6 +52,7 @@ export interface Progress {
 
 export interface DownloadEvent {
   event: string;
+  info?: string;
   progress?: Progress;
   error?: string;
 }
@@ -88,10 +89,8 @@ export class WindowManager {
     await this.initDB();
 
     await this.workerManager.init(this.sequelize);
-    this.initUpdate();
-    initMenu(this.menuEvents, () => {
-      autoUpdater.checkForUpdatesAndNotify();
-    });
+    this.initAutoUpdate();
+    initMenu(this.menuEvents, () => { this.checkForUpdates() });
 
     fs.watch(CONFIG_DIR, { encoding: 'utf-8' }, (_, filename) => {
       this.configEvents.next({ filename: filename });
@@ -127,48 +126,61 @@ export class WindowManager {
     logger.debug(`Database initialization completed`);
   }
 
-  initUpdate() {
+  initAutoUpdate() {
+    logger.info(`AutoUpdater feed URL: ${autoUpdater.getFeedURL()}`);
 
+    autoUpdater.logger = logger;
     autoUpdater.on('checking-for-update', () => {
       this.downloadEvents.next({
-        event: 'checking-for-update',
+        event: 'auto-update-checking-for-update',
       });
     });
 
     autoUpdater.on('update-available', (info) => {
       logger.debug(info);
       this.downloadEvents.next({
-        event: 'update-available',
+        event: 'auto-update-update-available',
+        info: info,
       });
     });
 
     autoUpdater.on('update-not-available', (info) => {
       logger.debug(info);
       this.downloadEvents.next({
-        event: 'update-not-available',
+        event: 'auto-update-update-not-available',
+        info: info,
       });
     });
 
     autoUpdater.on('download-progress', (progress) => {
       logger.debug(progress);
       this.downloadEvents.next({
-        event: 'download-progress',
+        event: 'auto-update-download-progress',
         progress: progress,
-      })
+      });
     });
 
     autoUpdater.on('update-downloaded', (info) => {
       logger.debug(info);
-      autoUpdater.quitAndInstall();
+      this.downloadEvents.next({
+        event: 'auto-update-update-downloaded',
+      });
+      setTimeout(() => {
+        autoUpdater.quitAndInstall();
+      }, 1000);
     });
 
     autoUpdater.on('error', (err) => {
       logger.warn(err);
       this.downloadEvents.next({
-        event: 'error',
+        event: 'auto-update-error',
         error: err.toString(),
       });
     });
+  }
+
+  async checkForUpdates() {
+    autoUpdater.checkForUpdatesAndNotify();
   }
 
   // send - Send a message to a window's webContents

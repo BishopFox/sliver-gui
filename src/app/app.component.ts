@@ -28,6 +28,7 @@ import {
 } from './components/dialogs/dialogs.component';
 import { EventsService, Notification, MenuEvent, DownloadEvent } from './providers/events.service';
 import { ClientService, Platforms, Settings, Themes } from './providers/client.service';
+import { BreakPointRegistry } from '@angular/flex-layout';
 
 
 @Component({
@@ -43,18 +44,17 @@ export class AppComponent implements OnInit, OnDestroy {
 
   // Navigation hot keys are disabled if the active elem is any of:
   private readonly DISABLE_NAV = ['input', 'textarea'];
-  
+
   mainWindow = window.location.origin === "app://sliver";
   settings: Settings;
   subs: Subscription[] = [];
 
   constructor(private _router: Router,
-              private _overlayContainer: OverlayContainer,
-              private _eventsService: EventsService,
-              private _clientService: ClientService,
-              private _snackBar: MatSnackBar,
-              public dialog: MatDialog) 
-  {
+    private _overlayContainer: OverlayContainer,
+    private _eventsService: EventsService,
+    private _clientService: ClientService,
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog) {
     if (this.mainWindow) {
       this.initAlerts();
     }
@@ -81,7 +81,7 @@ export class AppComponent implements OnInit, OnDestroy {
   async setTheme() {
     console.log(`Set theme to: ${this.settings.theme}`);
     const platform = await this._clientService.getPlatform();
-    switch(this.settings.theme) {
+    switch (this.settings.theme) {
       case Themes.Auto:
         this.setAutoTheme();
         break;
@@ -208,7 +208,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this._router.navigate(['settings']);
     });
     this.subs.push(sub);
-    
+
     // About menu event
     sub = this._eventsService.menu$.pipe(
       filter(event => event.button === 'about')
@@ -234,9 +234,23 @@ export class AppComponent implements OnInit, OnDestroy {
     });
     this.subs.push(sub);
 
+    // Auto update events
+    sub = this._eventsService.download$.pipe(
+      filter((autoUpdateEvent: DownloadEvent) => [
+        'auto-update-checking-for-update',
+        'auto-update-update-available',
+        'auto-update-update-not-available',
+        'auto-update-download-progress',
+        'auto-update-update-downloaded',
+        'auto-update-error'
+      ].includes(autoUpdateEvent.event))
+    ).subscribe((autoUpdateEvent: DownloadEvent) => {
+      this.autoUpdateEvents(autoUpdateEvent);
+    });
+    this.subs.push(sub);
   }
 
-  notificationAlert(message: string, buttonLabel: string, seconds: number, callback: Function|null = null) {
+  notificationAlert(message: string, buttonLabel: string, seconds: number, callback: Function | null = null) {
     const snackBarRef = this._snackBar.open(message, buttonLabel, {
       duration: seconds * 1000,
     });
@@ -290,6 +304,32 @@ export class AppComponent implements OnInit, OnDestroy {
         break;
       case 'sliver-download-client':
         this.sliverClientDownload();
+        break;
+    }
+  }
+
+  autoUpdateEvents(autoUpdateEvent: DownloadEvent) {
+    console.log(autoUpdateEvent);
+    switch (autoUpdateEvent.event) {
+      case 'auto-update-checking-for-update':
+        this.notificationAlert('Checking for updates ...', 'Dismiss', 3);
+        break;
+      case 'auto-update-update-not-available':
+        const noUpdateMsg = autoUpdateEvent?.info?.version ? `No updates available (current v${autoUpdateEvent.info.version})` : 'No updates available';
+        this.notificationAlert(noUpdateMsg, 'Dismiss', 3);
+        break;
+      case 'auto-update-update-available':
+        const updateMsg = autoUpdateEvent?.info?.version ? `Downloading update (v${autoUpdateEvent.info.version})` : 'Downloading update';
+        this.notificationAlert(updateMsg, 'Dismiss', 3);
+        break;
+      case 'auto-update-download-progress':
+        console.log(autoUpdateEvent.info);
+        break;
+      case 'auto-update-update-downloaded':
+        this.notificationAlert('Installing new version, restarting application ...', 'Dismiss', 1);
+        break;
+      case 'auto-update-error':
+        this.notificationAlert(`Error: ${autoUpdateEvent.info}`, 'Dismiss', 3);
         break;
     }
   }

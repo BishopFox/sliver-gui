@@ -22,10 +22,15 @@
   ],
   "mac": {
     "icon": "icon.png",
+    "hardenedRuntime": true,
+    "gatekeeperAssess": false,
     "target": [
       {
         "target": "dmg",
-        "arch": "x64"
+        "arch": [
+          "x64",
+          "arm64"
+        ]
       }
     ],
     "publish": [
@@ -33,7 +38,7 @@
         "provider": "github",
         "owner": "BishopFox",
         "repo": "sliver-gui",
-        "private": true
+        "private": false
       }
     ]
   }

@@ -37,25 +37,9 @@ jobs:
         npm install -g ngx-i18nsupport
         npm install -g ts-node
 
-    - name: Build MacOS AMD64
+    - name: Build MacOS
       run: |
-        npm run publish:macos-amd64
-        ls -lah ./release
-
-    - name: MacOS Artifacts AMD64
-      uses: actions/upload-artifact@v2
-      with:
-        name: macos-amd64
-        path: |
-          ./release/*.dmg
-          ./release/*.blockmap
-          ./release/latest-mac.yml
-
-    - run: rm -rf ./release  
-
-    - name: Build MacOS ARM64
-      run: |
-        npm run publish:macos-arm64
+        npm run publish:macos
         ls -lah ./release
 
     - name: MacOS Artifacts ARM64
@@ -106,8 +90,6 @@ jobs:
         name: linux-amd64
         path: |
           ./release/*.AppImage
-          ./release/*.deb
-          ./release/*.rpm
           ./release/*.blockmap
           ./release/latest-linux.yml
 
@@ -142,8 +124,7 @@ jobs:
         
     - name: Build Windows AMD64
       run: |
-        npm run publish:windows_exe
-        npm run publish:windows_nsis
+        npm run publish:windows
         dir ./release
 
     - name: Windows Artifacts AMD64
@@ -153,7 +134,7 @@ jobs:
         path: |
           ./release/*.exe
           ./release/*.blockmap
-          ./release/*.yml
+          ./release/latest.yml
 
   tagged-release:
 

@@ -23,8 +23,6 @@
   "linux": {
     "icon": "icon.png",
     "target": [
-      "deb",
-      "rpm",
       "AppImage"
     ],
     "publish": [
@@ -32,7 +30,7 @@
         "provider": "github",
         "owner": "BishopFox",
         "repo": "sliver-gui",
-        "private": true
+        "private": false
       }
     ]
   }

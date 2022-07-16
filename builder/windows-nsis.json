@@ -33,7 +33,7 @@
         "provider": "github",
         "owner": "BishopFox",
         "repo": "sliver-gui",
-        "private": true
+        "private": false
       }
     ]
   }
