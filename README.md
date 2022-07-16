@@ -5,7 +5,7 @@
 ⚠️ THIS PROJECT IS PRE-ALPHA AND FOR DEVELOPERS ONLY ⚠️
 
 * The GUI client is NOT feature complete, expect bugs and missing features.
-* Please do not open any issues/bug reports on this repo unless it's related to a pull request.
+* Not accepting any issues/bug reports at this time, however feel free to submit PRs.
 * There's no documentation or tutorials aside from this readme.
 
 
