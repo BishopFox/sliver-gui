@@ -43,7 +43,7 @@ jobs:
         ls -lah ./release
 
     - name: MacOS Artifacts ARM64
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: macos-arm64
         path: |
@@ -85,7 +85,7 @@ jobs:
         ls -lah ./release
 
     - name: Linux Artifacts AMD64
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: linux-amd64
         path: |
@@ -128,7 +128,7 @@ jobs:
         dir ./release
 
     - name: Windows Artifacts AMD64
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: windows-amd64
         path: |
