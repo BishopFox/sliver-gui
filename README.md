@@ -13,7 +13,7 @@
 
 ### Install
 
-Download the [latest release](https://github.com/BishopFox/sliver-gui/releases) and connect to a Sliver server using a standard operator profile. See the [wiki](https://github.com/BishopFox/sliver-gui/wiki) for more details. On MacOS you'll need to manually remove the quarantine flag on the app: `xattr -r -d com.apple.quarantine Sliver.app` before the application will run.
+Download the [latest release](https://github.com/BishopFox/sliver-gui/releases) and connect to a Sliver server using a standard operator profile. See the [wiki](https://github.com/BishopFox/sliver-gui/wiki) for more details. On MacOS you'll need to manually remove the quarantine bit on the app: `xattr -r -d com.apple.quarantine ./Sliver.app` before the application will run.
 
 ### Features
 
