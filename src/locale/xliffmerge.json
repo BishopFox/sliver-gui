@@ -1,12 +1,17 @@
 {
-    "xliffmergeOptions": {
-      "srcDir": "src/locale",
-      "i18nBaseFile": "messages",
-      "i18nFormat": "xlf",
-      "encoding": "UTF-8",
-
-      "autotranslate": ["fr", "ja", "es", "zh"],
-      "apikeyfile": "/Users/moloch/.gcp/apikey.txt"
-    }
+  "xliffmergeOptions": {
+    "srcDir": "src/locale",
+    "i18nBaseFile": "messages",
+    "i18nFormat": "xlf",
+    "encoding": "UTF-8",
+    "autotranslate": [
+      "fr",
+      "ja",
+      "es",
+      "de",
+      "uk",
+      "zh"
+    ],
+    "apikeyfile": "/Users/moloch/.gcp/apikey.txt"
   }
-  
+}

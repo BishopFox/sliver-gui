@@ -46,7 +46,7 @@
                   "package.json",
                   "LICENSE"
                 ]
-              },            
+              },
               {
                 "glob": "min/vs/basic-languages/javascript/**",
                 "input": "node_modules/monaco-editor",
@@ -186,6 +186,14 @@
             "translation": "src/locale/messages.ja.xlf",
             "baseHref": ""
           },
+          "uk": {
+            "translation": "src/locale/messages.uk.xlf",
+            "baseHref": ""
+          },
+          "de": {
+            "translation": "src/locale/messages.de.xlf",
+            "baseHref": ""
+          },
           "zh": {
             "translation": "src/locale/messages.zh.xlf",
             "baseHref": ""
@@ -196,8 +204,7 @@
     "angular-electron-e2e": {
       "root": "e2e",
       "projectType": "application",
-      "architect": {
-      }
+      "architect": {}
     }
   },
   "schematics": {

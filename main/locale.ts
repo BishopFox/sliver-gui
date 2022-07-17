@@ -27,6 +27,8 @@ export const Locales = new Map<string, string>([
   ["fr", "Français (French)"],
   ["es", "Español (Spanish)"],
   ["ja", "日本語 (Japanese)"],
+  ["de", "Deutsch (German)"],
+  ["uk", "Українська (Ukrainian)"],
   ["zh", "中文 (Chinese)"]
 ]);
 
