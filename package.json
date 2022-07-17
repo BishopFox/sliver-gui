@@ -88,7 +88,7 @@
     "moment": "^2.29.2",
     "monaco-editor": "^0.18.1",
     "node-gyp": "^8.4.1",
-    "node-notifier": "^9.0.0",
+    "node-notifier": "^10.0.1",
     "protobufjs": "^6.11.3",
     "rxjs": "^6.6.6",
     "sequelize": "^6.3.5",
