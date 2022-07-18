@@ -47,10 +47,10 @@ export class ExecuteCommandComponent implements OnInit {
   commandForm: UntypedFormGroup;
 
   constructor(private _route: ActivatedRoute,
-              private _fb: UntypedFormBuilder,
-              public dialog: MatDialog,
-              private _terminalService: TerminalService,
-              private _sliverService: SliverService) { }
+    private _fb: UntypedFormBuilder,
+    public dialog: MatDialog,
+    private _terminalService: TerminalService,
+    private _sliverService: SliverService) { }
 
   ngOnInit() {
     this._route.parent.params.pipe(take(1)).subscribe(params => {
@@ -100,9 +100,12 @@ export class ExecuteCommandComponent implements OnInit {
   displayOutput(executed: sliverpb.Execute) {
     const term = this._terminalService.newTerminal(this.session.getId(), this.namespace);
     if (executed.getStatus() !== 0) {
-      term.terminal.write(`${Colors.WARN}Exit code: ${executed.getStatus()}\n\n`); 
+      term.terminal.write(`${Colors.WARN}Exit code: ${executed.getStatus()}\n\n`);
     }
-    term.terminal.write(executed.getResult());
+    term.terminal.write(executed.getStdout());
+    if (executed.getStderr()) {
+      term.terminal.write(`${Colors.WARN}${executed.getStderr()}${Colors.Reset}\n\n`);
+    }
     if (this.selectAfterAdding) {
       this.selected.setValue(this.terminals.length - 1);
     }
