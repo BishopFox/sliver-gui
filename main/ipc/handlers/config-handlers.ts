@@ -81,6 +81,7 @@ export class ConfigHandlers {
             "ca_certificate": { "type": "string", "minLength": 1 },
             "certificate": { "type": "string", "minLength": 1 },
             "private_key": { "type": "string", "minLength": 1 },
+            "token": { "type": "string", "minLength": 1 },
           },
           "additionalProperties": false,
         },
@@ -126,6 +127,7 @@ export class ConfigHandlers {
           "ca_certificate": { "type": "string", "minLength": 1 },
           "certificate": { "type": "string", "minLength": 1 },
           "private_key": { "type": "string", "minLength": 1 },
+          "token": { "type": "string", "minLength": 1 },
         },
         "required": [
           "operator", "lhost", "lport", "ca_certificate",
