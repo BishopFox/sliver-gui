@@ -89,7 +89,7 @@
     "monaco-editor": "^0.18.1",
     "node-gyp": "^8.4.1",
     "node-notifier": "^10.0.1",
-    "protobufjs": "^6.11.3",
+    "protobufjs": "^7.0.0",
     "rxjs": "^6.6.6",
     "sequelize": "^6.3.5",
     "shlex": "^2.0.2",
