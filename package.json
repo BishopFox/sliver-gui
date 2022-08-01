@@ -46,7 +46,7 @@
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "2.0.8",
     "@types/mocha": "5.2.7",
-    "@types/node": "^14.17.32",
+    "@types/node": "^18.6.3",
     "@types/node-notifier": "^8.0.0",
     "@types/sequelize": "^4.28.9",
     "@types/sprintf-js": "^1.1.2",
