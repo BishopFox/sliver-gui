@@ -49,8 +49,8 @@ From the root of the git repo, to build your local platform:
 ```bash
 npm install
 cd main/workers/worker && npm install && cd ../../..
-npm install -g electron-packager
-npm install -g @angular/cli
+sudo npm install -g electron-packager
+sudo npm install -g @angular/cli
 npm run electron:local
 ```
 
