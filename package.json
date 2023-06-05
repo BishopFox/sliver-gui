@@ -91,7 +91,7 @@
     "node-notifier": "^10.0.1",
     "protobufjs": "^7.0.0",
     "rxjs": "^6.6.6",
-    "sequelize": "^6.3.5",
+    "sequelize": "^6.32.0",
     "shlex": "^2.0.2",
     "sliver-script": "^1.2.4",
     "sprintf-js": "^1.0.3",
