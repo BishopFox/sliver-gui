@@ -53,7 +53,7 @@
     "@types/uuid": "^3.4.8",
     "codelyzer": "^6.0.0",
     "core-js": "3.3.3",
-    "electron": "^21.1.0",
+    "electron": "^22.3.21",
     "electron-builder": "^23.1.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~7.0.0",
